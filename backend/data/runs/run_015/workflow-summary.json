@@ -1,0 +1,118 @@
+{
+  "runId": "9c250bb5-4c7c-481d-8bb3-b9fa04b2ddfe",
+  "timestamp": "2026-06-22T13:15:56.554Z",
+  "summary": {
+    "workflowId": "9c250bb5-4c7c-481d-8bb3-b9fa04b2ddfe",
+    "stepCount": 13,
+    "completedCount": 13,
+    "failedCount": 0,
+    "success": true,
+    "totalDurationMs": 123163,
+    "steps": [
+      {
+        "agentId": "planner-agent",
+        "agentName": "Planner Agent",
+        "parentAgentId": null,
+        "executionOrder": 1,
+        "status": "COMPLETED",
+        "durationMs": 9282
+      },
+      {
+        "agentId": "research-agent",
+        "agentName": "Research Agent",
+        "parentAgentId": null,
+        "executionOrder": 2,
+        "status": "COMPLETED",
+        "durationMs": 27607
+      },
+      {
+        "agentId": "topic-research-2",
+        "agentName": "Topic Research Agent 2",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 10149
+      },
+      {
+        "agentId": "topic-research-4",
+        "agentName": "Topic Research Agent 4",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 13531
+      },
+      {
+        "agentId": "topic-research-8",
+        "agentName": "Topic Research Agent 8",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 13663
+      },
+      {
+        "agentId": "topic-research-3",
+        "agentName": "Topic Research Agent 3",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 13803
+      },
+      {
+        "agentId": "topic-research-5",
+        "agentName": "Topic Research Agent 5",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 14681
+      },
+      {
+        "agentId": "topic-research-9",
+        "agentName": "Topic Research Agent 9",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 15060
+      },
+      {
+        "agentId": "topic-research-10",
+        "agentName": "Topic Research Agent 10",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 15897
+      },
+      {
+        "agentId": "topic-research-6",
+        "agentName": "Topic Research Agent 6",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 16792
+      },
+      {
+        "agentId": "topic-research-7",
+        "agentName": "Topic Research Agent 7",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 21508
+      },
+      {
+        "agentId": "topic-research-1",
+        "agentName": "Topic Research Agent 1",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 27590
+      },
+      {
+        "agentId": "writer-agent",
+        "agentName": "Writer Agent",
+        "parentAgentId": null,
+        "executionOrder": 3,
+        "status": "COMPLETED",
+        "durationMs": 86272
+      }
+    ]
+  }
+}

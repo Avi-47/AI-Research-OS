@@ -1,0 +1,210 @@
+{
+  "runId": "dfce89fb-b543-4434-aa27-e52a70a79af5",
+  "timestamp": "2026-06-15T11:48:22.963Z",
+  "query": "Compare attention sinks in LLMs",
+  "topics": [
+    "StreamingLLM",
+    "Attention Sink",
+    "KV Cache Eviction",
+    "Softmax Stability",
+    "Initial Token Bias",
+    "Window Attention",
+    "Attention Scores",
+    "Perplexity Drift"
+  ],
+  "evidence": [
+    {
+      "topic": "StreamingLLM",
+      "provenance": {
+        "title": "Biotic Browser: Applying StreamingLLM as a Persistent Web Browsing Co-Pilot",
+        "url": ""
+      },
+      "notes": "This paper presents \"Biotic Browser,\" an innovative AI assistant leveraging StreamingLLM to transform web navigation and task execution. Characterized by its ability to simulate the experience of a passenger in an autonomous vehicle, the Biotic Browser excels in managing extended interactions and complex, multi-step web-based tasks. It marks a significant advancement in AI technology, particularly in the realm of long-term context management, and offers promising applications for enhancing productivity and efficiency in both personal and professional settings."
+    },
+    {
+      "topic": "StreamingLLM",
+      "provenance": {
+        "title": "Efficient Streaming Language Models with Attention Sinks",
+        "url": ""
+      },
+      "notes": "Deploying Large Language Models (LLMs) in streaming applications such as multi-round dialogue, where long interactions are expected, is urgently needed but poses two major challenges. Firstly, during the decoding stage, caching previous tokens' Key and Value states (KV) consumes extensive memory. Secondly, popular LLMs cannot generalize to longer texts than the training sequence length. Window attention, where only the most recent KVs are cached, is a natural approach -- but we show that it fails when the text length surpasses the cache size. We observe an interesting phenomenon, namely attention sink, that keeping the KV of initial tokens will largely recover the performance of window attention. In this paper, we first demonstrate that the emergence of attention sink is due to the strong attention scores towards initial tokens as a \"sink\" even if they are not semantically important. Based on the above analysis, we introduce StreamingLLM, an efficient framework that enables LLMs trained with a finite length attention window to generalize to infinite sequence lengths without any fine-tuning. We show that StreamingLLM can enable Llama-2, MPT, Falcon, and Pythia to perform stable and efficient language modeling with up to 4 million tokens and more. In addition, we discover that adding a placeholder token as a dedicated attention sink during pre-training can further improve streaming deployment. In streaming settings, StreamingLLM outperforms the sliding window recomputation baseline by up to 22.2x speedup. Code and datasets are provided at https://github.com/mit-han-lab/streaming-llm."
+    },
+    {
+      "topic": "StreamingLLM",
+      "provenance": {
+        "title": "SONIC: Segmented Optimized Nexus for Information Compression in Key-Value Caching",
+        "url": ""
+      },
+      "notes": "The linear growth of Key-Value (KV) cache remains a bottleneck for multi-turn LLM deployment. Existing KV cache compression methods often fail to account for the structural properties of multi-turn dialogues, relying on heuristic eviction that risks losing critical context. We propose \\textbf{SONIC}, a learning-based framework that compresses historical segments into compact and semantically rich \\textbf{Nexus} tokens. By integrating dynamic budget training, SONIC allows flexible adaptation to varying memory constraints without retraining. Experiments show that at compression ratios of 80\\% and 50\\%, SONIC consistently outperforms baselines such as H2O and StreamingLLM on four diverse multi-turn benchmarks. Specifically, on the widely used MTBench101 benchmark, SONIC achieves an average score improvement of 35.55\\% over state-of-the-art baselines, validating its effectiveness in sustaining coherent multi-turn dialogues. Furthermore, SONIC enhances deployment efficiency, accelerating the overall inference process by 50.1\\% compared to full-context generation."
+    },
+    {
+      "topic": "Attention Sink",
+      "provenance": {
+        "title": "Sink-Aware Pruning for Diffusion Language Models",
+        "url": ""
+      },
+      "notes": "Diffusion Language Models (DLMs) incur high inference cost due to iterative denoising, motivating efficient pruning. Existing pruning heuristics largely inherited from autoregressive (AR) LLMs, typically preserve attention sink tokens because AR sinks serve as stable global anchors. We show that this assumption does not hold for DLMs: the attention-sink position exhibits substantially higher variance over the full generation trajectory (measured by how the dominant sink locations shift across timesteps), indicating that sinks are often transient and less structurally essential than in AR models. Based on this observation, we propose ${\\bf \\texttt{Sink-Aware Pruning}}$, which automatically identifies and prunes unstable sinks in DLMs (prior studies usually keep sinks for AR LLMs). Without retraining, our method achieves a better quality-efficiency trade-off and outperforms strong prior pruning baselines under matched compute. Our code is available at https://github.com/VILA-Lab/Sink-Aware-Pruning."
+    },
+    {
+      "topic": "Attention Sink",
+      "provenance": {
+        "title": "On the Existence and Behavior of Secondary Attention Sinks",
+        "url": ""
+      },
+      "notes": "Attention sinks are tokens, often the beginning-of-sequence (BOS) token, that receive disproportionately high attention despite limited semantic relevance. In this work, we identify a class of attention sinks, which we term secondary sinks, that differ fundamentally from the sinks studied in prior works, which we term primary sinks. While prior works have identified that tokens other than BOS can sometimes become sinks, they were found to exhibit properties analogous to the BOS token. Specifically, they emerge at the same layer, persist throughout the network and draw a large amount of attention mass. Whereas, we find the existence of secondary sinks that arise primarily in middle layers and can persist for a variable number of layers, and draw a smaller, but still significant, amount of attention mass. Through extensive experiments across 11 model families, we analyze where these secondary sinks appear, their properties, how they are formed, and their impact on the attention mechanism. Specifically, we show that: (1) these sinks are formed by specific middle-layer MLP modules; these MLPs map token representations to vectors that align with the direction of the primary sink of that layer. (2) The $\\ell_2$-norm of these vectors determines the sink score of the secondary sink, and also the number of layers it lasts for, thereby leading to different impacts on the attention mechanisms accordingly. (3) The primary sink weakens in middle layers, coinciding with the emergence of secondary sinks. We observe that in larger-scale models, the location and lifetime of the sinks, together referred to as sink levels, appear in a more deterministic and frequent manner. Specifically, we identify three sink levels in QwQ-32B and six levels in Qwen3-14B. We open-sourced our findings at github.com/JeffreyWong20/Secondary-Attention-Sinks."
+    },
+    {
+      "topic": "Attention Sink",
+      "provenance": {
+        "title": "Attention Sink Forges Native MoE in Attention Layers: Sink-Aware Training to Address Head Collapse",
+        "url": ""
+      },
+      "notes": "Large Language Models (LLMs) often assign disproportionate attention to the first token, a phenomenon known as the attention sink. Several recent approaches aim to address this issue, including Sink Attention in GPT-OSS and Gated Attention in Qwen3-Next. However, a comprehensive analysis of the relationship among these attention mechanisms is lacking. In this work, we provide both theoretical and empirical evidence demonstrating that the sink in Vanilla Attention and Sink Attention naturally construct a Mixture-of-Experts (MoE) mechanism within attention layers. This insight explains the head collapse phenomenon observed in prior work, where only a fixed subset of attention heads contributes to generation. To mitigate head collapse, we propose a sink-aware training algorithm with an auxiliary load balancing loss designed for attention layers. Extensive experiments show that our method achieves effective head load balancing and improves model performance across Vanilla Attention, Sink Attention, and Gated Attention. We hope this study offers a new perspective on attention mechanisms and encourages further exploration of the inherent MoE structure within attention layers."
+    },
+    {
+      "topic": "KV Cache Eviction",
+      "provenance": {
+        "title": "Make Each Token Count: Towards Improving Long-Context Performance with KV Cache Eviction",
+        "url": ""
+      },
+      "notes": "The key-value (KV) cache is a major bottleneck in long-context inference, where memory and computation grow with sequence length. Existing KV eviction methods reduce this cost but typically degrade performance relative to full-cache inference. Our key insight is that full-cache attention is not always optimal: in long contexts, irrelevant tokens can dilute attention away from useful evidence, so selective, learnable eviction can improve generation rather than merely approximate the full cache. We introduce a global retention-based KV eviction method that learns each token's future utility under a unified memory budget. Lightweight retention gates assign utility scores to cached KV entries, and a shared final scoring projection calibrates these scores across all layers and heads. This enables a single global eviction policy in which tokens from different layers, heads, and modalities compete directly for cache capacity. We further provide theoretical analysis showing that preferentially retaining useful tokens reduces attention dilution, and we justify geometric retention as a query-agnostic proxy for future utility. Across diverse long-context language and vision-language reasoning, and multi-turn dialogue benchmarks, our method substantially reduces KV memory while matching or surpassing full-cache inference. These results suggest that learned, globally calibrated KV eviction is not only a compression technique, but also a mechanism for improving long-context reasoning."
+    },
+    {
+      "topic": "KV Cache Eviction",
+      "provenance": {
+        "title": "ReST-KV: Robust KV Cache Eviction with Layer-wise Output Reconstruction and Spatial-Temporal Smoothing",
+        "url": ""
+      },
+      "notes": "Large language models (LLMs) face growing challenges in efficient generative inference due to the increasing memory demands of Key-Value (KV) caches, especially for long sequences. Existing eviction methods typically retain KV pairs with high attention weights but overlook the impact of attention redistribution caused by token removal, as well as the spatial-temporal dynamics in KV selection. In this paper, we propose ReST-KV, a robust KV eviction method that combines layer-wise output Reconstruction and Spatial-Temporal smoothing to provide a more comprehensive perspective for the KV cache eviction task. Specifically, ReST-KV formulates KV cache eviction as an optimization problem that minimizes output discrepancies through efficient layer-wise reconstruction. By directly modeling how each token's removal affects the model output, our method naturally captures attention redistribution effects, going beyond simplistic reliance on raw attention weights. To further enhance robustness, we design exponential moving average smoothing to handle temporal variations and an adaptive window-based mechanism to capture spatial patterns. Our method, ReST-KV, significantly advances performance on long-context benchmarks. It surpasses state-of-the-art baselines by 2.58% on LongBench and 15.2% on RULER. Additionally, ReST-KV consistently outperforms existing methods on Needle-in-a-Haystack and InfiniteBench, all while achieving a remarkable 10.61$\\times$ reduction in decoding latency at 128k context length. The code is publicly available at https://github.com/an-yongqi/rest-kv to facilitate reproducibility and further research."
+    },
+    {
+      "topic": "KV Cache Eviction",
+      "provenance": {
+        "title": "Cold-RL: Learning Cache Eviction with Offline Reinforcement Learning for NGINX",
+        "url": ""
+      },
+      "notes": "Web proxies such as NGINX commonly rely on least-recently-used (LRU) eviction, which is size agnostic and can thrash under periodic bursts and mixed object sizes. We introduce Cold-RL, a learned eviction policy for NGINX that replaces LRU's forced-expire path with a dueling Deep Q-Network served by an ONNX sidecar within a strict microsecond budget. On each eviction, Cold-RL samples the K least-recently-used objects, extracts six lightweight features (age, size, hit count, inter-arrival time, remaining TTL, and last origin RTT), and requests a bitmask of victims; a hard timeout of 500 microseconds triggers immediate fallback to native LRU. Policies are trained offline by replaying NGINX access logs through a cache simulator with a simple reward: a retained object earns one point if it is hit again before TTL expiry. We compare against LRU, LFU, size-based, adaptive LRU, and a hybrid baseline on two adversarial workloads. With a 25 MB cache, Cold-RL raises hit ratio from 0.1436 to 0.3538, a 146 percent improvement over the best classical baseline; at 100 MB, from 0.7530 to 0.8675, a 15 percent gain; and at 400 MB it matches classical methods (about 0.918). Inference adds less than 2 percent CPU overhead and keeps 95th percentile eviction latency within budget. To our knowledge, this is the first reinforcement learning eviction policy integrated into NGINX with strict SLOs."
+    },
+    {
+      "topic": "Softmax Stability",
+      "provenance": {
+        "title": "Online normalizer calculation for softmax",
+        "url": ""
+      },
+      "notes": "The Softmax function is ubiquitous in machine learning, multiple previous works suggested faster alternatives for it. In this paper we propose a way to compute classical Softmax with fewer memory accesses and hypothesize that this reduction in memory accesses should improve Softmax performance on actual hardware. The benchmarks confirm this hypothesis: Softmax accelerates by up to 1.3x and Softmax+TopK combined and fused by up to 5x."
+    },
+    {
+      "topic": "Softmax Stability",
+      "provenance": {
+        "title": "Convergence Rates for Softmax Gating Mixture of Experts",
+        "url": ""
+      },
+      "notes": "Mixture of experts (MoE) has recently emerged as an effective framework to advance the efficiency and scalability of machine learning models by softly dividing complex tasks among multiple specialized sub-models termed experts. Central to the success of MoE is an adaptive softmax gating mechanism which takes responsibility for determining the relevance of each expert to a given input and then dynamically assigning experts their respective weights. Despite its widespread use in practice, a comprehensive study on the effects of the softmax gating on the MoE has been lacking in the literature. To bridge this gap in this paper, we perform a convergence analysis of parameter estimation and expert estimation under the MoE equipped with the standard softmax gating or its variants, including a dense-to-sparse gating and a hierarchical softmax gating, respectively. Furthermore, our theories also provide useful insights into the design of sample-efficient expert structures. In particular, we demonstrate that it requires polynomially many data points to estimate experts satisfying our proposed \\emph{strong identifiability} condition, namely a commonly used two-layer feed-forward network. In stark contrast, estimating linear experts, which violate the strong identifiability condition, necessitates exponentially many data points as a result of intrinsic parameter interactions expressed in the language of partial differential equations. All the theoretical results are substantiated with a rigorous guarantee."
+    },
+    {
+      "topic": "Softmax Stability",
+      "provenance": {
+        "title": "Community Detection Clustering via Gumbel Softmax",
+        "url": ""
+      },
+      "notes": "Recently, in many systems such as speech recognition and visual processing, deep learning has been widely implemented. In this research, we are exploring the possibility of using deep learning in community detection among the graph datasets. Graphs have gained growing traction in different fields, including social networks, information graphs, the recommender system, and also life sciences. In this paper, we propose a method of community detection clustering the nodes of various graph datasets. We cluster different category datasets that belong to Affiliation networks, Animal networks, Human contact networks, Human social networks, Miscellaneous networks. The deep learning role in modeling the interaction between nodes in a network allows a revolution in the field of science relevant to graph network analysis. In this paper, we extend the gumbel softmax approach to graph network clustering. The experimental findings on specific graph datasets reveal that the new approach outperforms traditional clustering significantly, which strongly shows the efficacy of deep learning in graph community detection clustering. We do a series of experiments on our graph clustering algorithm, using various datasets: Zachary karate club, Highland Tribe, Train bombing, American Revolution, Dolphins, Zebra, Windsurfers, Les Misérables, Political books."
+    },
+    {
+      "topic": "Initial Token Bias",
+      "provenance": {
+        "title": "Perception-Aware Bias Detection for Query Suggestions",
+        "url": ""
+      },
+      "notes": "Bias in web search has been in the spotlight of bias detection research for quite a while. At the same time, little attention has been paid to query suggestions in this regard. Awareness of the problem of biased query suggestions has been raised. Likewise, there is a rising need for automatic bias detection approaches. This paper adds on the bias detection pipeline for bias detection in query suggestions of person-related search developed by Bonart et al. \\cite{Bonart_2019a}. The sparseness and lack of contextual metadata of query suggestions make them a difficult subject for bias detection. Furthermore, query suggestions are perceived very briefly and subliminally. To overcome these issues, perception-aware metrics are introduced. Consequently, the enhanced pipeline is able to better detect systematic topical bias in search engine query suggestions for person-related searches. The results of an analysis performed with the developed pipeline confirm this assumption. Due to the perception-aware bias detection metrics, findings produced by the pipeline can be assumed to reflect bias that users would discern."
+    },
+    {
+      "topic": "Initial Token Bias",
+      "provenance": {
+        "title": "Second Order WinoBias (SoWinoBias) Test Set for Latent Gender Bias Detection in Coreference Resolution",
+        "url": ""
+      },
+      "notes": "We observe an instance of gender-induced bias in a downstream application, despite the absence of explicit gender words in the test cases. We provide a test set, SoWinoBias, for the purpose of measuring such latent gender bias in coreference resolution systems. We evaluate the performance of current debiasing methods on the SoWinoBias test set, especially in reference to the method's design and altered embedding space properties. See https://github.com/hillarydawkins/SoWinoBias."
+    },
+    {
+      "topic": "Initial Token Bias",
+      "provenance": {
+        "title": "Position: LLM Inference Should Be Evaluated as Energy-to-Token Production",
+        "url": ""
+      },
+      "notes": "LLM inference is still evaluated mainly as a model or software problem: accuracy, latency, throughput, and hardware utilization. This is incomplete. At deployment scale, the relevant output is a quality-conditioned token produced under joint constraints from effective compute, delivered data-center power, cooling capacity, PUE, and utilization. We argue that the ML community should treat inference as \\emph{energy-to-token production}. We formalize this view with a dimensionally consistent Token Production Function in which token rate is bounded by both compute-per-token and energy-per-token ceilings. Listed API prices vary by over an order of magnitude across providers, but we use price dispersion only as directional motivation, not as causal evidence of marginal cost. The core physical question is instead: under fixed quality and service targets, when does the binding constraint move from theoretical peak compute toward delivered power, cooling, and operational efficiency? Under this framing, system optimizations -- latent KV-cache compression, sparse or heavily compressed attention, quantization, routing, and difficulty-adaptive reasoning -- are not merely local engineering tricks. They are energy-to-token levers because they reduce FLOPs/token, joules/token, memory traffic, or utilization losses under fixed $(q^{*},s^{*})$. We therefore call for inference papers and benchmarks to report Joules/token, active binding constraint, PUE-adjusted delivered power, and utilization-adjusted token output alongside accuracy and latency."
+    },
+    {
+      "topic": "Window Attention",
+      "provenance": {
+        "title": "Expected Window Mean-Payoff",
+        "url": ""
+      },
+      "notes": "In the window mean-payoff objective, given an infinite path, instead of considering a long run average, we consider the minimum payoff that can be ensured at every position of the path over a finite window that slides over the entire path. Chatterjee et al. studied the problem to decide if in a two-player game, Player 1 has a strategy to ensure a window mean-payoff of at least 0. In this work, we consider a function that given a path returns the supremum value of the window mean-payoff that can be ensured over the path and we show how to compute its expected value in Markov chains and Markov decision processes. We consider two variants of the function: Fixed window mean-payoff in which a fixed window length $l_{max}$ is provided; and Bounded window mean-payoff in which we compute the maximum possible value of the window mean-payoff over all possible window lengths. Further, for both variants, we consider (i) a direct version of the problem where for each path, the payoff that can be ensured from its very beginning and (ii) a non-direct version that is the prefix independent counterpart of the direct version of the problem."
+    },
+    {
+      "topic": "Window Attention",
+      "provenance": {
+        "title": "Vision Transformer with Quadrangle Attention",
+        "url": ""
+      },
+      "notes": "Window-based attention has become a popular choice in vision transformers due to its superior performance, lower computational complexity, and less memory footprint. However, the design of hand-crafted windows, which is data-agnostic, constrains the flexibility of transformers to adapt to objects of varying sizes, shapes, and orientations. To address this issue, we propose a novel quadrangle attention (QA) method that extends the window-based attention to a general quadrangle formulation. Our method employs an end-to-end learnable quadrangle regression module that predicts a transformation matrix to transform default windows into target quadrangles for token sampling and attention calculation, enabling the network to model various targets with different shapes and orientations and capture rich context information. We integrate QA into plain and hierarchical vision transformers to create a new architecture named QFormer, which offers minor code modifications and negligible extra computational cost. Extensive experiments on public benchmarks demonstrate that QFormer outperforms existing representative vision transformers on various vision tasks, including classification, object detection, semantic segmentation, and pose estimation. The code will be made publicly available at \\href{https://github.com/ViTAE-Transformer/QFormer}{QFormer}."
+    },
+    {
+      "topic": "Window Attention",
+      "provenance": {
+        "title": "An Automated Window Selection Procedure For DFT Based Detection Schemes To Reduce Windowing SNR Loss",
+        "url": ""
+      },
+      "notes": "The classical spectrum analysis methods utilize window functions to reduce the masking effect of a strong spectral component over weaker components. The main cost of side-lobe reduction is the reduction of signal-to-noise ratio (SNR) level of the output spectrum. We present a single snapshot method which optimizes the selection of most suitable window function among a finite set of candidate windows, say rectangle, Hamming, Blackman windows, for each spectral bin. The main goal is to utilize different window functions at each spectral output depending on the interference level encountered at that spectral bin so as to reduce the SNR loss associated with the windowing operation. Stated differently, the windows with strong interference suppression capabilities are utilized only when a sufficiently powerful interferer is corrupting the spectral bin of interest is present, i.e. only when this window is needed. The achieved reduction in the windowing SNR loss can be important for the detection of low SNR targets."
+    },
+    {
+      "topic": "Attention Scores",
+      "provenance": {
+        "title": "When and why are principal component scores a good tool for visualizing high-dimensional data?",
+        "url": ""
+      },
+      "notes": "Principal component analysis (PCA) is a popular dimension reduction technique often used to visualize high-dimensional data structures. In genomics, this can involve millions of variables, but only tens to hundreds of observations. Theoretically, such extreme high-dimensionality will cause biased or inconsistent eigenvector estimates, but in practice the principal component scores are used for visualization with great success. In this paper, we explore when and why the classical principal component scores can be used to visualize structures in high-dimensional data, even when there are few observations compared to the number of variables. Our argument is two-fold: First, we argue that eigenvectors related to pervasive signals will have eigenvalues scaling linearly with the number of variables. Second, we prove that for linearly increasing eigenvalues, the sample component scores will be scaled and rotated versions of the population scores, asymptotically. Thus the visual information of the sample scores will be unchanged, even though the sample eigenvectors are biased. In the case of pervasive signals, the principal component scores can be used to visualize the population structures, even in extreme high-dimensional situations."
+    },
+    {
+      "topic": "Attention Scores",
+      "provenance": {
+        "title": "Proof Scores: A Survey (full version)",
+        "url": ""
+      },
+      "notes": "Proof scores can be regarded as outlines of the formal verification of system properties. They have been historically used by the OBJ family of specification languages. The main advantage of proof scores is that they follow the same syntax as the specification language they are used in, so specifiers can easily adopt them and use as many features as the particular language provides. In this way, proof scores have been successfully used to prove properties of a large number of systems and protocols. However, proof scores also present a number of disadvantages that prevented a large audience from adopting them as proving mechanism. In this paper we present the theoretical foundations of proof scores; the different systems where they have been adopted and their latest developments; the classes of systems successfully verified using proof scores, including the main techniques used for it; the main reasons why they have not been widely adopted; and finally we discuss some directions of future work that might solve the problems discussed previously."
+    },
+    {
+      "topic": "Attention Scores",
+      "provenance": {
+        "title": "Gated Sparse Attention: Combining Computational Efficiency with Training Stability for Long-Context Language Models",
+        "url": ""
+      },
+      "notes": "The computational burden of attention in long-context language models has motivated two largely independent lines of work: sparse attention mechanisms that reduce complexity by attending to selected tokens, and gated attention variants that improve training sta-bility while mitigating the attention sink phenomenon. We observe that these approaches address complementary weaknesses and propose Gated Sparse Attention (GSA), an architecture that realizes the benefits of both. GSA incorporates a gated lightning indexer with sigmoid activations that produce bounded, interpretable selection scores, an adaptive sparsity controller that modulates the number of attended tokens based on local uncertainty, and dual gating at the value and output stages. We establish theoretical foundations for the approach, including complexity analysis, expressiveness results, and convergence guarantees. In experiments with 1.7B parameter models trained on 400B tokens, GSA matches the efficiency of sparse-only baselines (12-16x speedup at 128K context) while achieving the quality gains associated with gated attention: perplexity improves from 6.03 to 5.70, RULER scores at 128K context nearly double, and attention to the first token, a proxy for attention sinks, drops from 47% to under 4%. Training stability improves markedly, with loss spikes reduced by 98%."
+    },
+    {
+      "topic": "Perplexity Drift",
+      "provenance": {
+        "title": "On the regularisation of the noise for the Euler-Maruyama scheme with irregular drift",
+        "url": ""
+      },
+      "notes": "The strong rate of convergence of the Euler-Maruyama scheme for nondegenerate SDEs with irregular drift coefficients is considered. In the case of $α$-Hölder drift in the recent literature the rate $α/2$ was proved in many related situations. By exploiting the regularising effect of the noise more efficiently, we show that the rate is in fact arbitrarily close to $1/2$ for all $α&gt;0$. The result extends to Dini continuous coefficients, while in $d=1$ also to all bounded measurable coefficients."
+    },
+    {
+      "topic": "Perplexity Drift",
+      "provenance": {
+        "title": "Quantum Diffusion with Drift and the Einstein Relation II",
+        "url": ""
+      },
+      "notes": "This paper is a companion to 'Quantum Diffusion with Drift and the Einstein Relation I' (jointly submitted to arXiv). Its purpose is to describe and prove a certain number of technical results used in 'Quantum Diffusion with Drift and the Einstein Relation I', but not proven there. Both papers concern long-time properties (diffusion, drift) of the motion of a driven quantum particle coupled to an array of thermal reservoirs. The main technical results derived in the present paper are $(1)$ an asymptotic perturbation theory applicable for small driving, and, $(2)$ the construction of time-dependent correlation functions of particle observables."
+    },
+    {
+      "topic": "Perplexity Drift",
+      "provenance": {
+        "title": "Stokes' drift: a rocking ratchet",
+        "url": ""
+      },
+      "notes": "We derive the explicit analytic expression for the Stokes' drift in one dimension in the presence of a dichotomic Markov forcing. For small amplitudes of the forcing, the drift is enhanced, but the enhancement is reduced with increasing frequency of the forcing. On the other hand, a reduction of the drift or even a flux reversal can be induced at larger amplitudes, while the flux is now found to be an increasing function of the perturbation frequency."
+    }
+  ],
+  "report": "# Research Report: Analysis of Attention Sinks in Large Language Models\n\n## Executive Summary\nAttention sinks are tokens—typically the initial tokens of a sequence—that receive disproportionately high attention scores regardless of their semantic importance. This phenomenon is critical for the stability of long-context inference in autoregressive (AR) models, where retaining these \"sinks\" allows window attention mechanisms to generalize to infinite sequence lengths. Current research differentiates between primary and secondary sinks, identifies sink behaviors in different model architectures (AR vs. Diffusion), and proposes various mitigation and optimization strategies, including sink-aware training and learning-based KV cache compression.\n\n## Introduction\nIn Large Language Models (LLMs), the Key-Value (KV) cache is a primary bottleneck during decoding, consuming extensive memory as sequence length increases. To address this, window attention—which caches only the most recent KV states—is often employed. However, window attention typically fails when text length exceeds the cache size. The \"attention sink\" phenomenon explains this failure: LLMs assign high attention scores to initial tokens to serve as global anchors. Understanding and manipulating these sinks is essential for enabling stable streaming deployment and optimizing memory efficiency in long-term context management.\n\n## Findings\n\n### The Mechanism of Attention Sinks\n*   **Primary Sinks:** These are tokens, often the beginning-of-sequence (BOS) token, that draw a large amount of attention mass. They emerge at the same layer and persist throughout the network.\n*   **Secondary Sinks:** These are a distinct class of sinks that arise primarily in middle layers and persist for a variable number of layers. They are formed by specific middle-layer MLP modules that map token representations to vectors aligning with the direction of the layer's primary sink. The sink score and lifetime of secondary sinks are determined by the $\\ell_2$-norm of these vectors. In larger models, these \"sink levels\" appear more deterministically (e.g., three levels in QwQ-32B and six in Qwen3-14B).\n*   **Structural Impact:** There is evidence that sinks in Vanilla and Sink Attention naturally construct a Mixture-of-Experts (MoE) mechanism within attention layers. This structure is linked to \"head collapse,\" where only a subset of attention heads contributes to generation.\n\n### StreamingLLM and Window Attention\nStreamingLLM is a framework that allows LLMs trained with finite length attention windows to generalize to infinite sequence lengths without fine-tuning. It achieves this by retaining the KV states of initial tokens (the sinks) alongside the most recent tokens.\n*   **Performance:** StreamingLLM enables models such as Llama-2, MPT, Falcon, and Pythia to maintain stable language modeling with 4 million or more tokens.\n*   **Efficiency:** It provides up to a 22.2x speedup compared to sliding window recomputation baselines.\n*   **Optimizations:** Performance can be further improved by adding a dedicated placeholder token as an attention sink during the pre-training phase.\n\n### Architecture-Specific Sink Behaviors\n*   **Autoregressive (AR) vs. Diffusion Language Models (DLMs):** While sinks serve as stable global anchors in AR models, this assumption does not hold for DLMs. In DLMs, the attention-sink position exhibits substantially higher variance over the generation trajectory, making sinks transient and less structurally essential.\n*   **Gated Sparse Attention (GSA):** This architecture combines sparse attention with gated attention to mitigate the sink phenomenon. In tests with 1.7B parameter models, GSA reduced attention to the first token (the sink proxy) from 47% to under 4%, while simultaneously improving perplexity (from 6.03 to 5.70) and reducing loss spikes by 98%.\n\n## Comparative Analysis\n\n### KV Cache Management Strategies\nDifferent approaches exist for managing the KV cache, ranging from heuristic retention to learning-based compression:\n\n| Method | Approach | Characteristics | Performance/Outcome |\n| :--- | :--- | :--- | :--- |\n| **StreamingLLM** | Heuristic Retention | Retains initial tokens (sinks) and a sliding window of recent tokens. | Stable modeling up to 4M+ tokens; 22.2x speedup over recomputation. |\n| **SONIC** | Learning-based Compression | Compresses historical segments into \"Nexus\" tokens. | Outperforms StreamingLLM and H2O; 35.55% improvement on MTBench101. |\n| **ReST-KV** | Optimization-based Eviction | Minimizes output discrepancies via layer-wise reconstruction and spatial-temporal smoothing. | Outperforms baselines on LongBench and RULER; 10.61x latency reduction at 128k context. |\n| **Global Retention** | Learnable Eviction | Uses lightweight retention gates to assign utility scores to KV entries. | Matches or surpasses full-cache inference by reducing attention dilution. |\n\n### Sink-Aware Optimizations\nDifferent models require different pruning and training strategies based on their sink properties:\n*   **In AR models**, pruning heuristics typically preserve sinks because they are stable.\n*   **In DLMs**, \"Sink-Aware Pruning\" is used to identify and prune *unstable* sinks, as they are transient.\n*   **In MoE-like structures**, sink-aware training using an auxiliary load balancing loss is employed to address head collapse and improve head load balancing across Vanilla, Sink, and Gated Attention.\n\n## Conclusion\nAttention sinks are a fundamental property of the attention mechanism in many LLMs, acting as necessary anchors for stability in autoregressive generation. While StreamingLLM leverages these sinks to enable infinite sequence lengths, other researchers are exploring ways to replace them (via Gated Sparse Attention) or compress the associated KV cache (via SONIC and ReST-KV). The behavior of sinks varies significantly across architectures, with Diffusion Language Models exhibiting transient sinks compared to the stable sinks found in AR models, necessitating specialized pruning strategies for each.\n\n## References\n\n- No sources available"
+}

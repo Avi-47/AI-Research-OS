@@ -1,0 +1,38 @@
+{
+  "runId": "3b7b49f9-f1f8-46c2-9f78-5b42a653068d",
+  "timestamp": "2026-06-15T13:45:48.588Z",
+  "evidence": [
+    {
+      "topic": "SparseGPT",
+      "provenance": {
+        "title": "Arxiv Result",
+        "url": "https://arxiv.org/abs/1234.5678"
+      },
+      "notes": "Evidence from paper one"
+    },
+    {
+      "topic": "SparseGPT",
+      "provenance": {
+        "title": "Arxiv Result",
+        "url": "https://arxiv.org/abs/1234.5678"
+      },
+      "notes": "Evidence from paper two"
+    },
+    {
+      "topic": "Wanda",
+      "provenance": {
+        "title": "Arxiv Result",
+        "url": "https://arxiv.org/abs/1234.5678"
+      },
+      "notes": "Evidence from paper one"
+    },
+    {
+      "topic": "Wanda",
+      "provenance": {
+        "title": "Arxiv Result",
+        "url": "https://arxiv.org/abs/1234.5678"
+      },
+      "notes": "Evidence from paper two"
+    }
+  ]
+}

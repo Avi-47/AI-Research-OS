@@ -1,0 +1,293 @@
+{
+  "runId": "0fdce1ed-2d33-47bb-9ebc-b3665e82805b",
+  "timestamp": "2026-06-22T12:53:01.207Z",
+  "query": "compare transformer pruning techniques",
+  "topics": [
+    "Magnitude Pruning",
+    "Structured Pruning",
+    "Unstructured Pruning",
+    "Iterative Pruning",
+    "Lottery Ticket Hypothesis",
+    "Dynamic Pruning",
+    "Pruning During Training",
+    "Pruning After Fine‑Tuning",
+    "Pruning Schedules",
+    "Pruning Benchmarks"
+  ],
+  "evidence": [],
+  "report": "",
+  "summary": {
+    "workflowId": "0fdce1ed-2d33-47bb-9ebc-b3665e82805b",
+    "stepCount": 12,
+    "completedCount": 11,
+    "failedCount": 1,
+    "success": false,
+    "totalDurationMs": 29596,
+    "steps": [
+      {
+        "agentId": "planner-agent",
+        "agentName": "Planner Agent",
+        "parentAgentId": null,
+        "executionOrder": 1,
+        "status": "COMPLETED",
+        "durationMs": 7778
+      },
+      {
+        "agentId": "research-agent",
+        "agentName": "Research Agent",
+        "parentAgentId": null,
+        "executionOrder": 2,
+        "status": "FAILED",
+        "durationMs": 21817
+      },
+      {
+        "agentId": "topic-research-1",
+        "agentName": "Topic Research Agent 1",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 5149
+      },
+      {
+        "agentId": "topic-research-3",
+        "agentName": "Topic Research Agent 3",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 5551
+      },
+      {
+        "agentId": "topic-research-2",
+        "agentName": "Topic Research Agent 2",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 5561
+      },
+      {
+        "agentId": "topic-research-7",
+        "agentName": "Topic Research Agent 7",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 5665
+      },
+      {
+        "agentId": "topic-research-6",
+        "agentName": "Topic Research Agent 6",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 6515
+      },
+      {
+        "agentId": "topic-research-8",
+        "agentName": "Topic Research Agent 8",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 12825
+      },
+      {
+        "agentId": "topic-research-10",
+        "agentName": "Topic Research Agent 10",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 13202
+      },
+      {
+        "agentId": "topic-research-4",
+        "agentName": "Topic Research Agent 4",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 14684
+      },
+      {
+        "agentId": "topic-research-9",
+        "agentName": "Topic Research Agent 9",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 15644
+      },
+      {
+        "agentId": "topic-research-5",
+        "agentName": "Topic Research Agent 5",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 21811
+      }
+    ]
+  },
+  "traces": [
+    {
+      "traceId": "3aabaaad-93ff-4361-b463-2dd386d9dbe6",
+      "workflowId": "0fdce1ed-2d33-47bb-9ebc-b3665e82805b",
+      "agentId": "planner-agent",
+      "agentName": "Planner Agent",
+      "executionOrder": 1,
+      "status": "COMPLETED",
+      "startedAt": "2026-06-22T12:52:31.608Z",
+      "endedAt": "2026-06-22T12:52:39.386Z",
+      "durationMs": 7778,
+      "error": null
+    },
+    {
+      "traceId": "518665dc-2282-4c0c-8158-ef7a05ecc237",
+      "workflowId": "0fdce1ed-2d33-47bb-9ebc-b3665e82805b",
+      "agentId": "research-agent",
+      "agentName": "Research Agent",
+      "executionOrder": 2,
+      "status": "FAILED",
+      "startedAt": "2026-06-22T12:52:39.387Z",
+      "endedAt": "2026-06-22T12:53:01.204Z",
+      "durationMs": 21817,
+      "error": {
+        "name": "AgentError",
+        "message": "Cannot read properties of undefined (reading 'evidence')",
+        "code": "AGENT_EXECUTION_FAILED",
+        "agentId": "research-agent",
+        "agentName": "Research Agent",
+        "workflowId": "0fdce1ed-2d33-47bb-9ebc-b3665e82805b",
+        "recoverable": false,
+        "fatal": true,
+        "details": {
+          "stack": "TypeError: Cannot read properties of undefined (reading 'evidence')\n    at D:\\AIML\\research-os\\backend\\src\\runtime\\agents\\researchAgent.js:80:28\n    at Array.forEach (<anonymous>)\n    at ResearchAgent.execute (D:\\AIML\\research-os\\backend\\src\\runtime\\agents\\researchAgent.js:75:16)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async ResearchAgent.run (D:\\AIML\\research-os\\backend\\src\\runtime\\baseAgent.js:55:19)\n    at async WorkflowEngine.execute (D:\\AIML\\research-os\\backend\\src\\runtime\\workflow\\workflowEngine.js:78:20)\n    at async Object.execute (D:\\AIML\\research-os\\backend\\src\\runtime\\researchRuntime.js:88:21)\n    at async exports.generateResearch (D:\\AIML\\research-os\\backend\\src\\controllers\\research.controller.js:35:27)"
+        }
+      }
+    },
+    {
+      "traceId": "616e9023-19aa-48a1-9a2f-d260f9071318",
+      "workflowId": "0fdce1ed-2d33-47bb-9ebc-b3665e82805b",
+      "agentId": "topic-research-1",
+      "agentName": "Topic Research Agent 1",
+      "parentAgentId": "research-agent",
+      "executionOrder": null,
+      "status": "COMPLETED",
+      "startedAt": null,
+      "endedAt": null,
+      "durationMs": 5149,
+      "error": null
+    },
+    {
+      "traceId": "39e45259-a567-4511-9a85-af3a2db20da5",
+      "workflowId": "0fdce1ed-2d33-47bb-9ebc-b3665e82805b",
+      "agentId": "topic-research-3",
+      "agentName": "Topic Research Agent 3",
+      "parentAgentId": "research-agent",
+      "executionOrder": null,
+      "status": "COMPLETED",
+      "startedAt": null,
+      "endedAt": null,
+      "durationMs": 5551,
+      "error": null
+    },
+    {
+      "traceId": "fb72c70b-3e8b-467c-aa1d-c2a4b4e99ffd",
+      "workflowId": "0fdce1ed-2d33-47bb-9ebc-b3665e82805b",
+      "agentId": "topic-research-2",
+      "agentName": "Topic Research Agent 2",
+      "parentAgentId": "research-agent",
+      "executionOrder": null,
+      "status": "COMPLETED",
+      "startedAt": null,
+      "endedAt": null,
+      "durationMs": 5561,
+      "error": null
+    },
+    {
+      "traceId": "d7b0d355-e539-4377-8a02-71692eda4b01",
+      "workflowId": "0fdce1ed-2d33-47bb-9ebc-b3665e82805b",
+      "agentId": "topic-research-7",
+      "agentName": "Topic Research Agent 7",
+      "parentAgentId": "research-agent",
+      "executionOrder": null,
+      "status": "COMPLETED",
+      "startedAt": null,
+      "endedAt": null,
+      "durationMs": 5665,
+      "error": null
+    },
+    {
+      "traceId": "5e9da5ad-dbda-4e0e-af24-913b19c235d2",
+      "workflowId": "0fdce1ed-2d33-47bb-9ebc-b3665e82805b",
+      "agentId": "topic-research-6",
+      "agentName": "Topic Research Agent 6",
+      "parentAgentId": "research-agent",
+      "executionOrder": null,
+      "status": "COMPLETED",
+      "startedAt": null,
+      "endedAt": null,
+      "durationMs": 6515,
+      "error": null
+    },
+    {
+      "traceId": "42d380e8-b686-4565-ad52-5035b59fb497",
+      "workflowId": "0fdce1ed-2d33-47bb-9ebc-b3665e82805b",
+      "agentId": "topic-research-8",
+      "agentName": "Topic Research Agent 8",
+      "parentAgentId": "research-agent",
+      "executionOrder": null,
+      "status": "COMPLETED",
+      "startedAt": null,
+      "endedAt": null,
+      "durationMs": 12825,
+      "error": null
+    },
+    {
+      "traceId": "6142cbb1-e736-4d0a-8885-fc10dd5425fd",
+      "workflowId": "0fdce1ed-2d33-47bb-9ebc-b3665e82805b",
+      "agentId": "topic-research-10",
+      "agentName": "Topic Research Agent 10",
+      "parentAgentId": "research-agent",
+      "executionOrder": null,
+      "status": "COMPLETED",
+      "startedAt": null,
+      "endedAt": null,
+      "durationMs": 13202,
+      "error": null
+    },
+    {
+      "traceId": "3c917b97-8174-4fba-816d-c12586e2a6fe",
+      "workflowId": "0fdce1ed-2d33-47bb-9ebc-b3665e82805b",
+      "agentId": "topic-research-4",
+      "agentName": "Topic Research Agent 4",
+      "parentAgentId": "research-agent",
+      "executionOrder": null,
+      "status": "COMPLETED",
+      "startedAt": null,
+      "endedAt": null,
+      "durationMs": 14684,
+      "error": null
+    },
+    {
+      "traceId": "45ff881d-8cd7-4a5f-ad2e-1fd53ac14c62",
+      "workflowId": "0fdce1ed-2d33-47bb-9ebc-b3665e82805b",
+      "agentId": "topic-research-9",
+      "agentName": "Topic Research Agent 9",
+      "parentAgentId": "research-agent",
+      "executionOrder": null,
+      "status": "COMPLETED",
+      "startedAt": null,
+      "endedAt": null,
+      "durationMs": 15644,
+      "error": null
+    },
+    {
+      "traceId": "05380e81-80f1-4697-b5b3-9f5900e17771",
+      "workflowId": "0fdce1ed-2d33-47bb-9ebc-b3665e82805b",
+      "agentId": "topic-research-5",
+      "agentName": "Topic Research Agent 5",
+      "parentAgentId": "research-agent",
+      "executionOrder": null,
+      "status": "COMPLETED",
+      "startedAt": null,
+      "endedAt": null,
+      "durationMs": 21811,
+      "error": null
+    }
+  ]
+}

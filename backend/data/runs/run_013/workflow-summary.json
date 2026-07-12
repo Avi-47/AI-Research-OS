@@ -1,0 +1,94 @@
+{
+  "runId": "9e7f75e0-4b63-4305-b0de-d58536cc506a",
+  "timestamp": "2026-06-22T12:05:10.636Z",
+  "summary": {
+    "workflowId": "9e7f75e0-4b63-4305-b0de-d58536cc506a",
+    "stepCount": 10,
+    "completedCount": 10,
+    "failedCount": 0,
+    "success": true,
+    "totalDurationMs": 121251,
+    "steps": [
+      {
+        "agentId": "planner-agent",
+        "agentName": "Planner Agent",
+        "parentAgentId": null,
+        "executionOrder": 1,
+        "status": "COMPLETED",
+        "durationMs": 8431
+      },
+      {
+        "agentId": "research-agent",
+        "agentName": "Research Agent",
+        "parentAgentId": null,
+        "executionOrder": 2,
+        "status": "COMPLETED",
+        "durationMs": 47470
+      },
+      {
+        "agentId": "topic-research-5",
+        "agentName": "Topic Research Agent 5",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 8795
+      },
+      {
+        "agentId": "topic-research-6",
+        "agentName": "Topic Research Agent 6",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 8797
+      },
+      {
+        "agentId": "topic-research-4",
+        "agentName": "Topic Research Agent 4",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 10610
+      },
+      {
+        "agentId": "topic-research-1",
+        "agentName": "Topic Research Agent 1",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 14518
+      },
+      {
+        "agentId": "topic-research-7",
+        "agentName": "Topic Research Agent 7",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 14882
+      },
+      {
+        "agentId": "topic-research-3",
+        "agentName": "Topic Research Agent 3",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 42802
+      },
+      {
+        "agentId": "topic-research-2",
+        "agentName": "Topic Research Agent 2",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 47462
+      },
+      {
+        "agentId": "writer-agent",
+        "agentName": "Writer Agent",
+        "parentAgentId": null,
+        "executionOrder": 3,
+        "status": "COMPLETED",
+        "durationMs": 65349
+      }
+    ]
+  }
+}

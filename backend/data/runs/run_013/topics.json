@@ -1,0 +1,13 @@
+{
+  "runId": "9e7f75e0-4b63-4305-b0de-d58536cc506a",
+  "timestamp": "2026-06-22T12:05:10.636Z",
+  "topics": [
+    "Magnitude Pruning",
+    "Structured Pruning",
+    "Unstructured Pruning",
+    "Dynamic Network Surgery",
+    "Layerwise Importance Ranking",
+    "Group Lasso Pruning",
+    "Knowledge Distillation Guided Pruning"
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "runId": "3b7b49f9-f1f8-46c2-9f78-5b42a653068d",
+  "timestamp": "2026-06-15T13:45:48.588Z",
+  "query": "Compare transformer pruning techniques",
+  "topics": [
+    "SparseGPT",
+    "Wanda"
+  ],
+  "evidence": [
+    {
+      "topic": "SparseGPT",
+      "provenance": {
+        "title": "Arxiv Result",
+        "url": "https://arxiv.org/abs/1234.5678"
+      },
+      "notes": "Evidence from paper one"
+    },
+    {
+      "topic": "SparseGPT",
+      "provenance": {
+        "title": "Arxiv Result",
+        "url": "https://arxiv.org/abs/1234.5678"
+      },
+      "notes": "Evidence from paper two"
+    },
+    {
+      "topic": "Wanda",
+      "provenance": {
+        "title": "Arxiv Result",
+        "url": "https://arxiv.org/abs/1234.5678"
+      },
+      "notes": "Evidence from paper one"
+    },
+    {
+      "topic": "Wanda",
+      "provenance": {
+        "title": "Arxiv Result",
+        "url": "https://arxiv.org/abs/1234.5678"
+      },
+      "notes": "Evidence from paper two"
+    }
+  ],
+  "report": "# Report\n\n## Executive Summary\nBody.\n\n## Introduction\nIntro.\n\n## Findings\nFindings.\n\n## Comparative Analysis\nCompare.\n\n## Conclusion\nDone.\n\n## References\n\n- [Arxiv Result](https://arxiv.org/abs/1234.5678) - SparseGPT",
+  "summary": {
+    "workflowId": "3b7b49f9-f1f8-46c2-9f78-5b42a653068d",
+    "stepCount": 3,
+    "completedCount": 3,
+    "failedCount": 0,
+    "success": true,
+    "totalDurationMs": 41,
+    "steps": [
+      {
+        "agentId": "planner-agent",
+        "agentName": "Planner Agent",
+        "executionOrder": 1,
+        "status": "COMPLETED",
+        "durationMs": 24
+      },
+      {
+        "agentId": "research-agent",
+        "agentName": "Research Agent",
+        "executionOrder": 2,
+        "status": "COMPLETED",
+        "durationMs": 14
+      },
+      {
+        "agentId": "writer-agent",
+        "agentName": "Writer Agent",
+        "executionOrder": 3,
+        "status": "COMPLETED",
+        "durationMs": 3
+      }
+    ]
+  },
+  "traces": [
+    {
+      "traceId": "a77a6fab-97a9-4700-a775-7140c9572feb",
+      "workflowId": "3b7b49f9-f1f8-46c2-9f78-5b42a653068d",
+      "agentId": "planner-agent",
+      "agentName": "Planner Agent",
+      "executionOrder": 1,
+      "status": "COMPLETED",
+      "startedAt": "2026-06-15T13:45:48.546Z",
+      "endedAt": "2026-06-15T13:45:48.570Z",
+      "durationMs": 24,
+      "error": null
+    },
+    {
+      "traceId": "00b7e556-48c6-4e53-818b-9f62d127fd9a",
+      "workflowId": "3b7b49f9-f1f8-46c2-9f78-5b42a653068d",
+      "agentId": "research-agent",
+      "agentName": "Research Agent",
+      "executionOrder": 2,
+      "status": "COMPLETED",
+      "startedAt": "2026-06-15T13:45:48.571Z",
+      "endedAt": "2026-06-15T13:45:48.585Z",
+      "durationMs": 14,
+      "error": null
+    },
+    {
+      "traceId": "5019c70e-60f3-49ad-8e01-84b9a8d1b98a",
+      "workflowId": "3b7b49f9-f1f8-46c2-9f78-5b42a653068d",
+      "agentId": "writer-agent",
+      "agentName": "Writer Agent",
+      "executionOrder": 3,
+      "status": "COMPLETED",
+      "startedAt": "2026-06-15T13:45:48.585Z",
+      "endedAt": "2026-06-15T13:45:48.588Z",
+      "durationMs": 3,
+      "error": null
+    }
+  ]
+}

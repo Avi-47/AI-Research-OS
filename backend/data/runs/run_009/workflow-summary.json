@@ -1,0 +1,142 @@
+{
+  "runId": "b6e399f6-12f7-4881-b21d-f91cd235a29c",
+  "timestamp": "2026-06-19T13:44:47.942Z",
+  "summary": {
+    "workflowId": "b6e399f6-12f7-4881-b21d-f91cd235a29c",
+    "stepCount": 16,
+    "completedCount": 16,
+    "failedCount": 0,
+    "success": true,
+    "totalDurationMs": 275788,
+    "steps": [
+      {
+        "agentId": "planner-agent",
+        "agentName": "Planner Agent",
+        "parentAgentId": null,
+        "executionOrder": 1,
+        "status": "COMPLETED",
+        "durationMs": 3254
+      },
+      {
+        "agentId": "planner-agent",
+        "agentName": "Planner Agent",
+        "parentAgentId": null,
+        "executionOrder": 1,
+        "status": "COMPLETED",
+        "durationMs": 3252
+      },
+      {
+        "agentId": "research-agent",
+        "agentName": "Research Agent",
+        "parentAgentId": null,
+        "executionOrder": 2,
+        "status": "COMPLETED",
+        "durationMs": 19418
+      },
+      {
+        "agentId": "topic-research-10",
+        "agentName": "Topic Research Agent 10",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 7685
+      },
+      {
+        "agentId": "topic-research-4",
+        "agentName": "Topic Research Agent 4",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 10256
+      },
+      {
+        "agentId": "topic-research-3",
+        "agentName": "Topic Research Agent 3",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 12272
+      },
+      {
+        "agentId": "topic-research-7",
+        "agentName": "Topic Research Agent 7",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 12918
+      },
+      {
+        "agentId": "topic-research-9",
+        "agentName": "Topic Research Agent 9",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 13364
+      },
+      {
+        "agentId": "topic-research-8",
+        "agentName": "Topic Research Agent 8",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 15124
+      },
+      {
+        "agentId": "topic-research-6",
+        "agentName": "Topic Research Agent 6",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 15410
+      },
+      {
+        "agentId": "topic-research-5",
+        "agentName": "Topic Research Agent 5",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 15624
+      },
+      {
+        "agentId": "topic-research-2",
+        "agentName": "Topic Research Agent 2",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 18606
+      },
+      {
+        "agentId": "topic-research-1",
+        "agentName": "Topic Research Agent 1",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 19406
+      },
+      {
+        "agentId": "research-agent",
+        "agentName": "Research Agent",
+        "parentAgentId": null,
+        "executionOrder": 2,
+        "status": "COMPLETED",
+        "durationMs": 19416
+      },
+      {
+        "agentId": "writer-agent",
+        "agentName": "Writer Agent",
+        "parentAgentId": null,
+        "executionOrder": 3,
+        "status": "COMPLETED",
+        "durationMs": 44896
+      },
+      {
+        "agentId": "writer-agent",
+        "agentName": "Writer Agent",
+        "parentAgentId": null,
+        "executionOrder": 3,
+        "status": "COMPLETED",
+        "durationMs": 44887
+      }
+    ]
+  }
+}

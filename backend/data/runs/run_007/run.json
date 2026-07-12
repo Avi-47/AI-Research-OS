@@ -1,0 +1,81 @@
+{
+  "runId": "0c44b8ac-0f67-4410-ac4b-f37831e9172a",
+  "timestamp": "2026-06-19T12:42:08.121Z",
+  "query": "transformer pruning techniques",
+  "topics": [
+    "Structured Pruning",
+    "Unstructured Pruning",
+    "Magnitude Pruning",
+    "Weight-Saliency Analysis",
+    "Knowledge Distillation",
+    "Low-Rank Approximation",
+    "SparseGPT",
+    "Wanda",
+    "Iterative Pruning",
+    "Lottery Ticket Hypothesis"
+  ],
+  "evidence": [],
+  "report": "",
+  "summary": {
+    "workflowId": "0c44b8ac-0f67-4410-ac4b-f37831e9172a",
+    "stepCount": 2,
+    "completedCount": 1,
+    "failedCount": 1,
+    "success": false,
+    "totalDurationMs": 23650,
+    "steps": [
+      {
+        "agentId": "planner-agent",
+        "agentName": "Planner Agent",
+        "executionOrder": 1,
+        "status": "COMPLETED",
+        "durationMs": 2810
+      },
+      {
+        "agentId": "research-agent",
+        "agentName": "Research Agent",
+        "executionOrder": 2,
+        "status": "FAILED",
+        "durationMs": 20840
+      }
+    ]
+  },
+  "traces": [
+    {
+      "traceId": "a3301fb8-5920-4776-9a96-61d153a977b0",
+      "workflowId": "0c44b8ac-0f67-4410-ac4b-f37831e9172a",
+      "agentId": "planner-agent",
+      "agentName": "Planner Agent",
+      "executionOrder": 1,
+      "status": "COMPLETED",
+      "startedAt": "2026-06-19T12:41:44.470Z",
+      "endedAt": "2026-06-19T12:41:47.280Z",
+      "durationMs": 2810,
+      "error": null
+    },
+    {
+      "traceId": "5691e869-6e09-46aa-916d-e7adbe9023c7",
+      "workflowId": "0c44b8ac-0f67-4410-ac4b-f37831e9172a",
+      "agentId": "research-agent",
+      "agentName": "Research Agent",
+      "executionOrder": 2,
+      "status": "FAILED",
+      "startedAt": "2026-06-19T12:41:47.281Z",
+      "endedAt": "2026-06-19T12:42:08.121Z",
+      "durationMs": 20840,
+      "error": {
+        "name": "AgentError",
+        "message": "Cannot read properties of undefined (reading 'evidence')",
+        "code": "AGENT_EXECUTION_FAILED",
+        "agentId": "research-agent",
+        "agentName": "Research Agent",
+        "workflowId": "0c44b8ac-0f67-4410-ac4b-f37831e9172a",
+        "recoverable": false,
+        "fatal": true,
+        "details": {
+          "stack": "TypeError: Cannot read properties of undefined (reading 'evidence')\n    at D:\\AIML\\research-os\\backend\\src\\runtime\\agents\\researchAgent.js:67:42\n    at Array.forEach (<anonymous>)\n    at ResearchAgent.execute (D:\\AIML\\research-os\\backend\\src\\runtime\\agents\\researchAgent.js:63:17)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async ResearchAgent.run (D:\\AIML\\research-os\\backend\\src\\runtime\\baseAgent.js:68:19)\n    at async WorkflowEngine.execute (D:\\AIML\\research-os\\backend\\src\\runtime\\workflow\\workflowEngine.js:66:20)\n    at async Object.execute (D:\\AIML\\research-os\\backend\\src\\runtime\\researchRuntime.js:82:21)\n    at async exports.generateResearch (D:\\AIML\\research-os\\backend\\src\\controllers\\research.controller.js:35:27)"
+        }
+      }
+    }
+  ]
+}

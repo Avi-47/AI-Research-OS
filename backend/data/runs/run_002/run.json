@@ -1,0 +1,260 @@
+{
+  "runId": "3b0c89ea-3974-4b7a-b887-9fd9c597d016",
+  "timestamp": "2026-06-15T12:02:58.729Z",
+  "query": "Research agent architectures in GraphRAG systems",
+  "topics": [
+    "Knowledge Graph Construction",
+    "Community Detection Algorithms",
+    "Hierarchical Clustering",
+    "Global Query Engine",
+    "Local Query Engine",
+    "Multi-Agent Orchestration",
+    "Iterative Query Refinement",
+    "Context Window Optimization",
+    "Graph Traversal Strategies",
+    "Semantic Routing"
+  ],
+  "evidence": [
+    {
+      "topic": "Knowledge Graph Construction",
+      "provenance": {
+        "title": "AI Agent-Driven Framework for Automated Product Knowledge Graph Construction in E-Commerce",
+        "url": ""
+      },
+      "notes": "The rapid expansion of e-commerce platforms generates vast amounts of unstructured product data, creating significant challenges for information retrieval, recommendation systems, and data analytics. Knowledge Graphs (KGs) offer a structured, interpretable format to organize such data, yet constructing product-specific KGs remains a complex and manual process. This paper introduces a fully automated, AI agent-driven framework for constructing product knowledge graphs directly from unstructured product descriptions. Leveraging Large Language Models (LLMs), our method operates in three stages using dedicated agents: ontology creation and expansion, ontology refinement, and knowledge graph population. This agent-based approach ensures semantic coherence, scalability, and high-quality output without relying on predefined schemas or handcrafted extraction rules. We evaluate the system on a real-world dataset of air conditioner product descriptions, demonstrating strong performance in both ontology generation and KG population. The framework achieves over 97\\% property coverage and minimal redundancy, validating its effectiveness and practical applicability. Our work highlights the potential of LLMs to automate structured knowledge extraction in retail, providing a scalable path toward intelligent product data integration and utilization."
+    },
+    {
+      "topic": "Knowledge Graph Construction",
+      "provenance": {
+        "title": "A Multi-Agent System for Semantic Mapping of Relational Data to Knowledge Graphs",
+        "url": ""
+      },
+      "notes": "Enterprises often maintain multiple databases for storing critical business data in siloed systems, resulting in inefficiencies and challenges with data interoperability. A key to overcoming these challenges lies in integrating disparate data sources, enabling businesses to unlock the full potential of their data. Our work presents a novel approach for integrating multiple databases using knowledge graphs, focusing on the application of large language models as semantic agents for mapping and connecting structured data across systems by leveraging existing vocabularies. The proposed methodology introduces a semantic layer above tables in relational databases, utilizing a system comprising multiple LLM agents that map tables and columns to Schema.org terms. Our approach achieves a mapping accuracy of over 90% in multiple domains."
+    },
+    {
+      "topic": "Knowledge Graph Construction",
+      "provenance": {
+        "title": "Tax Knowledge Graph for a Smarter and More Personalized TurboTax",
+        "url": ""
+      },
+      "notes": "Most knowledge graph use cases are data-centric, focusing on representing data entities and their semantic relationships. There are no published success stories to represent large-scale complicated business logic with knowledge graph technologies. In this paper, we will share our innovative and practical approach to representing complicated U.S. and Canadian income tax compliance logic (calculations and rules) via a large-scale knowledge graph. We will cover how the Tax Knowledge Graph is constructed and automated, how it is used to calculate tax refunds, reasoned to find missing info, and navigated to explain the calculated results. The Tax Knowledge Graph has helped transform Intuit's flagship TurboTax product into a smart and personalized experience, accelerating and automating the tax preparation process while instilling confidence for millions of customers."
+    },
+    {
+      "topic": "Community Detection Algorithms",
+      "provenance": {
+        "title": "Combinations of Affinity Functions for Different Community Detection Algorithms in Social Networks",
+        "url": ""
+      },
+      "notes": "Social network analysis is a popular discipline among the social and behavioural sciences, in which the relationships between different social entities are modelled as a network. One of the most popular problems in social network analysis is finding communities in its network structure. Usually, a community in a social network is a functional sub-partition of the graph. However, as the definition of community is somewhat imprecise, many algorithms have been proposed to solve this task, each of them focusing on different social characteristics of the actors and the communities. In this work we propose to use novel combinations of affinity functions, which are designed to capture different social mechanics in the network interactions. We use them to extend already existing community detection algorithms in order to combine the capacity of the affinity functions to model different social interactions than those exploited by the original algorithms."
+    },
+    {
+      "topic": "Community Detection Algorithms",
+      "provenance": {
+        "title": "Multi-scale Community Detection using Stability Optimisation within Greedy Algorithms",
+        "url": ""
+      },
+      "notes": "Many real systems can be represented as networks whose analysis can be very informative regarding the original system's organisation. In the past decade community detection received a lot of attention and is now an active field of research. Recently stability was introduced as a new measure for partition quality. This work investigates stability as an optimisation criterion that exploits a Markov process view of networks to enable multi-scale community detection. Several heuristics and variations of an algorithm optimising stability are presented as well as an application to overlapping communities. Experiments show that the method enables accurate multi-scale network analysis."
+    },
+    {
+      "topic": "Community Detection Algorithms",
+      "provenance": {
+        "title": "OMICtools: a community-driven search engine for biological data analysis",
+        "url": ""
+      },
+      "notes": "With high-throughput biotechnologies generating unprecedented quantities of data, researchers are faced with the challenge of locating and comparing an exponentially growing number of programs and websites dedicated to computational biology, in order to maximize the potential of their data. OMICtools is designed to meet this need with its open-access search engine offering an easy means of locating the right tools corresponding to each researcher and their specific biological data analyses. The OMICtools website (https://OMICtools.com) centralizes more than 18,500 software tools and databases, manually classified, by a team of biocurators including many scientific experts. Key information, a direct link, and access to discussions and evaluations by the biomedical community are provided for each tool. Anyone can join the OMICtools community and create a profile page, to share their expertise and comment on tools. In addition, developers can directly upload their code versions which are registered for identification and citation in scientific publications, improving research traceability. The OMICtools community links thousands of life scientists and developers worldwide, who use this bioinformatics platform to accelerate their projects and biological data analyses."
+    },
+    {
+      "topic": "Hierarchical Clustering",
+      "provenance": {
+        "title": "Solving non-uniqueness in agglomerative hierarchical clustering using multidendrograms",
+        "url": ""
+      },
+      "notes": "In agglomerative hierarchical clustering, pair-group methods suffer from a problem of non-uniqueness when two or more distances between different clusters coincide during the amalgamation process. The traditional approach for solving this drawback has been to take any arbitrary criterion in order to break ties between distances, which results in different hierarchical classifications depending on the criterion followed. In this article we propose a variable-group algorithm that consists in grouping more than two clusters at the same time when ties occur. We give a tree representation for the results of the algorithm, which we call a multidendrogram, as well as a generalization of the Lance and Williams' formula which enables the implementation of the algorithm in a recursive way."
+    },
+    {
+      "topic": "Hierarchical Clustering",
+      "provenance": {
+        "title": "On Randomly Projected Hierarchical Clustering with Guarantees",
+        "url": ""
+      },
+      "notes": "Hierarchical clustering (HC) algorithms are generally limited to small data instances due to their runtime costs. Here we mitigate this shortcoming and explore fast HC algorithms based on random projections for single (SLC) and average (ALC) linkage clustering as well as for the minimum spanning tree problem (MST). We present a thorough adaptive analysis of our algorithms that improve prior work from $O(N^2)$ by up to a factor of $N/(\\log N)^2$ for a dataset of $N$ points in Euclidean space. The algorithms maintain, with arbitrary high probability, the outcome of hierarchical clustering as well as the worst-case running-time guarantees. We also present parameter-free instances of our algorithms."
+    },
+    {
+      "topic": "Hierarchical Clustering",
+      "provenance": {
+        "title": "Probabilistic Hierarchical Forecasting with Deep Poisson Mixtures",
+        "url": ""
+      },
+      "notes": "Hierarchical forecasting problems arise when time series have a natural group structure, and predictions at multiple levels of aggregation and disaggregation across the groups are needed. In such problems, it is often desired to satisfy the aggregation constraints in a given hierarchy, referred to as hierarchical coherence in the literature. Maintaining coherence while producing accurate forecasts can be a challenging problem, especially in the case of probabilistic forecasting. We present a novel method capable of accurate and coherent probabilistic forecasts for time series when reliable hierarchical information is present. We call it Deep Poisson Mixture Network (DPMN). It relies on the combination of neural networks and a statistical model for the joint distribution of the hierarchical multivariate time series structure. By construction, the model guarantees hierarchical coherence and provides simple rules for aggregation and disaggregation of the predictive distributions. We perform an extensive empirical evaluation comparing the DPMN to other state-of-the-art methods which produce hierarchically coherent probabilistic forecasts on multiple public datasets. Comparing to existing coherent probabilistic models, we obtain a relative improvement in the overall Continuous Ranked Probability Score (CRPS) of 11.8% on Australian domestic tourism data, and 8.1% on the Favorita grocery sales dataset, where time series are grouped with geographical hierarchies or travel intent hierarchies. For San Francisco Bay Area highway traffic, where the series' hierarchical structure is randomly assigned, and their correlations are less informative, our method does not show significant performance differences over statistical baselines."
+    },
+    {
+      "topic": "Global Query Engine",
+      "provenance": {
+        "title": "Developing a 21st Century Global Library for Mathematics Research",
+        "url": ""
+      },
+      "notes": "Developing a 21st Century Global Library for Mathematics Research discusses how information about what the mathematical literature contains can be formalized and made easier to express, encode, and explore. Many of the tools necessary to make this information system a reality will require much more than indexing and will instead depend on community input paired with machine learning, where mathematicians' expertise can fill the gaps of automatization. This report proposes the establishment of an organization; the development of a set of platforms, tools, and services; the deployment of an ongoing applied research program to complement the development work; and the mobilization and coordination of the mathematical community to take the first steps toward these capabilities. The report recommends building on the extensive work done by many dedicated individuals under the rubric of the World Digital Mathematical Library, as well as many other community initiatives. Developing a 21st Century Global Library for Mathematics envisions a combination of machine learning methods and community-based editorial effort that makes a significantly greater portion of the information and knowledge in the global mathematical corpus available to researchers as linked open data through a central organizational entity-referred to in the report as the Digital Mathematics Library. This report describes how such a library might operate - discussing development and research needs, role in facilitating discover and interaction, and establishing partnerships with publishers."
+    },
+    {
+      "topic": "Global Query Engine",
+      "provenance": {
+        "title": "Generating Query Recommendations via LLMs",
+        "url": ""
+      },
+      "notes": "Query recommendation systems are ubiquitous in modern search engines, assisting users in producing effective queries to meet their information needs. However, these systems require a large amount of data to produce good recommendations, such as a large collection of documents to index and query logs. In particular, query logs and user data are not available in cold start scenarios. Query logs are expensive to collect and maintain and require complex and time-consuming cascading pipelines for creating, combining, and ranking recommendations. To address these issues, we frame the query recommendation problem as a generative task, proposing a novel approach called Generative Query Recommendation (GQR). GQR uses an LLM as its foundation and does not require to be trained or fine-tuned to tackle the query recommendation problem. We design a prompt that enables the LLM to understand the specific recommendation task, even using a single example. We then improved our system by proposing a version that exploits query logs called Retriever-Augmented GQR (RA-GQR). RA-GQr dynamically composes its prompt by retrieving similar queries from query logs. GQR approaches reuses a pre-existing neural architecture resulting in a simpler and more ready-to-market approach, even in a cold start scenario. Our proposed GQR obtains state-of-the-art performance in terms of NDCG@10 and clarity score against two commercial search engines and the previous state-of-the-art approach on the Robust04 and ClueWeb09B collections, improving on average the NDCG@10 performance up to ~4% on Robust04 and ClueWeb09B w.r.t the previous best competitor. RA-GQR further improve the NDCG@10 obtaining an increase of ~11%, ~6\\% on Robust04 and ClueWeb09B w.r.t the best competitor. Furthermore, our system obtained ~59% of user preferences in a blind user study, proving that our method produces the most engaging queries."
+    },
+    {
+      "topic": "Global Query Engine",
+      "provenance": {
+        "title": "Bayesian Calibration of Engine-out NOx Models for Engine-to-Engine Transferability",
+        "url": ""
+      },
+      "notes": "Accurate prediction of engine-out NOx is essential for meeting stringent emissions regulations and optimizing engine performance. Traditional approaches rely on models trained on data from a small number of engines, which can be insufficient in generalizing across an entire population of engines due to sensor biases and variations in input conditions. In real world applications, these models require tuning or calibration to maintain acceptable error tolerance when applied to other engines. This highlights the need for models that can adapt with minimal adjustments to accommodate engine-to-engine variability and sensor discrepancies. While previous studies have explored machine learning methods for predicting engine-out NOx, these approaches often fail to generalize reliably across different engines and operating environments. To address these issues, we propose a Bayesian calibration framework that combines Gaussian processes (GP) with approximate Bayesian computation to infer and correct sensor biases. Starting with a pre-trained model developed using nominal engine data, our method identifies engine specific sensor biases and recalibrates predictions accordingly. By incorporating these inferred biases, our approach generates posterior predictive distributions for engine-out NOx on unseen test data, achieving high accuracy without retraining the model. Our results demonstrate that this transferable modeling approach significantly improves the accuracy of predictions compared to conventional non-adaptive GP models, effectively addressing engine-to-engine variability and improving model generalizability."
+    },
+    {
+      "topic": "Local Query Engine",
+      "provenance": {
+        "title": "Generating Query Recommendations via LLMs",
+        "url": ""
+      },
+      "notes": "Query recommendation systems are ubiquitous in modern search engines, assisting users in producing effective queries to meet their information needs. However, these systems require a large amount of data to produce good recommendations, such as a large collection of documents to index and query logs. In particular, query logs and user data are not available in cold start scenarios. Query logs are expensive to collect and maintain and require complex and time-consuming cascading pipelines for creating, combining, and ranking recommendations. To address these issues, we frame the query recommendation problem as a generative task, proposing a novel approach called Generative Query Recommendation (GQR). GQR uses an LLM as its foundation and does not require to be trained or fine-tuned to tackle the query recommendation problem. We design a prompt that enables the LLM to understand the specific recommendation task, even using a single example. We then improved our system by proposing a version that exploits query logs called Retriever-Augmented GQR (RA-GQR). RA-GQr dynamically composes its prompt by retrieving similar queries from query logs. GQR approaches reuses a pre-existing neural architecture resulting in a simpler and more ready-to-market approach, even in a cold start scenario. Our proposed GQR obtains state-of-the-art performance in terms of NDCG@10 and clarity score against two commercial search engines and the previous state-of-the-art approach on the Robust04 and ClueWeb09B collections, improving on average the NDCG@10 performance up to ~4% on Robust04 and ClueWeb09B w.r.t the previous best competitor. RA-GQR further improve the NDCG@10 obtaining an increase of ~11%, ~6\\% on Robust04 and ClueWeb09B w.r.t the best competitor. Furthermore, our system obtained ~59% of user preferences in a blind user study, proving that our method produces the most engaging queries."
+    },
+    {
+      "topic": "Local Query Engine",
+      "provenance": {
+        "title": "Bayesian Calibration of Engine-out NOx Models for Engine-to-Engine Transferability",
+        "url": ""
+      },
+      "notes": "Accurate prediction of engine-out NOx is essential for meeting stringent emissions regulations and optimizing engine performance. Traditional approaches rely on models trained on data from a small number of engines, which can be insufficient in generalizing across an entire population of engines due to sensor biases and variations in input conditions. In real world applications, these models require tuning or calibration to maintain acceptable error tolerance when applied to other engines. This highlights the need for models that can adapt with minimal adjustments to accommodate engine-to-engine variability and sensor discrepancies. While previous studies have explored machine learning methods for predicting engine-out NOx, these approaches often fail to generalize reliably across different engines and operating environments. To address these issues, we propose a Bayesian calibration framework that combines Gaussian processes (GP) with approximate Bayesian computation to infer and correct sensor biases. Starting with a pre-trained model developed using nominal engine data, our method identifies engine specific sensor biases and recalibrates predictions accordingly. By incorporating these inferred biases, our approach generates posterior predictive distributions for engine-out NOx on unseen test data, achieving high accuracy without retraining the model. Our results demonstrate that this transferable modeling approach significantly improves the accuracy of predictions compared to conventional non-adaptive GP models, effectively addressing engine-to-engine variability and improving model generalizability."
+    },
+    {
+      "topic": "Local Query Engine",
+      "provenance": {
+        "title": "Description Logics based Formalization of Wh-Queries",
+        "url": ""
+      },
+      "notes": "The problem of Natural Language Query Formalization (NLQF) is to translate a given user query in natural language (NL) into a formal language so that the semantic interpretation has equivalence with the NL interpretation. Formalization of NL queries enables logic based reasoning during information retrieval, database query, question-answering, etc. Formalization also helps in Web query normalization and indexing, query intent analysis, etc. In this paper we are proposing a Description Logics based formal methodology for wh-query intent (also called desire) identification and corresponding formal translation. We evaluated the scalability of our proposed formalism using Microsoft Encarta 98 query dataset and OWL-S TC v.4.0 dataset."
+    },
+    {
+      "topic": "Multi-Agent Orchestration",
+      "provenance": {
+        "title": "A Survey of Multi-Agent Deep Reinforcement Learning with Communication",
+        "url": ""
+      },
+      "notes": "Communication is an effective mechanism for coordinating the behaviors of multiple agents, broadening their views of the environment, and to support their collaborations. In the field of multi-agent deep reinforcement learning (MADRL), agents can improve the overall learning performance and achieve their objectives by communication. Agents can communicate various types of messages, either to all agents or to specific agent groups, or conditioned on specific constraints. With the growing body of research work in MADRL with communication (Comm-MADRL), there is a lack of a systematic and structural approach to distinguish and classify existing Comm-MADRL approaches. In this paper, we survey recent works in the Comm-MADRL field and consider various aspects of communication that can play a role in designing and developing multi-agent reinforcement learning systems. With these aspects in mind, we propose 9 dimensions along which Comm-MADRL approaches can be analyzed, developed, and compared. By projecting existing works into the multi-dimensional space, we discover interesting trends. We also propose some novel directions for designing future Comm-MADRL systems through exploring possible combinations of the dimensions."
+    },
+    {
+      "topic": "Multi-Agent Orchestration",
+      "provenance": {
+        "title": "A Methodology to Engineer and Validate Dynamic Multi-level Multi-agent Based Simulations",
+        "url": ""
+      },
+      "notes": "This article proposes a methodology to model and simulate complex systems, based on IRM4MLS, a generic agent-based meta-model able to deal with multi-level systems. This methodology permits the engineering of dynamic multi-level agent-based models, to represent complex systems over several scales and domains of interest. Its goal is to simulate a phenomenon using dynamically the lightest representation to save computer resources without loss of information. This methodology is based on two mechanisms: (1) the activation or deactivation of agents representing different domain parts of the same phenomenon and (2) the aggregation or disaggregation of agents representing the same phenomenon at different scales."
+    },
+    {
+      "topic": "Multi-Agent Orchestration",
+      "provenance": {
+        "title": "Augmenting the action space with conventions to improve multi-agent cooperation in Hanabi",
+        "url": ""
+      },
+      "notes": "The card game Hanabi is considered a strong medium for the testing and development of multi-agent reinforcement learning (MARL) algorithms, due to its cooperative nature, partial observability, limited communication and remarkable complexity. Previous research efforts have explored the capabilities of MARL algorithms within Hanabi, focusing largely on advanced architecture design and algorithmic manipulations to achieve state-of-the-art performance for various number of cooperators. However, this often leads to complex solution strategies with high computational cost and requiring large amounts of training data. For humans to solve the Hanabi game effectively, they require the use of conventions, which often allows for a means to implicitly convey ideas or knowledge based on a predefined, and mutually agreed upon, set of \"rules\" or principles. Multi-agent problems containing partial observability, especially when limited communication is present, can benefit greatly from the use of implicit knowledge sharing. In this paper, we propose a novel approach to augmenting an agent's action space using conventions, which act as a sequence of special cooperative actions that span over and include multiple time steps and multiple agents, requiring agents to actively opt in for it to reach fruition. These conventions are based on existing human conventions, and result in a significant improvement on the performance of existing techniques for self-play and cross-play for various number of cooperators within Hanabi."
+    },
+    {
+      "topic": "Iterative Query Refinement",
+      "provenance": {
+        "title": "Iterative Refinement Improves Compositional Image Generation",
+        "url": ""
+      },
+      "notes": "Text-to-image (T2I) models have achieved remarkable progress, yet they continue to struggle with complex prompts that require simultaneously handling multiple objects, relations, and attributes. Existing inference-time strategies, such as parallel sampling with verifiers or simply increasing denoising steps, can improve prompt alignment but remain inadequate for richly compositional settings where many constraints must be satisfied. Inspired by the success of chain-of-thought reasoning in large language models, we propose an iterative test-time strategy in which a T2I model progressively refines its generations across multiple steps, guided by feedback from a vision-language model as the critic in the loop. Our approach is simple, requires no external tools or priors, and can be flexibly applied to a wide range of image generators and vision-language models. Empirically, we demonstrate consistent gains on image generation across benchmarks: a 16.9% improvement in all-correct rate on ConceptMix (k=7), a 13.8% improvement on T2I-CompBench (3D-Spatial category) and a 12.5% improvement on Visual Jenga scene decomposition compared to compute-matched parallel sampling. Beyond quantitative gains, iterative refinement produces more faithful generations by decomposing complex prompts into sequential corrections, with human evaluators preferring our method 58.7% of the time over 41.3% for the parallel baseline. Together, these findings highlight iterative self-correction as a broadly applicable principle for compositional image generation. Results and visualizations are available at https://iterative-img-gen.github.io/"
+    },
+    {
+      "topic": "Iterative Query Refinement",
+      "provenance": {
+        "title": "Dynamic Adaptive Mesh Refinement for Topology Optimization",
+        "url": ""
+      },
+      "notes": "We present an improved method for topology optimization with both adaptive mesh refinement and derefinement. Since the total volume fraction in topology optimization is usually modest, after a few initial iterations the domain of computation is largely void. Hence, it is inefficient to have many small elements, in such regions, that contribute significantly to the overall computational cost but contribute little to the accuracy of computation and design. At the same time, we want high spatial resolution for accurate three-dimensional designs to avoid postprocessing or interpretation as much as possible. Dynamic adaptive mesh refinement (AMR) offers the possibility to balance these two requirements. We discuss requirements on AMR for topology optimization and the algorithmic features to implement them. The numerical design problems demonstrate (1) that our AMR strategy for topology optimization leads to designs that are equivalent to optimal designs on uniform meshes, (2) how AMR strategies that do not satisfy the postulated requirements may lead to suboptimal designs, and (3) that our AMR strategy significantly reduces the time to compute optimal designs."
+    },
+    {
+      "topic": "Iterative Query Refinement",
+      "provenance": {
+        "title": "Generating Query Recommendations via LLMs",
+        "url": ""
+      },
+      "notes": "Query recommendation systems are ubiquitous in modern search engines, assisting users in producing effective queries to meet their information needs. However, these systems require a large amount of data to produce good recommendations, such as a large collection of documents to index and query logs. In particular, query logs and user data are not available in cold start scenarios. Query logs are expensive to collect and maintain and require complex and time-consuming cascading pipelines for creating, combining, and ranking recommendations. To address these issues, we frame the query recommendation problem as a generative task, proposing a novel approach called Generative Query Recommendation (GQR). GQR uses an LLM as its foundation and does not require to be trained or fine-tuned to tackle the query recommendation problem. We design a prompt that enables the LLM to understand the specific recommendation task, even using a single example. We then improved our system by proposing a version that exploits query logs called Retriever-Augmented GQR (RA-GQR). RA-GQr dynamically composes its prompt by retrieving similar queries from query logs. GQR approaches reuses a pre-existing neural architecture resulting in a simpler and more ready-to-market approach, even in a cold start scenario. Our proposed GQR obtains state-of-the-art performance in terms of NDCG@10 and clarity score against two commercial search engines and the previous state-of-the-art approach on the Robust04 and ClueWeb09B collections, improving on average the NDCG@10 performance up to ~4% on Robust04 and ClueWeb09B w.r.t the previous best competitor. RA-GQR further improve the NDCG@10 obtaining an increase of ~11%, ~6\\% on Robust04 and ClueWeb09B w.r.t the best competitor. Furthermore, our system obtained ~59% of user preferences in a blind user study, proving that our method produces the most engaging queries."
+    },
+    {
+      "topic": "Context Window Optimization",
+      "provenance": {
+        "title": "On the solution existence and stability of polynomial optimization problems",
+        "url": ""
+      },
+      "notes": "This paper introduces and investigates a regularity condition in the asymptotic sense for optimization problems whose objective functions are polynomial. Under this regularity condition, the normalization argument in asymptotic analysis enables us to see the solution existence as well as the solution stability of these problems. We prove a Frank-Wolfe type theorem for regular optimization problems and an Eaves type theorem for non-regular pseudoconvex optimization problems. Moreover, we show results on the stability such as upper semicontinuity and local upper-Hölder stability of the solution map of polynomial optimization problems. At the end of the paper, we discuss the genericity of the regularity condition."
+    },
+    {
+      "topic": "Context Window Optimization",
+      "provenance": {
+        "title": "Exploiting Context to Identify Lexical Atoms -- A Statistical View of Linguistic Context",
+        "url": ""
+      },
+      "notes": "Interpretation of natural language is inherently context-sensitive. Most words in natural language are ambiguous and their meanings are heavily dependent on the linguistic context in which they are used. The study of lexical semantics can not be separated from the notion of context. This paper takes a contextual approach to lexical semantics and studies the linguistic context of lexical atoms, or \"sticky\" phrases such as \"hot dog\". Since such lexical atoms may occur frequently in unrestricted natural language text, recognizing them is crucial for understanding naturally-occurring text. The paper proposes several heuristic approaches to exploiting the linguistic context to identify lexical atoms from arbitrary natural language text."
+    },
+    {
+      "topic": "Context Window Optimization",
+      "provenance": {
+        "title": "Optimal design of frame structures with mixed categorical and continuous design variables using the Gumbel-Softmax method",
+        "url": ""
+      },
+      "notes": "In optimizing real-world structures, due to fabrication or budgetary restraints, the design variables may be restricted to a set of standard engineering choices. Such variables, commonly called categorical variables, are discrete and unordered in essence, precluding the utilization of gradient-based optimizers for the problems containing them. In this paper, incorporating the Gumbel-Softmax (GSM) method, we propose a new gradient-based optimizer for handling such variables in the optimal design of large-scale frame structures. The GSM method provides a means to draw differentiable samples from categorical distributions, thereby enabling sensitivity analysis for the variables generated from such distributions. The sensitivity information can greatly reduce the computational cost of traversing high-dimensional and discrete design spaces in comparison to employing gradient-free optimization methods. In addition, since the developed optimizer is gradient-based, it can naturally handle the simultaneous optimization of categorical and continuous design variables. Through three numerical case studies, different aspects of the proposed optimizer are studied and its advantages over population-based optimizers, specifically a genetic algorithm, are demonstrated."
+    },
+    {
+      "topic": "Graph Traversal Strategies",
+      "provenance": {
+        "title": "Momentum Strategies with L1 Filter",
+        "url": ""
+      },
+      "notes": "In this article, we discuss various implementation of L1 filtering in order to detect some properties of noisy signals. This filter consists of using a L1 penalty condition in order to obtain the filtered signal composed by a set of straight trends or steps. This penalty condition, which determines the number of breaks, is implemented in a constrained least square problem and is represented by a regularization parameter ? which is estimated by a cross-validation procedure. Financial time series are usually characterized by a long-term trend (called the global trend) and some short-term trends (which are named local trends). A combination of these two time scales can form a simple model describing the process of a global trend process with some mean-reverting properties. Explicit applications to momentum strategies are also discussed in detail with appropriate uses of the trend configurations."
+    },
+    {
+      "topic": "Graph Traversal Strategies",
+      "provenance": {
+        "title": "Counting cliques without generalized theta graphs",
+        "url": ""
+      },
+      "notes": "The \\textit{generalized Turán number} $\\mathrm{ex}(n, T, F)$ is the maximum possible number of copies of $T$ in an $F$-free graph on $n$ vertices for any two graphs $T$ and $F$. For the book graph $B_t$, there is a close connection between $\\ex(n,K_3,B_t)$ and the Ruzsa-Szemerédi triangle removal lemma. Motivated by this, in this paper, we study the generalized Turán problem for generalized theta graphs, a natural extension of book graphs. Our main result provides a complete characterization of the magnitude of $\\ex(n,K_3,H)$ when $H$ is a generalized theta graph, indicating when it is quadratic, when it is nearly quadratic, and when it is subquadratic. Furthermore, as an application, we obtain the exact value of $\\ex(n, K_r, kF)$, where $F$ is an edge-critical generalized theta graph, and $3\\le r\\le k+1$, extending several recent results."
+    },
+    {
+      "topic": "Graph Traversal Strategies",
+      "provenance": {
+        "title": "The Graph Traversal Pattern",
+        "url": ""
+      },
+      "notes": "A graph is a structure composed of a set of vertices (i.e.nodes, dots) connected to one another by a set of edges (i.e.links, lines). The concept of a graph has been around since the late 19$^\\text{th}$ century, however, only in recent decades has there been a strong resurgence in both theoretical and applied graph research in mathematics, physics, and computer science. In applied computing, since the late 1960s, the interlinked table structure of the relational database has been the predominant information storage and retrieval model. With the growth of graph/network-based data and the need to efficiently process such data, new data management systems have been developed. In contrast to the index-intensive, set-theoretic operations of relational databases, graph databases make use of index-free, local traversals. This article discusses the graph traversal pattern and its use in computing."
+    },
+    {
+      "topic": "Semantic Routing",
+      "provenance": {
+        "title": "High-Level ETL for Semantic Data Warehouses -- Full Version",
+        "url": ""
+      },
+      "notes": "The popularity of the Semantic Web (SW) encourages organizations to organize and publish semantic data using the RDF model. This growth poses new requirements to Business Intelligence (BI) technologies to enable On-Line Analytical Processing (OLAP)-like analysis over semantic data. The incorporation of semantic data into a Data Warehouse (DW) is not supported by the traditional Extract-Transform-Load (ETL) tools because they do not consider semantic issues in the integration process. In this paper, we propose a layer-based integration process and a set of high-level RDF-based ETL constructs required to define, map, extract, process, transform, integrate, update, and load (multidimensional) semantic data. Different to other ETL tools, we automate the ETL data flows by creating metadata at the schema level. Therefore, it relieves ETL developers from the burden of manual mapping at the ETL operation level. We create a prototype, named Semantic ETL Construct (SETLCONSTRUCT), based on the innovative ETL constructs proposed here. To evaluate SETLCONSTRUCT, we create a multidimensional semantic DW by integrating a Danish Business dataset and an EU Subsidy dataset using it and compare it with the previous programmable framework SETLPROG in terms of productivity, development time and performance. The evaluation shows that 1) SETLCONSTRUCT uses 92% fewer Number of Typed Characters (NOTC) than SETLPROG, and SETLAUTO (the extension of SETLCONSTRUCT for generating ETL execution flow automatically) further reduces the Number of Used Concepts (NOUC) by another 25%; 2) using SETLCONSTRUCT, the development time is almost cut in half compared to SETLPROG, and is cut by another 27% using SETLAUTO; 3) SETLCONSTRUCT is scalable and has similar performance compared to SETLPROG."
+    },
+    {
+      "topic": "Semantic Routing",
+      "provenance": {
+        "title": "Semantic Jira - Semantic Expert Finder in the Bug Tracking Tool Jira",
+        "url": ""
+      },
+      "notes": "The semantic expert recommender extension for the Jira bug tracking system semantically searches for similar tickets in Jira and recommends experts and links to existing organizational (Wiki) knowledge for each ticket. This helps to avoid redundant work and supports the search and collaboration with experts in the project management and maintenance phase based on semantically enriched tickets in Jira."
+    },
+    {
+      "topic": "Semantic Routing",
+      "provenance": {
+        "title": "Cosine-Similarity Routing with Semantic Anchors for Interpretable Mixture-of-Experts Language Models",
+        "url": ""
+      },
+      "notes": "Mixture-of-Experts (MoE) models improve efficiency through sparse activation, but their learned gating functions provide limited insight into routing decisions. This work introduces the Semantic Resonance Architecture (SRA), which routes tokens to experts via cosine similarity between token representations and learnable semantic anchors, making every routing decision directly traceable to anchor-token similarity scores. We evaluate SRA on WikiText-103 across 17 configurations. In a controlled multi-seed comparison (3 seeds x 4 configurations, 256 experts, $D_{ff}=256$), cosine routing achieves competitive perplexity with standard linear routing ($12.57 \\pm 0.03$ vs $12.45 \\pm 0.03$ for $K=1 \\to 4$; $12.52 \\pm 0.02$ vs $12.57 \\pm 0.02$ for $K=2 \\to 4$). The training recipe -- not the routing function -- drives specialization quality, while cosine routing provides inherent inspectability. We introduce a bandpass routing loss -- a floor-and-ceiling corridor on expert utilization -- that reduces dead experts from 30-45% to 0-6% and transfers to both routing types. Routing-space evaluation shows cosine routing provides significantly better word-level subtoken coherence in deeper layers ($p &lt; 0.001$), with 44-54% of expert specialization being syntactic rather than semantic. Extended analysis reveals cosine routing maintains more stable router saturation and tighter per-expert vocabulary distributions -- structural advantages from the bounded cosine similarity range. An inference-time $k$-sweep shows that $k=5$ yields a free 0.08-0.16 perplexity gain over $k=4$. Cross-dataset validation on OpenWebText confirms generalization: cosine routing achieves comparable perplexity (44.88 vs 45.44), the bandpass loss eliminates dead experts, and specialization patterns are preserved."
+    }
+  ],
+  "report": "# Research Report: Agent Architectures in GraphRAG Systems\n\n## Executive Summary\nThis report examines the role of agent-based architectures in the construction and utilization of knowledge graphs (KGs). Evidence indicates that multi-agent frameworks—particularly those leveraging Large Language Models (LLMs)—significantly automate the transition from unstructured or siloed data to structured knowledge. Key findings include the use of dedicated agent roles for ontology creation and population, the application of semantic agents for relational data mapping, and the integration of LLMs for generative query recommendation. While the evidence covers broad aspects of agent orchestration and semantic routing, it specifically highlights the ability of agentic workflows to improve property coverage, mapping accuracy, and query engagement.\n\n## Introduction\nGraphRAG systems rely on the synthesis of graph-based structured knowledge and the generative capabilities of LLMs. A critical component of these systems is the architecture used to construct the knowledge graph and the mechanisms used to query and refine the resulting data. This report analyzes how AI agent architectures are employed to automate the lifecycle of knowledge graph construction—from ontology generation to population—and how these systems manage semantic routing and query refinement to improve the retrieval of information.\n\n## Findings\n\n### Knowledge Graph Construction via AI Agents\nAgent-driven frameworks are being utilized to automate the complex process of creating product-specific knowledge graphs from unstructured descriptions. \n*   **Automated Frameworks:** One approach utilizes a three-stage process involving dedicated agents for:\n    1.  Ontology creation and expansion.\n    2.  Ontology refinement.\n    3.  Knowledge graph population.\n    This architecture achieves over 97% property coverage and minimal redundancy without the need for handcrafted extraction rules.\n*   **Semantic Mapping:** In enterprise environments with siloed relational databases, LLMs act as semantic agents. These agents create a semantic layer above database tables, mapping columns and tables to Schema.org terms with a reported mapping accuracy exceeding 90% across multiple domains.\n*   **Logic Representation:** Beyond data-centric entities, knowledge graphs are used to represent complex business logic, such as U.S. and Canadian income tax compliance rules. These graphs are automated to calculate refunds, reason through missing information, and provide explanations for calculated results.\n\n### Query Engines and Refinement\nThe architecture of query engines in these systems varies between generative and formal approaches:\n*   **Generative Query Recommendation (GQR):** LLMs are used to frame query recommendation as a generative task. The \"Retriever-Augmented GQR\" (RA-GQR) architecture dynamically composes prompts by retrieving similar queries from logs, improving NDCG@10 performance by approximately 6% to 11% over competitors.\n*   **Formalization of Queries:** For logic-based reasoning, Description Logics are used to translate natural language \"wh-queries\" into formal languages, enabling semantic interpretation for database queries and question-answering.\n*   **Iterative Refinement:** In compositional generation tasks, an iterative test-time strategy uses a vision-language model as a \"critic\" in a loop to progressively refine generations, decomposing complex prompts into sequential corrections.\n\n### Multi-Agent Orchestration and Routing\nThe coordination of multiple agents is managed through various communication and routing strategies:\n*   **Communication and Coordination:** In Multi-Agent Deep Reinforcement Learning (MADRL), communication allows agents to broaden their environmental views. Research suggests the use of \"conventions\"—predefined, mutually agreed-upon rules—to facilitate implicit knowledge sharing in environments with partial observability.\n*   **Semantic Routing:** The Semantic Resonance Architecture (SRA) employs cosine similarity between token representations and learnable semantic anchors to route tokens to specific experts in Mixture-of-Experts (MoE) models. This makes routing decisions traceable and reduces \"dead experts\" (from 30-45% down to 0-6%) when paired with a bandpass routing loss.\n*   **Graph Traversal:** Unlike relational databases that rely on set-theoretic operations, graph databases utilize index-free, local traversals to process network-based data.\n\n## Comparative Analysis\n\n### Automation vs. Manual Construction\nTraditional KG construction is described as a complex and manual process. The evidence suggests a shift toward agent-driven frameworks that eliminate the need for predefined schemas. For example, the agent-based framework for e-commerce data provides a scalable path toward data integration that outperforms manual rule-based extraction in terms of coverage and scalability.\n\n### Generative vs. Logic-Based Retrieval\nThe report identifies two distinct paths for query handling:\n1.  **Generative (GQR/RA-GQR):** Focuses on user engagement and recommendation, utilizing LLMs to handle \"cold start\" scenarios where query logs are unavailable.\n2.  **Logic-Based (Description Logics):** Focuses on formal translation and semantic equivalence to ensure precise reasoning during information retrieval.\n\n### Routing Mechanisms\nRouting in agentic systems varies by objective:\n*   **Operational Routing:** SRA uses cosine similarity for internal model efficiency (MoE).\n*   **Knowledge Routing:** Semantic expert finders (e.g., in Jira) use semantic searches to route users to existing organizational knowledge or specific experts based on enriched tickets.\n\n## Conclusion\nAgent architectures in GraphRAG-adjacent systems are evolving from simple retrieval tools into complex, multi-stage pipelines. The integration of specialized agents for ontology management and the use of semantic anchors for routing significantly improve the accuracy and scalability of knowledge graphs. The transition toward iterative refinement and retriever-augmented generation further enhances the system's ability to handle complex, compositional queries and siloed data sources.\n\n## References\n\n- No sources available"
+}

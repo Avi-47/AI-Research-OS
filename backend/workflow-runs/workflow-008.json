@@ -1,0 +1,1206 @@
+{
+  "workflowId": "b343dd24-917c-4e55-bf43-5984f2b39631",
+  "timestamp": "2026-06-22T11:41:33.019Z",
+  "query": "compare transformer pruning techniques",
+  "topics": [
+    "Structured Pruning",
+    "Unstructured Pruning",
+    "Magnitude Pruning",
+    "Weight-based Pruning",
+    "Activation-based Pruning",
+    "SparseGPT",
+    "Wanda",
+    "Movement Pruning",
+    "Iterative Magnitude Pruning",
+    "Lottery Ticket Hypothesis"
+  ],
+  "evidence": [
+    {
+      "topic": "Structured Pruning",
+      "provenance": {
+        "title": "A Comprehensive Study of Structural Pruning for Vision Models",
+        "url": ""
+      },
+      "notes": "Structural pruning has emerged as a promising approach for producing more efficient models. Nevertheless, the community suffers from a lack of standardized benchmarks and metrics, leaving the progress in this area not fully comprehended. To fill this gap, we present the first comprehensive benchmark, termed PruningBench, for structural pruning. PruningBench showcases the following three characteristics: 1) PruningBench employs a unified and consistent framework for evaluating the effectiveness of diverse structural pruning techniques; 2) PruningBench systematically evaluates 16 existing pruning methods, encompassing a wide array of models (e.g., CNNs and ViTs) and tasks (e.g., classification and detection); 3) PruningBench provides easily implementable interfaces to facilitate the implementation of future pruning methods, and enables the subsequent researchers to incorporate their work into our leaderboards. We provide an online pruning platform for customizing pruning tasks and reproducing all results in this paper. Leaderboard results can also be available."
+    },
+    {
+      "topic": "Structured Pruning",
+      "provenance": {
+        "title": "Is Oracle Pruning the True Oracle?",
+        "url": ""
+      },
+      "notes": "Oracle pruning, which selects unimportant weights by minimizing the pruned train loss, has been taken as the foundation for most neural network pruning methods for over 35 years, while few (if not none) have thought about how much the foundation really holds. This paper, for the first time, attempts to examine its validity on modern deep models through empirical correlation analyses and provide reflections on the field of neural network pruning. Specifically, for a typical pruning algorithm with three stages (pertaining, pruning, and retraining), we analyze the model performance correlation before and after retraining. Extensive experiments (37K models are trained) across a wide spectrum of models (LeNet5, VGG, ResNets, ViT, MLLM) and datasets (MNIST and its variants, CIFAR10/CIFAR100, ImageNet-1K, MLLM data) are conducted. The results lead to a surprising conclusion: on modern deep learning models, the performance before retraining is barely correlated with the performance after retraining. Namely, the weights selected by oracle pruning can hardly guarantee a good performance after retraining. This further implies that existing works using oracle pruning to derive pruning criteria may be groundless from the beginning. Further studies suggest the rising task complexity is one factor that makes oracle pruning invalid nowadays. Finally, given the evidence, we argue that the retraining stage in a pruning algorithm should be accounted for when developing any pruning criterion."
+    },
+    {
+      "topic": "Structured Pruning",
+      "provenance": {
+        "title": "Exploring 3D Dataset Pruning",
+        "url": ""
+      },
+      "notes": "Dataset pruning has been widely studied for 2D images to remove redundancy and accelerate training, while particular pruning methods for 3D data remain largely unexplored. In this work, we study dataset pruning for 3D data, where its observed common long-tail class distribution nature make optimization under conventional evaluation metrics Overall Accuracy (OA) and Mean Accuracy (mAcc) inherently conflicting, and further make pruning particularly challenging. To address this, we formulate pruning as approximating the full-data expected risk with a weighted subset, which reveals two key errors: coverage error from insufficient representativeness and prior-mismatch bias from inconsistency between subset-induced class weights and target metrics. We propose representation-aware subset selection with per-class retention quotas for long-tail coverage, and prior-invariant teacher supervision using calibrated soft labels and embedding-geometry distillation. The retention quota also serves as a switch to control the OA-mAcc trade-off. Extensive experiments on 3D datasets show that our method can improve both metrics across multiple settings while adapting to different downstream preferences. Our code is available at https://github.com/XiaohanZhao123/3D-Dataset-Pruning."
+    },
+    {
+      "topic": "Unstructured Pruning",
+      "provenance": {
+        "title": "Is Oracle Pruning the True Oracle?",
+        "url": ""
+      },
+      "notes": "Oracle pruning, which selects unimportant weights by minimizing the pruned train loss, has been taken as the foundation for most neural network pruning methods for over 35 years, while few (if not none) have thought about how much the foundation really holds. This paper, for the first time, attempts to examine its validity on modern deep models through empirical correlation analyses and provide reflections on the field of neural network pruning. Specifically, for a typical pruning algorithm with three stages (pertaining, pruning, and retraining), we analyze the model performance correlation before and after retraining. Extensive experiments (37K models are trained) across a wide spectrum of models (LeNet5, VGG, ResNets, ViT, MLLM) and datasets (MNIST and its variants, CIFAR10/CIFAR100, ImageNet-1K, MLLM data) are conducted. The results lead to a surprising conclusion: on modern deep learning models, the performance before retraining is barely correlated with the performance after retraining. Namely, the weights selected by oracle pruning can hardly guarantee a good performance after retraining. This further implies that existing works using oracle pruning to derive pruning criteria may be groundless from the beginning. Further studies suggest the rising task complexity is one factor that makes oracle pruning invalid nowadays. Finally, given the evidence, we argue that the retraining stage in a pruning algorithm should be accounted for when developing any pruning criterion."
+    },
+    {
+      "topic": "Unstructured Pruning",
+      "provenance": {
+        "title": "Exploring 3D Dataset Pruning",
+        "url": ""
+      },
+      "notes": "Dataset pruning has been widely studied for 2D images to remove redundancy and accelerate training, while particular pruning methods for 3D data remain largely unexplored. In this work, we study dataset pruning for 3D data, where its observed common long-tail class distribution nature make optimization under conventional evaluation metrics Overall Accuracy (OA) and Mean Accuracy (mAcc) inherently conflicting, and further make pruning particularly challenging. To address this, we formulate pruning as approximating the full-data expected risk with a weighted subset, which reveals two key errors: coverage error from insufficient representativeness and prior-mismatch bias from inconsistency between subset-induced class weights and target metrics. We propose representation-aware subset selection with per-class retention quotas for long-tail coverage, and prior-invariant teacher supervision using calibrated soft labels and embedding-geometry distillation. The retention quota also serves as a switch to control the OA-mAcc trade-off. Extensive experiments on 3D datasets show that our method can improve both metrics across multiple settings while adapting to different downstream preferences. Our code is available at https://github.com/XiaohanZhao123/3D-Dataset-Pruning."
+    },
+    {
+      "topic": "Unstructured Pruning",
+      "provenance": {
+        "title": "CHIP: CHannel Independence-based Pruning for Compact Neural Networks",
+        "url": ""
+      },
+      "notes": "Filter pruning has been widely used for neural network compression because of its enabled practical acceleration. To date, most of the existing filter pruning works explore the importance of filters via using intra-channel information. In this paper, starting from an inter-channel perspective, we propose to perform efficient filter pruning using Channel Independence, a metric that measures the correlations among different feature maps. The less independent feature map is interpreted as containing less useful information$/$knowledge, and hence its corresponding filter can be pruned without affecting model capacity. We systematically investigate the quantification metric, measuring scheme and sensitiveness$/$reliability of channel independence in the context of filter pruning. Our evaluation results for different models on various datasets show the superior performance of our approach. Notably, on CIFAR-10 dataset our solution can bring $0.90\\%$ and $0.94\\%$ accuracy increase over baseline ResNet-56 and ResNet-110 models, respectively, and meanwhile the model size and FLOPs are reduced by $42.8\\%$ and $47.4\\%$ (for ResNet-56) and $48.3\\%$ and $52.1\\%$ (for ResNet-110), respectively. On ImageNet dataset, our approach can achieve $40.8\\%$ and $44.8\\%$ storage and computation reductions, respectively, with $0.15\\%$ accuracy increase over the baseline ResNet-50 model. The code is available at https://github.com/Eclipsess/CHIP_NeurIPS2021."
+    },
+    {
+      "topic": "Magnitude Pruning",
+      "provenance": {
+        "title": "Layer-adaptive sparsity for the Magnitude-based Pruning",
+        "url": ""
+      },
+      "notes": "Recent discoveries on neural network pruning reveal that, with a carefully chosen layerwise sparsity, a simple magnitude-based pruning achieves state-of-the-art tradeoff between sparsity and performance. However, without a clear consensus on \"how to choose,\" the layerwise sparsities are mostly selected algorithm-by-algorithm, often resorting to handcrafted heuristics or an extensive hyperparameter search. To fill this gap, we propose a novel importance score for global pruning, coined layer-adaptive magnitude-based pruning (LAMP) score; the score is a rescaled version of weight magnitude that incorporates the model-level $\\ell_2$ distortion incurred by pruning, and does not require any hyperparameter tuning or heavy computation. Under various image classification setups, LAMP consistently outperforms popular existing schemes for layerwise sparsity selection. Furthermore, we observe that LAMP continues to outperform baselines even in weight-rewinding setups, while the connectivity-oriented layerwise sparsity (the strongest baseline overall) performs worse than a simple global magnitude-based pruning in this case. Code: https://github.com/jaeho-lee/layer-adaptive-sparsity"
+    },
+    {
+      "topic": "Magnitude Pruning",
+      "provenance": {
+        "title": "Is Oracle Pruning the True Oracle?",
+        "url": ""
+      },
+      "notes": "Oracle pruning, which selects unimportant weights by minimizing the pruned train loss, has been taken as the foundation for most neural network pruning methods for over 35 years, while few (if not none) have thought about how much the foundation really holds. This paper, for the first time, attempts to examine its validity on modern deep models through empirical correlation analyses and provide reflections on the field of neural network pruning. Specifically, for a typical pruning algorithm with three stages (pertaining, pruning, and retraining), we analyze the model performance correlation before and after retraining. Extensive experiments (37K models are trained) across a wide spectrum of models (LeNet5, VGG, ResNets, ViT, MLLM) and datasets (MNIST and its variants, CIFAR10/CIFAR100, ImageNet-1K, MLLM data) are conducted. The results lead to a surprising conclusion: on modern deep learning models, the performance before retraining is barely correlated with the performance after retraining. Namely, the weights selected by oracle pruning can hardly guarantee a good performance after retraining. This further implies that existing works using oracle pruning to derive pruning criteria may be groundless from the beginning. Further studies suggest the rising task complexity is one factor that makes oracle pruning invalid nowadays. Finally, given the evidence, we argue that the retraining stage in a pruning algorithm should be accounted for when developing any pruning criterion."
+    },
+    {
+      "topic": "Magnitude Pruning",
+      "provenance": {
+        "title": "Exploring 3D Dataset Pruning",
+        "url": ""
+      },
+      "notes": "Dataset pruning has been widely studied for 2D images to remove redundancy and accelerate training, while particular pruning methods for 3D data remain largely unexplored. In this work, we study dataset pruning for 3D data, where its observed common long-tail class distribution nature make optimization under conventional evaluation metrics Overall Accuracy (OA) and Mean Accuracy (mAcc) inherently conflicting, and further make pruning particularly challenging. To address this, we formulate pruning as approximating the full-data expected risk with a weighted subset, which reveals two key errors: coverage error from insufficient representativeness and prior-mismatch bias from inconsistency between subset-induced class weights and target metrics. We propose representation-aware subset selection with per-class retention quotas for long-tail coverage, and prior-invariant teacher supervision using calibrated soft labels and embedding-geometry distillation. The retention quota also serves as a switch to control the OA-mAcc trade-off. Extensive experiments on 3D datasets show that our method can improve both metrics across multiple settings while adapting to different downstream preferences. Our code is available at https://github.com/XiaohanZhao123/3D-Dataset-Pruning."
+    },
+    {
+      "topic": "Weight-based Pruning",
+      "provenance": {
+        "title": "Layer-adaptive sparsity for the Magnitude-based Pruning",
+        "url": ""
+      },
+      "notes": "Recent discoveries on neural network pruning reveal that, with a carefully chosen layerwise sparsity, a simple magnitude-based pruning achieves state-of-the-art tradeoff between sparsity and performance. However, without a clear consensus on \"how to choose,\" the layerwise sparsities are mostly selected algorithm-by-algorithm, often resorting to handcrafted heuristics or an extensive hyperparameter search. To fill this gap, we propose a novel importance score for global pruning, coined layer-adaptive magnitude-based pruning (LAMP) score; the score is a rescaled version of weight magnitude that incorporates the model-level $\\ell_2$ distortion incurred by pruning, and does not require any hyperparameter tuning or heavy computation. Under various image classification setups, LAMP consistently outperforms popular existing schemes for layerwise sparsity selection. Furthermore, we observe that LAMP continues to outperform baselines even in weight-rewinding setups, while the connectivity-oriented layerwise sparsity (the strongest baseline overall) performs worse than a simple global magnitude-based pruning in this case. Code: https://github.com/jaeho-lee/layer-adaptive-sparsity"
+    },
+    {
+      "topic": "Weight-based Pruning",
+      "provenance": {
+        "title": "Fewer Weights, More Problems: A Practical Attack on LLM Pruning",
+        "url": ""
+      },
+      "notes": "Model pruning, i.e., removing a subset of model weights, has become a prominent approach to reducing the memory footprint of large language models (LLMs) during inference. Notably, popular inference engines, such as vLLM, enable users to conveniently prune downloaded models before they are deployed. While the utility and efficiency of pruning methods have improved significantly, the security implications of pruning remain underexplored. In this work, for the first time, we show that modern LLM pruning methods can be maliciously exploited. In particular, an adversary can construct a model that appears benign yet, once pruned, exhibits malicious behaviors. Our method is based on the idea that the adversary can compute a proxy metric that estimates how likely each parameter is to be pruned. With this information, the adversary can first inject a malicious behavior into those parameters that are unlikely to be pruned. Then, they can repair the model by using parameters that are likely to be pruned, effectively canceling out the injected behavior in the unpruned model. We demonstrate the severity of our attack through extensive evaluation on five models; after any of the pruning in vLLM are applied (Magnitude, Wanda, and SparseGPT), it consistently exhibits strong malicious behaviors in a diverse set of attack scenarios (success rates of up to $95.7\\%$ for jailbreak, $98.7\\%$ for benign instruction refusal, and $99.5\\%$ for targeted content injection). Our results reveal a critical deployment-time security gap and underscore the urgent need for stronger security awareness in model compression."
+    },
+    {
+      "topic": "Weight-based Pruning",
+      "provenance": {
+        "title": "Is Oracle Pruning the True Oracle?",
+        "url": ""
+      },
+      "notes": "Oracle pruning, which selects unimportant weights by minimizing the pruned train loss, has been taken as the foundation for most neural network pruning methods for over 35 years, while few (if not none) have thought about how much the foundation really holds. This paper, for the first time, attempts to examine its validity on modern deep models through empirical correlation analyses and provide reflections on the field of neural network pruning. Specifically, for a typical pruning algorithm with three stages (pertaining, pruning, and retraining), we analyze the model performance correlation before and after retraining. Extensive experiments (37K models are trained) across a wide spectrum of models (LeNet5, VGG, ResNets, ViT, MLLM) and datasets (MNIST and its variants, CIFAR10/CIFAR100, ImageNet-1K, MLLM data) are conducted. The results lead to a surprising conclusion: on modern deep learning models, the performance before retraining is barely correlated with the performance after retraining. Namely, the weights selected by oracle pruning can hardly guarantee a good performance after retraining. This further implies that existing works using oracle pruning to derive pruning criteria may be groundless from the beginning. Further studies suggest the rising task complexity is one factor that makes oracle pruning invalid nowadays. Finally, given the evidence, we argue that the retraining stage in a pruning algorithm should be accounted for when developing any pruning criterion."
+    },
+    {
+      "topic": "Activation-based Pruning",
+      "provenance": {
+        "title": "Is Oracle Pruning the True Oracle?",
+        "url": ""
+      },
+      "notes": "Oracle pruning, which selects unimportant weights by minimizing the pruned train loss, has been taken as the foundation for most neural network pruning methods for over 35 years, while few (if not none) have thought about how much the foundation really holds. This paper, for the first time, attempts to examine its validity on modern deep models through empirical correlation analyses and provide reflections on the field of neural network pruning. Specifically, for a typical pruning algorithm with three stages (pertaining, pruning, and retraining), we analyze the model performance correlation before and after retraining. Extensive experiments (37K models are trained) across a wide spectrum of models (LeNet5, VGG, ResNets, ViT, MLLM) and datasets (MNIST and its variants, CIFAR10/CIFAR100, ImageNet-1K, MLLM data) are conducted. The results lead to a surprising conclusion: on modern deep learning models, the performance before retraining is barely correlated with the performance after retraining. Namely, the weights selected by oracle pruning can hardly guarantee a good performance after retraining. This further implies that existing works using oracle pruning to derive pruning criteria may be groundless from the beginning. Further studies suggest the rising task complexity is one factor that makes oracle pruning invalid nowadays. Finally, given the evidence, we argue that the retraining stage in a pruning algorithm should be accounted for when developing any pruning criterion."
+    },
+    {
+      "topic": "Activation-based Pruning",
+      "provenance": {
+        "title": "Iterative Activation-based Structured Pruning",
+        "url": ""
+      },
+      "notes": "Deploying complex deep learning models on edge devices is challenging because they have substantial compute and memory resource requirements, whereas edge devices' resource budget is limited. To solve this problem, extensive pruning techniques have been proposed for compressing networks. Recent advances based on the Lottery Ticket Hypothesis (LTH) show that iterative model pruning tends to produce smaller and more accurate models. However, LTH research focuses on unstructured pruning, which is hardware-inefficient and difficult to accelerate on hardware platforms. In this paper, we investigate iterative pruning in the context of structured pruning because structurally pruned models map well on commodity hardware. We find that directly applying a structured weight-based pruning technique iteratively, called iterative L1-norm based pruning (ILP), does not produce accurate pruned models. To solve this problem, we propose two activation-based pruning methods, Iterative Activation-based Pruning (IAP) and Adaptive Iterative Activation-based Pruning (AIAP). We observe that, with only 1% accuracy loss, IAP and AIAP achieve 7.75X and 15.88$X compression on LeNet-5, and 1.25X and 1.71X compression on ResNet-50, whereas ILP achieves 4.77X and 1.13X, respectively."
+    },
+    {
+      "topic": "Activation-based Pruning",
+      "provenance": {
+        "title": "Exploring 3D Dataset Pruning",
+        "url": ""
+      },
+      "notes": "Dataset pruning has been widely studied for 2D images to remove redundancy and accelerate training, while particular pruning methods for 3D data remain largely unexplored. In this work, we study dataset pruning for 3D data, where its observed common long-tail class distribution nature make optimization under conventional evaluation metrics Overall Accuracy (OA) and Mean Accuracy (mAcc) inherently conflicting, and further make pruning particularly challenging. To address this, we formulate pruning as approximating the full-data expected risk with a weighted subset, which reveals two key errors: coverage error from insufficient representativeness and prior-mismatch bias from inconsistency between subset-induced class weights and target metrics. We propose representation-aware subset selection with per-class retention quotas for long-tail coverage, and prior-invariant teacher supervision using calibrated soft labels and embedding-geometry distillation. The retention quota also serves as a switch to control the OA-mAcc trade-off. Extensive experiments on 3D datasets show that our method can improve both metrics across multiple settings while adapting to different downstream preferences. Our code is available at https://github.com/XiaohanZhao123/3D-Dataset-Pruning."
+    },
+    {
+      "topic": "SparseGPT",
+      "provenance": {
+        "title": "SparseGPT: Massive Language Models Can Be Accurately Pruned in One-Shot",
+        "url": ""
+      },
+      "notes": "We show for the first time that large-scale generative pretrained transformer (GPT) family models can be pruned to at least 50% sparsity in one-shot, without any retraining, at minimal loss of accuracy. This is achieved via a new pruning method called SparseGPT, specifically designed to work efficiently and accurately on massive GPT-family models. We can execute SparseGPT on the largest available open-source models, OPT-175B and BLOOM-176B, in under 4.5 hours, and can reach 60% unstructured sparsity with negligible increase in perplexity: remarkably, more than 100 billion weights from these models can be ignored at inference time. SparseGPT generalizes to semi-structured (2:4 and 4:8) patterns, and is compatible with weight quantization approaches. The code is available at: https://github.com/IST-DASLab/sparsegpt."
+    },
+    {
+      "topic": "SparseGPT",
+      "provenance": {
+        "title": "ROSE: Reordered SparseGPT for More Accurate One-Shot Large Language Models Pruning",
+        "url": ""
+      },
+      "notes": "Pruning is widely recognized as an effective method for reducing the parameters of large language models (LLMs), potentially leading to more efficient deployment and inference. One classic and prominent path of LLM one-shot pruning is to leverage second-order gradients (i.e., Hessian), represented by the pioneering work SparseGPT. However, the predefined left-to-right pruning order in SparseGPT leads to suboptimal performance when the weights exhibit columnar patterns. This paper studies the effect of pruning order under the SparseGPT framework. The analyses lead us to propose ROSE, a reordered SparseGPT method that prioritizes weights with larger potential pruning errors to be pruned earlier. ROSE first performs pre-pruning to identify candidate weights for removal, and estimates both column and block pruning loss. Subsequently, two-level reordering is performed: columns within each block are reordered in descending order of column loss, while blocks are reordered based on block loss. We introduce the relative range of block loss as a metric to identify columnar layers, enabling adaptive reordering across the entire model. Substantial empirical results on prevalent LLMs (LLaMA2-7B/13B/70B, LLaMA3-8B, Mistral-7B) demonstrate that ROSE surpasses the original SparseGPT and other counterpart pruning methods. Our code is available at https://github.com/mingluo-su/ROSE."
+    },
+    {
+      "topic": "SparseGPT",
+      "provenance": {
+        "title": "A Tighter Complexity Analysis of SparseGPT",
+        "url": ""
+      },
+      "notes": "In this work, we improved the analysis of the running time of SparseGPT [Frantar, Alistarh ICML 2023] from $O(d^{3})$ to $O(d^ω + d^{2+a+o(1)} + d^{1+ω(1,1,a)-a})$ for any $a \\in [0, 1]$, where $ω$ is the exponent of matrix multiplication. In particular, for the current $ω\\approx 2.371$ [Alman, Duan, Williams, Xu, Xu, Zhou 2024], our running time boils down to $O(d^{2.53})$. This running time is due to the analysis of the lazy update behavior in iterative maintenance problems such as [Deng, Song, Weinstein 2022; Brand, Song, Zhou ICML 2024]."
+    },
+    {
+      "topic": "Wanda",
+      "provenance": {
+        "title": "A Simple and Effective Pruning Approach for Large Language Models",
+        "url": ""
+      },
+      "notes": "As their size increases, Large Languages Models (LLMs) are natural candidates for network pruning methods: approaches that drop a subset of network weights while striving to preserve performance. Existing methods, however, require either retraining, which is rarely affordable for billion-scale LLMs, or solving a weight reconstruction problem reliant on second-order information, which may also be computationally expensive. In this paper, we introduce a novel, straightforward yet effective pruning method, termed Wanda (Pruning by Weights and activations), designed to induce sparsity in pretrained LLMs. Motivated by the recent observation of emergent large magnitude features in LLMs, our approach prunes weights with the smallest magnitudes multiplied by the corresponding input activations, on a per-output basis. Notably, Wanda requires no retraining or weight update, and the pruned LLM can be used as is. We conduct a thorough evaluation of our method Wanda on LLaMA and LLaMA-2 across various language benchmarks. Wanda significantly outperforms the established baseline of magnitude pruning and performs competitively against recent method involving intensive weight update. Code is available at https://github.com/locuslab/wanda."
+    },
+    {
+      "topic": "Wanda",
+      "provenance": {
+        "title": "Wanda++: Pruning Large Language Models via Regional Gradients",
+        "url": ""
+      },
+      "notes": "Large Language Models (LLMs) pruning seeks to remove unimportant weights for inference speedup with minimal accuracy impact. However, existing methods often suffer from accuracy degradation without full-model sparsity-aware fine-tuning. This paper presents Wanda++, a novel pruning framework that outperforms the state-of-the-art methods by utilizing decoder-block-level \\textbf{regional} gradients. Specifically, Wanda++ improves the pruning score with regional gradients for the first time and proposes an efficient regional optimization method to minimize pruning-induced output discrepancies between the dense and sparse decoder output. Notably, Wanda++ improves perplexity by up to 32\\% over Wanda in the language modeling task and generalizes effectively to downstream tasks. Moreover, despite updating weights with regional optimization, Wanda++ remains orthogonal to sparsity-aware fine-tuning, further reducing perplexity with LoRA in great extend. Our approach is lightweight, pruning a 7B LLaMA model in under 10 minutes on a single H100 GPU."
+    },
+    {
+      "topic": "Wanda",
+      "provenance": {
+        "title": "M-Wanda: Improving One-Shot Pruning for Multilingual LLMs",
+        "url": ""
+      },
+      "notes": "Multilingual LLM performance is often critically dependent on model size. With an eye on efficiency, this has led to a surge in interest in one-shot pruning methods that retain the benefits of large-scale pretraining while shrinking the model size. However, as pruning tends to come with performance loss, it is important to understand the trade-offs between multilinguality and sparsification. In this work, we study multilingual performance under different sparsity constraints and show that moderate ratios already substantially harm performance. To help bridge this gap, we propose M-Wanda, a pruning method that models cross-lingual variation by incorporating language-aware activation statistics into its pruning criterion and dynamically adjusts layerwise sparsity based on cross-lingual importance. We show that M-Wanda consistently improves performance at minimal additional costs. We are the first to explicitly optimize pruning to retain multilingual performance, and hope to inspire future advances in multilingual pruning."
+    },
+    {
+      "topic": "Movement Pruning",
+      "provenance": {
+        "title": "Is Oracle Pruning the True Oracle?",
+        "url": ""
+      },
+      "notes": "Oracle pruning, which selects unimportant weights by minimizing the pruned train loss, has been taken as the foundation for most neural network pruning methods for over 35 years, while few (if not none) have thought about how much the foundation really holds. This paper, for the first time, attempts to examine its validity on modern deep models through empirical correlation analyses and provide reflections on the field of neural network pruning. Specifically, for a typical pruning algorithm with three stages (pertaining, pruning, and retraining), we analyze the model performance correlation before and after retraining. Extensive experiments (37K models are trained) across a wide spectrum of models (LeNet5, VGG, ResNets, ViT, MLLM) and datasets (MNIST and its variants, CIFAR10/CIFAR100, ImageNet-1K, MLLM data) are conducted. The results lead to a surprising conclusion: on modern deep learning models, the performance before retraining is barely correlated with the performance after retraining. Namely, the weights selected by oracle pruning can hardly guarantee a good performance after retraining. This further implies that existing works using oracle pruning to derive pruning criteria may be groundless from the beginning. Further studies suggest the rising task complexity is one factor that makes oracle pruning invalid nowadays. Finally, given the evidence, we argue that the retraining stage in a pruning algorithm should be accounted for when developing any pruning criterion."
+    },
+    {
+      "topic": "Movement Pruning",
+      "provenance": {
+        "title": "Exploring 3D Dataset Pruning",
+        "url": ""
+      },
+      "notes": "Dataset pruning has been widely studied for 2D images to remove redundancy and accelerate training, while particular pruning methods for 3D data remain largely unexplored. In this work, we study dataset pruning for 3D data, where its observed common long-tail class distribution nature make optimization under conventional evaluation metrics Overall Accuracy (OA) and Mean Accuracy (mAcc) inherently conflicting, and further make pruning particularly challenging. To address this, we formulate pruning as approximating the full-data expected risk with a weighted subset, which reveals two key errors: coverage error from insufficient representativeness and prior-mismatch bias from inconsistency between subset-induced class weights and target metrics. We propose representation-aware subset selection with per-class retention quotas for long-tail coverage, and prior-invariant teacher supervision using calibrated soft labels and embedding-geometry distillation. The retention quota also serves as a switch to control the OA-mAcc trade-off. Extensive experiments on 3D datasets show that our method can improve both metrics across multiple settings while adapting to different downstream preferences. Our code is available at https://github.com/XiaohanZhao123/3D-Dataset-Pruning."
+    },
+    {
+      "topic": "Movement Pruning",
+      "provenance": {
+        "title": "CHIP: CHannel Independence-based Pruning for Compact Neural Networks",
+        "url": ""
+      },
+      "notes": "Filter pruning has been widely used for neural network compression because of its enabled practical acceleration. To date, most of the existing filter pruning works explore the importance of filters via using intra-channel information. In this paper, starting from an inter-channel perspective, we propose to perform efficient filter pruning using Channel Independence, a metric that measures the correlations among different feature maps. The less independent feature map is interpreted as containing less useful information$/$knowledge, and hence its corresponding filter can be pruned without affecting model capacity. We systematically investigate the quantification metric, measuring scheme and sensitiveness$/$reliability of channel independence in the context of filter pruning. Our evaluation results for different models on various datasets show the superior performance of our approach. Notably, on CIFAR-10 dataset our solution can bring $0.90\\%$ and $0.94\\%$ accuracy increase over baseline ResNet-56 and ResNet-110 models, respectively, and meanwhile the model size and FLOPs are reduced by $42.8\\%$ and $47.4\\%$ (for ResNet-56) and $48.3\\%$ and $52.1\\%$ (for ResNet-110), respectively. On ImageNet dataset, our approach can achieve $40.8\\%$ and $44.8\\%$ storage and computation reductions, respectively, with $0.15\\%$ accuracy increase over the baseline ResNet-50 model. The code is available at https://github.com/Eclipsess/CHIP_NeurIPS2021."
+    },
+    {
+      "topic": "Iterative Magnitude Pruning",
+      "provenance": {
+        "title": "Layer-adaptive sparsity for the Magnitude-based Pruning",
+        "url": ""
+      },
+      "notes": "Recent discoveries on neural network pruning reveal that, with a carefully chosen layerwise sparsity, a simple magnitude-based pruning achieves state-of-the-art tradeoff between sparsity and performance. However, without a clear consensus on \"how to choose,\" the layerwise sparsities are mostly selected algorithm-by-algorithm, often resorting to handcrafted heuristics or an extensive hyperparameter search. To fill this gap, we propose a novel importance score for global pruning, coined layer-adaptive magnitude-based pruning (LAMP) score; the score is a rescaled version of weight magnitude that incorporates the model-level $\\ell_2$ distortion incurred by pruning, and does not require any hyperparameter tuning or heavy computation. Under various image classification setups, LAMP consistently outperforms popular existing schemes for layerwise sparsity selection. Furthermore, we observe that LAMP continues to outperform baselines even in weight-rewinding setups, while the connectivity-oriented layerwise sparsity (the strongest baseline overall) performs worse than a simple global magnitude-based pruning in this case. Code: https://github.com/jaeho-lee/layer-adaptive-sparsity"
+    },
+    {
+      "topic": "Iterative Magnitude Pruning",
+      "provenance": {
+        "title": "Insights into the Lottery Ticket Hypothesis and Iterative Magnitude Pruning",
+        "url": ""
+      },
+      "notes": "Lottery ticket hypothesis for deep neural networks emphasizes the importance of initialization used to re-train the sparser networks obtained using the iterative magnitude pruning process. An explanation for why the specific initialization proposed by the lottery ticket hypothesis tends to work better in terms of generalization (and training) performance has been lacking. Moreover, the underlying principles in iterative magnitude pruning, like the pruning of smaller magnitude weights and the role of the iterative process, lack full understanding and explanation. In this work, we attempt to provide insights into these phenomena by empirically studying the volume/geometry and loss landscape characteristics of the solutions obtained at various stages of the iterative magnitude pruning process."
+    },
+    {
+      "topic": "Iterative Magnitude Pruning",
+      "provenance": {
+        "title": "Prune&amp;Comp: Free Lunch for Layer-Pruned LLMs via Iterative Pruning with Magnitude Compensation",
+        "url": ""
+      },
+      "notes": "Layer pruning has emerged as a promising technique for compressing large language models (LLMs) while achieving acceleration proportional to the pruning ratio. In this work, we identify that removing any layer induces a significant magnitude gap in hidden states, resulting in substantial performance degradation. To address this issue, we propose Prune&amp;Comp, a novel plug-and-play layer pruning scheme that leverages magnitude compensation to mitigate such gaps in a training-free manner. Specifically, we first estimate the magnitude gap caused by layer removal and then eliminate this gap by rescaling the remaining weights offline, with zero runtime overhead incurred. We further demonstrate the advantages of Prune&amp;Comp through an iterative pruning strategy. When integrated with an iterative prune-and-compensate loop, Prune&amp;Comp consistently enhances existing layer pruning metrics. For instance, when 5 layers of LLaMA-3-8B are pruned using the prevalent block influence metric, Prune&amp;Comp nearly halves the perplexity and retains 93.19\\% of the original model's question-answering performance, outperforming the baseline by 4.01%."
+    },
+    {
+      "topic": "Lottery Ticket Hypothesis",
+      "provenance": {
+        "title": "Linear Mode Connectivity and the Lottery Ticket Hypothesis",
+        "url": ""
+      },
+      "notes": "We study whether a neural network optimizes to the same, linearly connected minimum under different samples of SGD noise (e.g., random data order and augmentation). We find that standard vision models become stable to SGD noise in this way early in training. From then on, the outcome of optimization is determined to a linearly connected region. We use this technique to study iterative magnitude pruning (IMP), the procedure used by work on the lottery ticket hypothesis to identify subnetworks that could have trained in isolation to full accuracy. We find that these subnetworks only reach full accuracy when they are stable to SGD noise, which either occurs at initialization for small-scale settings (MNIST) or early in training for large-scale settings (ResNet-50 and Inception-v3 on ImageNet)."
+    },
+    {
+      "topic": "Lottery Ticket Hypothesis",
+      "provenance": {
+        "title": "Stabilizing the Lottery Ticket Hypothesis",
+        "url": ""
+      },
+      "notes": "Pruning is a well-established technique for removing unnecessary structure from neural networks after training to improve the performance of inference. Several recent results have explored the possibility of pruning at initialization time to provide similar benefits during training. In particular, the \"lottery ticket hypothesis\" conjectures that typical neural networks contain small subnetworks that can train to similar accuracy in a commensurate number of steps. The evidence for this claim is that a procedure based on iterative magnitude pruning (IMP) reliably finds such subnetworks retroactively on small vision tasks. However, IMP fails on deeper networks, and proposed methods to prune before training or train pruned networks encounter similar scaling limitations. In this paper, we argue that these efforts have struggled on deeper networks because they have focused on pruning precisely at initialization. We modify IMP to search for subnetworks that could have been obtained by pruning early in training (0.1% to 7% through) rather than at iteration 0. With this change, it finds small subnetworks of deeper networks (e.g., 80% sparsity on Resnet-50) that can complete the training process to match the accuracy of the original network on more challenging tasks (e.g., ImageNet). In situations where IMP fails at iteration 0, the accuracy benefits of delaying pruning accrue rapidly over the earliest iterations of training. To explain these behaviors, we study subnetwork \"stability,\" finding that - as accuracy improves in this fashion - IMP subnetworks train to parameters closer to those of the full network and do so with improved consistency in the face of gradient noise. These results offer new insights into the opportunity to prune large-scale networks early in training and the behaviors underlying the lottery ticket hypothesis"
+    },
+    {
+      "topic": "Lottery Ticket Hypothesis",
+      "provenance": {
+        "title": "Successfully Applying the Stabilized Lottery Ticket Hypothesis to the Transformer Architecture",
+        "url": ""
+      },
+      "notes": "Sparse models require less memory for storage and enable a faster inference by reducing the necessary number of FLOPs. This is relevant both for time-critical and on-device computations using neural networks. The stabilized lottery ticket hypothesis states that networks can be pruned after none or few training iterations, using a mask computed based on the unpruned converged model. On the transformer architecture and the WMT 2014 English-to-German and English-to-French tasks, we show that stabilized lottery ticket pruning performs similar to magnitude pruning for sparsity levels of up to 85%, and propose a new combination of pruning techniques that outperforms all other techniques for even higher levels of sparsity. Furthermore, we confirm that the parameter's initial sign and not its specific value is the primary factor for successful training, and show that magnitude pruning could be used to find winning lottery tickets."
+    }
+  ],
+  "report": "# Research Report: Comparison of Transformer and Neural Network Pruning Techniques\n\n## Executive Summary\nThis report analyzes various pruning techniques applied to neural networks and Transformer-based architectures, including Large Language Models (LLMs) and Vision Transformers (ViTs). The analysis identifies a shift from traditional magnitude-based and \"oracle\" pruning toward more sophisticated one-shot, activation-aware, and stability-focused methods. Key findings indicate that traditional oracle pruning is largely invalid for modern deep models due to a lack of correlation between pre-retraining and post-retraining performance. Modern LLM pruning has evolved toward \"one-shot\" methods like SparseGPT and Wanda to avoid prohibitive retraining costs, while structured pruning seeks to improve hardware efficiency through activation-based and channel-independence metrics.\n\n## Introduction\nPruning is a critical technique for reducing the memory footprint, storage, and computational requirements (FLOPs) of deep learning models. In the context of Transformer architectures and LLMs, the challenge is to maintain model performance (e.g., perplexity and accuracy) while achieving high sparsity. Pruning methodologies generally bifurcate into unstructured pruning (removing individual weights) and structured pruning (removing entire filters, channels, or layers). This report compares these approaches and evaluates the validity of traditional pruning criteria against modern alternatives.\n\n## Findings\n\n### 1. Weight-Based and Magnitude Pruning\n*   **Magnitude-Based Pruning:** Simple magnitude-based pruning can achieve a strong tradeoff between sparsity and performance if layerwise sparsity is carefully chosen. The Layer-Adaptive Magnitude-based Pruning (LAMP) score improves this by rescaling weight magnitude to incorporate model-level $\\ell_2$ distortion, eliminating the need for handcrafted heuristics.\n*   **Oracle Pruning:** Traditionally, oracle pruning (minimizing pruned train loss) was the foundation for pruning for over 35 years. However, empirical evidence across 37,000 models (including ViT and MLLM) shows that on modern deep models, performance before retraining is barely correlated with performance after retraining. This suggests that oracle pruning criteria may be groundless for complex modern tasks.\n*   **Security Vulnerabilities:** Weight-based pruning in LLMs (including Magnitude, Wanda, and SparseGPT) can be exploited. Adversaries can inject malicious behaviors into parameters unlikely to be pruned while using parameters likely to be pruned to cancel those behaviors in the unpruned model, creating a \"benign\" model that becomes malicious only after pruning.\n\n### 2. One-Shot LLM Pruning Techniques\nBecause retraining billion-scale LLMs is often unaffordable, one-shot methods have emerged:\n*   **SparseGPT:** A method designed for massive GPT-family models that can achieve at least 50% unstructured sparsity in one-shot without retraining. It is compatible with semi-structured patterns (2:4 and 4:8) and weight quantization.\n    *   *ROSE (Reordered SparseGPT):* Improves upon SparseGPT by reordering the pruning order. Instead of a left-to-right order, ROSE prioritizes weights with larger potential pruning errors based on column and block pruning loss.\n*   **Wanda (Pruning by Weights and activations):** Prunes weights based on the product of the smallest magnitudes and their corresponding input activations on a per-output basis.\n    *   *Wanda++:* Enhances Wanda by using decoder-block-level regional gradients to minimize output discrepancies between dense and sparse outputs.\n    *   *M-Wanda:* Adapts pruning for multilingual LLMs by incorporating language-aware activation statistics and adjusting layerwise sparsity based on cross-lingual importance.\n\n### 3. Structured and Activation-Based Pruning\nStructured pruning is prioritized for better hardware acceleration.\n*   **Filter and Channel Pruning:** The CHIP (Channel Independence-based Pruning) method utilizes inter-channel correlations rather than intra-channel information. By pruning less independent feature maps, it reduces model size and FLOPs (e.g., reducing ResNet-56 size by 42.8% and FLOPs by 47.4% with an accuracy increase).\n*   **Iterative Activation-based Pruning:** Iterative L1-norm based pruning (ILP) often fails to produce accurate models. In contrast, Iterative Activation-based Pruning (IAP) and Adaptive Iterative Activation-based Pruning (AIAP) achieve significantly higher compression (e.g., 15.88X on LeNet-5) with minimal accuracy loss (1%).\n*   **Layer Pruning:** Removing layers induces magnitude gaps in hidden states. The Prune&Comp scheme mitigates this by rescaling remaining weights offline to eliminate the magnitude gap, which, when used iteratively, retains 93.19% of question-answering performance for LLaMA-3-8B when 5 layers are pruned.\n\n### 4. The Lottery Ticket Hypothesis (LTH) and Stability\n*   **Iterative Magnitude Pruning (IMP):** IMP is used to find \"winning ticket\" subnetworks. While IMP works on small tasks (MNIST), it often fails on deeper networks at initialization.\n*   **Stabilized LTH:** Research suggests that pruning early in training (0.1% to 7% through) rather than at iteration 0 allows deeper networks (e.g., ResNet-50 at 80% sparsity) to match the accuracy of the original network.\n*   **Transformer Application:** On Transformer architectures for translation tasks (WMT 2014), stabilized lottery ticket pruning performs similarly to magnitude pruning up to 85% sparsity. The initial sign of the parameter is found to be more critical for successful training than the specific value.\n\n## Comparative Analysis\n\n| Technique | Primary Metric | Retraining Required? | Structural Nature | Key Advantage | Key Limitation |\n| :--- | :--- | :--- | :--- | :--- | :--- |\n| **Oracle Pruning** | Pruned Train Loss | Yes | Unstructured | Historical Standard | Invalid for modern deep models |\n| **LAMP** | Rescaled Magnitude | No (Global) | Unstructured | No hyperparameter tuning | $\\ell_2$ distortion focus |\n| **SparseGPT** | Second-order gradients | No | Unstructured/Semi-structured | High sparsity (60%) in < 4.5 hrs | Predefined pruning order (fixed in ROSE) |\n| **Wanda** | Weight $\\times$ Activation | No | Unstructured | Simple, no weight updates | Baseline for newer regional gradient methods |\n| **CHIP** | Channel Independence | No | Structured | Practical hardware acceleration | Focused on CNNs/ResNets |\n| **IAP/AIAP** | Activations | Yes (Iterative) | Structured | Higher compression than weight-based | Requires iterative process |\n\n## Conclusion\nPruning for Transformer and deep models has evolved from simple magnitude and loss-based metrics toward activation-aware and one-shot methods. The evidence demonstrates that for massive models, retraining is largely replaced by one-shot reconstruction (SparseGPT) or activation-based heuristics (Wanda). While structured pruning offers superior hardware efficiency, iterative activation-based approaches (IAP/AIAP) provide better accuracy than traditional iterative weight-based pruning. Finally, the \"Stabilized LTH\" indicates that the timing of pruning—specifically pruning early in training rather than at initialization—is vital for the success of sparsity in deeper architectures.\n\n## References\n\n- No sources available",
+  "state": {
+    "query": "compare transformer pruning techniques",
+    "topics": [
+      "Structured Pruning",
+      "Unstructured Pruning",
+      "Magnitude Pruning",
+      "Weight-based Pruning",
+      "Activation-based Pruning",
+      "SparseGPT",
+      "Wanda",
+      "Movement Pruning",
+      "Iterative Magnitude Pruning",
+      "Lottery Ticket Hypothesis"
+    ],
+    "evidence": [
+      {
+        "topic": "Structured Pruning",
+        "provenance": {
+          "title": "A Comprehensive Study of Structural Pruning for Vision Models",
+          "url": ""
+        },
+        "notes": "Structural pruning has emerged as a promising approach for producing more efficient models. Nevertheless, the community suffers from a lack of standardized benchmarks and metrics, leaving the progress in this area not fully comprehended. To fill this gap, we present the first comprehensive benchmark, termed PruningBench, for structural pruning. PruningBench showcases the following three characteristics: 1) PruningBench employs a unified and consistent framework for evaluating the effectiveness of diverse structural pruning techniques; 2) PruningBench systematically evaluates 16 existing pruning methods, encompassing a wide array of models (e.g., CNNs and ViTs) and tasks (e.g., classification and detection); 3) PruningBench provides easily implementable interfaces to facilitate the implementation of future pruning methods, and enables the subsequent researchers to incorporate their work into our leaderboards. We provide an online pruning platform for customizing pruning tasks and reproducing all results in this paper. Leaderboard results can also be available."
+      },
+      {
+        "topic": "Structured Pruning",
+        "provenance": {
+          "title": "Is Oracle Pruning the True Oracle?",
+          "url": ""
+        },
+        "notes": "Oracle pruning, which selects unimportant weights by minimizing the pruned train loss, has been taken as the foundation for most neural network pruning methods for over 35 years, while few (if not none) have thought about how much the foundation really holds. This paper, for the first time, attempts to examine its validity on modern deep models through empirical correlation analyses and provide reflections on the field of neural network pruning. Specifically, for a typical pruning algorithm with three stages (pertaining, pruning, and retraining), we analyze the model performance correlation before and after retraining. Extensive experiments (37K models are trained) across a wide spectrum of models (LeNet5, VGG, ResNets, ViT, MLLM) and datasets (MNIST and its variants, CIFAR10/CIFAR100, ImageNet-1K, MLLM data) are conducted. The results lead to a surprising conclusion: on modern deep learning models, the performance before retraining is barely correlated with the performance after retraining. Namely, the weights selected by oracle pruning can hardly guarantee a good performance after retraining. This further implies that existing works using oracle pruning to derive pruning criteria may be groundless from the beginning. Further studies suggest the rising task complexity is one factor that makes oracle pruning invalid nowadays. Finally, given the evidence, we argue that the retraining stage in a pruning algorithm should be accounted for when developing any pruning criterion."
+      },
+      {
+        "topic": "Structured Pruning",
+        "provenance": {
+          "title": "Exploring 3D Dataset Pruning",
+          "url": ""
+        },
+        "notes": "Dataset pruning has been widely studied for 2D images to remove redundancy and accelerate training, while particular pruning methods for 3D data remain largely unexplored. In this work, we study dataset pruning for 3D data, where its observed common long-tail class distribution nature make optimization under conventional evaluation metrics Overall Accuracy (OA) and Mean Accuracy (mAcc) inherently conflicting, and further make pruning particularly challenging. To address this, we formulate pruning as approximating the full-data expected risk with a weighted subset, which reveals two key errors: coverage error from insufficient representativeness and prior-mismatch bias from inconsistency between subset-induced class weights and target metrics. We propose representation-aware subset selection with per-class retention quotas for long-tail coverage, and prior-invariant teacher supervision using calibrated soft labels and embedding-geometry distillation. The retention quota also serves as a switch to control the OA-mAcc trade-off. Extensive experiments on 3D datasets show that our method can improve both metrics across multiple settings while adapting to different downstream preferences. Our code is available at https://github.com/XiaohanZhao123/3D-Dataset-Pruning."
+      },
+      {
+        "topic": "Unstructured Pruning",
+        "provenance": {
+          "title": "Is Oracle Pruning the True Oracle?",
+          "url": ""
+        },
+        "notes": "Oracle pruning, which selects unimportant weights by minimizing the pruned train loss, has been taken as the foundation for most neural network pruning methods for over 35 years, while few (if not none) have thought about how much the foundation really holds. This paper, for the first time, attempts to examine its validity on modern deep models through empirical correlation analyses and provide reflections on the field of neural network pruning. Specifically, for a typical pruning algorithm with three stages (pertaining, pruning, and retraining), we analyze the model performance correlation before and after retraining. Extensive experiments (37K models are trained) across a wide spectrum of models (LeNet5, VGG, ResNets, ViT, MLLM) and datasets (MNIST and its variants, CIFAR10/CIFAR100, ImageNet-1K, MLLM data) are conducted. The results lead to a surprising conclusion: on modern deep learning models, the performance before retraining is barely correlated with the performance after retraining. Namely, the weights selected by oracle pruning can hardly guarantee a good performance after retraining. This further implies that existing works using oracle pruning to derive pruning criteria may be groundless from the beginning. Further studies suggest the rising task complexity is one factor that makes oracle pruning invalid nowadays. Finally, given the evidence, we argue that the retraining stage in a pruning algorithm should be accounted for when developing any pruning criterion."
+      },
+      {
+        "topic": "Unstructured Pruning",
+        "provenance": {
+          "title": "Exploring 3D Dataset Pruning",
+          "url": ""
+        },
+        "notes": "Dataset pruning has been widely studied for 2D images to remove redundancy and accelerate training, while particular pruning methods for 3D data remain largely unexplored. In this work, we study dataset pruning for 3D data, where its observed common long-tail class distribution nature make optimization under conventional evaluation metrics Overall Accuracy (OA) and Mean Accuracy (mAcc) inherently conflicting, and further make pruning particularly challenging. To address this, we formulate pruning as approximating the full-data expected risk with a weighted subset, which reveals two key errors: coverage error from insufficient representativeness and prior-mismatch bias from inconsistency between subset-induced class weights and target metrics. We propose representation-aware subset selection with per-class retention quotas for long-tail coverage, and prior-invariant teacher supervision using calibrated soft labels and embedding-geometry distillation. The retention quota also serves as a switch to control the OA-mAcc trade-off. Extensive experiments on 3D datasets show that our method can improve both metrics across multiple settings while adapting to different downstream preferences. Our code is available at https://github.com/XiaohanZhao123/3D-Dataset-Pruning."
+      },
+      {
+        "topic": "Unstructured Pruning",
+        "provenance": {
+          "title": "CHIP: CHannel Independence-based Pruning for Compact Neural Networks",
+          "url": ""
+        },
+        "notes": "Filter pruning has been widely used for neural network compression because of its enabled practical acceleration. To date, most of the existing filter pruning works explore the importance of filters via using intra-channel information. In this paper, starting from an inter-channel perspective, we propose to perform efficient filter pruning using Channel Independence, a metric that measures the correlations among different feature maps. The less independent feature map is interpreted as containing less useful information$/$knowledge, and hence its corresponding filter can be pruned without affecting model capacity. We systematically investigate the quantification metric, measuring scheme and sensitiveness$/$reliability of channel independence in the context of filter pruning. Our evaluation results for different models on various datasets show the superior performance of our approach. Notably, on CIFAR-10 dataset our solution can bring $0.90\\%$ and $0.94\\%$ accuracy increase over baseline ResNet-56 and ResNet-110 models, respectively, and meanwhile the model size and FLOPs are reduced by $42.8\\%$ and $47.4\\%$ (for ResNet-56) and $48.3\\%$ and $52.1\\%$ (for ResNet-110), respectively. On ImageNet dataset, our approach can achieve $40.8\\%$ and $44.8\\%$ storage and computation reductions, respectively, with $0.15\\%$ accuracy increase over the baseline ResNet-50 model. The code is available at https://github.com/Eclipsess/CHIP_NeurIPS2021."
+      },
+      {
+        "topic": "Magnitude Pruning",
+        "provenance": {
+          "title": "Layer-adaptive sparsity for the Magnitude-based Pruning",
+          "url": ""
+        },
+        "notes": "Recent discoveries on neural network pruning reveal that, with a carefully chosen layerwise sparsity, a simple magnitude-based pruning achieves state-of-the-art tradeoff between sparsity and performance. However, without a clear consensus on \"how to choose,\" the layerwise sparsities are mostly selected algorithm-by-algorithm, often resorting to handcrafted heuristics or an extensive hyperparameter search. To fill this gap, we propose a novel importance score for global pruning, coined layer-adaptive magnitude-based pruning (LAMP) score; the score is a rescaled version of weight magnitude that incorporates the model-level $\\ell_2$ distortion incurred by pruning, and does not require any hyperparameter tuning or heavy computation. Under various image classification setups, LAMP consistently outperforms popular existing schemes for layerwise sparsity selection. Furthermore, we observe that LAMP continues to outperform baselines even in weight-rewinding setups, while the connectivity-oriented layerwise sparsity (the strongest baseline overall) performs worse than a simple global magnitude-based pruning in this case. Code: https://github.com/jaeho-lee/layer-adaptive-sparsity"
+      },
+      {
+        "topic": "Magnitude Pruning",
+        "provenance": {
+          "title": "Is Oracle Pruning the True Oracle?",
+          "url": ""
+        },
+        "notes": "Oracle pruning, which selects unimportant weights by minimizing the pruned train loss, has been taken as the foundation for most neural network pruning methods for over 35 years, while few (if not none) have thought about how much the foundation really holds. This paper, for the first time, attempts to examine its validity on modern deep models through empirical correlation analyses and provide reflections on the field of neural network pruning. Specifically, for a typical pruning algorithm with three stages (pertaining, pruning, and retraining), we analyze the model performance correlation before and after retraining. Extensive experiments (37K models are trained) across a wide spectrum of models (LeNet5, VGG, ResNets, ViT, MLLM) and datasets (MNIST and its variants, CIFAR10/CIFAR100, ImageNet-1K, MLLM data) are conducted. The results lead to a surprising conclusion: on modern deep learning models, the performance before retraining is barely correlated with the performance after retraining. Namely, the weights selected by oracle pruning can hardly guarantee a good performance after retraining. This further implies that existing works using oracle pruning to derive pruning criteria may be groundless from the beginning. Further studies suggest the rising task complexity is one factor that makes oracle pruning invalid nowadays. Finally, given the evidence, we argue that the retraining stage in a pruning algorithm should be accounted for when developing any pruning criterion."
+      },
+      {
+        "topic": "Magnitude Pruning",
+        "provenance": {
+          "title": "Exploring 3D Dataset Pruning",
+          "url": ""
+        },
+        "notes": "Dataset pruning has been widely studied for 2D images to remove redundancy and accelerate training, while particular pruning methods for 3D data remain largely unexplored. In this work, we study dataset pruning for 3D data, where its observed common long-tail class distribution nature make optimization under conventional evaluation metrics Overall Accuracy (OA) and Mean Accuracy (mAcc) inherently conflicting, and further make pruning particularly challenging. To address this, we formulate pruning as approximating the full-data expected risk with a weighted subset, which reveals two key errors: coverage error from insufficient representativeness and prior-mismatch bias from inconsistency between subset-induced class weights and target metrics. We propose representation-aware subset selection with per-class retention quotas for long-tail coverage, and prior-invariant teacher supervision using calibrated soft labels and embedding-geometry distillation. The retention quota also serves as a switch to control the OA-mAcc trade-off. Extensive experiments on 3D datasets show that our method can improve both metrics across multiple settings while adapting to different downstream preferences. Our code is available at https://github.com/XiaohanZhao123/3D-Dataset-Pruning."
+      },
+      {
+        "topic": "Weight-based Pruning",
+        "provenance": {
+          "title": "Layer-adaptive sparsity for the Magnitude-based Pruning",
+          "url": ""
+        },
+        "notes": "Recent discoveries on neural network pruning reveal that, with a carefully chosen layerwise sparsity, a simple magnitude-based pruning achieves state-of-the-art tradeoff between sparsity and performance. However, without a clear consensus on \"how to choose,\" the layerwise sparsities are mostly selected algorithm-by-algorithm, often resorting to handcrafted heuristics or an extensive hyperparameter search. To fill this gap, we propose a novel importance score for global pruning, coined layer-adaptive magnitude-based pruning (LAMP) score; the score is a rescaled version of weight magnitude that incorporates the model-level $\\ell_2$ distortion incurred by pruning, and does not require any hyperparameter tuning or heavy computation. Under various image classification setups, LAMP consistently outperforms popular existing schemes for layerwise sparsity selection. Furthermore, we observe that LAMP continues to outperform baselines even in weight-rewinding setups, while the connectivity-oriented layerwise sparsity (the strongest baseline overall) performs worse than a simple global magnitude-based pruning in this case. Code: https://github.com/jaeho-lee/layer-adaptive-sparsity"
+      },
+      {
+        "topic": "Weight-based Pruning",
+        "provenance": {
+          "title": "Fewer Weights, More Problems: A Practical Attack on LLM Pruning",
+          "url": ""
+        },
+        "notes": "Model pruning, i.e., removing a subset of model weights, has become a prominent approach to reducing the memory footprint of large language models (LLMs) during inference. Notably, popular inference engines, such as vLLM, enable users to conveniently prune downloaded models before they are deployed. While the utility and efficiency of pruning methods have improved significantly, the security implications of pruning remain underexplored. In this work, for the first time, we show that modern LLM pruning methods can be maliciously exploited. In particular, an adversary can construct a model that appears benign yet, once pruned, exhibits malicious behaviors. Our method is based on the idea that the adversary can compute a proxy metric that estimates how likely each parameter is to be pruned. With this information, the adversary can first inject a malicious behavior into those parameters that are unlikely to be pruned. Then, they can repair the model by using parameters that are likely to be pruned, effectively canceling out the injected behavior in the unpruned model. We demonstrate the severity of our attack through extensive evaluation on five models; after any of the pruning in vLLM are applied (Magnitude, Wanda, and SparseGPT), it consistently exhibits strong malicious behaviors in a diverse set of attack scenarios (success rates of up to $95.7\\%$ for jailbreak, $98.7\\%$ for benign instruction refusal, and $99.5\\%$ for targeted content injection). Our results reveal a critical deployment-time security gap and underscore the urgent need for stronger security awareness in model compression."
+      },
+      {
+        "topic": "Weight-based Pruning",
+        "provenance": {
+          "title": "Is Oracle Pruning the True Oracle?",
+          "url": ""
+        },
+        "notes": "Oracle pruning, which selects unimportant weights by minimizing the pruned train loss, has been taken as the foundation for most neural network pruning methods for over 35 years, while few (if not none) have thought about how much the foundation really holds. This paper, for the first time, attempts to examine its validity on modern deep models through empirical correlation analyses and provide reflections on the field of neural network pruning. Specifically, for a typical pruning algorithm with three stages (pertaining, pruning, and retraining), we analyze the model performance correlation before and after retraining. Extensive experiments (37K models are trained) across a wide spectrum of models (LeNet5, VGG, ResNets, ViT, MLLM) and datasets (MNIST and its variants, CIFAR10/CIFAR100, ImageNet-1K, MLLM data) are conducted. The results lead to a surprising conclusion: on modern deep learning models, the performance before retraining is barely correlated with the performance after retraining. Namely, the weights selected by oracle pruning can hardly guarantee a good performance after retraining. This further implies that existing works using oracle pruning to derive pruning criteria may be groundless from the beginning. Further studies suggest the rising task complexity is one factor that makes oracle pruning invalid nowadays. Finally, given the evidence, we argue that the retraining stage in a pruning algorithm should be accounted for when developing any pruning criterion."
+      },
+      {
+        "topic": "Activation-based Pruning",
+        "provenance": {
+          "title": "Is Oracle Pruning the True Oracle?",
+          "url": ""
+        },
+        "notes": "Oracle pruning, which selects unimportant weights by minimizing the pruned train loss, has been taken as the foundation for most neural network pruning methods for over 35 years, while few (if not none) have thought about how much the foundation really holds. This paper, for the first time, attempts to examine its validity on modern deep models through empirical correlation analyses and provide reflections on the field of neural network pruning. Specifically, for a typical pruning algorithm with three stages (pertaining, pruning, and retraining), we analyze the model performance correlation before and after retraining. Extensive experiments (37K models are trained) across a wide spectrum of models (LeNet5, VGG, ResNets, ViT, MLLM) and datasets (MNIST and its variants, CIFAR10/CIFAR100, ImageNet-1K, MLLM data) are conducted. The results lead to a surprising conclusion: on modern deep learning models, the performance before retraining is barely correlated with the performance after retraining. Namely, the weights selected by oracle pruning can hardly guarantee a good performance after retraining. This further implies that existing works using oracle pruning to derive pruning criteria may be groundless from the beginning. Further studies suggest the rising task complexity is one factor that makes oracle pruning invalid nowadays. Finally, given the evidence, we argue that the retraining stage in a pruning algorithm should be accounted for when developing any pruning criterion."
+      },
+      {
+        "topic": "Activation-based Pruning",
+        "provenance": {
+          "title": "Iterative Activation-based Structured Pruning",
+          "url": ""
+        },
+        "notes": "Deploying complex deep learning models on edge devices is challenging because they have substantial compute and memory resource requirements, whereas edge devices' resource budget is limited. To solve this problem, extensive pruning techniques have been proposed for compressing networks. Recent advances based on the Lottery Ticket Hypothesis (LTH) show that iterative model pruning tends to produce smaller and more accurate models. However, LTH research focuses on unstructured pruning, which is hardware-inefficient and difficult to accelerate on hardware platforms. In this paper, we investigate iterative pruning in the context of structured pruning because structurally pruned models map well on commodity hardware. We find that directly applying a structured weight-based pruning technique iteratively, called iterative L1-norm based pruning (ILP), does not produce accurate pruned models. To solve this problem, we propose two activation-based pruning methods, Iterative Activation-based Pruning (IAP) and Adaptive Iterative Activation-based Pruning (AIAP). We observe that, with only 1% accuracy loss, IAP and AIAP achieve 7.75X and 15.88$X compression on LeNet-5, and 1.25X and 1.71X compression on ResNet-50, whereas ILP achieves 4.77X and 1.13X, respectively."
+      },
+      {
+        "topic": "Activation-based Pruning",
+        "provenance": {
+          "title": "Exploring 3D Dataset Pruning",
+          "url": ""
+        },
+        "notes": "Dataset pruning has been widely studied for 2D images to remove redundancy and accelerate training, while particular pruning methods for 3D data remain largely unexplored. In this work, we study dataset pruning for 3D data, where its observed common long-tail class distribution nature make optimization under conventional evaluation metrics Overall Accuracy (OA) and Mean Accuracy (mAcc) inherently conflicting, and further make pruning particularly challenging. To address this, we formulate pruning as approximating the full-data expected risk with a weighted subset, which reveals two key errors: coverage error from insufficient representativeness and prior-mismatch bias from inconsistency between subset-induced class weights and target metrics. We propose representation-aware subset selection with per-class retention quotas for long-tail coverage, and prior-invariant teacher supervision using calibrated soft labels and embedding-geometry distillation. The retention quota also serves as a switch to control the OA-mAcc trade-off. Extensive experiments on 3D datasets show that our method can improve both metrics across multiple settings while adapting to different downstream preferences. Our code is available at https://github.com/XiaohanZhao123/3D-Dataset-Pruning."
+      },
+      {
+        "topic": "SparseGPT",
+        "provenance": {
+          "title": "SparseGPT: Massive Language Models Can Be Accurately Pruned in One-Shot",
+          "url": ""
+        },
+        "notes": "We show for the first time that large-scale generative pretrained transformer (GPT) family models can be pruned to at least 50% sparsity in one-shot, without any retraining, at minimal loss of accuracy. This is achieved via a new pruning method called SparseGPT, specifically designed to work efficiently and accurately on massive GPT-family models. We can execute SparseGPT on the largest available open-source models, OPT-175B and BLOOM-176B, in under 4.5 hours, and can reach 60% unstructured sparsity with negligible increase in perplexity: remarkably, more than 100 billion weights from these models can be ignored at inference time. SparseGPT generalizes to semi-structured (2:4 and 4:8) patterns, and is compatible with weight quantization approaches. The code is available at: https://github.com/IST-DASLab/sparsegpt."
+      },
+      {
+        "topic": "SparseGPT",
+        "provenance": {
+          "title": "ROSE: Reordered SparseGPT for More Accurate One-Shot Large Language Models Pruning",
+          "url": ""
+        },
+        "notes": "Pruning is widely recognized as an effective method for reducing the parameters of large language models (LLMs), potentially leading to more efficient deployment and inference. One classic and prominent path of LLM one-shot pruning is to leverage second-order gradients (i.e., Hessian), represented by the pioneering work SparseGPT. However, the predefined left-to-right pruning order in SparseGPT leads to suboptimal performance when the weights exhibit columnar patterns. This paper studies the effect of pruning order under the SparseGPT framework. The analyses lead us to propose ROSE, a reordered SparseGPT method that prioritizes weights with larger potential pruning errors to be pruned earlier. ROSE first performs pre-pruning to identify candidate weights for removal, and estimates both column and block pruning loss. Subsequently, two-level reordering is performed: columns within each block are reordered in descending order of column loss, while blocks are reordered based on block loss. We introduce the relative range of block loss as a metric to identify columnar layers, enabling adaptive reordering across the entire model. Substantial empirical results on prevalent LLMs (LLaMA2-7B/13B/70B, LLaMA3-8B, Mistral-7B) demonstrate that ROSE surpasses the original SparseGPT and other counterpart pruning methods. Our code is available at https://github.com/mingluo-su/ROSE."
+      },
+      {
+        "topic": "SparseGPT",
+        "provenance": {
+          "title": "A Tighter Complexity Analysis of SparseGPT",
+          "url": ""
+        },
+        "notes": "In this work, we improved the analysis of the running time of SparseGPT [Frantar, Alistarh ICML 2023] from $O(d^{3})$ to $O(d^ω + d^{2+a+o(1)} + d^{1+ω(1,1,a)-a})$ for any $a \\in [0, 1]$, where $ω$ is the exponent of matrix multiplication. In particular, for the current $ω\\approx 2.371$ [Alman, Duan, Williams, Xu, Xu, Zhou 2024], our running time boils down to $O(d^{2.53})$. This running time is due to the analysis of the lazy update behavior in iterative maintenance problems such as [Deng, Song, Weinstein 2022; Brand, Song, Zhou ICML 2024]."
+      },
+      {
+        "topic": "Wanda",
+        "provenance": {
+          "title": "A Simple and Effective Pruning Approach for Large Language Models",
+          "url": ""
+        },
+        "notes": "As their size increases, Large Languages Models (LLMs) are natural candidates for network pruning methods: approaches that drop a subset of network weights while striving to preserve performance. Existing methods, however, require either retraining, which is rarely affordable for billion-scale LLMs, or solving a weight reconstruction problem reliant on second-order information, which may also be computationally expensive. In this paper, we introduce a novel, straightforward yet effective pruning method, termed Wanda (Pruning by Weights and activations), designed to induce sparsity in pretrained LLMs. Motivated by the recent observation of emergent large magnitude features in LLMs, our approach prunes weights with the smallest magnitudes multiplied by the corresponding input activations, on a per-output basis. Notably, Wanda requires no retraining or weight update, and the pruned LLM can be used as is. We conduct a thorough evaluation of our method Wanda on LLaMA and LLaMA-2 across various language benchmarks. Wanda significantly outperforms the established baseline of magnitude pruning and performs competitively against recent method involving intensive weight update. Code is available at https://github.com/locuslab/wanda."
+      },
+      {
+        "topic": "Wanda",
+        "provenance": {
+          "title": "Wanda++: Pruning Large Language Models via Regional Gradients",
+          "url": ""
+        },
+        "notes": "Large Language Models (LLMs) pruning seeks to remove unimportant weights for inference speedup with minimal accuracy impact. However, existing methods often suffer from accuracy degradation without full-model sparsity-aware fine-tuning. This paper presents Wanda++, a novel pruning framework that outperforms the state-of-the-art methods by utilizing decoder-block-level \\textbf{regional} gradients. Specifically, Wanda++ improves the pruning score with regional gradients for the first time and proposes an efficient regional optimization method to minimize pruning-induced output discrepancies between the dense and sparse decoder output. Notably, Wanda++ improves perplexity by up to 32\\% over Wanda in the language modeling task and generalizes effectively to downstream tasks. Moreover, despite updating weights with regional optimization, Wanda++ remains orthogonal to sparsity-aware fine-tuning, further reducing perplexity with LoRA in great extend. Our approach is lightweight, pruning a 7B LLaMA model in under 10 minutes on a single H100 GPU."
+      },
+      {
+        "topic": "Wanda",
+        "provenance": {
+          "title": "M-Wanda: Improving One-Shot Pruning for Multilingual LLMs",
+          "url": ""
+        },
+        "notes": "Multilingual LLM performance is often critically dependent on model size. With an eye on efficiency, this has led to a surge in interest in one-shot pruning methods that retain the benefits of large-scale pretraining while shrinking the model size. However, as pruning tends to come with performance loss, it is important to understand the trade-offs between multilinguality and sparsification. In this work, we study multilingual performance under different sparsity constraints and show that moderate ratios already substantially harm performance. To help bridge this gap, we propose M-Wanda, a pruning method that models cross-lingual variation by incorporating language-aware activation statistics into its pruning criterion and dynamically adjusts layerwise sparsity based on cross-lingual importance. We show that M-Wanda consistently improves performance at minimal additional costs. We are the first to explicitly optimize pruning to retain multilingual performance, and hope to inspire future advances in multilingual pruning."
+      },
+      {
+        "topic": "Movement Pruning",
+        "provenance": {
+          "title": "Is Oracle Pruning the True Oracle?",
+          "url": ""
+        },
+        "notes": "Oracle pruning, which selects unimportant weights by minimizing the pruned train loss, has been taken as the foundation for most neural network pruning methods for over 35 years, while few (if not none) have thought about how much the foundation really holds. This paper, for the first time, attempts to examine its validity on modern deep models through empirical correlation analyses and provide reflections on the field of neural network pruning. Specifically, for a typical pruning algorithm with three stages (pertaining, pruning, and retraining), we analyze the model performance correlation before and after retraining. Extensive experiments (37K models are trained) across a wide spectrum of models (LeNet5, VGG, ResNets, ViT, MLLM) and datasets (MNIST and its variants, CIFAR10/CIFAR100, ImageNet-1K, MLLM data) are conducted. The results lead to a surprising conclusion: on modern deep learning models, the performance before retraining is barely correlated with the performance after retraining. Namely, the weights selected by oracle pruning can hardly guarantee a good performance after retraining. This further implies that existing works using oracle pruning to derive pruning criteria may be groundless from the beginning. Further studies suggest the rising task complexity is one factor that makes oracle pruning invalid nowadays. Finally, given the evidence, we argue that the retraining stage in a pruning algorithm should be accounted for when developing any pruning criterion."
+      },
+      {
+        "topic": "Movement Pruning",
+        "provenance": {
+          "title": "Exploring 3D Dataset Pruning",
+          "url": ""
+        },
+        "notes": "Dataset pruning has been widely studied for 2D images to remove redundancy and accelerate training, while particular pruning methods for 3D data remain largely unexplored. In this work, we study dataset pruning for 3D data, where its observed common long-tail class distribution nature make optimization under conventional evaluation metrics Overall Accuracy (OA) and Mean Accuracy (mAcc) inherently conflicting, and further make pruning particularly challenging. To address this, we formulate pruning as approximating the full-data expected risk with a weighted subset, which reveals two key errors: coverage error from insufficient representativeness and prior-mismatch bias from inconsistency between subset-induced class weights and target metrics. We propose representation-aware subset selection with per-class retention quotas for long-tail coverage, and prior-invariant teacher supervision using calibrated soft labels and embedding-geometry distillation. The retention quota also serves as a switch to control the OA-mAcc trade-off. Extensive experiments on 3D datasets show that our method can improve both metrics across multiple settings while adapting to different downstream preferences. Our code is available at https://github.com/XiaohanZhao123/3D-Dataset-Pruning."
+      },
+      {
+        "topic": "Movement Pruning",
+        "provenance": {
+          "title": "CHIP: CHannel Independence-based Pruning for Compact Neural Networks",
+          "url": ""
+        },
+        "notes": "Filter pruning has been widely used for neural network compression because of its enabled practical acceleration. To date, most of the existing filter pruning works explore the importance of filters via using intra-channel information. In this paper, starting from an inter-channel perspective, we propose to perform efficient filter pruning using Channel Independence, a metric that measures the correlations among different feature maps. The less independent feature map is interpreted as containing less useful information$/$knowledge, and hence its corresponding filter can be pruned without affecting model capacity. We systematically investigate the quantification metric, measuring scheme and sensitiveness$/$reliability of channel independence in the context of filter pruning. Our evaluation results for different models on various datasets show the superior performance of our approach. Notably, on CIFAR-10 dataset our solution can bring $0.90\\%$ and $0.94\\%$ accuracy increase over baseline ResNet-56 and ResNet-110 models, respectively, and meanwhile the model size and FLOPs are reduced by $42.8\\%$ and $47.4\\%$ (for ResNet-56) and $48.3\\%$ and $52.1\\%$ (for ResNet-110), respectively. On ImageNet dataset, our approach can achieve $40.8\\%$ and $44.8\\%$ storage and computation reductions, respectively, with $0.15\\%$ accuracy increase over the baseline ResNet-50 model. The code is available at https://github.com/Eclipsess/CHIP_NeurIPS2021."
+      },
+      {
+        "topic": "Iterative Magnitude Pruning",
+        "provenance": {
+          "title": "Layer-adaptive sparsity for the Magnitude-based Pruning",
+          "url": ""
+        },
+        "notes": "Recent discoveries on neural network pruning reveal that, with a carefully chosen layerwise sparsity, a simple magnitude-based pruning achieves state-of-the-art tradeoff between sparsity and performance. However, without a clear consensus on \"how to choose,\" the layerwise sparsities are mostly selected algorithm-by-algorithm, often resorting to handcrafted heuristics or an extensive hyperparameter search. To fill this gap, we propose a novel importance score for global pruning, coined layer-adaptive magnitude-based pruning (LAMP) score; the score is a rescaled version of weight magnitude that incorporates the model-level $\\ell_2$ distortion incurred by pruning, and does not require any hyperparameter tuning or heavy computation. Under various image classification setups, LAMP consistently outperforms popular existing schemes for layerwise sparsity selection. Furthermore, we observe that LAMP continues to outperform baselines even in weight-rewinding setups, while the connectivity-oriented layerwise sparsity (the strongest baseline overall) performs worse than a simple global magnitude-based pruning in this case. Code: https://github.com/jaeho-lee/layer-adaptive-sparsity"
+      },
+      {
+        "topic": "Iterative Magnitude Pruning",
+        "provenance": {
+          "title": "Insights into the Lottery Ticket Hypothesis and Iterative Magnitude Pruning",
+          "url": ""
+        },
+        "notes": "Lottery ticket hypothesis for deep neural networks emphasizes the importance of initialization used to re-train the sparser networks obtained using the iterative magnitude pruning process. An explanation for why the specific initialization proposed by the lottery ticket hypothesis tends to work better in terms of generalization (and training) performance has been lacking. Moreover, the underlying principles in iterative magnitude pruning, like the pruning of smaller magnitude weights and the role of the iterative process, lack full understanding and explanation. In this work, we attempt to provide insights into these phenomena by empirically studying the volume/geometry and loss landscape characteristics of the solutions obtained at various stages of the iterative magnitude pruning process."
+      },
+      {
+        "topic": "Iterative Magnitude Pruning",
+        "provenance": {
+          "title": "Prune&amp;Comp: Free Lunch for Layer-Pruned LLMs via Iterative Pruning with Magnitude Compensation",
+          "url": ""
+        },
+        "notes": "Layer pruning has emerged as a promising technique for compressing large language models (LLMs) while achieving acceleration proportional to the pruning ratio. In this work, we identify that removing any layer induces a significant magnitude gap in hidden states, resulting in substantial performance degradation. To address this issue, we propose Prune&amp;Comp, a novel plug-and-play layer pruning scheme that leverages magnitude compensation to mitigate such gaps in a training-free manner. Specifically, we first estimate the magnitude gap caused by layer removal and then eliminate this gap by rescaling the remaining weights offline, with zero runtime overhead incurred. We further demonstrate the advantages of Prune&amp;Comp through an iterative pruning strategy. When integrated with an iterative prune-and-compensate loop, Prune&amp;Comp consistently enhances existing layer pruning metrics. For instance, when 5 layers of LLaMA-3-8B are pruned using the prevalent block influence metric, Prune&amp;Comp nearly halves the perplexity and retains 93.19\\% of the original model's question-answering performance, outperforming the baseline by 4.01%."
+      },
+      {
+        "topic": "Lottery Ticket Hypothesis",
+        "provenance": {
+          "title": "Linear Mode Connectivity and the Lottery Ticket Hypothesis",
+          "url": ""
+        },
+        "notes": "We study whether a neural network optimizes to the same, linearly connected minimum under different samples of SGD noise (e.g., random data order and augmentation). We find that standard vision models become stable to SGD noise in this way early in training. From then on, the outcome of optimization is determined to a linearly connected region. We use this technique to study iterative magnitude pruning (IMP), the procedure used by work on the lottery ticket hypothesis to identify subnetworks that could have trained in isolation to full accuracy. We find that these subnetworks only reach full accuracy when they are stable to SGD noise, which either occurs at initialization for small-scale settings (MNIST) or early in training for large-scale settings (ResNet-50 and Inception-v3 on ImageNet)."
+      },
+      {
+        "topic": "Lottery Ticket Hypothesis",
+        "provenance": {
+          "title": "Stabilizing the Lottery Ticket Hypothesis",
+          "url": ""
+        },
+        "notes": "Pruning is a well-established technique for removing unnecessary structure from neural networks after training to improve the performance of inference. Several recent results have explored the possibility of pruning at initialization time to provide similar benefits during training. In particular, the \"lottery ticket hypothesis\" conjectures that typical neural networks contain small subnetworks that can train to similar accuracy in a commensurate number of steps. The evidence for this claim is that a procedure based on iterative magnitude pruning (IMP) reliably finds such subnetworks retroactively on small vision tasks. However, IMP fails on deeper networks, and proposed methods to prune before training or train pruned networks encounter similar scaling limitations. In this paper, we argue that these efforts have struggled on deeper networks because they have focused on pruning precisely at initialization. We modify IMP to search for subnetworks that could have been obtained by pruning early in training (0.1% to 7% through) rather than at iteration 0. With this change, it finds small subnetworks of deeper networks (e.g., 80% sparsity on Resnet-50) that can complete the training process to match the accuracy of the original network on more challenging tasks (e.g., ImageNet). In situations where IMP fails at iteration 0, the accuracy benefits of delaying pruning accrue rapidly over the earliest iterations of training. To explain these behaviors, we study subnetwork \"stability,\" finding that - as accuracy improves in this fashion - IMP subnetworks train to parameters closer to those of the full network and do so with improved consistency in the face of gradient noise. These results offer new insights into the opportunity to prune large-scale networks early in training and the behaviors underlying the lottery ticket hypothesis"
+      },
+      {
+        "topic": "Lottery Ticket Hypothesis",
+        "provenance": {
+          "title": "Successfully Applying the Stabilized Lottery Ticket Hypothesis to the Transformer Architecture",
+          "url": ""
+        },
+        "notes": "Sparse models require less memory for storage and enable a faster inference by reducing the necessary number of FLOPs. This is relevant both for time-critical and on-device computations using neural networks. The stabilized lottery ticket hypothesis states that networks can be pruned after none or few training iterations, using a mask computed based on the unpruned converged model. On the transformer architecture and the WMT 2014 English-to-German and English-to-French tasks, we show that stabilized lottery ticket pruning performs similar to magnitude pruning for sparsity levels of up to 85%, and propose a new combination of pruning techniques that outperforms all other techniques for even higher levels of sparsity. Furthermore, we confirm that the parameter's initial sign and not its specific value is the primary factor for successful training, and show that magnitude pruning could be used to find winning lottery tickets."
+      }
+    ],
+    "topicStatus": {
+      "Structured Pruning": "COMPLETED",
+      "Unstructured Pruning": "COMPLETED",
+      "Magnitude Pruning": "COMPLETED",
+      "Weight-based Pruning": "COMPLETED",
+      "Activation-based Pruning": "COMPLETED",
+      "SparseGPT": "COMPLETED",
+      "Wanda": "COMPLETED",
+      "Movement Pruning": "COMPLETED",
+      "Iterative Magnitude Pruning": "COMPLETED",
+      "Lottery Ticket Hypothesis": "COMPLETED"
+    },
+    "report": "# Research Report: Comparison of Transformer and Neural Network Pruning Techniques\n\n## Executive Summary\nThis report analyzes various pruning techniques applied to neural networks and Transformer-based architectures, including Large Language Models (LLMs) and Vision Transformers (ViTs). The analysis identifies a shift from traditional magnitude-based and \"oracle\" pruning toward more sophisticated one-shot, activation-aware, and stability-focused methods. Key findings indicate that traditional oracle pruning is largely invalid for modern deep models due to a lack of correlation between pre-retraining and post-retraining performance. Modern LLM pruning has evolved toward \"one-shot\" methods like SparseGPT and Wanda to avoid prohibitive retraining costs, while structured pruning seeks to improve hardware efficiency through activation-based and channel-independence metrics.\n\n## Introduction\nPruning is a critical technique for reducing the memory footprint, storage, and computational requirements (FLOPs) of deep learning models. In the context of Transformer architectures and LLMs, the challenge is to maintain model performance (e.g., perplexity and accuracy) while achieving high sparsity. Pruning methodologies generally bifurcate into unstructured pruning (removing individual weights) and structured pruning (removing entire filters, channels, or layers). This report compares these approaches and evaluates the validity of traditional pruning criteria against modern alternatives.\n\n## Findings\n\n### 1. Weight-Based and Magnitude Pruning\n*   **Magnitude-Based Pruning:** Simple magnitude-based pruning can achieve a strong tradeoff between sparsity and performance if layerwise sparsity is carefully chosen. The Layer-Adaptive Magnitude-based Pruning (LAMP) score improves this by rescaling weight magnitude to incorporate model-level $\\ell_2$ distortion, eliminating the need for handcrafted heuristics.\n*   **Oracle Pruning:** Traditionally, oracle pruning (minimizing pruned train loss) was the foundation for pruning for over 35 years. However, empirical evidence across 37,000 models (including ViT and MLLM) shows that on modern deep models, performance before retraining is barely correlated with performance after retraining. This suggests that oracle pruning criteria may be groundless for complex modern tasks.\n*   **Security Vulnerabilities:** Weight-based pruning in LLMs (including Magnitude, Wanda, and SparseGPT) can be exploited. Adversaries can inject malicious behaviors into parameters unlikely to be pruned while using parameters likely to be pruned to cancel those behaviors in the unpruned model, creating a \"benign\" model that becomes malicious only after pruning.\n\n### 2. One-Shot LLM Pruning Techniques\nBecause retraining billion-scale LLMs is often unaffordable, one-shot methods have emerged:\n*   **SparseGPT:** A method designed for massive GPT-family models that can achieve at least 50% unstructured sparsity in one-shot without retraining. It is compatible with semi-structured patterns (2:4 and 4:8) and weight quantization.\n    *   *ROSE (Reordered SparseGPT):* Improves upon SparseGPT by reordering the pruning order. Instead of a left-to-right order, ROSE prioritizes weights with larger potential pruning errors based on column and block pruning loss.\n*   **Wanda (Pruning by Weights and activations):** Prunes weights based on the product of the smallest magnitudes and their corresponding input activations on a per-output basis.\n    *   *Wanda++:* Enhances Wanda by using decoder-block-level regional gradients to minimize output discrepancies between dense and sparse outputs.\n    *   *M-Wanda:* Adapts pruning for multilingual LLMs by incorporating language-aware activation statistics and adjusting layerwise sparsity based on cross-lingual importance.\n\n### 3. Structured and Activation-Based Pruning\nStructured pruning is prioritized for better hardware acceleration.\n*   **Filter and Channel Pruning:** The CHIP (Channel Independence-based Pruning) method utilizes inter-channel correlations rather than intra-channel information. By pruning less independent feature maps, it reduces model size and FLOPs (e.g., reducing ResNet-56 size by 42.8% and FLOPs by 47.4% with an accuracy increase).\n*   **Iterative Activation-based Pruning:** Iterative L1-norm based pruning (ILP) often fails to produce accurate models. In contrast, Iterative Activation-based Pruning (IAP) and Adaptive Iterative Activation-based Pruning (AIAP) achieve significantly higher compression (e.g., 15.88X on LeNet-5) with minimal accuracy loss (1%).\n*   **Layer Pruning:** Removing layers induces magnitude gaps in hidden states. The Prune&Comp scheme mitigates this by rescaling remaining weights offline to eliminate the magnitude gap, which, when used iteratively, retains 93.19% of question-answering performance for LLaMA-3-8B when 5 layers are pruned.\n\n### 4. The Lottery Ticket Hypothesis (LTH) and Stability\n*   **Iterative Magnitude Pruning (IMP):** IMP is used to find \"winning ticket\" subnetworks. While IMP works on small tasks (MNIST), it often fails on deeper networks at initialization.\n*   **Stabilized LTH:** Research suggests that pruning early in training (0.1% to 7% through) rather than at iteration 0 allows deeper networks (e.g., ResNet-50 at 80% sparsity) to match the accuracy of the original network.\n*   **Transformer Application:** On Transformer architectures for translation tasks (WMT 2014), stabilized lottery ticket pruning performs similarly to magnitude pruning up to 85% sparsity. The initial sign of the parameter is found to be more critical for successful training than the specific value.\n\n## Comparative Analysis\n\n| Technique | Primary Metric | Retraining Required? | Structural Nature | Key Advantage | Key Limitation |\n| :--- | :--- | :--- | :--- | :--- | :--- |\n| **Oracle Pruning** | Pruned Train Loss | Yes | Unstructured | Historical Standard | Invalid for modern deep models |\n| **LAMP** | Rescaled Magnitude | No (Global) | Unstructured | No hyperparameter tuning | $\\ell_2$ distortion focus |\n| **SparseGPT** | Second-order gradients | No | Unstructured/Semi-structured | High sparsity (60%) in < 4.5 hrs | Predefined pruning order (fixed in ROSE) |\n| **Wanda** | Weight $\\times$ Activation | No | Unstructured | Simple, no weight updates | Baseline for newer regional gradient methods |\n| **CHIP** | Channel Independence | No | Structured | Practical hardware acceleration | Focused on CNNs/ResNets |\n| **IAP/AIAP** | Activations | Yes (Iterative) | Structured | Higher compression than weight-based | Requires iterative process |\n\n## Conclusion\nPruning for Transformer and deep models has evolved from simple magnitude and loss-based metrics toward activation-aware and one-shot methods. The evidence demonstrates that for massive models, retraining is largely replaced by one-shot reconstruction (SparseGPT) or activation-based heuristics (Wanda). While structured pruning offers superior hardware efficiency, iterative activation-based approaches (IAP/AIAP) provide better accuracy than traditional iterative weight-based pruning. Finally, the \"Stabilized LTH\" indicates that the timing of pruning—specifically pruning early in training rather than at initialization—is vital for the success of sparsity in deeper architectures.\n\n## References\n\n- No sources available",
+    "metadata": {},
+    "workflowGraph": {
+      "nodes": [
+        {
+          "id": "planner-agent"
+        },
+        {
+          "id": "research-agent"
+        },
+        {
+          "id": "topic-research-1"
+        },
+        {
+          "id": "topic-research-2"
+        },
+        {
+          "id": "topic-research-3"
+        },
+        {
+          "id": "topic-research-4"
+        },
+        {
+          "id": "topic-research-5"
+        },
+        {
+          "id": "topic-research-6"
+        },
+        {
+          "id": "topic-research-7"
+        },
+        {
+          "id": "topic-research-8"
+        },
+        {
+          "id": "topic-research-9"
+        },
+        {
+          "id": "topic-research-10"
+        },
+        {
+          "id": "writer-agent"
+        }
+      ],
+      "edges": [
+        [
+          "planner-agent",
+          [
+            "research-agent"
+          ]
+        ],
+        [
+          "research-agent",
+          [
+            "topic-research-1",
+            "topic-research-2",
+            "topic-research-3",
+            "topic-research-4",
+            "topic-research-5",
+            "topic-research-6",
+            "topic-research-7",
+            "topic-research-8",
+            "topic-research-9",
+            "topic-research-10"
+          ]
+        ],
+        [
+          "topic-research-1",
+          [
+            "writer-agent"
+          ]
+        ],
+        [
+          "topic-research-2",
+          [
+            "writer-agent"
+          ]
+        ],
+        [
+          "topic-research-3",
+          [
+            "writer-agent"
+          ]
+        ],
+        [
+          "topic-research-4",
+          [
+            "writer-agent"
+          ]
+        ],
+        [
+          "topic-research-5",
+          [
+            "writer-agent"
+          ]
+        ],
+        [
+          "topic-research-6",
+          [
+            "writer-agent"
+          ]
+        ],
+        [
+          "topic-research-7",
+          [
+            "writer-agent"
+          ]
+        ],
+        [
+          "topic-research-8",
+          [
+            "writer-agent"
+          ]
+        ],
+        [
+          "topic-research-9",
+          [
+            "writer-agent"
+          ]
+        ],
+        [
+          "topic-research-10",
+          [
+            "writer-agent"
+          ]
+        ],
+        [
+          "writer-agent",
+          []
+        ]
+      ]
+    }
+  },
+  "agentResults": [
+    {
+      "topics": [
+        "Structured Pruning",
+        "Unstructured Pruning",
+        "Magnitude Pruning",
+        "Weight-based Pruning",
+        "Activation-based Pruning",
+        "SparseGPT",
+        "Wanda",
+        "Movement Pruning",
+        "Iterative Magnitude Pruning",
+        "Lottery Ticket Hypothesis"
+      ]
+    },
+    {
+      "evidence": [
+        {
+          "topic": "Structured Pruning",
+          "provenance": {
+            "title": "A Comprehensive Study of Structural Pruning for Vision Models",
+            "url": ""
+          },
+          "notes": "Structural pruning has emerged as a promising approach for producing more efficient models. Nevertheless, the community suffers from a lack of standardized benchmarks and metrics, leaving the progress in this area not fully comprehended. To fill this gap, we present the first comprehensive benchmark, termed PruningBench, for structural pruning. PruningBench showcases the following three characteristics: 1) PruningBench employs a unified and consistent framework for evaluating the effectiveness of diverse structural pruning techniques; 2) PruningBench systematically evaluates 16 existing pruning methods, encompassing a wide array of models (e.g., CNNs and ViTs) and tasks (e.g., classification and detection); 3) PruningBench provides easily implementable interfaces to facilitate the implementation of future pruning methods, and enables the subsequent researchers to incorporate their work into our leaderboards. We provide an online pruning platform for customizing pruning tasks and reproducing all results in this paper. Leaderboard results can also be available."
+        },
+        {
+          "topic": "Structured Pruning",
+          "provenance": {
+            "title": "Is Oracle Pruning the True Oracle?",
+            "url": ""
+          },
+          "notes": "Oracle pruning, which selects unimportant weights by minimizing the pruned train loss, has been taken as the foundation for most neural network pruning methods for over 35 years, while few (if not none) have thought about how much the foundation really holds. This paper, for the first time, attempts to examine its validity on modern deep models through empirical correlation analyses and provide reflections on the field of neural network pruning. Specifically, for a typical pruning algorithm with three stages (pertaining, pruning, and retraining), we analyze the model performance correlation before and after retraining. Extensive experiments (37K models are trained) across a wide spectrum of models (LeNet5, VGG, ResNets, ViT, MLLM) and datasets (MNIST and its variants, CIFAR10/CIFAR100, ImageNet-1K, MLLM data) are conducted. The results lead to a surprising conclusion: on modern deep learning models, the performance before retraining is barely correlated with the performance after retraining. Namely, the weights selected by oracle pruning can hardly guarantee a good performance after retraining. This further implies that existing works using oracle pruning to derive pruning criteria may be groundless from the beginning. Further studies suggest the rising task complexity is one factor that makes oracle pruning invalid nowadays. Finally, given the evidence, we argue that the retraining stage in a pruning algorithm should be accounted for when developing any pruning criterion."
+        },
+        {
+          "topic": "Structured Pruning",
+          "provenance": {
+            "title": "Exploring 3D Dataset Pruning",
+            "url": ""
+          },
+          "notes": "Dataset pruning has been widely studied for 2D images to remove redundancy and accelerate training, while particular pruning methods for 3D data remain largely unexplored. In this work, we study dataset pruning for 3D data, where its observed common long-tail class distribution nature make optimization under conventional evaluation metrics Overall Accuracy (OA) and Mean Accuracy (mAcc) inherently conflicting, and further make pruning particularly challenging. To address this, we formulate pruning as approximating the full-data expected risk with a weighted subset, which reveals two key errors: coverage error from insufficient representativeness and prior-mismatch bias from inconsistency between subset-induced class weights and target metrics. We propose representation-aware subset selection with per-class retention quotas for long-tail coverage, and prior-invariant teacher supervision using calibrated soft labels and embedding-geometry distillation. The retention quota also serves as a switch to control the OA-mAcc trade-off. Extensive experiments on 3D datasets show that our method can improve both metrics across multiple settings while adapting to different downstream preferences. Our code is available at https://github.com/XiaohanZhao123/3D-Dataset-Pruning."
+        },
+        {
+          "topic": "Unstructured Pruning",
+          "provenance": {
+            "title": "Is Oracle Pruning the True Oracle?",
+            "url": ""
+          },
+          "notes": "Oracle pruning, which selects unimportant weights by minimizing the pruned train loss, has been taken as the foundation for most neural network pruning methods for over 35 years, while few (if not none) have thought about how much the foundation really holds. This paper, for the first time, attempts to examine its validity on modern deep models through empirical correlation analyses and provide reflections on the field of neural network pruning. Specifically, for a typical pruning algorithm with three stages (pertaining, pruning, and retraining), we analyze the model performance correlation before and after retraining. Extensive experiments (37K models are trained) across a wide spectrum of models (LeNet5, VGG, ResNets, ViT, MLLM) and datasets (MNIST and its variants, CIFAR10/CIFAR100, ImageNet-1K, MLLM data) are conducted. The results lead to a surprising conclusion: on modern deep learning models, the performance before retraining is barely correlated with the performance after retraining. Namely, the weights selected by oracle pruning can hardly guarantee a good performance after retraining. This further implies that existing works using oracle pruning to derive pruning criteria may be groundless from the beginning. Further studies suggest the rising task complexity is one factor that makes oracle pruning invalid nowadays. Finally, given the evidence, we argue that the retraining stage in a pruning algorithm should be accounted for when developing any pruning criterion."
+        },
+        {
+          "topic": "Unstructured Pruning",
+          "provenance": {
+            "title": "Exploring 3D Dataset Pruning",
+            "url": ""
+          },
+          "notes": "Dataset pruning has been widely studied for 2D images to remove redundancy and accelerate training, while particular pruning methods for 3D data remain largely unexplored. In this work, we study dataset pruning for 3D data, where its observed common long-tail class distribution nature make optimization under conventional evaluation metrics Overall Accuracy (OA) and Mean Accuracy (mAcc) inherently conflicting, and further make pruning particularly challenging. To address this, we formulate pruning as approximating the full-data expected risk with a weighted subset, which reveals two key errors: coverage error from insufficient representativeness and prior-mismatch bias from inconsistency between subset-induced class weights and target metrics. We propose representation-aware subset selection with per-class retention quotas for long-tail coverage, and prior-invariant teacher supervision using calibrated soft labels and embedding-geometry distillation. The retention quota also serves as a switch to control the OA-mAcc trade-off. Extensive experiments on 3D datasets show that our method can improve both metrics across multiple settings while adapting to different downstream preferences. Our code is available at https://github.com/XiaohanZhao123/3D-Dataset-Pruning."
+        },
+        {
+          "topic": "Unstructured Pruning",
+          "provenance": {
+            "title": "CHIP: CHannel Independence-based Pruning for Compact Neural Networks",
+            "url": ""
+          },
+          "notes": "Filter pruning has been widely used for neural network compression because of its enabled practical acceleration. To date, most of the existing filter pruning works explore the importance of filters via using intra-channel information. In this paper, starting from an inter-channel perspective, we propose to perform efficient filter pruning using Channel Independence, a metric that measures the correlations among different feature maps. The less independent feature map is interpreted as containing less useful information$/$knowledge, and hence its corresponding filter can be pruned without affecting model capacity. We systematically investigate the quantification metric, measuring scheme and sensitiveness$/$reliability of channel independence in the context of filter pruning. Our evaluation results for different models on various datasets show the superior performance of our approach. Notably, on CIFAR-10 dataset our solution can bring $0.90\\%$ and $0.94\\%$ accuracy increase over baseline ResNet-56 and ResNet-110 models, respectively, and meanwhile the model size and FLOPs are reduced by $42.8\\%$ and $47.4\\%$ (for ResNet-56) and $48.3\\%$ and $52.1\\%$ (for ResNet-110), respectively. On ImageNet dataset, our approach can achieve $40.8\\%$ and $44.8\\%$ storage and computation reductions, respectively, with $0.15\\%$ accuracy increase over the baseline ResNet-50 model. The code is available at https://github.com/Eclipsess/CHIP_NeurIPS2021."
+        },
+        {
+          "topic": "Magnitude Pruning",
+          "provenance": {
+            "title": "Layer-adaptive sparsity for the Magnitude-based Pruning",
+            "url": ""
+          },
+          "notes": "Recent discoveries on neural network pruning reveal that, with a carefully chosen layerwise sparsity, a simple magnitude-based pruning achieves state-of-the-art tradeoff between sparsity and performance. However, without a clear consensus on \"how to choose,\" the layerwise sparsities are mostly selected algorithm-by-algorithm, often resorting to handcrafted heuristics or an extensive hyperparameter search. To fill this gap, we propose a novel importance score for global pruning, coined layer-adaptive magnitude-based pruning (LAMP) score; the score is a rescaled version of weight magnitude that incorporates the model-level $\\ell_2$ distortion incurred by pruning, and does not require any hyperparameter tuning or heavy computation. Under various image classification setups, LAMP consistently outperforms popular existing schemes for layerwise sparsity selection. Furthermore, we observe that LAMP continues to outperform baselines even in weight-rewinding setups, while the connectivity-oriented layerwise sparsity (the strongest baseline overall) performs worse than a simple global magnitude-based pruning in this case. Code: https://github.com/jaeho-lee/layer-adaptive-sparsity"
+        },
+        {
+          "topic": "Magnitude Pruning",
+          "provenance": {
+            "title": "Is Oracle Pruning the True Oracle?",
+            "url": ""
+          },
+          "notes": "Oracle pruning, which selects unimportant weights by minimizing the pruned train loss, has been taken as the foundation for most neural network pruning methods for over 35 years, while few (if not none) have thought about how much the foundation really holds. This paper, for the first time, attempts to examine its validity on modern deep models through empirical correlation analyses and provide reflections on the field of neural network pruning. Specifically, for a typical pruning algorithm with three stages (pertaining, pruning, and retraining), we analyze the model performance correlation before and after retraining. Extensive experiments (37K models are trained) across a wide spectrum of models (LeNet5, VGG, ResNets, ViT, MLLM) and datasets (MNIST and its variants, CIFAR10/CIFAR100, ImageNet-1K, MLLM data) are conducted. The results lead to a surprising conclusion: on modern deep learning models, the performance before retraining is barely correlated with the performance after retraining. Namely, the weights selected by oracle pruning can hardly guarantee a good performance after retraining. This further implies that existing works using oracle pruning to derive pruning criteria may be groundless from the beginning. Further studies suggest the rising task complexity is one factor that makes oracle pruning invalid nowadays. Finally, given the evidence, we argue that the retraining stage in a pruning algorithm should be accounted for when developing any pruning criterion."
+        },
+        {
+          "topic": "Magnitude Pruning",
+          "provenance": {
+            "title": "Exploring 3D Dataset Pruning",
+            "url": ""
+          },
+          "notes": "Dataset pruning has been widely studied for 2D images to remove redundancy and accelerate training, while particular pruning methods for 3D data remain largely unexplored. In this work, we study dataset pruning for 3D data, where its observed common long-tail class distribution nature make optimization under conventional evaluation metrics Overall Accuracy (OA) and Mean Accuracy (mAcc) inherently conflicting, and further make pruning particularly challenging. To address this, we formulate pruning as approximating the full-data expected risk with a weighted subset, which reveals two key errors: coverage error from insufficient representativeness and prior-mismatch bias from inconsistency between subset-induced class weights and target metrics. We propose representation-aware subset selection with per-class retention quotas for long-tail coverage, and prior-invariant teacher supervision using calibrated soft labels and embedding-geometry distillation. The retention quota also serves as a switch to control the OA-mAcc trade-off. Extensive experiments on 3D datasets show that our method can improve both metrics across multiple settings while adapting to different downstream preferences. Our code is available at https://github.com/XiaohanZhao123/3D-Dataset-Pruning."
+        },
+        {
+          "topic": "Weight-based Pruning",
+          "provenance": {
+            "title": "Layer-adaptive sparsity for the Magnitude-based Pruning",
+            "url": ""
+          },
+          "notes": "Recent discoveries on neural network pruning reveal that, with a carefully chosen layerwise sparsity, a simple magnitude-based pruning achieves state-of-the-art tradeoff between sparsity and performance. However, without a clear consensus on \"how to choose,\" the layerwise sparsities are mostly selected algorithm-by-algorithm, often resorting to handcrafted heuristics or an extensive hyperparameter search. To fill this gap, we propose a novel importance score for global pruning, coined layer-adaptive magnitude-based pruning (LAMP) score; the score is a rescaled version of weight magnitude that incorporates the model-level $\\ell_2$ distortion incurred by pruning, and does not require any hyperparameter tuning or heavy computation. Under various image classification setups, LAMP consistently outperforms popular existing schemes for layerwise sparsity selection. Furthermore, we observe that LAMP continues to outperform baselines even in weight-rewinding setups, while the connectivity-oriented layerwise sparsity (the strongest baseline overall) performs worse than a simple global magnitude-based pruning in this case. Code: https://github.com/jaeho-lee/layer-adaptive-sparsity"
+        },
+        {
+          "topic": "Weight-based Pruning",
+          "provenance": {
+            "title": "Fewer Weights, More Problems: A Practical Attack on LLM Pruning",
+            "url": ""
+          },
+          "notes": "Model pruning, i.e., removing a subset of model weights, has become a prominent approach to reducing the memory footprint of large language models (LLMs) during inference. Notably, popular inference engines, such as vLLM, enable users to conveniently prune downloaded models before they are deployed. While the utility and efficiency of pruning methods have improved significantly, the security implications of pruning remain underexplored. In this work, for the first time, we show that modern LLM pruning methods can be maliciously exploited. In particular, an adversary can construct a model that appears benign yet, once pruned, exhibits malicious behaviors. Our method is based on the idea that the adversary can compute a proxy metric that estimates how likely each parameter is to be pruned. With this information, the adversary can first inject a malicious behavior into those parameters that are unlikely to be pruned. Then, they can repair the model by using parameters that are likely to be pruned, effectively canceling out the injected behavior in the unpruned model. We demonstrate the severity of our attack through extensive evaluation on five models; after any of the pruning in vLLM are applied (Magnitude, Wanda, and SparseGPT), it consistently exhibits strong malicious behaviors in a diverse set of attack scenarios (success rates of up to $95.7\\%$ for jailbreak, $98.7\\%$ for benign instruction refusal, and $99.5\\%$ for targeted content injection). Our results reveal a critical deployment-time security gap and underscore the urgent need for stronger security awareness in model compression."
+        },
+        {
+          "topic": "Weight-based Pruning",
+          "provenance": {
+            "title": "Is Oracle Pruning the True Oracle?",
+            "url": ""
+          },
+          "notes": "Oracle pruning, which selects unimportant weights by minimizing the pruned train loss, has been taken as the foundation for most neural network pruning methods for over 35 years, while few (if not none) have thought about how much the foundation really holds. This paper, for the first time, attempts to examine its validity on modern deep models through empirical correlation analyses and provide reflections on the field of neural network pruning. Specifically, for a typical pruning algorithm with three stages (pertaining, pruning, and retraining), we analyze the model performance correlation before and after retraining. Extensive experiments (37K models are trained) across a wide spectrum of models (LeNet5, VGG, ResNets, ViT, MLLM) and datasets (MNIST and its variants, CIFAR10/CIFAR100, ImageNet-1K, MLLM data) are conducted. The results lead to a surprising conclusion: on modern deep learning models, the performance before retraining is barely correlated with the performance after retraining. Namely, the weights selected by oracle pruning can hardly guarantee a good performance after retraining. This further implies that existing works using oracle pruning to derive pruning criteria may be groundless from the beginning. Further studies suggest the rising task complexity is one factor that makes oracle pruning invalid nowadays. Finally, given the evidence, we argue that the retraining stage in a pruning algorithm should be accounted for when developing any pruning criterion."
+        },
+        {
+          "topic": "Activation-based Pruning",
+          "provenance": {
+            "title": "Is Oracle Pruning the True Oracle?",
+            "url": ""
+          },
+          "notes": "Oracle pruning, which selects unimportant weights by minimizing the pruned train loss, has been taken as the foundation for most neural network pruning methods for over 35 years, while few (if not none) have thought about how much the foundation really holds. This paper, for the first time, attempts to examine its validity on modern deep models through empirical correlation analyses and provide reflections on the field of neural network pruning. Specifically, for a typical pruning algorithm with three stages (pertaining, pruning, and retraining), we analyze the model performance correlation before and after retraining. Extensive experiments (37K models are trained) across a wide spectrum of models (LeNet5, VGG, ResNets, ViT, MLLM) and datasets (MNIST and its variants, CIFAR10/CIFAR100, ImageNet-1K, MLLM data) are conducted. The results lead to a surprising conclusion: on modern deep learning models, the performance before retraining is barely correlated with the performance after retraining. Namely, the weights selected by oracle pruning can hardly guarantee a good performance after retraining. This further implies that existing works using oracle pruning to derive pruning criteria may be groundless from the beginning. Further studies suggest the rising task complexity is one factor that makes oracle pruning invalid nowadays. Finally, given the evidence, we argue that the retraining stage in a pruning algorithm should be accounted for when developing any pruning criterion."
+        },
+        {
+          "topic": "Activation-based Pruning",
+          "provenance": {
+            "title": "Iterative Activation-based Structured Pruning",
+            "url": ""
+          },
+          "notes": "Deploying complex deep learning models on edge devices is challenging because they have substantial compute and memory resource requirements, whereas edge devices' resource budget is limited. To solve this problem, extensive pruning techniques have been proposed for compressing networks. Recent advances based on the Lottery Ticket Hypothesis (LTH) show that iterative model pruning tends to produce smaller and more accurate models. However, LTH research focuses on unstructured pruning, which is hardware-inefficient and difficult to accelerate on hardware platforms. In this paper, we investigate iterative pruning in the context of structured pruning because structurally pruned models map well on commodity hardware. We find that directly applying a structured weight-based pruning technique iteratively, called iterative L1-norm based pruning (ILP), does not produce accurate pruned models. To solve this problem, we propose two activation-based pruning methods, Iterative Activation-based Pruning (IAP) and Adaptive Iterative Activation-based Pruning (AIAP). We observe that, with only 1% accuracy loss, IAP and AIAP achieve 7.75X and 15.88$X compression on LeNet-5, and 1.25X and 1.71X compression on ResNet-50, whereas ILP achieves 4.77X and 1.13X, respectively."
+        },
+        {
+          "topic": "Activation-based Pruning",
+          "provenance": {
+            "title": "Exploring 3D Dataset Pruning",
+            "url": ""
+          },
+          "notes": "Dataset pruning has been widely studied for 2D images to remove redundancy and accelerate training, while particular pruning methods for 3D data remain largely unexplored. In this work, we study dataset pruning for 3D data, where its observed common long-tail class distribution nature make optimization under conventional evaluation metrics Overall Accuracy (OA) and Mean Accuracy (mAcc) inherently conflicting, and further make pruning particularly challenging. To address this, we formulate pruning as approximating the full-data expected risk with a weighted subset, which reveals two key errors: coverage error from insufficient representativeness and prior-mismatch bias from inconsistency between subset-induced class weights and target metrics. We propose representation-aware subset selection with per-class retention quotas for long-tail coverage, and prior-invariant teacher supervision using calibrated soft labels and embedding-geometry distillation. The retention quota also serves as a switch to control the OA-mAcc trade-off. Extensive experiments on 3D datasets show that our method can improve both metrics across multiple settings while adapting to different downstream preferences. Our code is available at https://github.com/XiaohanZhao123/3D-Dataset-Pruning."
+        },
+        {
+          "topic": "SparseGPT",
+          "provenance": {
+            "title": "SparseGPT: Massive Language Models Can Be Accurately Pruned in One-Shot",
+            "url": ""
+          },
+          "notes": "We show for the first time that large-scale generative pretrained transformer (GPT) family models can be pruned to at least 50% sparsity in one-shot, without any retraining, at minimal loss of accuracy. This is achieved via a new pruning method called SparseGPT, specifically designed to work efficiently and accurately on massive GPT-family models. We can execute SparseGPT on the largest available open-source models, OPT-175B and BLOOM-176B, in under 4.5 hours, and can reach 60% unstructured sparsity with negligible increase in perplexity: remarkably, more than 100 billion weights from these models can be ignored at inference time. SparseGPT generalizes to semi-structured (2:4 and 4:8) patterns, and is compatible with weight quantization approaches. The code is available at: https://github.com/IST-DASLab/sparsegpt."
+        },
+        {
+          "topic": "SparseGPT",
+          "provenance": {
+            "title": "ROSE: Reordered SparseGPT for More Accurate One-Shot Large Language Models Pruning",
+            "url": ""
+          },
+          "notes": "Pruning is widely recognized as an effective method for reducing the parameters of large language models (LLMs), potentially leading to more efficient deployment and inference. One classic and prominent path of LLM one-shot pruning is to leverage second-order gradients (i.e., Hessian), represented by the pioneering work SparseGPT. However, the predefined left-to-right pruning order in SparseGPT leads to suboptimal performance when the weights exhibit columnar patterns. This paper studies the effect of pruning order under the SparseGPT framework. The analyses lead us to propose ROSE, a reordered SparseGPT method that prioritizes weights with larger potential pruning errors to be pruned earlier. ROSE first performs pre-pruning to identify candidate weights for removal, and estimates both column and block pruning loss. Subsequently, two-level reordering is performed: columns within each block are reordered in descending order of column loss, while blocks are reordered based on block loss. We introduce the relative range of block loss as a metric to identify columnar layers, enabling adaptive reordering across the entire model. Substantial empirical results on prevalent LLMs (LLaMA2-7B/13B/70B, LLaMA3-8B, Mistral-7B) demonstrate that ROSE surpasses the original SparseGPT and other counterpart pruning methods. Our code is available at https://github.com/mingluo-su/ROSE."
+        },
+        {
+          "topic": "SparseGPT",
+          "provenance": {
+            "title": "A Tighter Complexity Analysis of SparseGPT",
+            "url": ""
+          },
+          "notes": "In this work, we improved the analysis of the running time of SparseGPT [Frantar, Alistarh ICML 2023] from $O(d^{3})$ to $O(d^ω + d^{2+a+o(1)} + d^{1+ω(1,1,a)-a})$ for any $a \\in [0, 1]$, where $ω$ is the exponent of matrix multiplication. In particular, for the current $ω\\approx 2.371$ [Alman, Duan, Williams, Xu, Xu, Zhou 2024], our running time boils down to $O(d^{2.53})$. This running time is due to the analysis of the lazy update behavior in iterative maintenance problems such as [Deng, Song, Weinstein 2022; Brand, Song, Zhou ICML 2024]."
+        },
+        {
+          "topic": "Wanda",
+          "provenance": {
+            "title": "A Simple and Effective Pruning Approach for Large Language Models",
+            "url": ""
+          },
+          "notes": "As their size increases, Large Languages Models (LLMs) are natural candidates for network pruning methods: approaches that drop a subset of network weights while striving to preserve performance. Existing methods, however, require either retraining, which is rarely affordable for billion-scale LLMs, or solving a weight reconstruction problem reliant on second-order information, which may also be computationally expensive. In this paper, we introduce a novel, straightforward yet effective pruning method, termed Wanda (Pruning by Weights and activations), designed to induce sparsity in pretrained LLMs. Motivated by the recent observation of emergent large magnitude features in LLMs, our approach prunes weights with the smallest magnitudes multiplied by the corresponding input activations, on a per-output basis. Notably, Wanda requires no retraining or weight update, and the pruned LLM can be used as is. We conduct a thorough evaluation of our method Wanda on LLaMA and LLaMA-2 across various language benchmarks. Wanda significantly outperforms the established baseline of magnitude pruning and performs competitively against recent method involving intensive weight update. Code is available at https://github.com/locuslab/wanda."
+        },
+        {
+          "topic": "Wanda",
+          "provenance": {
+            "title": "Wanda++: Pruning Large Language Models via Regional Gradients",
+            "url": ""
+          },
+          "notes": "Large Language Models (LLMs) pruning seeks to remove unimportant weights for inference speedup with minimal accuracy impact. However, existing methods often suffer from accuracy degradation without full-model sparsity-aware fine-tuning. This paper presents Wanda++, a novel pruning framework that outperforms the state-of-the-art methods by utilizing decoder-block-level \\textbf{regional} gradients. Specifically, Wanda++ improves the pruning score with regional gradients for the first time and proposes an efficient regional optimization method to minimize pruning-induced output discrepancies between the dense and sparse decoder output. Notably, Wanda++ improves perplexity by up to 32\\% over Wanda in the language modeling task and generalizes effectively to downstream tasks. Moreover, despite updating weights with regional optimization, Wanda++ remains orthogonal to sparsity-aware fine-tuning, further reducing perplexity with LoRA in great extend. Our approach is lightweight, pruning a 7B LLaMA model in under 10 minutes on a single H100 GPU."
+        },
+        {
+          "topic": "Wanda",
+          "provenance": {
+            "title": "M-Wanda: Improving One-Shot Pruning for Multilingual LLMs",
+            "url": ""
+          },
+          "notes": "Multilingual LLM performance is often critically dependent on model size. With an eye on efficiency, this has led to a surge in interest in one-shot pruning methods that retain the benefits of large-scale pretraining while shrinking the model size. However, as pruning tends to come with performance loss, it is important to understand the trade-offs between multilinguality and sparsification. In this work, we study multilingual performance under different sparsity constraints and show that moderate ratios already substantially harm performance. To help bridge this gap, we propose M-Wanda, a pruning method that models cross-lingual variation by incorporating language-aware activation statistics into its pruning criterion and dynamically adjusts layerwise sparsity based on cross-lingual importance. We show that M-Wanda consistently improves performance at minimal additional costs. We are the first to explicitly optimize pruning to retain multilingual performance, and hope to inspire future advances in multilingual pruning."
+        },
+        {
+          "topic": "Movement Pruning",
+          "provenance": {
+            "title": "Is Oracle Pruning the True Oracle?",
+            "url": ""
+          },
+          "notes": "Oracle pruning, which selects unimportant weights by minimizing the pruned train loss, has been taken as the foundation for most neural network pruning methods for over 35 years, while few (if not none) have thought about how much the foundation really holds. This paper, for the first time, attempts to examine its validity on modern deep models through empirical correlation analyses and provide reflections on the field of neural network pruning. Specifically, for a typical pruning algorithm with three stages (pertaining, pruning, and retraining), we analyze the model performance correlation before and after retraining. Extensive experiments (37K models are trained) across a wide spectrum of models (LeNet5, VGG, ResNets, ViT, MLLM) and datasets (MNIST and its variants, CIFAR10/CIFAR100, ImageNet-1K, MLLM data) are conducted. The results lead to a surprising conclusion: on modern deep learning models, the performance before retraining is barely correlated with the performance after retraining. Namely, the weights selected by oracle pruning can hardly guarantee a good performance after retraining. This further implies that existing works using oracle pruning to derive pruning criteria may be groundless from the beginning. Further studies suggest the rising task complexity is one factor that makes oracle pruning invalid nowadays. Finally, given the evidence, we argue that the retraining stage in a pruning algorithm should be accounted for when developing any pruning criterion."
+        },
+        {
+          "topic": "Movement Pruning",
+          "provenance": {
+            "title": "Exploring 3D Dataset Pruning",
+            "url": ""
+          },
+          "notes": "Dataset pruning has been widely studied for 2D images to remove redundancy and accelerate training, while particular pruning methods for 3D data remain largely unexplored. In this work, we study dataset pruning for 3D data, where its observed common long-tail class distribution nature make optimization under conventional evaluation metrics Overall Accuracy (OA) and Mean Accuracy (mAcc) inherently conflicting, and further make pruning particularly challenging. To address this, we formulate pruning as approximating the full-data expected risk with a weighted subset, which reveals two key errors: coverage error from insufficient representativeness and prior-mismatch bias from inconsistency between subset-induced class weights and target metrics. We propose representation-aware subset selection with per-class retention quotas for long-tail coverage, and prior-invariant teacher supervision using calibrated soft labels and embedding-geometry distillation. The retention quota also serves as a switch to control the OA-mAcc trade-off. Extensive experiments on 3D datasets show that our method can improve both metrics across multiple settings while adapting to different downstream preferences. Our code is available at https://github.com/XiaohanZhao123/3D-Dataset-Pruning."
+        },
+        {
+          "topic": "Movement Pruning",
+          "provenance": {
+            "title": "CHIP: CHannel Independence-based Pruning for Compact Neural Networks",
+            "url": ""
+          },
+          "notes": "Filter pruning has been widely used for neural network compression because of its enabled practical acceleration. To date, most of the existing filter pruning works explore the importance of filters via using intra-channel information. In this paper, starting from an inter-channel perspective, we propose to perform efficient filter pruning using Channel Independence, a metric that measures the correlations among different feature maps. The less independent feature map is interpreted as containing less useful information$/$knowledge, and hence its corresponding filter can be pruned without affecting model capacity. We systematically investigate the quantification metric, measuring scheme and sensitiveness$/$reliability of channel independence in the context of filter pruning. Our evaluation results for different models on various datasets show the superior performance of our approach. Notably, on CIFAR-10 dataset our solution can bring $0.90\\%$ and $0.94\\%$ accuracy increase over baseline ResNet-56 and ResNet-110 models, respectively, and meanwhile the model size and FLOPs are reduced by $42.8\\%$ and $47.4\\%$ (for ResNet-56) and $48.3\\%$ and $52.1\\%$ (for ResNet-110), respectively. On ImageNet dataset, our approach can achieve $40.8\\%$ and $44.8\\%$ storage and computation reductions, respectively, with $0.15\\%$ accuracy increase over the baseline ResNet-50 model. The code is available at https://github.com/Eclipsess/CHIP_NeurIPS2021."
+        },
+        {
+          "topic": "Iterative Magnitude Pruning",
+          "provenance": {
+            "title": "Layer-adaptive sparsity for the Magnitude-based Pruning",
+            "url": ""
+          },
+          "notes": "Recent discoveries on neural network pruning reveal that, with a carefully chosen layerwise sparsity, a simple magnitude-based pruning achieves state-of-the-art tradeoff between sparsity and performance. However, without a clear consensus on \"how to choose,\" the layerwise sparsities are mostly selected algorithm-by-algorithm, often resorting to handcrafted heuristics or an extensive hyperparameter search. To fill this gap, we propose a novel importance score for global pruning, coined layer-adaptive magnitude-based pruning (LAMP) score; the score is a rescaled version of weight magnitude that incorporates the model-level $\\ell_2$ distortion incurred by pruning, and does not require any hyperparameter tuning or heavy computation. Under various image classification setups, LAMP consistently outperforms popular existing schemes for layerwise sparsity selection. Furthermore, we observe that LAMP continues to outperform baselines even in weight-rewinding setups, while the connectivity-oriented layerwise sparsity (the strongest baseline overall) performs worse than a simple global magnitude-based pruning in this case. Code: https://github.com/jaeho-lee/layer-adaptive-sparsity"
+        },
+        {
+          "topic": "Iterative Magnitude Pruning",
+          "provenance": {
+            "title": "Insights into the Lottery Ticket Hypothesis and Iterative Magnitude Pruning",
+            "url": ""
+          },
+          "notes": "Lottery ticket hypothesis for deep neural networks emphasizes the importance of initialization used to re-train the sparser networks obtained using the iterative magnitude pruning process. An explanation for why the specific initialization proposed by the lottery ticket hypothesis tends to work better in terms of generalization (and training) performance has been lacking. Moreover, the underlying principles in iterative magnitude pruning, like the pruning of smaller magnitude weights and the role of the iterative process, lack full understanding and explanation. In this work, we attempt to provide insights into these phenomena by empirically studying the volume/geometry and loss landscape characteristics of the solutions obtained at various stages of the iterative magnitude pruning process."
+        },
+        {
+          "topic": "Iterative Magnitude Pruning",
+          "provenance": {
+            "title": "Prune&amp;Comp: Free Lunch for Layer-Pruned LLMs via Iterative Pruning with Magnitude Compensation",
+            "url": ""
+          },
+          "notes": "Layer pruning has emerged as a promising technique for compressing large language models (LLMs) while achieving acceleration proportional to the pruning ratio. In this work, we identify that removing any layer induces a significant magnitude gap in hidden states, resulting in substantial performance degradation. To address this issue, we propose Prune&amp;Comp, a novel plug-and-play layer pruning scheme that leverages magnitude compensation to mitigate such gaps in a training-free manner. Specifically, we first estimate the magnitude gap caused by layer removal and then eliminate this gap by rescaling the remaining weights offline, with zero runtime overhead incurred. We further demonstrate the advantages of Prune&amp;Comp through an iterative pruning strategy. When integrated with an iterative prune-and-compensate loop, Prune&amp;Comp consistently enhances existing layer pruning metrics. For instance, when 5 layers of LLaMA-3-8B are pruned using the prevalent block influence metric, Prune&amp;Comp nearly halves the perplexity and retains 93.19\\% of the original model's question-answering performance, outperforming the baseline by 4.01%."
+        },
+        {
+          "topic": "Lottery Ticket Hypothesis",
+          "provenance": {
+            "title": "Linear Mode Connectivity and the Lottery Ticket Hypothesis",
+            "url": ""
+          },
+          "notes": "We study whether a neural network optimizes to the same, linearly connected minimum under different samples of SGD noise (e.g., random data order and augmentation). We find that standard vision models become stable to SGD noise in this way early in training. From then on, the outcome of optimization is determined to a linearly connected region. We use this technique to study iterative magnitude pruning (IMP), the procedure used by work on the lottery ticket hypothesis to identify subnetworks that could have trained in isolation to full accuracy. We find that these subnetworks only reach full accuracy when they are stable to SGD noise, which either occurs at initialization for small-scale settings (MNIST) or early in training for large-scale settings (ResNet-50 and Inception-v3 on ImageNet)."
+        },
+        {
+          "topic": "Lottery Ticket Hypothesis",
+          "provenance": {
+            "title": "Stabilizing the Lottery Ticket Hypothesis",
+            "url": ""
+          },
+          "notes": "Pruning is a well-established technique for removing unnecessary structure from neural networks after training to improve the performance of inference. Several recent results have explored the possibility of pruning at initialization time to provide similar benefits during training. In particular, the \"lottery ticket hypothesis\" conjectures that typical neural networks contain small subnetworks that can train to similar accuracy in a commensurate number of steps. The evidence for this claim is that a procedure based on iterative magnitude pruning (IMP) reliably finds such subnetworks retroactively on small vision tasks. However, IMP fails on deeper networks, and proposed methods to prune before training or train pruned networks encounter similar scaling limitations. In this paper, we argue that these efforts have struggled on deeper networks because they have focused on pruning precisely at initialization. We modify IMP to search for subnetworks that could have been obtained by pruning early in training (0.1% to 7% through) rather than at iteration 0. With this change, it finds small subnetworks of deeper networks (e.g., 80% sparsity on Resnet-50) that can complete the training process to match the accuracy of the original network on more challenging tasks (e.g., ImageNet). In situations where IMP fails at iteration 0, the accuracy benefits of delaying pruning accrue rapidly over the earliest iterations of training. To explain these behaviors, we study subnetwork \"stability,\" finding that - as accuracy improves in this fashion - IMP subnetworks train to parameters closer to those of the full network and do so with improved consistency in the face of gradient noise. These results offer new insights into the opportunity to prune large-scale networks early in training and the behaviors underlying the lottery ticket hypothesis"
+        },
+        {
+          "topic": "Lottery Ticket Hypothesis",
+          "provenance": {
+            "title": "Successfully Applying the Stabilized Lottery Ticket Hypothesis to the Transformer Architecture",
+            "url": ""
+          },
+          "notes": "Sparse models require less memory for storage and enable a faster inference by reducing the necessary number of FLOPs. This is relevant both for time-critical and on-device computations using neural networks. The stabilized lottery ticket hypothesis states that networks can be pruned after none or few training iterations, using a mask computed based on the unpruned converged model. On the transformer architecture and the WMT 2014 English-to-German and English-to-French tasks, we show that stabilized lottery ticket pruning performs similar to magnitude pruning for sparsity levels of up to 85%, and propose a new combination of pruning techniques that outperforms all other techniques for even higher levels of sparsity. Furthermore, we confirm that the parameter's initial sign and not its specific value is the primary factor for successful training, and show that magnitude pruning could be used to find winning lottery tickets."
+        }
+      ]
+    },
+    {
+      "report": "# Research Report: Comparison of Transformer and Neural Network Pruning Techniques\n\n## Executive Summary\nThis report analyzes various pruning techniques applied to neural networks and Transformer-based architectures, including Large Language Models (LLMs) and Vision Transformers (ViTs). The analysis identifies a shift from traditional magnitude-based and \"oracle\" pruning toward more sophisticated one-shot, activation-aware, and stability-focused methods. Key findings indicate that traditional oracle pruning is largely invalid for modern deep models due to a lack of correlation between pre-retraining and post-retraining performance. Modern LLM pruning has evolved toward \"one-shot\" methods like SparseGPT and Wanda to avoid prohibitive retraining costs, while structured pruning seeks to improve hardware efficiency through activation-based and channel-independence metrics.\n\n## Introduction\nPruning is a critical technique for reducing the memory footprint, storage, and computational requirements (FLOPs) of deep learning models. In the context of Transformer architectures and LLMs, the challenge is to maintain model performance (e.g., perplexity and accuracy) while achieving high sparsity. Pruning methodologies generally bifurcate into unstructured pruning (removing individual weights) and structured pruning (removing entire filters, channels, or layers). This report compares these approaches and evaluates the validity of traditional pruning criteria against modern alternatives.\n\n## Findings\n\n### 1. Weight-Based and Magnitude Pruning\n*   **Magnitude-Based Pruning:** Simple magnitude-based pruning can achieve a strong tradeoff between sparsity and performance if layerwise sparsity is carefully chosen. The Layer-Adaptive Magnitude-based Pruning (LAMP) score improves this by rescaling weight magnitude to incorporate model-level $\\ell_2$ distortion, eliminating the need for handcrafted heuristics.\n*   **Oracle Pruning:** Traditionally, oracle pruning (minimizing pruned train loss) was the foundation for pruning for over 35 years. However, empirical evidence across 37,000 models (including ViT and MLLM) shows that on modern deep models, performance before retraining is barely correlated with performance after retraining. This suggests that oracle pruning criteria may be groundless for complex modern tasks.\n*   **Security Vulnerabilities:** Weight-based pruning in LLMs (including Magnitude, Wanda, and SparseGPT) can be exploited. Adversaries can inject malicious behaviors into parameters unlikely to be pruned while using parameters likely to be pruned to cancel those behaviors in the unpruned model, creating a \"benign\" model that becomes malicious only after pruning.\n\n### 2. One-Shot LLM Pruning Techniques\nBecause retraining billion-scale LLMs is often unaffordable, one-shot methods have emerged:\n*   **SparseGPT:** A method designed for massive GPT-family models that can achieve at least 50% unstructured sparsity in one-shot without retraining. It is compatible with semi-structured patterns (2:4 and 4:8) and weight quantization.\n    *   *ROSE (Reordered SparseGPT):* Improves upon SparseGPT by reordering the pruning order. Instead of a left-to-right order, ROSE prioritizes weights with larger potential pruning errors based on column and block pruning loss.\n*   **Wanda (Pruning by Weights and activations):** Prunes weights based on the product of the smallest magnitudes and their corresponding input activations on a per-output basis.\n    *   *Wanda++:* Enhances Wanda by using decoder-block-level regional gradients to minimize output discrepancies between dense and sparse outputs.\n    *   *M-Wanda:* Adapts pruning for multilingual LLMs by incorporating language-aware activation statistics and adjusting layerwise sparsity based on cross-lingual importance.\n\n### 3. Structured and Activation-Based Pruning\nStructured pruning is prioritized for better hardware acceleration.\n*   **Filter and Channel Pruning:** The CHIP (Channel Independence-based Pruning) method utilizes inter-channel correlations rather than intra-channel information. By pruning less independent feature maps, it reduces model size and FLOPs (e.g., reducing ResNet-56 size by 42.8% and FLOPs by 47.4% with an accuracy increase).\n*   **Iterative Activation-based Pruning:** Iterative L1-norm based pruning (ILP) often fails to produce accurate models. In contrast, Iterative Activation-based Pruning (IAP) and Adaptive Iterative Activation-based Pruning (AIAP) achieve significantly higher compression (e.g., 15.88X on LeNet-5) with minimal accuracy loss (1%).\n*   **Layer Pruning:** Removing layers induces magnitude gaps in hidden states. The Prune&Comp scheme mitigates this by rescaling remaining weights offline to eliminate the magnitude gap, which, when used iteratively, retains 93.19% of question-answering performance for LLaMA-3-8B when 5 layers are pruned.\n\n### 4. The Lottery Ticket Hypothesis (LTH) and Stability\n*   **Iterative Magnitude Pruning (IMP):** IMP is used to find \"winning ticket\" subnetworks. While IMP works on small tasks (MNIST), it often fails on deeper networks at initialization.\n*   **Stabilized LTH:** Research suggests that pruning early in training (0.1% to 7% through) rather than at iteration 0 allows deeper networks (e.g., ResNet-50 at 80% sparsity) to match the accuracy of the original network.\n*   **Transformer Application:** On Transformer architectures for translation tasks (WMT 2014), stabilized lottery ticket pruning performs similarly to magnitude pruning up to 85% sparsity. The initial sign of the parameter is found to be more critical for successful training than the specific value.\n\n## Comparative Analysis\n\n| Technique | Primary Metric | Retraining Required? | Structural Nature | Key Advantage | Key Limitation |\n| :--- | :--- | :--- | :--- | :--- | :--- |\n| **Oracle Pruning** | Pruned Train Loss | Yes | Unstructured | Historical Standard | Invalid for modern deep models |\n| **LAMP** | Rescaled Magnitude | No (Global) | Unstructured | No hyperparameter tuning | $\\ell_2$ distortion focus |\n| **SparseGPT** | Second-order gradients | No | Unstructured/Semi-structured | High sparsity (60%) in < 4.5 hrs | Predefined pruning order (fixed in ROSE) |\n| **Wanda** | Weight $\\times$ Activation | No | Unstructured | Simple, no weight updates | Baseline for newer regional gradient methods |\n| **CHIP** | Channel Independence | No | Structured | Practical hardware acceleration | Focused on CNNs/ResNets |\n| **IAP/AIAP** | Activations | Yes (Iterative) | Structured | Higher compression than weight-based | Requires iterative process |\n\n## Conclusion\nPruning for Transformer and deep models has evolved from simple magnitude and loss-based metrics toward activation-aware and one-shot methods. The evidence demonstrates that for massive models, retraining is largely replaced by one-shot reconstruction (SparseGPT) or activation-based heuristics (Wanda). While structured pruning offers superior hardware efficiency, iterative activation-based approaches (IAP/AIAP) provide better accuracy than traditional iterative weight-based pruning. Finally, the \"Stabilized LTH\" indicates that the timing of pruning—specifically pruning early in training rather than at initialization—is vital for the success of sparsity in deeper architectures.\n\n## References\n\n- No sources available"
+    }
+  ],
+  "summary": {
+    "workflowId": "b343dd24-917c-4e55-bf43-5984f2b39631",
+    "stepCount": 13,
+    "completedCount": 13,
+    "failedCount": 0,
+    "success": true,
+    "totalDurationMs": 184041,
+    "steps": [
+      {
+        "agentId": "planner-agent",
+        "agentName": "Planner Agent",
+        "parentAgentId": null,
+        "executionOrder": 1,
+        "status": "COMPLETED",
+        "durationMs": 8064
+      },
+      {
+        "agentId": "research-agent",
+        "agentName": "Research Agent",
+        "parentAgentId": null,
+        "executionOrder": 2,
+        "status": "COMPLETED",
+        "durationMs": 19014
+      },
+      {
+        "agentId": "topic-research-3",
+        "agentName": "Topic Research Agent 3",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 5021
+      },
+      {
+        "agentId": "topic-research-5",
+        "agentName": "Topic Research Agent 5",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 5171
+      },
+      {
+        "agentId": "topic-research-4",
+        "agentName": "Topic Research Agent 4",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 5249
+      },
+      {
+        "agentId": "topic-research-8",
+        "agentName": "Topic Research Agent 8",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 11605
+      },
+      {
+        "agentId": "topic-research-9",
+        "agentName": "Topic Research Agent 9",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 12488
+      },
+      {
+        "agentId": "topic-research-2",
+        "agentName": "Topic Research Agent 2",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 13459
+      },
+      {
+        "agentId": "topic-research-7",
+        "agentName": "Topic Research Agent 7",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 13842
+      },
+      {
+        "agentId": "topic-research-1",
+        "agentName": "Topic Research Agent 1",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 16255
+      },
+      {
+        "agentId": "topic-research-6",
+        "agentName": "Topic Research Agent 6",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 17231
+      },
+      {
+        "agentId": "topic-research-10",
+        "agentName": "Topic Research Agent 10",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 19009
+      },
+      {
+        "agentId": "writer-agent",
+        "agentName": "Writer Agent",
+        "parentAgentId": null,
+        "executionOrder": 3,
+        "status": "COMPLETED",
+        "durationMs": 37633
+      }
+    ]
+  },
+  "traces": [
+    {
+      "traceId": "9870e55c-badd-4d66-bb4f-1a10a1662aae",
+      "workflowId": "b343dd24-917c-4e55-bf43-5984f2b39631",
+      "agentId": "planner-agent",
+      "agentName": "Planner Agent",
+      "executionOrder": 1,
+      "status": "COMPLETED",
+      "startedAt": "2026-06-22T11:40:28.306Z",
+      "endedAt": "2026-06-22T11:40:36.370Z",
+      "durationMs": 8064,
+      "error": null
+    },
+    {
+      "traceId": "63826595-c8e8-4e0d-94a1-83ab7c3c71a0",
+      "workflowId": "b343dd24-917c-4e55-bf43-5984f2b39631",
+      "agentId": "research-agent",
+      "agentName": "Research Agent",
+      "executionOrder": 2,
+      "status": "COMPLETED",
+      "startedAt": "2026-06-22T11:40:36.371Z",
+      "endedAt": "2026-06-22T11:40:55.385Z",
+      "durationMs": 19014,
+      "error": null
+    },
+    {
+      "traceId": "1565c2b4-b024-4502-bc3c-82d0a5f78fb5",
+      "workflowId": "b343dd24-917c-4e55-bf43-5984f2b39631",
+      "agentId": "topic-research-3",
+      "agentName": "Topic Research Agent 3",
+      "parentAgentId": "research-agent",
+      "executionOrder": null,
+      "status": "COMPLETED",
+      "startedAt": null,
+      "endedAt": null,
+      "durationMs": 5021,
+      "error": null
+    },
+    {
+      "traceId": "4015acf3-69e1-4f5a-a049-1b82794b7da1",
+      "workflowId": "b343dd24-917c-4e55-bf43-5984f2b39631",
+      "agentId": "topic-research-5",
+      "agentName": "Topic Research Agent 5",
+      "parentAgentId": "research-agent",
+      "executionOrder": null,
+      "status": "COMPLETED",
+      "startedAt": null,
+      "endedAt": null,
+      "durationMs": 5171,
+      "error": null
+    },
+    {
+      "traceId": "1fb64c55-1bd2-4d37-8e0d-d561f688fa78",
+      "workflowId": "b343dd24-917c-4e55-bf43-5984f2b39631",
+      "agentId": "topic-research-4",
+      "agentName": "Topic Research Agent 4",
+      "parentAgentId": "research-agent",
+      "executionOrder": null,
+      "status": "COMPLETED",
+      "startedAt": null,
+      "endedAt": null,
+      "durationMs": 5249,
+      "error": null
+    },
+    {
+      "traceId": "877ef30b-385f-49dc-bd5b-309e321c5fc7",
+      "workflowId": "b343dd24-917c-4e55-bf43-5984f2b39631",
+      "agentId": "topic-research-8",
+      "agentName": "Topic Research Agent 8",
+      "parentAgentId": "research-agent",
+      "executionOrder": null,
+      "status": "COMPLETED",
+      "startedAt": null,
+      "endedAt": null,
+      "durationMs": 11605,
+      "error": null
+    },
+    {
+      "traceId": "f7ae414a-e35e-48a8-b35b-f5c62a2bbcd5",
+      "workflowId": "b343dd24-917c-4e55-bf43-5984f2b39631",
+      "agentId": "topic-research-9",
+      "agentName": "Topic Research Agent 9",
+      "parentAgentId": "research-agent",
+      "executionOrder": null,
+      "status": "COMPLETED",
+      "startedAt": null,
+      "endedAt": null,
+      "durationMs": 12488,
+      "error": null
+    },
+    {
+      "traceId": "5b61abf7-691f-48b9-8b11-eff84d6a5f2d",
+      "workflowId": "b343dd24-917c-4e55-bf43-5984f2b39631",
+      "agentId": "topic-research-2",
+      "agentName": "Topic Research Agent 2",
+      "parentAgentId": "research-agent",
+      "executionOrder": null,
+      "status": "COMPLETED",
+      "startedAt": null,
+      "endedAt": null,
+      "durationMs": 13459,
+      "error": null
+    },
+    {
+      "traceId": "310add38-e3b9-43f0-9752-72cf3ea67c1e",
+      "workflowId": "b343dd24-917c-4e55-bf43-5984f2b39631",
+      "agentId": "topic-research-7",
+      "agentName": "Topic Research Agent 7",
+      "parentAgentId": "research-agent",
+      "executionOrder": null,
+      "status": "COMPLETED",
+      "startedAt": null,
+      "endedAt": null,
+      "durationMs": 13842,
+      "error": null
+    },
+    {
+      "traceId": "3ba050f0-a37d-4a8e-8ca6-c95e64147ddb",
+      "workflowId": "b343dd24-917c-4e55-bf43-5984f2b39631",
+      "agentId": "topic-research-1",
+      "agentName": "Topic Research Agent 1",
+      "parentAgentId": "research-agent",
+      "executionOrder": null,
+      "status": "COMPLETED",
+      "startedAt": null,
+      "endedAt": null,
+      "durationMs": 16255,
+      "error": null
+    },
+    {
+      "traceId": "fbc1038b-3bef-4dc1-8280-3251b170f53e",
+      "workflowId": "b343dd24-917c-4e55-bf43-5984f2b39631",
+      "agentId": "topic-research-6",
+      "agentName": "Topic Research Agent 6",
+      "parentAgentId": "research-agent",
+      "executionOrder": null,
+      "status": "COMPLETED",
+      "startedAt": null,
+      "endedAt": null,
+      "durationMs": 17231,
+      "error": null
+    },
+    {
+      "traceId": "2670c2ba-ffd1-423a-bfb1-1777755fadf2",
+      "workflowId": "b343dd24-917c-4e55-bf43-5984f2b39631",
+      "agentId": "topic-research-10",
+      "agentName": "Topic Research Agent 10",
+      "parentAgentId": "research-agent",
+      "executionOrder": null,
+      "status": "COMPLETED",
+      "startedAt": null,
+      "endedAt": null,
+      "durationMs": 19009,
+      "error": null
+    },
+    {
+      "traceId": "c3f8c7bc-3774-4978-90e0-5ddc05e63c68",
+      "workflowId": "b343dd24-917c-4e55-bf43-5984f2b39631",
+      "agentId": "writer-agent",
+      "agentName": "Writer Agent",
+      "executionOrder": 3,
+      "status": "COMPLETED",
+      "startedAt": "2026-06-22T11:40:55.385Z",
+      "endedAt": "2026-06-22T11:41:33.018Z",
+      "durationMs": 37633,
+      "error": null
+    }
+  ]
+}

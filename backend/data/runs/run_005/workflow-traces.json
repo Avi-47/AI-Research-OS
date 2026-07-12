@@ -1,0 +1,42 @@
+{
+  "runId": "3b7b49f9-f1f8-46c2-9f78-5b42a653068d",
+  "timestamp": "2026-06-15T13:45:48.588Z",
+  "traces": [
+    {
+      "traceId": "a77a6fab-97a9-4700-a775-7140c9572feb",
+      "workflowId": "3b7b49f9-f1f8-46c2-9f78-5b42a653068d",
+      "agentId": "planner-agent",
+      "agentName": "Planner Agent",
+      "executionOrder": 1,
+      "status": "COMPLETED",
+      "startedAt": "2026-06-15T13:45:48.546Z",
+      "endedAt": "2026-06-15T13:45:48.570Z",
+      "durationMs": 24,
+      "error": null
+    },
+    {
+      "traceId": "00b7e556-48c6-4e53-818b-9f62d127fd9a",
+      "workflowId": "3b7b49f9-f1f8-46c2-9f78-5b42a653068d",
+      "agentId": "research-agent",
+      "agentName": "Research Agent",
+      "executionOrder": 2,
+      "status": "COMPLETED",
+      "startedAt": "2026-06-15T13:45:48.571Z",
+      "endedAt": "2026-06-15T13:45:48.585Z",
+      "durationMs": 14,
+      "error": null
+    },
+    {
+      "traceId": "5019c70e-60f3-49ad-8e01-84b9a8d1b98a",
+      "workflowId": "3b7b49f9-f1f8-46c2-9f78-5b42a653068d",
+      "agentId": "writer-agent",
+      "agentName": "Writer Agent",
+      "executionOrder": 3,
+      "status": "COMPLETED",
+      "startedAt": "2026-06-15T13:45:48.585Z",
+      "endedAt": "2026-06-15T13:45:48.588Z",
+      "durationMs": 3,
+      "error": null
+    }
+  ]
+}

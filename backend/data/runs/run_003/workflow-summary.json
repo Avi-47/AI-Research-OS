@@ -1,0 +1,35 @@
+{
+  "runId": "2cdc6552-bbc5-4cce-a046-9d30aca9feec",
+  "timestamp": "2026-06-15T13:20:31.623Z",
+  "summary": {
+    "workflowId": "2cdc6552-bbc5-4cce-a046-9d30aca9feec",
+    "stepCount": 3,
+    "completedCount": 3,
+    "failedCount": 0,
+    "success": true,
+    "totalDurationMs": 21,
+    "steps": [
+      {
+        "agentId": "planner-agent",
+        "agentName": "Planner Agent",
+        "executionOrder": 1,
+        "status": "COMPLETED",
+        "durationMs": 10
+      },
+      {
+        "agentId": "research-agent",
+        "agentName": "Research Agent",
+        "executionOrder": 2,
+        "status": "COMPLETED",
+        "durationMs": 8
+      },
+      {
+        "agentId": "writer-agent",
+        "agentName": "Writer Agent",
+        "executionOrder": 3,
+        "status": "COMPLETED",
+        "durationMs": 3
+      }
+    ]
+  }
+}

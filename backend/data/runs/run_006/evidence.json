@@ -1,0 +1,246 @@
+{
+  "runId": "f5b4df54-97ba-488d-a441-32d3a6b4d232",
+  "timestamp": "2026-06-15T13:49:51.114Z",
+  "evidence": [
+    {
+      "topic": "Graph-based Retrieval-Augmented Generation",
+      "provenance": {
+        "title": "AR-RAG: Autoregressive Retrieval Augmentation for Image Generation",
+        "url": ""
+      },
+      "notes": "We introduce Autoregressive Retrieval Augmentation (AR-RAG), a novel paradigm that enhances image generation by autoregressively incorporating knearest neighbor retrievals at the patch level. Unlike prior methods that perform a single, static retrieval before generation and condition the entire generation on fixed reference images, AR-RAG performs context-aware retrievals at each generation step, using prior-generated patches as queries to retrieve and incorporate the most relevant patch-level visual references, enabling the model to respond to evolving generation needs while avoiding limitations (e.g., over-copying, stylistic bias, etc.) prevalent in existing methods. To realize AR-RAG, we propose two parallel frameworks: (1) Distribution-Augmentation in Decoding (DAiD), a training-free plug-and-use decoding strategy that directly merges the distribution of model-predicted patches with the distribution of retrieved patches, and (2) Feature-Augmentation in Decoding (FAiD), a parameter-efficient fine-tuning method that progressively smooths the features of retrieved patches via multi-scale convolution operations and leverages them to augment the image generation process. We validate the effectiveness of AR-RAG on widely adopted benchmarks, including Midjourney-30K, GenEval and DPG-Bench, demonstrating significant performance gains over state-of-the-art image generation models."
+    },
+    {
+      "topic": "Graph-based Retrieval-Augmented Generation",
+      "provenance": {
+        "title": "EVOR: Evolving Retrieval for Code Generation",
+        "url": ""
+      },
+      "notes": "Recently the retrieval-augmented generation (RAG) has been successfully applied in code generation. However, existing pipelines for retrieval-augmented code generation (RACG) employ static knowledge bases with a single source, limiting the adaptation capabilities of Large Language Models (LLMs) to domains they have insufficient knowledge of. In this work, we develop a novel pipeline, EVOR, that employs the synchronous evolution of both queries and diverse knowledge bases. On two realistic settings where the external knowledge is required to solve code generation tasks, we compile four new datasets associated with frequently updated libraries and long-tail programming languages, named EVOR-BENCH. Extensive experiments demonstrate that EVOR achieves two to four times of execution accuracy compared to other methods such as Reflexion (Shinn et al., 2024), DocPrompting (Zhou et al., 2023), etc. We demonstrate that EVOR is flexible and can be easily combined with them to achieve further improvement. Further analysis reveals that EVOR benefits from the synchronous evolution of queries and documents and the diverse information sources in the knowledge base. We hope that our studies will inspire more insights into the design of advanced RACG pipelines in future research. Our model, code, and data are available at https://arks-codegen.github.io."
+    },
+    {
+      "topic": "Graph-based Retrieval-Augmented Generation",
+      "provenance": {
+        "title": "Automated Literature Review Using NLP Techniques and LLM-Based Retrieval-Augmented Generation",
+        "url": ""
+      },
+      "notes": "This research presents and compares multiple approaches to automate the generation of literature reviews using several Natural Language Processing (NLP) techniques and retrieval-augmented generation (RAG) with a Large Language Model (LLM). The ever-increasing number of research articles provides a huge challenge for manual literature review. It has resulted in an increased demand for automation. Developing a system capable of automatically generating the literature reviews from only the PDF files as input is the primary objective of this research work. The effectiveness of several Natural Language Processing (NLP) strategies, such as the frequency-based method (spaCy), the transformer model (Simple T5), and retrieval-augmented generation (RAG) with Large Language Model (GPT-3.5-turbo), is evaluated to meet the primary objective. The SciTLDR dataset is chosen for this research experiment and three distinct techniques are utilized to implement three different systems for auto-generating the literature reviews. The ROUGE scores are used for the evaluation of all three systems. Based on the evaluation, the Large Language Model GPT-3.5-turbo achieved the highest ROUGE-1 score, 0.364. The transformer model comes in second place and spaCy is at the last position. Finally, a graphical user interface is created for the best system based on the large language model."
+    },
+    {
+      "topic": "Multi-Agent Coordination in GraphRAG",
+      "provenance": {
+        "title": "A Survey of Multi-Agent Deep Reinforcement Learning with Communication",
+        "url": ""
+      },
+      "notes": "Communication is an effective mechanism for coordinating the behaviors of multiple agents, broadening their views of the environment, and to support their collaborations. In the field of multi-agent deep reinforcement learning (MADRL), agents can improve the overall learning performance and achieve their objectives by communication. Agents can communicate various types of messages, either to all agents or to specific agent groups, or conditioned on specific constraints. With the growing body of research work in MADRL with communication (Comm-MADRL), there is a lack of a systematic and structural approach to distinguish and classify existing Comm-MADRL approaches. In this paper, we survey recent works in the Comm-MADRL field and consider various aspects of communication that can play a role in designing and developing multi-agent reinforcement learning systems. With these aspects in mind, we propose 9 dimensions along which Comm-MADRL approaches can be analyzed, developed, and compared. By projecting existing works into the multi-dimensional space, we discover interesting trends. We also propose some novel directions for designing future Comm-MADRL systems through exploring possible combinations of the dimensions."
+    },
+    {
+      "topic": "Multi-Agent Coordination in GraphRAG",
+      "provenance": {
+        "title": "A Methodology to Engineer and Validate Dynamic Multi-level Multi-agent Based Simulations",
+        "url": ""
+      },
+      "notes": "This article proposes a methodology to model and simulate complex systems, based on IRM4MLS, a generic agent-based meta-model able to deal with multi-level systems. This methodology permits the engineering of dynamic multi-level agent-based models, to represent complex systems over several scales and domains of interest. Its goal is to simulate a phenomenon using dynamically the lightest representation to save computer resources without loss of information. This methodology is based on two mechanisms: (1) the activation or deactivation of agents representing different domain parts of the same phenomenon and (2) the aggregation or disaggregation of agents representing the same phenomenon at different scales."
+    },
+    {
+      "topic": "Multi-Agent Coordination in GraphRAG",
+      "provenance": {
+        "title": "Augmenting the action space with conventions to improve multi-agent cooperation in Hanabi",
+        "url": ""
+      },
+      "notes": "The card game Hanabi is considered a strong medium for the testing and development of multi-agent reinforcement learning (MARL) algorithms, due to its cooperative nature, partial observability, limited communication and remarkable complexity. Previous research efforts have explored the capabilities of MARL algorithms within Hanabi, focusing largely on advanced architecture design and algorithmic manipulations to achieve state-of-the-art performance for various number of cooperators. However, this often leads to complex solution strategies with high computational cost and requiring large amounts of training data. For humans to solve the Hanabi game effectively, they require the use of conventions, which often allows for a means to implicitly convey ideas or knowledge based on a predefined, and mutually agreed upon, set of \"rules\" or principles. Multi-agent problems containing partial observability, especially when limited communication is present, can benefit greatly from the use of implicit knowledge sharing. In this paper, we propose a novel approach to augmenting an agent's action space using conventions, which act as a sequence of special cooperative actions that span over and include multiple time steps and multiple agents, requiring agents to actively opt in for it to reach fruition. These conventions are based on existing human conventions, and result in a significant improvement on the performance of existing techniques for self-play and cross-play for various number of cooperators within Hanabi."
+    },
+    {
+      "topic": "Dynamic Knowledge Graph Construction",
+      "provenance": {
+        "title": "AI Agent-Driven Framework for Automated Product Knowledge Graph Construction in E-Commerce",
+        "url": ""
+      },
+      "notes": "The rapid expansion of e-commerce platforms generates vast amounts of unstructured product data, creating significant challenges for information retrieval, recommendation systems, and data analytics. Knowledge Graphs (KGs) offer a structured, interpretable format to organize such data, yet constructing product-specific KGs remains a complex and manual process. This paper introduces a fully automated, AI agent-driven framework for constructing product knowledge graphs directly from unstructured product descriptions. Leveraging Large Language Models (LLMs), our method operates in three stages using dedicated agents: ontology creation and expansion, ontology refinement, and knowledge graph population. This agent-based approach ensures semantic coherence, scalability, and high-quality output without relying on predefined schemas or handcrafted extraction rules. We evaluate the system on a real-world dataset of air conditioner product descriptions, demonstrating strong performance in both ontology generation and KG population. The framework achieves over 97\\% property coverage and minimal redundancy, validating its effectiveness and practical applicability. Our work highlights the potential of LLMs to automate structured knowledge extraction in retail, providing a scalable path toward intelligent product data integration and utilization."
+    },
+    {
+      "topic": "Dynamic Knowledge Graph Construction",
+      "provenance": {
+        "title": "A Multi-Agent System for Semantic Mapping of Relational Data to Knowledge Graphs",
+        "url": ""
+      },
+      "notes": "Enterprises often maintain multiple databases for storing critical business data in siloed systems, resulting in inefficiencies and challenges with data interoperability. A key to overcoming these challenges lies in integrating disparate data sources, enabling businesses to unlock the full potential of their data. Our work presents a novel approach for integrating multiple databases using knowledge graphs, focusing on the application of large language models as semantic agents for mapping and connecting structured data across systems by leveraging existing vocabularies. The proposed methodology introduces a semantic layer above tables in relational databases, utilizing a system comprising multiple LLM agents that map tables and columns to Schema.org terms. Our approach achieves a mapping accuracy of over 90% in multiple domains."
+    },
+    {
+      "topic": "Dynamic Knowledge Graph Construction",
+      "provenance": {
+        "title": "Tax Knowledge Graph for a Smarter and More Personalized TurboTax",
+        "url": ""
+      },
+      "notes": "Most knowledge graph use cases are data-centric, focusing on representing data entities and their semantic relationships. There are no published success stories to represent large-scale complicated business logic with knowledge graph technologies. In this paper, we will share our innovative and practical approach to representing complicated U.S. and Canadian income tax compliance logic (calculations and rules) via a large-scale knowledge graph. We will cover how the Tax Knowledge Graph is constructed and automated, how it is used to calculate tax refunds, reasoned to find missing info, and navigated to explain the calculated results. The Tax Knowledge Graph has helped transform Intuit's flagship TurboTax product into a smart and personalized experience, accelerating and automating the tax preparation process while instilling confidence for millions of customers."
+    },
+    {
+      "topic": "Intent-Aware Query Expansion",
+      "provenance": {
+        "title": "Semantic Evolutionary Concept Distances for Effective Information Retrieval in Query Expansion",
+        "url": ""
+      },
+      "notes": "In this work several semantic approaches to concept-based query expansion and reranking schemes are studied and compared with different ontology-based expansion methods in web document search and retrieval. In particular, we focus on concept-based query expansion schemes, where, in order to effectively increase the precision of web document retrieval and to decrease the users browsing time, the main goal is to quickly provide users with the most suitable query expansion. Two key tasks for query expansion in web document retrieval are to find the expansion candidates, as the closest concepts in web document domain, and to rank the expanded queries properly. The approach we propose aims at improving the expansion phase for better web document retrieval and precision. The basic idea is to measure the distance between candidate concepts using the PMING distance, a collaborative semantic proximity measure, i.e. a measure which can be computed by using statistical results from web search engine. Experiments show that the proposed technique can provide users with more satisfying expansion results and improve the quality of web document retrieval."
+    },
+    {
+      "topic": "Intent-Aware Query Expansion",
+      "provenance": {
+        "title": "Intent-Aware Authorization for Zero Trust CI/CD",
+        "url": ""
+      },
+      "notes": "This paper introduces intent-aware authorization for Zero Trust CI/CD systems. Identity establishes who is making the request, but additional signals are required to decide whether access should be granted. We describe a control loop architecture where policy engines such as OPA and Cedar evaluate runtime context, justification, and human approvals before issuing access credentials. The system builds on SPIFFE-based workload identity and credential brokers, and enables fine-grained, auditable authorization. This is the third paper in a series on Zero Trust CI/CD design patterns."
+    },
+    {
+      "topic": "Intent-Aware Query Expansion",
+      "provenance": {
+        "title": "Intent-Aware Neural Query Reformulation for Behavior-Aligned Product Search",
+        "url": ""
+      },
+      "notes": "Understanding and modeling buyer intent is a foundational challenge in optimizing search query reformulation within the dynamic landscape of e-commerce search systems. This work introduces a robust data pipeline designed to mine and analyze large-scale buyer query logs, with a focus on extracting fine-grained intent signals from both explicit interactions and implicit behavioral cues. Leveraging advanced sequence mining techniques and supervised learning models, the pipeline systematically captures patterns indicative of latent purchase intent, enabling the construction of a high-fidelity, intent-rich dataset. The proposed framework facilitates the development of adaptive query rewrite strategies by grounding reformulations in inferred user intent rather than surface-level lexical signals. This alignment between query rewriting and underlying user objectives enhances both retrieval relevance and downstream engagement metrics. Empirical evaluations across multiple product verticals demonstrate measurable gains in precision-oriented relevance metrics, underscoring the efficacy of intent-aware reformulation. Our findings highlight the value of intent-centric modeling in bridging the gap between sparse user inputs and complex product discovery goals, and establish a scalable foundation for future research in user-aligned neural retrieval and ranking systems."
+    },
+    {
+      "topic": "Agent-Specific Embedding Spaces",
+      "provenance": {
+        "title": "A semidefinite program for least distortion embeddings of flat tori into Hilbert spaces",
+        "url": ""
+      },
+      "notes": "We derive and analyze an infinite-dimensional semidefinite program which computes least distortion embeddings of flat tori $\\mathbb{R}^n/L$, where $L$ is an $n$-dimensional lattice, into Hilbert spaces. This enables us to provide a constant factor improvement over the previously best lower bound on the minimal distortion of an embedding of an $n$-dimensional flat torus. As further applications we prove that every $n$-dimensional flat torus has a finite dimensional least distortion embedding, that the standard embedding of the standard tours is optimal, and we determine least distortion embeddings of all $2$-dimensional flat tori."
+    },
+    {
+      "topic": "Agent-Specific Embedding Spaces",
+      "provenance": {
+        "title": "Embedding Atlas: Low-Friction, Interactive Embedding Visualization",
+        "url": ""
+      },
+      "notes": "Embedding projections are popular for visualizing large datasets and models. However, people often encounter \"friction\" when using embedding visualization tools: (1) barriers to adoption, e.g., tedious data wrangling and loading, scalability limits, no integration of results into existing workflows, and (2) limitations in possible analyses, without integration with external tools to additionally show coordinated views of metadata. In this paper, we present Embedding Atlas, a scalable, interactive visualization tool designed to make interacting with large embeddings as easy as possible. Embedding Atlas uses modern web technologies and advanced algorithms -- including density-based clustering, and automated labeling -- to provide a fast and rich data analysis experience at scale. We evaluate Embedding Atlas with a competitive analysis against other popular embedding tools, showing that Embedding Atlas's feature set specifically helps reduce friction, and report a benchmark on its real-time rendering performance with millions of points. Embedding Atlas is available as open source to support future work in embedding-based analysis."
+    },
+    {
+      "topic": "Agent-Specific Embedding Spaces",
+      "provenance": {
+        "title": "Antisymmetry of the stochastic order on all ordered topological spaces",
+        "url": ""
+      },
+      "notes": "In this short note, we prove that the stochastic order of Radon probability measures on any ordered topological space is antisymmetric. This has been known before in various special cases. We give a simple and elementary proof of the general result."
+    },
+    {
+      "topic": "Graph Attention Mechanisms for Agent Query Routing",
+      "provenance": {
+        "title": "Faster Approximate Distance Queries and Compact Routing in Sparse Graphs",
+        "url": ""
+      },
+      "notes": "A distance oracle is a compact representation of the shortest distance matrix of a graph. It can be queried to approximate shortest paths between any pair of vertices. Any distance oracle that returns paths of worst-case stretch (2k-1) must require space $Ω(n^{1 + 1/k})$ for graphs of n nodes. The hard cases that enforce this lower bound are, however, rather dense graphs with average degree Ω(n^{1/k}). We present distance oracles that, for sparse graphs, substantially break the lower bound barrier at the expense of higher query time. For any 1 \\leq α\\leq n, our distance oracles can return stretch 2 paths using O(m + n^2/α) space and stretch 3 paths using O(m + n^2/α^2) space, at the expense of O(αm/n) query time. By setting appropriate values of α, we get the first distance oracles that have size linear in the size of the graph, and return constant stretch paths in non-trivial query time. The query time can be further reduced to O(α), by using an additional O(m α) space for all our distance oracles, or at the cost of a small constant additive stretch. We use our stretch 2 distance oracle to present the first compact routing scheme with worst-case stretch 2. Any compact routing scheme with stretch less than 2 must require linear memory at some nodes even for sparse graphs; our scheme, hence, achieves the optimal stretch with non-trivial memory requirements. Moreover, supported by large-scale simulations on graphs including the AS-level Internet graph, we argue that our stretch-2 scheme would be simple and efficient to implement as a distributed compact routing protocol."
+    },
+    {
+      "topic": "Graph Attention Mechanisms for Agent Query Routing",
+      "provenance": {
+        "title": "Robust Hierarchical Graph Classification with Subgraph Attention",
+        "url": ""
+      },
+      "notes": "Graph neural networks get significant attention for graph representation and classification in machine learning community. Attention mechanism applied on the neighborhood of a node improves the performance of graph neural networks. Typically, it helps to identify a neighbor node which plays more important role to determine the label of the node under consideration. But in real world scenarios, a particular subset of nodes together, but not the individual pairs in the subset, may be important to determine the label of the graph. To address this problem, we introduce the concept of subgraph attention for graphs. On the other hand, hierarchical graph pooling has been shown to be promising in recent literature. But due to noisy hierarchical structure of real world graphs, not all the hierarchies of a graph play equal role for graph classification. Towards this end, we propose a graph classification algorithm called SubGattPool which jointly learns the subgraph attention and employs two different types of hierarchical attention mechanisms to find the important nodes in a hierarchy and the importance of individual hierarchies in a graph. Experimental evaluation with different types of graph classification algorithms shows that SubGattPool is able to improve the state-of-the-art or remains competitive on multiple publicly available graph classification datasets. We conduct further experiments on both synthetic and real world graph datasets to justify the usefulness of different components of SubGattPool and to show its consistent performance on other downstream tasks."
+    },
+    {
+      "topic": "Graph Attention Mechanisms for Agent Query Routing",
+      "provenance": {
+        "title": "Hard-Attention Gates with Gradient Routing for Endoscopic Image Computing",
+        "url": ""
+      },
+      "notes": "To address overfitting and enhance model generalization in gastroenterological polyp size assessment, our study introduces Feature-Selection Gates (FSG) or Hard-Attention Gates (HAG) alongside Gradient Routing (GR) for dynamic feature selection. This technique aims to boost Convolutional Neural Networks (CNNs) and Vision Transformers (ViTs) by promoting sparse connectivity, thereby reducing overfitting and enhancing generalization. HAG achieves this through sparsification with learnable weights, serving as a regularization strategy. GR further refines this process by optimizing HAG parameters via dual forward passes, independently from the main model, to improve feature re-weighting. Our evaluation spanned multiple datasets, including CIFAR-100 for a broad impact assessment and specialized endoscopic datasets (REAL-Colon, Misawa, and SUN) focusing on polyp size estimation, covering over 200 polyps in more than 370,000 frames. The findings indicate that our HAG-enhanced networks substantially enhance performance in both binary and triclass classification tasks related to polyp sizing. Specifically, CNNs experienced an F1 Score improvement to 87.8% in binary classification, while in triclass classification, the ViT-T model reached an F1 Score of 76.5%, outperforming traditional CNNs and ViT-T models. To facilitate further research, we are releasing our codebase, which includes implementations for CNNs, multistream CNNs, ViT, and HAG-augmented variants. This resource aims to standardize the use of endoscopic datasets, providing public training-validation-testing splits for reliable and comparable research in gastroenterological polyp size estimation. The codebase is available at github.com/cosmoimd/feature-selection-gates."
+    },
+    {
+      "topic": "Self-Play Optimization for Retrieval Agents",
+      "provenance": {
+        "title": "CARROT: A Learned Cost-Constrained Retrieval Optimization System for RAG",
+        "url": ""
+      },
+      "notes": "Large Language Models (LLMs) have demonstrated impressive ability in generation and reasoning tasks but struggle with handling up-to-date knowledge, leading to inaccuracies or hallucinations. Retrieval-Augmented Generation (RAG) mitigates this by retrieving and incorporating external knowledge into input prompts. In particular, due to LLMs' context window limitations and long-context hallucinations, only the most relevant \"chunks\" are retrieved. However, current RAG systems face three key challenges: (1) chunks are often retrieved independently without considering their relationships, such as redundancy and ordering; (2) the utility of chunks is non-monotonic, as adding more chunks can degrade quality; and (3) retrieval strategies fail to adapt to the unique characteristics of different queries. To overcome these challenges, we design a cost-constrained retrieval optimization framework for RAG. We adopt a Monte Carlo Tree Search (MCTS) based strategy to find the optimal chunk combination order, which considers the chunks' correlations. In addition, to address the non-monotonicity of chunk utility, instead of treating budget exhaustion as the termination condition, we design a utility computation strategy to identify the optimal chunk combination without necessarily exhausting the budget. Furthermore, we propose a configuration agent that predicts optimal configurations for each query domain, improving our framework's adaptability and efficiency. Experimental results demonstrate up to a 30% improvement over baseline models, highlighting the framework's effectiveness, scalability, and suitability. Our source code has been released at https://github.com/wang0702/CARROT."
+    },
+    {
+      "topic": "Self-Play Optimization for Retrieval Agents",
+      "provenance": {
+        "title": "Lightweight and Direct Document Relevance Optimization for Generative Information Retrieval",
+        "url": ""
+      },
+      "notes": "Generative information retrieval (GenIR) is a promising neural retrieval paradigm that formulates document retrieval as a document identifier (docid) generation task, allowing for end-to-end optimization toward a unified global retrieval objective. However, existing GenIR models suffer from token-level misalignment, where models trained to predict the next token often fail to capture document-level relevance effectively. While reinforcement learning-based methods, such as reinforcement learning from relevance feedback (RLRF), aim to address this misalignment through reward modeling, they introduce significant complexity, requiring the optimization of an auxiliary reward function followed by reinforcement fine-tuning, which is computationally expensive and often unstable. To address these challenges, we propose direct document relevance optimization (DDRO), which aligns token-level docid generation with document-level relevance estimation through direct optimization via pairwise ranking, eliminating the need for explicit reward modeling and reinforcement learning. Experimental results on benchmark datasets, including MS MARCO document and Natural Questions, show that DDRO outperforms reinforcement learning-based methods, achieving a 7.4% improvement in MRR@10 for MS MARCO and a 19.9% improvement for Natural Questions. These findings highlight DDRO's potential to enhance retrieval effectiveness with a simplified optimization approach. By framing alignment as a direct optimization problem, DDRO simplifies the ranking optimization pipeline of GenIR models while offering a viable alternative to reinforcement learning-based methods."
+    },
+    {
+      "topic": "Self-Play Optimization for Retrieval Agents",
+      "provenance": {
+        "title": "LLandMark: A Multi-Agent Framework for Landmark-Aware Multimodal Interactive Video Retrieval",
+        "url": ""
+      },
+      "notes": "The increasing diversity and scale of video data demand retrieval systems capable of multimodal understanding, adaptive reasoning, and domain-specific knowledge integration. This paper presents LLandMark, a modular multi-agent framework for landmark-aware multimodal video retrieval to handle real-world complex queries. The framework features specialized agents that collaborate across four stages: query parsing and planning, landmark reasoning, multimodal retrieval, and reranked answer synthesis. A key component, the Landmark Knowledge Agent, detects cultural or spatial landmarks and reformulates them into descriptive visual prompts, enhancing CLIP-based semantic matching for Vietnamese scenes. To expand capabilities, we introduce an LLM-assisted image-to-image pipeline, where a large language model (Gemini 2.5 Flash) autonomously detects landmarks, generates image search queries, retrieves representative images, and performs CLIP-based visual similarity matching, removing the need for manual image input. In addition, an OCR refinement module leveraging Gemini and LlamaIndex improves Vietnamese text recognition. Experimental results show that LLandMark achieves adaptive, culturally grounded, and explainable retrieval performance."
+    },
+    {
+      "topic": "Causal Reasoning in Agent Planning",
+      "provenance": {
+        "title": "Navigating the State of Cognitive Flow: Context-Aware AI Interventions for Effective Reasoning Support",
+        "url": ""
+      },
+      "notes": "Flow theory describes an optimal cognitive state where individuals experience deep focus and intrinsic motivation when a task's difficulty aligns with their skill level. In AI-augmented reasoning, interventions that disrupt the state of cognitive flow can hinder rather than enhance decision-making. This paper proposes a context-aware cognitive augmentation framework that adapts interventions based on three key contextual factors: type, timing, and scale. By leveraging multimodal behavioral cues (e.g., gaze behavior, typing hesitation, interaction speed), AI can dynamically adjust cognitive support to maintain or restore flow. We introduce the concept of cognitive flow, an extension of flow theory in AI-augmented reasoning, where interventions are personalized, adaptive, and minimally intrusive. By shifting from static interventions to context-aware augmentation, our approach ensures that AI systems support deep engagement in complex decision-making and reasoning without disrupting cognitive immersion."
+    },
+    {
+      "topic": "Causal Reasoning in Agent Planning",
+      "provenance": {
+        "title": "Relational Causal Models with Cycles:Representation and Reasoning",
+        "url": ""
+      },
+      "notes": "Causal reasoning in relational domains is fundamental to studying real-world social phenomena in which individual units can influence each other's traits and behavior. Dynamics between interconnected units can be represented as an instantiation of a relational causal model; however, causal reasoning over such instantiation requires additional templating assumptions that capture feedback loops of influence. Previous research has developed lifted representations to address the relational nature of such dynamics but has strictly required that the representation has no cycles. To facilitate cycles in relational representation and learning, we introduce relational $σ$-separation, a new criterion for understanding relational systems with feedback loops. We also introduce a new lifted representation, $σ$-abstract ground graph which helps with abstracting statistical independence relations in all possible instantiations of the cyclic relational model. We show the necessary and sufficient conditions for the completeness of $σ$-AGG and that relational $σ$-separation is sound and complete in the presence of one or more cycles with arbitrary length. To the best of our knowledge, this is the first work on representation of and reasoning with cyclic relational causal models."
+    },
+    {
+      "topic": "Causal Reasoning in Agent Planning",
+      "provenance": {
+        "title": "Causal Agent Replay: Counterfactual Attribution for LLM-Agent Failures",
+        "url": ""
+      },
+      "notes": "When an LLM agent fails -- issues a refund it should not have, calls the wrong tool, leaks data -- existing tooling answers what happened (observability) or whether it passed (evaluation), but not which step caused the failure. The obvious heuristics are wrong: the step that executes the harmful action is usually not the step that decided on it, and LLM-judge attribution is correlational and unreliable (state-of-the-art step-level accuracy on the Who&amp;When benchmark is about 14%). We present Causal Agent Replay (CAR), which answers the question by intervention: it models an agent run as a structural causal model, applies a do-operation to a step, and re-executes the trajectory forward under the same stochastic policy, measuring the shift in the outcome distribution. We define an intervention algebra over agent steps, a single-step contrastive estimator whose point-of-commitment rule resolves a confound specific to stochastic run-forward, and a budget-bounded Monte-Carlo Shapley estimator that splits credit across interacting steps. Every effect is reported with confidence intervals. We validate against synthetic structural causal models with planted ground truth: the contrastive estimator recovers the pivotal step, and Shapley recovers a two-step interaction (0.44, 0.45, ~0; efficiency sum 0.909 versus the analytic 0.91). CAR is open source and runs on hosted or free local models."
+    },
+    {
+      "topic": "Federated Knowledge Graph Updates",
+      "provenance": {
+        "title": "AI Agent-Driven Framework for Automated Product Knowledge Graph Construction in E-Commerce",
+        "url": ""
+      },
+      "notes": "The rapid expansion of e-commerce platforms generates vast amounts of unstructured product data, creating significant challenges for information retrieval, recommendation systems, and data analytics. Knowledge Graphs (KGs) offer a structured, interpretable format to organize such data, yet constructing product-specific KGs remains a complex and manual process. This paper introduces a fully automated, AI agent-driven framework for constructing product knowledge graphs directly from unstructured product descriptions. Leveraging Large Language Models (LLMs), our method operates in three stages using dedicated agents: ontology creation and expansion, ontology refinement, and knowledge graph population. This agent-based approach ensures semantic coherence, scalability, and high-quality output without relying on predefined schemas or handcrafted extraction rules. We evaluate the system on a real-world dataset of air conditioner product descriptions, demonstrating strong performance in both ontology generation and KG population. The framework achieves over 97\\% property coverage and minimal redundancy, validating its effectiveness and practical applicability. Our work highlights the potential of LLMs to automate structured knowledge extraction in retail, providing a scalable path toward intelligent product data integration and utilization."
+    },
+    {
+      "topic": "Federated Knowledge Graph Updates",
+      "provenance": {
+        "title": "A Multi-Agent System for Semantic Mapping of Relational Data to Knowledge Graphs",
+        "url": ""
+      },
+      "notes": "Enterprises often maintain multiple databases for storing critical business data in siloed systems, resulting in inefficiencies and challenges with data interoperability. A key to overcoming these challenges lies in integrating disparate data sources, enabling businesses to unlock the full potential of their data. Our work presents a novel approach for integrating multiple databases using knowledge graphs, focusing on the application of large language models as semantic agents for mapping and connecting structured data across systems by leveraging existing vocabularies. The proposed methodology introduces a semantic layer above tables in relational databases, utilizing a system comprising multiple LLM agents that map tables and columns to Schema.org terms. Our approach achieves a mapping accuracy of over 90% in multiple domains."
+    },
+    {
+      "topic": "Federated Knowledge Graph Updates",
+      "provenance": {
+        "title": "Federated Learning with Graph-Based Aggregation for Traffic Forecasting",
+        "url": ""
+      },
+      "notes": "In traffic prediction, the goal is to estimate traffic speed or flow in specific regions or road segments using historical data collected by devices deployed in each area. Each region or road segment can be viewed as an individual client that measures local traffic flow, making Federated Learning (FL) a suitable approach for collaboratively training models without sharing raw data. In centralized FL, a central server collects and aggregates model updates from multiple clients to build a shared model while preserving each client's data privacy. Standard FL methods, such as Federated Averaging (FedAvg), assume that clients are independent, which can limit performance in traffic prediction tasks where spatial relationships between clients are important. Federated Graph Learning methods can capture these dependencies during server-side aggregation, but they often introduce significant computational overhead. In this paper, we propose a lightweight graph-aware FL approach that blends the simplicity of FedAvg with key ideas from graph learning. Rather than training full models, our method applies basic neighbourhood aggregation principles to guide parameter updates, weighting client models based on graph connectivity. This approach captures spatial relationships effectively while remaining computationally efficient. We evaluate our method on two benchmark traffic datasets, METR-LA and PEMS-BAY, and show that it achieves competitive performance compared to standard baselines and recent graph-based federated learning techniques."
+    },
+    {
+      "topic": "Explainable Multi-Agent Interactions",
+      "provenance": {
+        "title": "A Survey of Multi-Agent Deep Reinforcement Learning with Communication",
+        "url": ""
+      },
+      "notes": "Communication is an effective mechanism for coordinating the behaviors of multiple agents, broadening their views of the environment, and to support their collaborations. In the field of multi-agent deep reinforcement learning (MADRL), agents can improve the overall learning performance and achieve their objectives by communication. Agents can communicate various types of messages, either to all agents or to specific agent groups, or conditioned on specific constraints. With the growing body of research work in MADRL with communication (Comm-MADRL), there is a lack of a systematic and structural approach to distinguish and classify existing Comm-MADRL approaches. In this paper, we survey recent works in the Comm-MADRL field and consider various aspects of communication that can play a role in designing and developing multi-agent reinforcement learning systems. With these aspects in mind, we propose 9 dimensions along which Comm-MADRL approaches can be analyzed, developed, and compared. By projecting existing works into the multi-dimensional space, we discover interesting trends. We also propose some novel directions for designing future Comm-MADRL systems through exploring possible combinations of the dimensions."
+    },
+    {
+      "topic": "Explainable Multi-Agent Interactions",
+      "provenance": {
+        "title": "A Methodology to Engineer and Validate Dynamic Multi-level Multi-agent Based Simulations",
+        "url": ""
+      },
+      "notes": "This article proposes a methodology to model and simulate complex systems, based on IRM4MLS, a generic agent-based meta-model able to deal with multi-level systems. This methodology permits the engineering of dynamic multi-level agent-based models, to represent complex systems over several scales and domains of interest. Its goal is to simulate a phenomenon using dynamically the lightest representation to save computer resources without loss of information. This methodology is based on two mechanisms: (1) the activation or deactivation of agents representing different domain parts of the same phenomenon and (2) the aggregation or disaggregation of agents representing the same phenomenon at different scales."
+    },
+    {
+      "topic": "Explainable Multi-Agent Interactions",
+      "provenance": {
+        "title": "Augmenting the action space with conventions to improve multi-agent cooperation in Hanabi",
+        "url": ""
+      },
+      "notes": "The card game Hanabi is considered a strong medium for the testing and development of multi-agent reinforcement learning (MARL) algorithms, due to its cooperative nature, partial observability, limited communication and remarkable complexity. Previous research efforts have explored the capabilities of MARL algorithms within Hanabi, focusing largely on advanced architecture design and algorithmic manipulations to achieve state-of-the-art performance for various number of cooperators. However, this often leads to complex solution strategies with high computational cost and requiring large amounts of training data. For humans to solve the Hanabi game effectively, they require the use of conventions, which often allows for a means to implicitly convey ideas or knowledge based on a predefined, and mutually agreed upon, set of \"rules\" or principles. Multi-agent problems containing partial observability, especially when limited communication is present, can benefit greatly from the use of implicit knowledge sharing. In this paper, we propose a novel approach to augmenting an agent's action space using conventions, which act as a sequence of special cooperative actions that span over and include multiple time steps and multiple agents, requiring agents to actively opt in for it to reach fruition. These conventions are based on existing human conventions, and result in a significant improvement on the performance of existing techniques for self-play and cross-play for various number of cooperators within Hanabi."
+    }
+  ]
+}

@@ -1,0 +1,198 @@
+{
+  "runId": "80bbeaf5-791c-4fc3-a285-4022aa9ba60b",
+  "timestamp": "2026-06-15T13:28:22.704Z",
+  "evidence": [
+    {
+      "topic": "Multi-agent Orchestration",
+      "provenance": {
+        "title": "A Survey of Multi-Agent Deep Reinforcement Learning with Communication",
+        "url": ""
+      },
+      "notes": "Communication is an effective mechanism for coordinating the behaviors of multiple agents, broadening their views of the environment, and to support their collaborations. In the field of multi-agent deep reinforcement learning (MADRL), agents can improve the overall learning performance and achieve their objectives by communication. Agents can communicate various types of messages, either to all agents or to specific agent groups, or conditioned on specific constraints. With the growing body of research work in MADRL with communication (Comm-MADRL), there is a lack of a systematic and structural approach to distinguish and classify existing Comm-MADRL approaches. In this paper, we survey recent works in the Comm-MADRL field and consider various aspects of communication that can play a role in designing and developing multi-agent reinforcement learning systems. With these aspects in mind, we propose 9 dimensions along which Comm-MADRL approaches can be analyzed, developed, and compared. By projecting existing works into the multi-dimensional space, we discover interesting trends. We also propose some novel directions for designing future Comm-MADRL systems through exploring possible combinations of the dimensions."
+    },
+    {
+      "topic": "Multi-agent Orchestration",
+      "provenance": {
+        "title": "A Methodology to Engineer and Validate Dynamic Multi-level Multi-agent Based Simulations",
+        "url": ""
+      },
+      "notes": "This article proposes a methodology to model and simulate complex systems, based on IRM4MLS, a generic agent-based meta-model able to deal with multi-level systems. This methodology permits the engineering of dynamic multi-level agent-based models, to represent complex systems over several scales and domains of interest. Its goal is to simulate a phenomenon using dynamically the lightest representation to save computer resources without loss of information. This methodology is based on two mechanisms: (1) the activation or deactivation of agents representing different domain parts of the same phenomenon and (2) the aggregation or disaggregation of agents representing the same phenomenon at different scales."
+    },
+    {
+      "topic": "Multi-agent Orchestration",
+      "provenance": {
+        "title": "Augmenting the action space with conventions to improve multi-agent cooperation in Hanabi",
+        "url": ""
+      },
+      "notes": "The card game Hanabi is considered a strong medium for the testing and development of multi-agent reinforcement learning (MARL) algorithms, due to its cooperative nature, partial observability, limited communication and remarkable complexity. Previous research efforts have explored the capabilities of MARL algorithms within Hanabi, focusing largely on advanced architecture design and algorithmic manipulations to achieve state-of-the-art performance for various number of cooperators. However, this often leads to complex solution strategies with high computational cost and requiring large amounts of training data. For humans to solve the Hanabi game effectively, they require the use of conventions, which often allows for a means to implicitly convey ideas or knowledge based on a predefined, and mutually agreed upon, set of \"rules\" or principles. Multi-agent problems containing partial observability, especially when limited communication is present, can benefit greatly from the use of implicit knowledge sharing. In this paper, we propose a novel approach to augmenting an agent's action space using conventions, which act as a sequence of special cooperative actions that span over and include multiple time steps and multiple agents, requiring agents to actively opt in for it to reach fruition. These conventions are based on existing human conventions, and result in a significant improvement on the performance of existing techniques for self-play and cross-play for various number of cooperators within Hanabi."
+    },
+    {
+      "topic": "Iterative Query Refinement",
+      "provenance": {
+        "title": "Iterative Refinement Improves Compositional Image Generation",
+        "url": ""
+      },
+      "notes": "Text-to-image (T2I) models have achieved remarkable progress, yet they continue to struggle with complex prompts that require simultaneously handling multiple objects, relations, and attributes. Existing inference-time strategies, such as parallel sampling with verifiers or simply increasing denoising steps, can improve prompt alignment but remain inadequate for richly compositional settings where many constraints must be satisfied. Inspired by the success of chain-of-thought reasoning in large language models, we propose an iterative test-time strategy in which a T2I model progressively refines its generations across multiple steps, guided by feedback from a vision-language model as the critic in the loop. Our approach is simple, requires no external tools or priors, and can be flexibly applied to a wide range of image generators and vision-language models. Empirically, we demonstrate consistent gains on image generation across benchmarks: a 16.9% improvement in all-correct rate on ConceptMix (k=7), a 13.8% improvement on T2I-CompBench (3D-Spatial category) and a 12.5% improvement on Visual Jenga scene decomposition compared to compute-matched parallel sampling. Beyond quantitative gains, iterative refinement produces more faithful generations by decomposing complex prompts into sequential corrections, with human evaluators preferring our method 58.7% of the time over 41.3% for the parallel baseline. Together, these findings highlight iterative self-correction as a broadly applicable principle for compositional image generation. Results and visualizations are available at https://iterative-img-gen.github.io/"
+    },
+    {
+      "topic": "Iterative Query Refinement",
+      "provenance": {
+        "title": "Dynamic Adaptive Mesh Refinement for Topology Optimization",
+        "url": ""
+      },
+      "notes": "We present an improved method for topology optimization with both adaptive mesh refinement and derefinement. Since the total volume fraction in topology optimization is usually modest, after a few initial iterations the domain of computation is largely void. Hence, it is inefficient to have many small elements, in such regions, that contribute significantly to the overall computational cost but contribute little to the accuracy of computation and design. At the same time, we want high spatial resolution for accurate three-dimensional designs to avoid postprocessing or interpretation as much as possible. Dynamic adaptive mesh refinement (AMR) offers the possibility to balance these two requirements. We discuss requirements on AMR for topology optimization and the algorithmic features to implement them. The numerical design problems demonstrate (1) that our AMR strategy for topology optimization leads to designs that are equivalent to optimal designs on uniform meshes, (2) how AMR strategies that do not satisfy the postulated requirements may lead to suboptimal designs, and (3) that our AMR strategy significantly reduces the time to compute optimal designs."
+    },
+    {
+      "topic": "Iterative Query Refinement",
+      "provenance": {
+        "title": "Generating Query Recommendations via LLMs",
+        "url": ""
+      },
+      "notes": "Query recommendation systems are ubiquitous in modern search engines, assisting users in producing effective queries to meet their information needs. However, these systems require a large amount of data to produce good recommendations, such as a large collection of documents to index and query logs. In particular, query logs and user data are not available in cold start scenarios. Query logs are expensive to collect and maintain and require complex and time-consuming cascading pipelines for creating, combining, and ranking recommendations. To address these issues, we frame the query recommendation problem as a generative task, proposing a novel approach called Generative Query Recommendation (GQR). GQR uses an LLM as its foundation and does not require to be trained or fine-tuned to tackle the query recommendation problem. We design a prompt that enables the LLM to understand the specific recommendation task, even using a single example. We then improved our system by proposing a version that exploits query logs called Retriever-Augmented GQR (RA-GQR). RA-GQr dynamically composes its prompt by retrieving similar queries from query logs. GQR approaches reuses a pre-existing neural architecture resulting in a simpler and more ready-to-market approach, even in a cold start scenario. Our proposed GQR obtains state-of-the-art performance in terms of NDCG@10 and clarity score against two commercial search engines and the previous state-of-the-art approach on the Robust04 and ClueWeb09B collections, improving on average the NDCG@10 performance up to ~4% on Robust04 and ClueWeb09B w.r.t the previous best competitor. RA-GQR further improve the NDCG@10 obtaining an increase of ~11%, ~6\\% on Robust04 and ClueWeb09B w.r.t the best competitor. Furthermore, our system obtained ~59% of user preferences in a blind user study, proving that our method produces the most engaging queries."
+    },
+    {
+      "topic": "Knowledge Graph Traversal Algorithms",
+      "provenance": {
+        "title": "AI Agent-Driven Framework for Automated Product Knowledge Graph Construction in E-Commerce",
+        "url": ""
+      },
+      "notes": "The rapid expansion of e-commerce platforms generates vast amounts of unstructured product data, creating significant challenges for information retrieval, recommendation systems, and data analytics. Knowledge Graphs (KGs) offer a structured, interpretable format to organize such data, yet constructing product-specific KGs remains a complex and manual process. This paper introduces a fully automated, AI agent-driven framework for constructing product knowledge graphs directly from unstructured product descriptions. Leveraging Large Language Models (LLMs), our method operates in three stages using dedicated agents: ontology creation and expansion, ontology refinement, and knowledge graph population. This agent-based approach ensures semantic coherence, scalability, and high-quality output without relying on predefined schemas or handcrafted extraction rules. We evaluate the system on a real-world dataset of air conditioner product descriptions, demonstrating strong performance in both ontology generation and KG population. The framework achieves over 97\\% property coverage and minimal redundancy, validating its effectiveness and practical applicability. Our work highlights the potential of LLMs to automate structured knowledge extraction in retail, providing a scalable path toward intelligent product data integration and utilization."
+    },
+    {
+      "topic": "Knowledge Graph Traversal Algorithms",
+      "provenance": {
+        "title": "Planar Induced Subgraphs of Sparse Graphs",
+        "url": ""
+      },
+      "notes": "We show that every graph has an induced pseudoforest of at least $n-m/4.5$ vertices, an induced partial 2-tree of at least $n-m/5$ vertices, and an induced planar subgraph of at least $n-m/5.2174$ vertices. These results are constructive, implying linear-time algorithms to find the respective induced subgraphs. We also show that the size of the largest $K_h$-minor-free graph in a given graph can sometimes be at most $n-m/6+o(m)$."
+    },
+    {
+      "topic": "Knowledge Graph Traversal Algorithms",
+      "provenance": {
+        "title": "A Multi-Agent System for Semantic Mapping of Relational Data to Knowledge Graphs",
+        "url": ""
+      },
+      "notes": "Enterprises often maintain multiple databases for storing critical business data in siloed systems, resulting in inefficiencies and challenges with data interoperability. A key to overcoming these challenges lies in integrating disparate data sources, enabling businesses to unlock the full potential of their data. Our work presents a novel approach for integrating multiple databases using knowledge graphs, focusing on the application of large language models as semantic agents for mapping and connecting structured data across systems by leveraging existing vocabularies. The proposed methodology introduces a semantic layer above tables in relational databases, utilizing a system comprising multiple LLM agents that map tables and columns to Schema.org terms. Our approach achieves a mapping accuracy of over 90% in multiple domains."
+    },
+    {
+      "topic": "Community Summary Indexing",
+      "provenance": {
+        "title": "OMICtools: a community-driven search engine for biological data analysis",
+        "url": ""
+      },
+      "notes": "With high-throughput biotechnologies generating unprecedented quantities of data, researchers are faced with the challenge of locating and comparing an exponentially growing number of programs and websites dedicated to computational biology, in order to maximize the potential of their data. OMICtools is designed to meet this need with its open-access search engine offering an easy means of locating the right tools corresponding to each researcher and their specific biological data analyses. The OMICtools website (https://OMICtools.com) centralizes more than 18,500 software tools and databases, manually classified, by a team of biocurators including many scientific experts. Key information, a direct link, and access to discussions and evaluations by the biomedical community are provided for each tool. Anyone can join the OMICtools community and create a profile page, to share their expertise and comment on tools. In addition, developers can directly upload their code versions which are registered for identification and citation in scientific publications, improving research traceability. The OMICtools community links thousands of life scientists and developers worldwide, who use this bioinformatics platform to accelerate their projects and biological data analyses."
+    },
+    {
+      "topic": "Community Summary Indexing",
+      "provenance": {
+        "title": "Summary Report for Snowmass Community Engagement Frontier Topical Group 06: Public Policy &amp; Government Engagement",
+        "url": ""
+      },
+      "notes": "This document is the Snowmass summary report for the Public Policy &amp; Government Engagement topical group within the Community Engagement Frontier. This report discusses how the U.S. High Energy Physics (HEP) community currently engages with government at all levels and provides recommendations for how the execution of these actives can be improved and for how the scope of existing activities can be expanded. This includes the current HEP Congressional government engagement \"DC trip\", materials produced for communication with government officials, government engagement in areas other than HEP funding, and interactions with the funding agencies, Executive Office of the President, and state and local governments."
+    },
+    {
+      "topic": "Community Summary Indexing",
+      "provenance": {
+        "title": "Conference Summary",
+        "url": ""
+      },
+      "notes": "Conference Summary at FPCP04"
+    },
+    {
+      "topic": "Hybrid Search Integration",
+      "provenance": {
+        "title": "Symmetries and periodic orbits in simple hybrid Routhian systems",
+        "url": ""
+      },
+      "notes": "Symmetries are ubiquitous in a wide range of nonlinear systems. Particularly in systems whose dynamics are determined by a Lagrangian or Hamiltonian function. For hybrid systems which possess a continuous-time dynamics determined by a Lagrangian function, with a cyclic variable, the degrees of freedom for the corresponding hybrid Lagrangian system can be reduced by means of a method known as \\textit{hybrid Routhian reduction}. In this paper we study sufficient conditions for the existence of periodic orbits in hybrid Routhian systems which also exhibit time-reversal symmetry. Likewise, we explore some stability aspects of such orbits through the characterization of the eigenvalues for the corresponding linearized Poincaré map. Finally, we apply the results to find periodic solutions in underactuated hybrid Routhian control systems."
+    },
+    {
+      "topic": "Hybrid Search Integration",
+      "provenance": {
+        "title": "Dynamics of Controlled Hybrid Systems of Aerial Cable-Ways",
+        "url": ""
+      },
+      "notes": "Dynamics of the hybrid systems of aerial cable-ways is investigated. The eigenvalue problems are considered for such hybrid systems with different assumptions. An overview of different methods for eigenvalue problems is given. In the research, the method of the normal fundamental systems is applied, which turns out to be very effective for the considered problems. Changes of dynamical characteristics of the systems depending on the controlled parameter are studied."
+    },
+    {
+      "topic": "Hybrid Search Integration",
+      "provenance": {
+        "title": "A Case-Driven Multi-Agent Framework for E-Commerce Search Relevance",
+        "url": ""
+      },
+      "notes": "Relevance is a foundation of user experience in e-commerce search. We view relevance optimization as a closed-loop ecosystem involving multiple human roles: users who provide feedback, product managers who define standards, annotators who label data, algorithm engineers who optimize models, and evaluators who assess performance. Because improving relevance in practice means systematically resolving user-perceived bad cases, we ask a system-level question: can this ecosystem be reimagined by replacing its human roles with autonomous agents? To answer this question, we propose a case-driven multi-agent framework that automates the pipeline from bad-case identification to resolution. The framework instantiates an Annotator Agent for multi-turn annotation, an Optimizer Agent for autonomous bad-case analysis and resolution, and a User Agent that identifies bad cases through conversational interaction, together forming an autonomous and continually evolving system. To make the framework practical in production, we further adopt a harness-engineering paradigm and build a unified retrieval-and-ranking relevance model for efficient training, an instruction-following relevance model for real-time case resolution, Global Memory to reduce information asymmetry across agents, a Deep Search Agent to target underestimation failures, and an agent-based chatbot for human--agent collaboration. Extensive human evaluation shows that the framework performs relevance-related tasks effectively, improves annotation accuracy, and enables more timely and generalizable bad-case resolution, indicating a practical paradigm for industrial search relevance optimization."
+    },
+    {
+      "topic": "Context Window Management",
+      "provenance": {
+        "title": "Exploiting Context to Identify Lexical Atoms -- A Statistical View of Linguistic Context",
+        "url": ""
+      },
+      "notes": "Interpretation of natural language is inherently context-sensitive. Most words in natural language are ambiguous and their meanings are heavily dependent on the linguistic context in which they are used. The study of lexical semantics can not be separated from the notion of context. This paper takes a contextual approach to lexical semantics and studies the linguistic context of lexical atoms, or \"sticky\" phrases such as \"hot dog\". Since such lexical atoms may occur frequently in unrestricted natural language text, recognizing them is crucial for understanding naturally-occurring text. The paper proposes several heuristic approaches to exploiting the linguistic context to identify lexical atoms from arbitrary natural language text."
+    },
+    {
+      "topic": "Context Window Management",
+      "provenance": {
+        "title": "Towards Adaptive Context Management for Intelligent Conversational Question Answering",
+        "url": ""
+      },
+      "notes": "This particular paper introduces an Adaptive Context Management (ACM) framework for the Conversational Question Answering (ConvQA) systems. The key objective of the ACM framework is to optimize the use of the conversation history by dynamically managing context for maximizing the relevant information provided to a ConvQA model within its token limit. Our approach incorporates a Context Manager (CM) Module, a Summarization (SM) Module, and an Entity Extraction (EE) Module in a bid to handle the conversation history efficaciously. The CM Module dynamically adjusts the context size, thereby preserving the most relevant and recent information within a model's token limit. The SM Module summarizes the older parts of the conversation history via a sliding window. When the summarization window exceeds its limit, the EE Module identifies and retains key entities from the oldest conversation turns. Experimental results demonstrate the effectiveness of our envisaged framework in generating accurate and contextually appropriate responses, thereby highlighting the potential of the ACM framework to enhance the robustness and scalability of the ConvQA systems."
+    },
+    {
+      "topic": "Context Window Management",
+      "provenance": {
+        "title": "Impacts of National Cultures on Managerial Decisions of Engaging in Core Earnings Management",
+        "url": ""
+      },
+      "notes": "This study investigates the impact of Hofstede's cultural dimensions on abnormal core earnings management in multiple national cultural contexts. We employ an Ordinary Least Squares (OLS) regression model with abnormal core earnings as the dependent variable. The independent variables analyzed include Hofstede's dimensions: Power Distance Index (PDI), Individualism (IDV), Masculinity (MAS), and Uncertainty Avoidance Index (UAI). Our findings reveal that individualism is positively associated with abnormal core earnings, suggesting that cultures characterized by high individualism may encourage practices that inflate earnings due to the prominence of personal achievement and rewards. In contrast, masculinity negatively correlates with abnormal core earnings, indicating that the risk-taking attributes associated with masculine cultures may deter earnings management. Interestingly, uncertainty avoidance is positively linked to abnormal core earnings, supporting the notion that managers tend to engage more in earnings management to minimize fluctuations in financial reports in cultures with high uncertainty avoidance. The relationship between power distance and abnormal core earnings is found to be non-significant, indicating no substantial effect in this context. These findings contribute to the literature on cultural influences in financial reporting, providing valuable insights for policymakers and multinational firms concerning the cultural contexts within which financial decisions and reporting occur."
+    },
+    {
+      "topic": "Reasoning-and-Acting (ReAct) Loops",
+      "provenance": {
+        "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+        "url": ""
+      },
+      "notes": "While large language models (LLMs) have demonstrated impressive capabilities across tasks in language understanding and interactive decision making, their abilities for reasoning (e.g. chain-of-thought prompting) and acting (e.g. action plan generation) have primarily been studied as separate topics. In this paper, we explore the use of LLMs to generate both reasoning traces and task-specific actions in an interleaved manner, allowing for greater synergy between the two: reasoning traces help the model induce, track, and update action plans as well as handle exceptions, while actions allow it to interface with external sources, such as knowledge bases or environments, to gather additional information. We apply our approach, named ReAct, to a diverse set of language and decision making tasks and demonstrate its effectiveness over state-of-the-art baselines, as well as improved human interpretability and trustworthiness over methods without reasoning or acting components. Concretely, on question answering (HotpotQA) and fact verification (Fever), ReAct overcomes issues of hallucination and error propagation prevalent in chain-of-thought reasoning by interacting with a simple Wikipedia API, and generates human-like task-solving trajectories that are more interpretable than baselines without reasoning traces. On two interactive decision making benchmarks (ALFWorld and WebShop), ReAct outperforms imitation and reinforcement learning methods by an absolute success rate of 34% and 10% respectively, while being prompted with only one or two in-context examples. Project site with code: https://react-lm.github.io"
+    },
+    {
+      "topic": "Reasoning-and-Acting (ReAct) Loops",
+      "provenance": {
+        "title": "On the road to percent accuracy IV: ReACT -- computing the non-linear power spectrum beyond $Λ$CDM",
+        "url": ""
+      },
+      "notes": "To effectively exploit large-scale structure surveys, we depend on accurate and reliable predictions of non-linear cosmological structure formation. Tools for efficient and comprehensive computational modelling are therefore essential to perform cosmological parameter inference analyses. We present the public software package ReACT, demonstrating its capability for the fast and accurate calculation of non-linear power spectra from non-standard physics. We showcase ReACT through a series of analyses on the DGP and $f(R)$ gravity models, adopting LSST-like cosmic shear power spectra. Accurate non-linear modelling with ReACT has the potential to more than double LSST's constraining power on the $f(R)$ parameter, in contrast to an analysis that is limited to the quasi-linear regime. We find that ReACT is sufficiently robust for the inference of consistent constraints on theories beyond $Λ$CDM for current and ongoing surveys. With further improvement, particularly in terms of the accuracy of the non-linear $Λ$CDM power spectrum, ReACT can, in principle, meet the accuracy requirements for future surveys such as Euclid and LSST."
+    },
+    {
+      "topic": "Reasoning-and-Acting (ReAct) Loops",
+      "provenance": {
+        "title": "GEM: Graph-Enhanced Mixture-of-Experts with ReAct Agents for Dialogue State Tracking",
+        "url": ""
+      },
+      "notes": "Dialogue State Tracking (DST) requires precise extraction of structured information from multi-domain conversations, a task where Large Language Models (LLMs) struggle despite their impressive general capabilities. We present GEM (Graph-Enhanced Mixture-of-Experts), a novel framework that combines language models and graph-structured dialogue understanding with ReAct agent-based reasoning for superior DST performance. Our approach dynamically routes between specialized experts: a Graph Neural Network that captures dialogue structure and turn-level dependencies, and a finetuned T5-Small encoder-decoder for sequence modeling, coordinated by an intelligent router. For complex value generation tasks, we integrate ReAct agents that perform structured reasoning over dialogue context. On MultiWOZ 2.2, GEM achieves 65.19% Joint Goal Accuracy, substantially outperforming end-to-end LLM approaches (best: 38.43%) and surpassing state-of-the-art (SOTA) methods including TOATOD (63.79%), D3ST (58.70%), and Diable (56.48%). Our graph-enhanced mixture-of-experts architecture with ReAct integration demonstrates that combining structured dialogue representation with dynamic expert routing and agent-based reasoning provides a powerful paradigm for dialogue state tracking, achieving superior accuracy while maintaining computational efficiency through selective expert activation."
+    },
+    {
+      "topic": "Graph-based Tool Use",
+      "provenance": {
+        "title": "AIRCC-Clim: a user-friendly tool for generating regional probabilistic climate change scenarios and risk measures",
+        "url": ""
+      },
+      "notes": "Complex physical models are the most advanced tools available for producing realistic simulations of the climate system. However, such levels of realism imply high computational cost and restrictions on their use for policymaking and risk assessment. Two central characteristics of climate change are uncertainty and that it is a dynamic problem in which international actions can significantly alter climate projections and information needs, including partial and full compliance of global climate goals. Here we present AIRCC-Clim, a simple climate model emulator that produces regional probabilistic climate change projections of monthly and annual temperature and precipitation, as well as risk measures, based both on standard and user-defined emissions scenarios for six greenhouse gases. AIRCC-Clim emulates 37 atmosphere-ocean coupled general circulation models with low computational and technical requirements for the user. This standalone, user-friendly software is designed for a variety of applications including impact assessments, climate policy evaluation and integrated assessment modelling."
+    },
+    {
+      "topic": "Graph-based Tool Use",
+      "provenance": {
+        "title": "ZeroLeak: Using LLMs for Scalable and Cost Effective Side-Channel Patching",
+        "url": ""
+      },
+      "notes": "Security critical software, e.g., OpenSSL, comes with numerous side-channel leakages left unpatched due to a lack of resources or experts. The situation will only worsen as the pace of code development accelerates, with developers relying on Large Language Models (LLMs) to automatically generate code. In this work, we explore the use of LLMs in generating patches for vulnerable code with microarchitectural side-channel leakages. For this, we investigate the generative abilities of powerful LLMs by carefully crafting prompts following a zero-shot learning approach. All generated code is dynamically analyzed by leakage detection tools, which are capable of pinpointing information leakage at the instruction level leaked either from secret dependent accesses or branches or vulnerable Spectre gadgets, respectively. Carefully crafted prompts are used to generate candidate replacements for vulnerable code, which are then analyzed for correctness and for leakage resilience. From a cost/performance perspective, the GPT4-based configuration costs in API calls a mere few cents per vulnerability fixed. Our results show that LLM-based patching is far more cost-effective and thus provides a scalable solution. Finally, the framework we propose will improve in time, especially as vulnerability detection tools and LLMs mature."
+    },
+    {
+      "topic": "Graph-based Tool Use",
+      "provenance": {
+        "title": "FastSpec: Scalable Generation and Detection of Spectre Gadgets Using Neural Embeddings",
+        "url": ""
+      },
+      "notes": "Several techniques have been proposed to detect vulnerable Spectre gadgets in widely deployed commercial software. Unfortunately, detection techniques proposed so far rely on hand-written rules which fall short in covering subtle variations of known Spectre gadgets as well as demand a huge amount of time to analyze each conditional branch in software. Moreover, detection tool evaluations are based only on a handful of these gadgets, as it requires arduous effort to craft new gadgets manually. In this work, we employ both fuzzing and deep learning techniques to automate the generation and detection of Spectre gadgets. We first create a diverse set of Spectre-V1 gadgets by introducing perturbations to the known gadgets. Using mutational fuzzing, we produce a data set with more than 1 million Spectre-V1 gadgets which is the largest Spectre gadget data set built to date. Next, we conduct the first empirical usability study of Generative Adversarial Networks (GANs) in the context of assembly code generation without any human interaction. We introduce SpectreGAN which leverages masking implementation of GANs for both learning the gadget structures and generating new gadgets. This provides the first scalable solution to extend the variety of Spectre gadgets. Finally, we propose FastSpec which builds a classifier with the generated Spectre gadgets based on a novel high dimensional Neural Embeddings technique (BERT). For the case studies, we demonstrate that FastSpec discovers potential gadgets with a high success rate in OpenSSL libraries and Phoronix benchmarks. Further, FastSpec offers much greater flexibility and time-related performance gain compared to the existing tools and therefore can be used for gadget detection in large-scale software."
+    }
+  ]
+}

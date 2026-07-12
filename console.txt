@@ -1,0 +1,180 @@
+
+  console.log(
+    freeModels.map(m => m.id)
+  );
+
+
+        console.log("REQUEST RECEIVED");
+
+        const { query } = req.body;
+        const runId = crypto.randomUUID();
+        const runtime = getResearchRuntime();
+
+        console.log("QUERY:", query);
+
+        const execution = await runtime.execute(query, {
+            workflowId: runId
+        });
+        console.log(
+            "WORKFLOW GRAPH:",
+            JSON.stringify(execution.graph, null, 2)
+        );
+
+        const { topics, evidence, report } = execution;
+        const timestamp = new Date().toISOString();
+
+        console.log("WORKFLOW SUMMARY:", execution.summary);
+
+
+catch (err) {
+        console.log("CONTROLLER ERROR");
+        console.log(err);
+
+        res.status(500).json({
+            error: "Failed"
+        });
+
+     console.log("CONTROLLER ERROR");
+        console.log(err);
+
+	console.log("\n========= MEMORY =========");
+	console.log(memory.map(m => m.provenance.title));
+	console.log("==========================\n");
+
+
+
+		console.log(`
+		SCHEDULER SUMMARY
+		-----------------
+		Queued: ${metrics.queued}
+		Running: ${metrics.running}
+		Completed: ${metrics.completed}
+		Failed: ${metrics.failed}
+		`);
+
+
+
+            console.log(
+                "INSERTING AGENT:",
+                record.agentId
+            );
+
+	console.log("WORKFLOW RECORD:");
+		console.dir(record, { depth: null });
+
+
+		console.log(`Evidence synthesis failed for topic: ${topic}`);
+		console.log(err.response?.data || err.message);
+
+
+		console.log("Planner LLM failed.");
+		console.log("Using keyword fallback.");
+
+
+ console.log("Academic search arXiv failed");
+        console.log(err.message);
+    }
+
+    try {
+        const semanticScholarResults = await searchSemanticScholar(query);
+        if (semanticScholarResults.length > 0) {
+            return semanticScholarResults;
+        }
+    } catch (err) {
+        console.log("Academic search Semantic Scholar failed");
+        console.log(err.message);
+    }
+
+    try {
+        return await searchOpenAlex(query);
+    } catch (err) {
+        console.log("Academic search OpenAlex failed");
+        console.log(err.message);
+        return [];
+    }
+
+ console.log("Fact search Wikipedia failed");
+        console.log(err.message);
+    }
+
+    try {
+        const wikidataResults = await searchWikidata(query);
+        if (wikidataResults.length > 0) {
+            return wikidataResults;
+        }
+    } catch (err) {
+        console.log("Fact search Wikidata failed");
+        console.log(err.message);
+    }
+
+
+} catch (err) {
+        console.log("Tech search GitHub failed");
+        console.log(err.message);
+    }
+
+    try {
+        const papersWithCodeResults = await searchPapersWithCode(query);
+        if (papersWithCodeResults.length > 0) {
+            return papersWithCodeResults;
+        }
+    } catch (err) {
+        console.log("Tech search Papers With Code failed");
+        console.log(err.message);
+    }
+
+    try {
+        return await searchAcademic(query);
+    } catch (err) {
+        console.log("Tech search academic fallback failed");
+        console.log(err.message);
+        return [];
+
+for (const model of MODELS) {
+		try {
+			console.log(`${stage} Model Attempt: ${model}`);
+			const response = await axios.post(
+				"https://openrouter.ai/api/v1/chat/completions",
+				{
+					model,
+					messages: [
+						{
+							role: "user",
+							content: prompt
+						}
+					]
+				},
+				{
+					headers: {
+						Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`
+					}
+				}
+			);
+
+			console.log(`${stage} Model Used: ${model}`);
+			return response.data.choices[0].message.content;
+		} catch (err) {
+			lastError = err;
+			console.log(`${stage} Model Failed: ${model}`);
+			console.log(err.response?.data || err.message);
+		}
+	}
+
+	throw lastError || new Error("All models failed");
+}
+
+async function callJsonOpenRouter(prompt, options = {}) {
+	const content = await callOpenRouter(prompt, options);
+	const jsonText = extractJsonBlock(content);
+
+	return JSON.parse(jsonText);
+}
+
+module.exports = {
+	callOpenRouter,
+	callJsonOpenRouter,
+	extractJsonBlock,
+	stripCodeFences
+};
+
+

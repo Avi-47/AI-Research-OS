@@ -1,0 +1,14 @@
+{
+  "runId": "0ecbf10e-b1a0-433f-a457-16788a583f4d",
+  "timestamp": "2026-06-24T13:14:52.965Z",
+  "topics": [
+    "Magnitude Pruning",
+    "Structured Pruning",
+    "Lottery Ticket Hypothesis",
+    "Taylor Coefficient Pruning",
+    "SNIP",
+    "GraSP",
+    "Synflow",
+    "Deep Compression"
+  ]
+}

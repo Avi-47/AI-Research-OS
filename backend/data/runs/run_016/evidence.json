@@ -1,0 +1,326 @@
+{
+  "runId": "59b88da9-36ce-46cb-a6f6-49b41a549c14",
+  "timestamp": "2026-06-24T12:30:09.507Z",
+  "evidence": [
+    {
+      "topic": "Unstructured Pruning",
+      "provenance": {
+        "title": "Personalized Federated Learning by Structured and Unstructured Pruning under Data Heterogeneity",
+        "url": "https://doi.org/10.1109/icdcsw53096.2021.00012"
+      },
+      "notes": "Source: OpenAlex (2021), cited by 82"
+    },
+    {
+      "topic": "Unstructured Pruning",
+      "provenance": {
+        "title": "Structured Compression by Weight Encryption for Unstructured Pruning and Quantization",
+        "url": "https://doi.org/10.1109/cvpr42600.2020.00198"
+      },
+      "notes": "Source: OpenAlex (2020), cited by 47"
+    },
+    {
+      "topic": "Unstructured Pruning",
+      "provenance": {
+        "title": "Digital Predistortion of LTE-A Power Amplifiers Using Compressed-Sampling-Based Unstructured Pruning of Volterra Series",
+        "url": "https://doi.org/10.1109/tmtt.2014.2360845"
+      },
+      "notes": "Source: IEEE Transactions on Microwave Theory and Techniques (2014), cited by 81"
+    },
+    {
+      "topic": "Structured Pruning",
+      "provenance": {
+        "title": "Structured Pruning of Deep Convolutional Neural Networks",
+        "url": "https://doi.org/10.1145/3005348"
+      },
+      "notes": "Provides a survey on structured pruning specifically for deep convolutional neural networks."
+    },
+    {
+      "topic": "Structured Pruning",
+      "provenance": {
+        "title": "Structured Pruning of Deep Convolutional Neural Networks",
+        "url": "https://doi.org/10.1145/3005348"
+      },
+      "notes": "Introduces an automatic framework for structured pruning of DNNs aimed at achieving ultra-high compression rates."
+    },
+    {
+      "topic": "Structured Pruning",
+      "provenance": {
+        "title": "Structured Pruning of Deep Convolutional Neural Networks",
+        "url": "https://doi.org/10.1145/3005348"
+      },
+      "notes": "Discusses the application of structured pruning techniques to large language models."
+    },
+    {
+      "topic": "Structured Pruning",
+      "provenance": {
+        "title": "Structured Pruning of Deep Convolutional Neural Networks",
+        "url": "https://doi.org/10.1145/3005348"
+      },
+      "notes": "Explores the use of structured pruning on a BERT-based model for question answering tasks."
+    },
+    {
+      "topic": "Magnitude Pruning",
+      "provenance": {
+        "title": "Pruning Filters for Efficient ConvNets",
+        "url": "http://arxiv.org/abs/1608.08710"
+      },
+      "notes": "Discusses the pruning of filters to create more efficient Convolutional Neural Networks."
+    },
+    {
+      "topic": "Magnitude Pruning",
+      "provenance": {
+        "title": "Pruning Filters for Efficient ConvNets",
+        "url": "http://arxiv.org/abs/1608.08710"
+      },
+      "notes": "Introduces Accelerated Iterative Magnitude Pruning to increase the speed of the pruning process."
+    },
+    {
+      "topic": "Magnitude Pruning",
+      "provenance": {
+        "title": "Pruning Filters for Efficient ConvNets",
+        "url": "http://arxiv.org/abs/1608.08710"
+      },
+      "notes": "Explores the use of layer-adaptive sparsity within magnitude-based pruning frameworks."
+    },
+    {
+      "topic": "Magnitude Pruning",
+      "provenance": {
+        "title": "Pruning Filters for Efficient ConvNets",
+        "url": "http://arxiv.org/abs/1608.08710"
+      },
+      "notes": "Applies iterative magnitude pruning to AlexNet for the specific task of skin cancer classification."
+    },
+    {
+      "topic": "Magnitude Pruning",
+      "provenance": {
+        "title": "Pruning Filters for Efficient ConvNets",
+        "url": "http://arxiv.org/abs/1608.08710"
+      },
+      "notes": "Conducts a case study on global magnitude pruning to evaluate if high complexity is necessary for neural network pruning."
+    },
+    {
+      "topic": "Weight-based Pruning",
+      "provenance": {
+        "title": "Gradient-based learning applied to document recognition",
+        "url": "https://doi.org/10.1109/5.726791"
+      },
+      "notes": "A highly cited foundational work on gradient-based learning and document recognition published in 1998."
+    },
+    {
+      "topic": "Weight-based Pruning",
+      "provenance": {
+        "title": "Gradient-based learning applied to document recognition",
+        "url": "https://doi.org/10.1109/5.726791"
+      },
+      "notes": "Discusses pruning CNNs to achieve more resource-efficient inference."
+    },
+    {
+      "topic": "Weight-based Pruning",
+      "provenance": {
+        "title": "Gradient-based learning applied to document recognition",
+        "url": "https://doi.org/10.1109/5.726791"
+      },
+      "notes": "Focuses on the structured pruning of deep convolutional neural networks."
+    },
+    {
+      "topic": "Weight-based Pruning",
+      "provenance": {
+        "title": "Gradient-based learning applied to document recognition",
+        "url": "https://doi.org/10.1109/5.726791"
+      },
+      "notes": "Explores pattern-based weight pruning for real-time DNN execution on mobile hardware."
+    },
+    {
+      "topic": "Weight-based Pruning",
+      "provenance": {
+        "title": "Gradient-based learning applied to document recognition",
+        "url": "https://doi.org/10.1109/5.726791"
+      },
+      "notes": "Discusses the Optimal Brain Surgeon method and general network pruning techniques."
+    },
+    {
+      "topic": "Activation-based Pruning",
+      "provenance": {
+        "title": "Gradient-based learning applied to document recognition",
+        "url": "https://doi.org/10.1109/5.726791"
+      },
+      "notes": "Research published in 2024 focusing specifically on activation-based pruning of neural networks."
+    },
+    {
+      "topic": "Activation-based Pruning",
+      "provenance": {
+        "title": "Gradient-based learning applied to document recognition",
+        "url": "https://doi.org/10.1109/5.726791"
+      },
+      "notes": "Introduces HRel, a filter pruning method based on the relevance between class labels and activation maps."
+    },
+    {
+      "topic": "Activation-based Pruning",
+      "provenance": {
+        "title": "Gradient-based learning applied to document recognition",
+        "url": "https://doi.org/10.1109/5.726791"
+      },
+      "notes": "Presents a data-driven neuron pruning approach known as Network Trimming for creating efficient deep architectures."
+    },
+    {
+      "topic": "Activation-based Pruning",
+      "provenance": {
+        "title": "Gradient-based learning applied to document recognition",
+        "url": "https://doi.org/10.1109/5.726791"
+      },
+      "notes": "Discusses the pruning of Convolutional Neural Networks to achieve more resource-efficient inference."
+    },
+    {
+      "topic": "SparseGPT",
+      "provenance": {
+        "title": "SparseGPT: Massive Language Models Can Be Accurately Pruned in One-Shot",
+        "url": "http://arxiv.org/abs/2301.00774"
+      },
+      "notes": "Presents a method for accurately pruning massive language models in a one-shot process."
+    },
+    {
+      "topic": "SparseGPT",
+      "provenance": {
+        "title": "SparseGPT: Massive Language Models Can Be Accurately Pruned in One-Shot",
+        "url": "http://arxiv.org/abs/2301.00774"
+      },
+      "notes": "Provides a more refined analysis of the complexity associated with SparseGPT."
+    },
+    {
+      "topic": "SparseGPT",
+      "provenance": {
+        "title": "SparseGPT: Massive Language Models Can Be Accurately Pruned in One-Shot",
+        "url": "http://arxiv.org/abs/2301.00774"
+      },
+      "notes": "Introduces ROSE as a reordered version of SparseGPT to improve the accuracy of one-shot LLM pruning."
+    },
+    {
+      "topic": "Wanda",
+      "provenance": {
+        "title": "WANDA",
+        "url": "https://doi.org/10.1145/2448096.2448105"
+      },
+      "notes": "Wanda serves as a database specifically for duplicated fish genes."
+    },
+    {
+      "topic": "Wanda",
+      "provenance": {
+        "title": "WANDA",
+        "url": "https://doi.org/10.1145/2448096.2448105"
+      },
+      "notes": "Wanda is a system used for the secure introduction of mobile devices."
+    },
+    {
+      "topic": "Wanda",
+      "provenance": {
+        "title": "WANDA",
+        "url": "https://doi.org/10.1145/2448096.2448105"
+      },
+      "notes": "The Wanda Measurement Tool is utilized in the field of forensic document examination."
+    },
+    {
+      "topic": "Wanda",
+      "provenance": {
+        "title": "WANDA",
+        "url": "https://doi.org/10.1145/2448096.2448105"
+      },
+      "notes": "The Wanda site in Soroako, South Sulawesi, Indonesia, provides data on environmental changes during the Late Pleistocene and later Holocene."
+    },
+    {
+      "topic": "Iterative Pruning",
+      "provenance": {
+        "title": "An iterative pruning algorithm for feedforward neural networks",
+        "url": "https://doi.org/10.1109/72.572092"
+      },
+      "notes": "Focuses on channel pruning to increase the acceleration of very deep neural networks."
+    },
+    {
+      "topic": "Iterative Pruning",
+      "provenance": {
+        "title": "An iterative pruning algorithm for feedforward neural networks",
+        "url": "https://doi.org/10.1109/72.572092"
+      },
+      "notes": "Proposes a method for pruning neural networks that does not require data by conserving synaptic flow."
+    },
+    {
+      "topic": "Iterative Pruning",
+      "provenance": {
+        "title": "An iterative pruning algorithm for feedforward neural networks",
+        "url": "https://doi.org/10.1109/72.572092"
+      },
+      "notes": "Uses iterative pruning to incorporate multiple tasks into a single neural network."
+    },
+    {
+      "topic": "Iterative Pruning",
+      "provenance": {
+        "title": "An iterative pruning algorithm for feedforward neural networks",
+        "url": "https://doi.org/10.1109/72.572092"
+      },
+      "notes": "Combines efficiency distillation and iterative pruning for image super-resolution tasks."
+    },
+    {
+      "topic": "Knowledge Distillation for Pruning",
+      "provenance": {
+        "title": "Sequence-Level Knowledge Distillation",
+        "url": "https://doi.org/10.18653/v1/d16-1139"
+      },
+      "notes": "Proposes the combination of weight pruning and knowledge distillation to achieve CNN compression."
+    },
+    {
+      "topic": "Knowledge Distillation for Pruning",
+      "provenance": {
+        "title": "Sequence-Level Knowledge Distillation",
+        "url": "https://doi.org/10.18653/v1/d16-1139"
+      },
+      "notes": "Explores the joint use of structured pruning and dense knowledge distillation for the compression of transformer models."
+    },
+    {
+      "topic": "Knowledge Distillation for Pruning",
+      "provenance": {
+        "title": "Sequence-Level Knowledge Distillation",
+        "url": "https://doi.org/10.18653/v1/d16-1139"
+      },
+      "notes": "Presents a method for model compression using a sequential approach of knowledge distillation followed by pruning."
+    },
+    {
+      "topic": "Knowledge Distillation for Pruning",
+      "provenance": {
+        "title": "Sequence-Level Knowledge Distillation",
+        "url": "https://doi.org/10.18653/v1/d16-1139"
+      },
+      "notes": "Introduces a category-aware framework combining distillation and pruning for lightweight 3D object detection."
+    },
+    {
+      "topic": "Lottery Ticket Hypothesis",
+      "provenance": {
+        "title": "The Lottery Ticket Hypothesis: Finding Sparse, Trainable Neural Networks",
+        "url": "http://arxiv.org/abs/1803.03635"
+      },
+      "notes": "Introduces the hypothesis regarding finding sparse, trainable neural networks."
+    },
+    {
+      "topic": "Lottery Ticket Hypothesis",
+      "provenance": {
+        "title": "The Lottery Ticket Hypothesis: Finding Sparse, Trainable Neural Networks",
+        "url": "http://arxiv.org/abs/1803.03635"
+      },
+      "notes": "Research focused on the stabilization of the Lottery Ticket Hypothesis."
+    },
+    {
+      "topic": "Lottery Ticket Hypothesis",
+      "provenance": {
+        "title": "The Lottery Ticket Hypothesis: Finding Sparse, Trainable Neural Networks",
+        "url": "http://arxiv.org/abs/1803.03635"
+      },
+      "notes": "Applies the Lottery Ticket Hypothesis to personalized and communication-efficient federated learning on non-IID datasets."
+    },
+    {
+      "topic": "Lottery Ticket Hypothesis",
+      "provenance": {
+        "title": "The Lottery Ticket Hypothesis: Finding Sparse, Trainable Neural Networks",
+        "url": "http://arxiv.org/abs/1803.03635"
+      },
+      "notes": "Investigates the proof of the hypothesis, suggesting that pruning is the primary mechanism."
+    }
+  ]
+}

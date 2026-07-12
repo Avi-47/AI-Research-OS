@@ -1,0 +1,44 @@
+{
+  "runId": "cdaffe2c-31e0-487a-99b7-c073dce46c8f",
+  "timestamp": "2026-06-15T11:59:32.265Z",
+  "query": "Compare transformer pruning techniques",
+  "topics": [
+    "SparseGPT",
+    "Wanda"
+  ],
+  "evidence": [
+    {
+      "topic": "SparseGPT",
+      "provenance": {
+        "title": "Arxiv Result",
+        "url": "https://arxiv.org/abs/1234.5678"
+      },
+      "notes": "Evidence from paper one"
+    },
+    {
+      "topic": "SparseGPT",
+      "provenance": {
+        "title": "Arxiv Result",
+        "url": "https://arxiv.org/abs/1234.5678"
+      },
+      "notes": "Evidence from paper two"
+    },
+    {
+      "topic": "Wanda",
+      "provenance": {
+        "title": "Arxiv Result",
+        "url": "https://arxiv.org/abs/1234.5678"
+      },
+      "notes": "Evidence from paper one"
+    },
+    {
+      "topic": "Wanda",
+      "provenance": {
+        "title": "Arxiv Result",
+        "url": "https://arxiv.org/abs/1234.5678"
+      },
+      "notes": "Evidence from paper two"
+    }
+  ],
+  "report": "# Report\n\n## Executive Summary\nBody.\n\n## Introduction\nIntro.\n\n## Findings\nFindings.\n\n## Comparative Analysis\nCompare.\n\n## Conclusion\nDone.\n\n## References\n\n- [Arxiv Result](https://arxiv.org/abs/1234.5678) - SparseGPT"
+}

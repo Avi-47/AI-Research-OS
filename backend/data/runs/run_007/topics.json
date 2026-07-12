@@ -1,0 +1,16 @@
+{
+  "runId": "0c44b8ac-0f67-4410-ac4b-f37831e9172a",
+  "timestamp": "2026-06-19T12:42:08.121Z",
+  "topics": [
+    "Structured Pruning",
+    "Unstructured Pruning",
+    "Magnitude Pruning",
+    "Weight-Saliency Analysis",
+    "Knowledge Distillation",
+    "Low-Rank Approximation",
+    "SparseGPT",
+    "Wanda",
+    "Iterative Pruning",
+    "Lottery Ticket Hypothesis"
+  ]
+}

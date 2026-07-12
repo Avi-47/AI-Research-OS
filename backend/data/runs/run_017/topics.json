@@ -1,0 +1,16 @@
+{
+  "runId": "aaa7fc6c-aa48-44ae-866b-5f81a1720b11",
+  "timestamp": "2026-06-24T12:54:22.962Z",
+  "topics": [
+    "Magnitude Pruning",
+    "Structured Pruning",
+    "Unstructured Pruning",
+    "SparseGPT",
+    "Wanda",
+    "Movement Pruning",
+    "Lottery Ticket Hypothesis",
+    "Knowledge Distillation",
+    "Weight-based Sparsity",
+    "Activation-based Sparsity"
+  ]
+}

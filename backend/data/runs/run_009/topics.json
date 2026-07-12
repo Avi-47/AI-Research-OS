@@ -1,0 +1,16 @@
+{
+  "runId": "b6e399f6-12f7-4881-b21d-f91cd235a29c",
+  "timestamp": "2026-06-19T13:44:47.942Z",
+  "topics": [
+    "Structured Pruning",
+    "Unstructured Pruning",
+    "Magnitude Pruning",
+    "Movement Pruning",
+    "Weight-based Pruning",
+    "Activation-based Pruning",
+    "Knowledge Distillation for Pruning",
+    "Lottery Ticket Hypothesis",
+    "SparseGPT",
+    "Wanda"
+  ]
+}

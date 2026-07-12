@@ -1,0 +1,16 @@
+{
+  "runId": "0fdce1ed-2d33-47bb-9ebc-b3665e82805b",
+  "timestamp": "2026-06-22T12:53:01.207Z",
+  "topics": [
+    "Magnitude Pruning",
+    "Structured Pruning",
+    "Unstructured Pruning",
+    "Iterative Pruning",
+    "Lottery Ticket Hypothesis",
+    "Dynamic Pruning",
+    "Pruning During Training",
+    "Pruning After Fine‑Tuning",
+    "Pruning Schedules",
+    "Pruning Benchmarks"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "runId": "9c250bb5-4c7c-481d-8bb3-b9fa04b2ddfe",
+  "timestamp": "2026-06-22T13:15:56.554Z",
+  "topics": [
+    "Magnitude Pruning",
+    "Lottery Ticket Hypothesis",
+    "Structured Pruning",
+    "Unstructured Pruning",
+    "Variational Dropout",
+    "Prune & Retrain",
+    "SparseGPT",
+    "Wanda",
+    "STR",
+    "DPM"
+  ]
+}

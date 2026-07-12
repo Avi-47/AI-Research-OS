@@ -1,0 +1,14 @@
+{
+  "runId": "fd61025d-a780-4809-8c9c-8110d932ed2c",
+  "timestamp": "2026-06-19T14:17:24.739Z",
+  "topics": [
+    "Magnitude Pruning",
+    "Structured Pruning",
+    "Unstructured Pruning",
+    "Iterative Pruning",
+    "Lottery Ticket Hypothesis for Transformers",
+    "Sparsity-Inducing Regularization",
+    "Weight Sharing Pruning",
+    "Activity-Centric Pruning"
+  ]
+}

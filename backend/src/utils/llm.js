@@ -1,0 +1,135 @@
+const axios = require("axios");
+
+const MODELS = [
+  "google/gemma-4-31b-it:free",
+  "openai/gpt-oss-20b:free",
+  "qwen/qwen3-coder:free",
+  "meta-llama/llama-3.3-70b-instruct:free"
+];
+
+function getStageLabel(stage) {
+	return String(stage || "LLM").trim();
+}
+
+function stripCodeFences(content) {
+	return String(content || "")
+		.trim()
+		.replace(/^```(?:json)?/i, "")
+		.replace(/```$/i, "")
+		.trim();
+}
+
+function extractJsonBlock(content) {
+	const cleanedContent = stripCodeFences(content);
+
+	const arrayStart = cleanedContent.indexOf("[");
+	const objectStart = cleanedContent.indexOf("{");
+
+	let startIndex = -1;
+
+	if (arrayStart === -1) {
+		startIndex = objectStart;
+	} else if (objectStart === -1) {
+		startIndex = arrayStart;
+	} else {
+		startIndex = Math.min(arrayStart, objectStart);
+	}
+
+	if (startIndex === -1) {
+		throw new Error("LLM response did not contain JSON");
+	}
+
+	const openingToken = cleanedContent[startIndex];
+	const closingToken = openingToken === "[" ? "]" : "}";
+	const endIndex = cleanedContent.lastIndexOf(closingToken);
+
+	if (endIndex === -1 || endIndex < startIndex) {
+		throw new Error("LLM response JSON was incomplete");
+	}
+
+	return cleanedContent.slice(startIndex, endIndex + 1);
+}
+
+async function callOpenRouter(prompt, options = {}) {
+	const stage = getStageLabel(options.stage);
+	let lastError = null;
+
+	for (const model of MODELS) {
+		try {
+			console.log(`${stage} Model Attempt: ${model}`);
+			const response = await axios.post(
+				"https://openrouter.ai/api/v1/chat/completions",
+				{
+					model,
+					messages: [
+						{
+							role: "user",
+							content: prompt
+						}
+					],
+					temperature: options.temperature ?? 0.7,
+					max_tokens: options.maxTokens ?? 4000
+				},
+				{
+					headers: {
+						Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`
+					}
+				}
+			);
+
+			console.log(`${stage} Model Used: ${model}`);
+			const choice = response.data?.choices?.[0];
+			if (!choice?.message?.content) {
+				throw new Error("Empty model response");
+			}
+			return choice.message.content;
+		} catch (err) {
+			lastError = err;
+			console.log(`${stage} Model Failed: ${model}`);
+			console.log(err.response?.data || err.message);
+		}
+	}
+
+	throw lastError || new Error("All models failed");
+}
+
+async function callJsonOpenRouter(prompt, options = {}) {
+
+    const jsonPrompt = `
+You are a JSON generation engine.
+Return ONLY valid JSON.
+Do not output markdown.
+Do not output explanations.
+Do not output code fences.
+${prompt}
+`;
+    const content = await callOpenRouter(
+        jsonPrompt,
+        {
+            ...options,
+            temperature: 0,
+            maxTokens: 4000
+        }
+    );
+    console.log("\n========== RAW LLM RESPONSE ==========");
+    console.log(content);
+    console.log("======================================\n");
+    let jsonText = extractJsonBlock(content);
+    // Remove trailing commas
+    jsonText = jsonText.replace(/,\s*([}\]])/g, "$1");
+    try {
+        return JSON.parse(jsonText);
+    }
+    catch (err) {
+        console.log("JSON Parse Failed.");
+        console.log(jsonText);
+        throw err;
+    }
+}
+
+module.exports = {
+	callOpenRouter,
+	callJsonOpenRouter,
+	extractJsonBlock,
+	stripCodeFences
+};

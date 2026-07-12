@@ -1,0 +1,133 @@
+{
+  "runId": "9e7f75e0-4b63-4305-b0de-d58536cc506a",
+  "timestamp": "2026-06-22T12:05:10.636Z",
+  "traces": [
+    {
+      "traceId": "26f4cf8d-f53e-4c73-a204-072cd40ab910",
+      "workflowId": "9e7f75e0-4b63-4305-b0de-d58536cc506a",
+      "agentId": "planner-agent",
+      "agentName": "Planner Agent",
+      "executionOrder": 1,
+      "status": "COMPLETED",
+      "startedAt": "2026-06-22T12:03:09.384Z",
+      "endedAt": "2026-06-22T12:03:17.815Z",
+      "durationMs": 8431,
+      "error": null
+    },
+    {
+      "traceId": "902cc8fb-dd27-43b7-bac0-b6385e00f5d4",
+      "workflowId": "9e7f75e0-4b63-4305-b0de-d58536cc506a",
+      "agentId": "research-agent",
+      "agentName": "Research Agent",
+      "executionOrder": 2,
+      "status": "COMPLETED",
+      "startedAt": "2026-06-22T12:03:17.816Z",
+      "endedAt": "2026-06-22T12:04:05.286Z",
+      "durationMs": 47470,
+      "error": null
+    },
+    {
+      "traceId": "1e0c8220-8bb1-4ce5-a7f5-f3d3bda29ee0",
+      "workflowId": "9e7f75e0-4b63-4305-b0de-d58536cc506a",
+      "agentId": "topic-research-5",
+      "agentName": "Topic Research Agent 5",
+      "parentAgentId": "research-agent",
+      "executionOrder": null,
+      "status": "COMPLETED",
+      "startedAt": null,
+      "endedAt": null,
+      "durationMs": 8795,
+      "error": null
+    },
+    {
+      "traceId": "014fd846-b42b-423c-9615-61cb32719a9e",
+      "workflowId": "9e7f75e0-4b63-4305-b0de-d58536cc506a",
+      "agentId": "topic-research-6",
+      "agentName": "Topic Research Agent 6",
+      "parentAgentId": "research-agent",
+      "executionOrder": null,
+      "status": "COMPLETED",
+      "startedAt": null,
+      "endedAt": null,
+      "durationMs": 8797,
+      "error": null
+    },
+    {
+      "traceId": "0af6e0c2-c7d6-404c-9e03-e5aec6325c40",
+      "workflowId": "9e7f75e0-4b63-4305-b0de-d58536cc506a",
+      "agentId": "topic-research-4",
+      "agentName": "Topic Research Agent 4",
+      "parentAgentId": "research-agent",
+      "executionOrder": null,
+      "status": "COMPLETED",
+      "startedAt": null,
+      "endedAt": null,
+      "durationMs": 10610,
+      "error": null
+    },
+    {
+      "traceId": "9f2aa357-6b57-45c6-98c2-6b780376c63f",
+      "workflowId": "9e7f75e0-4b63-4305-b0de-d58536cc506a",
+      "agentId": "topic-research-1",
+      "agentName": "Topic Research Agent 1",
+      "parentAgentId": "research-agent",
+      "executionOrder": null,
+      "status": "COMPLETED",
+      "startedAt": null,
+      "endedAt": null,
+      "durationMs": 14518,
+      "error": null
+    },
+    {
+      "traceId": "2e30eb8a-e412-40c4-80f0-07d8b8fd9912",
+      "workflowId": "9e7f75e0-4b63-4305-b0de-d58536cc506a",
+      "agentId": "topic-research-7",
+      "agentName": "Topic Research Agent 7",
+      "parentAgentId": "research-agent",
+      "executionOrder": null,
+      "status": "COMPLETED",
+      "startedAt": null,
+      "endedAt": null,
+      "durationMs": 14882,
+      "error": null
+    },
+    {
+      "traceId": "f9e38355-a5b0-4d03-92d6-3f7b54370968",
+      "workflowId": "9e7f75e0-4b63-4305-b0de-d58536cc506a",
+      "agentId": "topic-research-3",
+      "agentName": "Topic Research Agent 3",
+      "parentAgentId": "research-agent",
+      "executionOrder": null,
+      "status": "COMPLETED",
+      "startedAt": null,
+      "endedAt": null,
+      "durationMs": 42802,
+      "error": null
+    },
+    {
+      "traceId": "f1ad9418-afb0-4d09-91d5-517d5f1a4c5b",
+      "workflowId": "9e7f75e0-4b63-4305-b0de-d58536cc506a",
+      "agentId": "topic-research-2",
+      "agentName": "Topic Research Agent 2",
+      "parentAgentId": "research-agent",
+      "executionOrder": null,
+      "status": "COMPLETED",
+      "startedAt": null,
+      "endedAt": null,
+      "durationMs": 47462,
+      "error": null
+    },
+    {
+      "traceId": "7e4128f2-0753-43e0-b317-3b30ac612f71",
+      "workflowId": "9e7f75e0-4b63-4305-b0de-d58536cc506a",
+      "agentId": "writer-agent",
+      "agentName": "Writer Agent",
+      "executionOrder": 3,
+      "status": "COMPLETED",
+      "startedAt": "2026-06-22T12:04:05.286Z",
+      "endedAt": "2026-06-22T12:05:10.635Z",
+      "durationMs": 65349,
+      "error": null
+    }
+  ]
+}

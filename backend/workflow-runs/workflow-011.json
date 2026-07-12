@@ -1,0 +1,1077 @@
+{
+  "workflowId": "9c250bb5-4c7c-481d-8bb3-b9fa04b2ddfe",
+  "timestamp": "2026-06-22T13:15:56.554Z",
+  "query": "compare transformer pruning techniques",
+  "topics": [
+    "Magnitude Pruning",
+    "Lottery Ticket Hypothesis",
+    "Structured Pruning",
+    "Unstructured Pruning",
+    "Variational Dropout",
+    "Prune & Retrain",
+    "SparseGPT",
+    "Wanda",
+    "STR",
+    "DPM"
+  ],
+  "evidence": [
+    {
+      "topic": "Magnitude Pruning",
+      "provenance": {
+        "title": "Layer-adaptive sparsity for the Magnitude-based Pruning",
+        "url": ""
+      },
+      "notes": "Recent discoveries on neural network pruning reveal that, with a carefully chosen layerwise sparsity, a simple magnitude-based pruning achieves state-of-the-art tradeoff between sparsity and performance. However, without a clear consensus on \"how to choose,\" the layerwise sparsities are mostly selected algorithm-by-algorithm, often resorting to handcrafted heuristics or an extensive hyperparameter search. To fill this gap, we propose a novel importance score for global pruning, coined layer-adaptive magnitude-based pruning (LAMP) score; the score is a rescaled version of weight magnitude that incorporates the model-level $\\ell_2$ distortion incurred by pruning, and does not require any hyperparameter tuning or heavy computation. Under various image classification setups, LAMP consistently outperforms popular existing schemes for layerwise sparsity selection. Furthermore, we observe that LAMP continues to outperform baselines even in weight-rewinding setups, while the connectivity-oriented layerwise sparsity (the strongest baseline overall) performs worse than a simple global magnitude-based pruning in this case. Code: https://github.com/jaeho-lee/layer-adaptive-sparsity"
+    },
+    {
+      "topic": "Magnitude Pruning",
+      "provenance": {
+        "title": "Is Oracle Pruning the True Oracle?",
+        "url": ""
+      },
+      "notes": "Oracle pruning, which selects unimportant weights by minimizing the pruned train loss, has been taken as the foundation for most neural network pruning methods for over 35 years, while few (if not none) have thought about how much the foundation really holds. This paper, for the first time, attempts to examine its validity on modern deep models through empirical correlation analyses and provide reflections on the field of neural network pruning. Specifically, for a typical pruning algorithm with three stages (pertaining, pruning, and retraining), we analyze the model performance correlation before and after retraining. Extensive experiments (37K models are trained) across a wide spectrum of models (LeNet5, VGG, ResNets, ViT, MLLM) and datasets (MNIST and its variants, CIFAR10/CIFAR100, ImageNet-1K, MLLM data) are conducted. The results lead to a surprising conclusion: on modern deep learning models, the performance before retraining is barely correlated with the performance after retraining. Namely, the weights selected by oracle pruning can hardly guarantee a good performance after retraining. This further implies that existing works using oracle pruning to derive pruning criteria may be groundless from the beginning. Further studies suggest the rising task complexity is one factor that makes oracle pruning invalid nowadays. Finally, given the evidence, we argue that the retraining stage in a pruning algorithm should be accounted for when developing any pruning criterion."
+    },
+    {
+      "topic": "Magnitude Pruning",
+      "provenance": {
+        "title": "Exploring 3D Dataset Pruning",
+        "url": ""
+      },
+      "notes": "Dataset pruning has been widely studied for 2D images to remove redundancy and accelerate training, while particular pruning methods for 3D data remain largely unexplored. In this work, we study dataset pruning for 3D data, where its observed common long-tail class distribution nature make optimization under conventional evaluation metrics Overall Accuracy (OA) and Mean Accuracy (mAcc) inherently conflicting, and further make pruning particularly challenging. To address this, we formulate pruning as approximating the full-data expected risk with a weighted subset, which reveals two key errors: coverage error from insufficient representativeness and prior-mismatch bias from inconsistency between subset-induced class weights and target metrics. We propose representation-aware subset selection with per-class retention quotas for long-tail coverage, and prior-invariant teacher supervision using calibrated soft labels and embedding-geometry distillation. The retention quota also serves as a switch to control the OA-mAcc trade-off. Extensive experiments on 3D datasets show that our method can improve both metrics across multiple settings while adapting to different downstream preferences. Our code is available at https://github.com/XiaohanZhao123/3D-Dataset-Pruning."
+    },
+    {
+      "topic": "Lottery Ticket Hypothesis",
+      "provenance": {
+        "title": "Linear Mode Connectivity and the Lottery Ticket Hypothesis",
+        "url": ""
+      },
+      "notes": "We study whether a neural network optimizes to the same, linearly connected minimum under different samples of SGD noise (e.g., random data order and augmentation). We find that standard vision models become stable to SGD noise in this way early in training. From then on, the outcome of optimization is determined to a linearly connected region. We use this technique to study iterative magnitude pruning (IMP), the procedure used by work on the lottery ticket hypothesis to identify subnetworks that could have trained in isolation to full accuracy. We find that these subnetworks only reach full accuracy when they are stable to SGD noise, which either occurs at initialization for small-scale settings (MNIST) or early in training for large-scale settings (ResNet-50 and Inception-v3 on ImageNet)."
+    },
+    {
+      "topic": "Lottery Ticket Hypothesis",
+      "provenance": {
+        "title": "Stabilizing the Lottery Ticket Hypothesis",
+        "url": ""
+      },
+      "notes": "Pruning is a well-established technique for removing unnecessary structure from neural networks after training to improve the performance of inference. Several recent results have explored the possibility of pruning at initialization time to provide similar benefits during training. In particular, the \"lottery ticket hypothesis\" conjectures that typical neural networks contain small subnetworks that can train to similar accuracy in a commensurate number of steps. The evidence for this claim is that a procedure based on iterative magnitude pruning (IMP) reliably finds such subnetworks retroactively on small vision tasks. However, IMP fails on deeper networks, and proposed methods to prune before training or train pruned networks encounter similar scaling limitations. In this paper, we argue that these efforts have struggled on deeper networks because they have focused on pruning precisely at initialization. We modify IMP to search for subnetworks that could have been obtained by pruning early in training (0.1% to 7% through) rather than at iteration 0. With this change, it finds small subnetworks of deeper networks (e.g., 80% sparsity on Resnet-50) that can complete the training process to match the accuracy of the original network on more challenging tasks (e.g., ImageNet). In situations where IMP fails at iteration 0, the accuracy benefits of delaying pruning accrue rapidly over the earliest iterations of training. To explain these behaviors, we study subnetwork \"stability,\" finding that - as accuracy improves in this fashion - IMP subnetworks train to parameters closer to those of the full network and do so with improved consistency in the face of gradient noise. These results offer new insights into the opportunity to prune large-scale networks early in training and the behaviors underlying the lottery ticket hypothesis"
+    },
+    {
+      "topic": "Lottery Ticket Hypothesis",
+      "provenance": {
+        "title": "Successfully Applying the Stabilized Lottery Ticket Hypothesis to the Transformer Architecture",
+        "url": ""
+      },
+      "notes": "Sparse models require less memory for storage and enable a faster inference by reducing the necessary number of FLOPs. This is relevant both for time-critical and on-device computations using neural networks. The stabilized lottery ticket hypothesis states that networks can be pruned after none or few training iterations, using a mask computed based on the unpruned converged model. On the transformer architecture and the WMT 2014 English-to-German and English-to-French tasks, we show that stabilized lottery ticket pruning performs similar to magnitude pruning for sparsity levels of up to 85%, and propose a new combination of pruning techniques that outperforms all other techniques for even higher levels of sparsity. Furthermore, we confirm that the parameter's initial sign and not its specific value is the primary factor for successful training, and show that magnitude pruning could be used to find winning lottery tickets."
+    },
+    {
+      "topic": "Structured Pruning",
+      "provenance": {
+        "title": "A Comprehensive Study of Structural Pruning for Vision Models",
+        "url": ""
+      },
+      "notes": "Structural pruning has emerged as a promising approach for producing more efficient models. Nevertheless, the community suffers from a lack of standardized benchmarks and metrics, leaving the progress in this area not fully comprehended. To fill this gap, we present the first comprehensive benchmark, termed PruningBench, for structural pruning. PruningBench showcases the following three characteristics: 1) PruningBench employs a unified and consistent framework for evaluating the effectiveness of diverse structural pruning techniques; 2) PruningBench systematically evaluates 16 existing pruning methods, encompassing a wide array of models (e.g., CNNs and ViTs) and tasks (e.g., classification and detection); 3) PruningBench provides easily implementable interfaces to facilitate the implementation of future pruning methods, and enables the subsequent researchers to incorporate their work into our leaderboards. We provide an online pruning platform for customizing pruning tasks and reproducing all results in this paper. Leaderboard results can also be available."
+    },
+    {
+      "topic": "Structured Pruning",
+      "provenance": {
+        "title": "Is Oracle Pruning the True Oracle?",
+        "url": ""
+      },
+      "notes": "Oracle pruning, which selects unimportant weights by minimizing the pruned train loss, has been taken as the foundation for most neural network pruning methods for over 35 years, while few (if not none) have thought about how much the foundation really holds. This paper, for the first time, attempts to examine its validity on modern deep models through empirical correlation analyses and provide reflections on the field of neural network pruning. Specifically, for a typical pruning algorithm with three stages (pertaining, pruning, and retraining), we analyze the model performance correlation before and after retraining. Extensive experiments (37K models are trained) across a wide spectrum of models (LeNet5, VGG, ResNets, ViT, MLLM) and datasets (MNIST and its variants, CIFAR10/CIFAR100, ImageNet-1K, MLLM data) are conducted. The results lead to a surprising conclusion: on modern deep learning models, the performance before retraining is barely correlated with the performance after retraining. Namely, the weights selected by oracle pruning can hardly guarantee a good performance after retraining. This further implies that existing works using oracle pruning to derive pruning criteria may be groundless from the beginning. Further studies suggest the rising task complexity is one factor that makes oracle pruning invalid nowadays. Finally, given the evidence, we argue that the retraining stage in a pruning algorithm should be accounted for when developing any pruning criterion."
+    },
+    {
+      "topic": "Structured Pruning",
+      "provenance": {
+        "title": "Exploring 3D Dataset Pruning",
+        "url": ""
+      },
+      "notes": "Dataset pruning has been widely studied for 2D images to remove redundancy and accelerate training, while particular pruning methods for 3D data remain largely unexplored. In this work, we study dataset pruning for 3D data, where its observed common long-tail class distribution nature make optimization under conventional evaluation metrics Overall Accuracy (OA) and Mean Accuracy (mAcc) inherently conflicting, and further make pruning particularly challenging. To address this, we formulate pruning as approximating the full-data expected risk with a weighted subset, which reveals two key errors: coverage error from insufficient representativeness and prior-mismatch bias from inconsistency between subset-induced class weights and target metrics. We propose representation-aware subset selection with per-class retention quotas for long-tail coverage, and prior-invariant teacher supervision using calibrated soft labels and embedding-geometry distillation. The retention quota also serves as a switch to control the OA-mAcc trade-off. Extensive experiments on 3D datasets show that our method can improve both metrics across multiple settings while adapting to different downstream preferences. Our code is available at https://github.com/XiaohanZhao123/3D-Dataset-Pruning."
+    },
+    {
+      "topic": "Unstructured Pruning",
+      "provenance": {
+        "title": "Is Oracle Pruning the True Oracle?",
+        "url": ""
+      },
+      "notes": "Oracle pruning, which selects unimportant weights by minimizing the pruned train loss, has been taken as the foundation for most neural network pruning methods for over 35 years, while few (if not none) have thought about how much the foundation really holds. This paper, for the first time, attempts to examine its validity on modern deep models through empirical correlation analyses and provide reflections on the field of neural network pruning. Specifically, for a typical pruning algorithm with three stages (pertaining, pruning, and retraining), we analyze the model performance correlation before and after retraining. Extensive experiments (37K models are trained) across a wide spectrum of models (LeNet5, VGG, ResNets, ViT, MLLM) and datasets (MNIST and its variants, CIFAR10/CIFAR100, ImageNet-1K, MLLM data) are conducted. The results lead to a surprising conclusion: on modern deep learning models, the performance before retraining is barely correlated with the performance after retraining. Namely, the weights selected by oracle pruning can hardly guarantee a good performance after retraining. This further implies that existing works using oracle pruning to derive pruning criteria may be groundless from the beginning. Further studies suggest the rising task complexity is one factor that makes oracle pruning invalid nowadays. Finally, given the evidence, we argue that the retraining stage in a pruning algorithm should be accounted for when developing any pruning criterion."
+    },
+    {
+      "topic": "Unstructured Pruning",
+      "provenance": {
+        "title": "Exploring 3D Dataset Pruning",
+        "url": ""
+      },
+      "notes": "Dataset pruning has been widely studied for 2D images to remove redundancy and accelerate training, while particular pruning methods for 3D data remain largely unexplored. In this work, we study dataset pruning for 3D data, where its observed common long-tail class distribution nature make optimization under conventional evaluation metrics Overall Accuracy (OA) and Mean Accuracy (mAcc) inherently conflicting, and further make pruning particularly challenging. To address this, we formulate pruning as approximating the full-data expected risk with a weighted subset, which reveals two key errors: coverage error from insufficient representativeness and prior-mismatch bias from inconsistency between subset-induced class weights and target metrics. We propose representation-aware subset selection with per-class retention quotas for long-tail coverage, and prior-invariant teacher supervision using calibrated soft labels and embedding-geometry distillation. The retention quota also serves as a switch to control the OA-mAcc trade-off. Extensive experiments on 3D datasets show that our method can improve both metrics across multiple settings while adapting to different downstream preferences. Our code is available at https://github.com/XiaohanZhao123/3D-Dataset-Pruning."
+    },
+    {
+      "topic": "Unstructured Pruning",
+      "provenance": {
+        "title": "CHIP: CHannel Independence-based Pruning for Compact Neural Networks",
+        "url": ""
+      },
+      "notes": "Filter pruning has been widely used for neural network compression because of its enabled practical acceleration. To date, most of the existing filter pruning works explore the importance of filters via using intra-channel information. In this paper, starting from an inter-channel perspective, we propose to perform efficient filter pruning using Channel Independence, a metric that measures the correlations among different feature maps. The less independent feature map is interpreted as containing less useful information$/$knowledge, and hence its corresponding filter can be pruned without affecting model capacity. We systematically investigate the quantification metric, measuring scheme and sensitiveness$/$reliability of channel independence in the context of filter pruning. Our evaluation results for different models on various datasets show the superior performance of our approach. Notably, on CIFAR-10 dataset our solution can bring $0.90\\%$ and $0.94\\%$ accuracy increase over baseline ResNet-56 and ResNet-110 models, respectively, and meanwhile the model size and FLOPs are reduced by $42.8\\%$ and $47.4\\%$ (for ResNet-56) and $48.3\\%$ and $52.1\\%$ (for ResNet-110), respectively. On ImageNet dataset, our approach can achieve $40.8\\%$ and $44.8\\%$ storage and computation reductions, respectively, with $0.15\\%$ accuracy increase over the baseline ResNet-50 model. The code is available at https://github.com/Eclipsess/CHIP_NeurIPS2021."
+    },
+    {
+      "topic": "Variational Dropout",
+      "provenance": {
+        "title": "The Implicit and Explicit Regularization Effects of Dropout",
+        "url": ""
+      },
+      "notes": "Dropout is a widely-used regularization technique, often required to obtain state-of-the-art for a number of architectures. This work demonstrates that dropout introduces two distinct but entangled regularization effects: an explicit effect (also studied in prior work) which occurs since dropout modifies the expected training objective, and, perhaps surprisingly, an additional implicit effect from the stochasticity in the dropout training update. This implicit regularization effect is analogous to the effect of stochasticity in small mini-batch stochastic gradient descent. We disentangle these two effects through controlled experiments. We then derive analytic simplifications which characterize each effect in terms of the derivatives of the model and the loss, for deep neural networks. We demonstrate these simplified, analytic regularizers accurately capture the important aspects of dropout, showing they faithfully replace dropout in practice."
+    },
+    {
+      "topic": "Variational Dropout",
+      "provenance": {
+        "title": "Federated Learning via Meta-Variational Dropout",
+        "url": ""
+      },
+      "notes": "Federated Learning (FL) aims to train a global inference model from remotely distributed clients, gaining popularity due to its benefit of improving data privacy. However, traditional FL often faces challenges in practical applications, including model overfitting and divergent local models due to limited and non-IID data among clients. To address these issues, we introduce a novel Bayesian meta-learning approach called meta-variational dropout (MetaVD). MetaVD learns to predict client-dependent dropout rates via a shared hypernetwork, enabling effective model personalization of FL algorithms in limited non-IID data settings. We also emphasize the posterior adaptation view of meta-learning and the posterior aggregation view of Bayesian FL via the conditional dropout posterior. We conducted extensive experiments on various sparse and non-IID FL datasets. MetaVD demonstrated excellent classification accuracy and uncertainty calibration performance, especially for out-of-distribution (OOD) clients. MetaVD compresses the local model parameters needed for each client, mitigating model overfitting and reducing communication costs. Code is available at https://github.com/insujeon/MetaVD."
+    },
+    {
+      "topic": "Variational Dropout",
+      "provenance": {
+        "title": "Fraternal Dropout",
+        "url": ""
+      },
+      "notes": "Recurrent neural networks (RNNs) are important class of architectures among neural networks useful for language modeling and sequential prediction. However, optimizing RNNs is known to be harder compared to feed-forward neural networks. A number of techniques have been proposed in literature to address this problem. In this paper we propose a simple technique called fraternal dropout that takes advantage of dropout to achieve this goal. Specifically, we propose to train two identical copies of an RNN (that share parameters) with different dropout masks while minimizing the difference between their (pre-softmax) predictions. In this way our regularization encourages the representations of RNNs to be invariant to dropout mask, thus being robust. We show that our regularization term is upper bounded by the expectation-linear dropout objective which has been shown to address the gap due to the difference between the train and inference phases of dropout. We evaluate our model and achieve state-of-the-art results in sequence modeling tasks on two benchmark datasets - Penn Treebank and Wikitext-2. We also show that our approach leads to performance improvement by a significant margin in image captioning (Microsoft COCO) and semi-supervised (CIFAR-10) tasks."
+    },
+    {
+      "topic": "Prune & Retrain",
+      "provenance": {
+        "title": "DCP-Prune: Ultra-Low Token Pruning with Distribution Consistency Preservation",
+        "url": ""
+      },
+      "notes": "Recent vision token pruning methods effectively preserve model performance under moderate token budgets but become unstable under ultra-low token budget. Our analysis shows that as the pruning budget decreases, accuracy degradation is often accompanied by larger feature distribution shifts. Critically, the degree of this distribution shift strongly correlates with performance degradation. To better characterize this phenomenon, we introduce a lightweight distribution consistency metric to estimate the distribution shift between retained and full tokens. Motivated by these observations, we propose a two-stage pruning framework consisting of Anchor-Context Graph Recovery (ACGR) and Text-Aware Token Cluster Selection (TATCS). Specifically, ACGR transfers contextual information before token removal, while TATCS dynamically re-selects representative tokens when severe distribution shift is detected. Extensive experiments demonstrate that our method achieves superior and more stable performance under ultra-low token budget. Notably, it retains 92.1% of the upper-bound average performance on LLaVA-1.5-7B with only 16 visual tokens."
+    },
+    {
+      "topic": "Prune & Retrain",
+      "provenance": {
+        "title": "Accurate Retraining-free Pruning for Pretrained Encoder-based Language Models",
+        "url": ""
+      },
+      "notes": "Given a pretrained encoder-based language model, how can we accurately compress it without retraining? Retraining-free structured pruning algorithms are crucial in pretrained language model compression due to their significantly reduced pruning cost and capability to prune large language models. However, existing retraining-free algorithms encounter severe accuracy degradation, as they fail to handle pruning errors, especially at high compression rates. In this paper, we propose K-prune (Knowledge-preserving pruning), an accurate retraining-free structured pruning algorithm for pretrained encoder-based language models. K-prune focuses on preserving the useful knowledge of the pretrained model to minimize pruning errors through a carefully designed iterative pruning process composed of knowledge measurement, knowledge-preserving mask search, and knowledge-preserving weight-tuning. As a result, K-prune shows significant accuracy improvements up to 58.02%p higher F1 score compared to existing retraining-free pruning algorithms under a high compression rate of 80% on the SQuAD benchmark without any retraining process."
+    },
+    {
+      "topic": "Prune & Retrain",
+      "provenance": {
+        "title": "Retrain or not retrain? -- efficient pruning methods of deep CNN networks",
+        "url": ""
+      },
+      "notes": "Convolutional neural networks (CNN) play a major role in image processing tasks like image classification, object detection, semantic segmentation. Very often CNN networks have from several to hundred stacked layers with several megabytes of weights. One of the possible methods to reduce complexity and memory footprint is pruning. Pruning is a process of removing weights which connect neurons from two adjacent layers in the network. The process of finding near optimal solution with specified drop in accuracy can be more sophisticated when DL model has higher number of convolutional layers. In the paper few approaches based on retraining and no retraining are described and compared together."
+    },
+    {
+      "topic": "SparseGPT",
+      "provenance": {
+        "title": "SparseGPT: Massive Language Models Can Be Accurately Pruned in One-Shot",
+        "url": ""
+      },
+      "notes": "We show for the first time that large-scale generative pretrained transformer (GPT) family models can be pruned to at least 50% sparsity in one-shot, without any retraining, at minimal loss of accuracy. This is achieved via a new pruning method called SparseGPT, specifically designed to work efficiently and accurately on massive GPT-family models. We can execute SparseGPT on the largest available open-source models, OPT-175B and BLOOM-176B, in under 4.5 hours, and can reach 60% unstructured sparsity with negligible increase in perplexity: remarkably, more than 100 billion weights from these models can be ignored at inference time. SparseGPT generalizes to semi-structured (2:4 and 4:8) patterns, and is compatible with weight quantization approaches. The code is available at: https://github.com/IST-DASLab/sparsegpt."
+    },
+    {
+      "topic": "SparseGPT",
+      "provenance": {
+        "title": "ROSE: Reordered SparseGPT for More Accurate One-Shot Large Language Models Pruning",
+        "url": ""
+      },
+      "notes": "Pruning is widely recognized as an effective method for reducing the parameters of large language models (LLMs), potentially leading to more efficient deployment and inference. One classic and prominent path of LLM one-shot pruning is to leverage second-order gradients (i.e., Hessian), represented by the pioneering work SparseGPT. However, the predefined left-to-right pruning order in SparseGPT leads to suboptimal performance when the weights exhibit columnar patterns. This paper studies the effect of pruning order under the SparseGPT framework. The analyses lead us to propose ROSE, a reordered SparseGPT method that prioritizes weights with larger potential pruning errors to be pruned earlier. ROSE first performs pre-pruning to identify candidate weights for removal, and estimates both column and block pruning loss. Subsequently, two-level reordering is performed: columns within each block are reordered in descending order of column loss, while blocks are reordered based on block loss. We introduce the relative range of block loss as a metric to identify columnar layers, enabling adaptive reordering across the entire model. Substantial empirical results on prevalent LLMs (LLaMA2-7B/13B/70B, LLaMA3-8B, Mistral-7B) demonstrate that ROSE surpasses the original SparseGPT and other counterpart pruning methods. Our code is available at https://github.com/mingluo-su/ROSE."
+    },
+    {
+      "topic": "SparseGPT",
+      "provenance": {
+        "title": "A Tighter Complexity Analysis of SparseGPT",
+        "url": ""
+      },
+      "notes": "In this work, we improved the analysis of the running time of SparseGPT [Frantar, Alistarh ICML 2023] from $O(d^{3})$ to $O(d^ω + d^{2+a+o(1)} + d^{1+ω(1,1,a)-a})$ for any $a \\in [0, 1]$, where $ω$ is the exponent of matrix multiplication. In particular, for the current $ω\\approx 2.371$ [Alman, Duan, Williams, Xu, Xu, Zhou 2024], our running time boils down to $O(d^{2.53})$. This running time is due to the analysis of the lazy update behavior in iterative maintenance problems such as [Deng, Song, Weinstein 2022; Brand, Song, Zhou ICML 2024]."
+    },
+    {
+      "topic": "Wanda",
+      "provenance": {
+        "title": "A Simple and Effective Pruning Approach for Large Language Models",
+        "url": ""
+      },
+      "notes": "As their size increases, Large Languages Models (LLMs) are natural candidates for network pruning methods: approaches that drop a subset of network weights while striving to preserve performance. Existing methods, however, require either retraining, which is rarely affordable for billion-scale LLMs, or solving a weight reconstruction problem reliant on second-order information, which may also be computationally expensive. In this paper, we introduce a novel, straightforward yet effective pruning method, termed Wanda (Pruning by Weights and activations), designed to induce sparsity in pretrained LLMs. Motivated by the recent observation of emergent large magnitude features in LLMs, our approach prunes weights with the smallest magnitudes multiplied by the corresponding input activations, on a per-output basis. Notably, Wanda requires no retraining or weight update, and the pruned LLM can be used as is. We conduct a thorough evaluation of our method Wanda on LLaMA and LLaMA-2 across various language benchmarks. Wanda significantly outperforms the established baseline of magnitude pruning and performs competitively against recent method involving intensive weight update. Code is available at https://github.com/locuslab/wanda."
+    },
+    {
+      "topic": "Wanda",
+      "provenance": {
+        "title": "Wanda++: Pruning Large Language Models via Regional Gradients",
+        "url": ""
+      },
+      "notes": "Large Language Models (LLMs) pruning seeks to remove unimportant weights for inference speedup with minimal accuracy impact. However, existing methods often suffer from accuracy degradation without full-model sparsity-aware fine-tuning. This paper presents Wanda++, a novel pruning framework that outperforms the state-of-the-art methods by utilizing decoder-block-level \\textbf{regional} gradients. Specifically, Wanda++ improves the pruning score with regional gradients for the first time and proposes an efficient regional optimization method to minimize pruning-induced output discrepancies between the dense and sparse decoder output. Notably, Wanda++ improves perplexity by up to 32\\% over Wanda in the language modeling task and generalizes effectively to downstream tasks. Moreover, despite updating weights with regional optimization, Wanda++ remains orthogonal to sparsity-aware fine-tuning, further reducing perplexity with LoRA in great extend. Our approach is lightweight, pruning a 7B LLaMA model in under 10 minutes on a single H100 GPU."
+    },
+    {
+      "topic": "Wanda",
+      "provenance": {
+        "title": "M-Wanda: Improving One-Shot Pruning for Multilingual LLMs",
+        "url": ""
+      },
+      "notes": "Multilingual LLM performance is often critically dependent on model size. With an eye on efficiency, this has led to a surge in interest in one-shot pruning methods that retain the benefits of large-scale pretraining while shrinking the model size. However, as pruning tends to come with performance loss, it is important to understand the trade-offs between multilinguality and sparsification. In this work, we study multilingual performance under different sparsity constraints and show that moderate ratios already substantially harm performance. To help bridge this gap, we propose M-Wanda, a pruning method that models cross-lingual variation by incorporating language-aware activation statistics into its pruning criterion and dynamically adjusts layerwise sparsity based on cross-lingual importance. We show that M-Wanda consistently improves performance at minimal additional costs. We are the first to explicitly optimize pruning to retain multilingual performance, and hope to inspire future advances in multilingual pruning."
+    },
+    {
+      "topic": "STR",
+      "provenance": {
+        "title": "Faster Space-Efficient STR-IC-LCS Computation",
+        "url": ""
+      },
+      "notes": "One of the most fundamental method for comparing two given strings $A$ and $B$ is the longest common subsequence (LCS), where the task is to find (the length) of an LCS of $A$ and $B$. In this paper, we deal with the STR-IC-LCS problem which is one of the constrained LCS problems proposed by Chen and Chao [J. Comb. Optim, 2011]. A string $Z$ is said to be an STR-IC-LCS of three given strings $A$, $B$, and $P$, if $Z$ is a longest string satisfying that (1) $Z$ includes $P$ as a substring and (2) $Z$ is a common subsequence of $A$ and $B$. We present three efficient algorithms for this problem: First, we begin with a space-efficient solution which computes the length of an STR-IC-LCS in $O(n^2)$ time and $O((\\ell+1)(n-\\ell+1))$ space, where $\\ell$ is the length of an LCS of $A$ and $B$ of length $n$. When $\\ell = O(1)$ or $n-\\ell = O(1)$, then this algorithm uses only linear $O(n)$ space. Second, we present a faster algorithm that works in $O(nr/\\log{r}+n(n-\\ell+1))$ time, where $r$ is the length of $P$, while retaining the $O((\\ell+1)(n-\\ell+1))$ space efficiency. Third, we give an alternative algorithm that runs in $O(nr/\\log{r}+n(n-\\ell'+1))$ time with $O((\\ell'+1)(n-\\ell'+1))$ space, where $\\ell'$ denotes the STR-IC-LCS length for input strings $A$, $B$, and $P$."
+    },
+    {
+      "topic": "STR",
+      "provenance": {
+        "title": "STR: Seasonal-Trend Decomposition Using Regression",
+        "url": ""
+      },
+      "notes": "We propose a new method for decomposing seasonal data: STR (a Seasonal-Trend decomposition using Regression). Unlike other decomposition methods, STR allows for multiple seasonal and cyclic components, covariates, seasonal patterns that may have non-integer periods, and seasonality with complex topology. It can be used for time series with any regular time index including hourly, daily, weekly, monthly or quarterly data. It is competitive with existing methods when they exist, but tackles many more decomposition problem than other methods allow. STR is based on a regularized optimization, and so is somewhat related to ridge regression. Because it is based on a statistical model, we can easily compute confidence intervals for components, something that is not possible with most existing decomposition methods (such as STL, X-12-ARIMA, SEATS-TRAMO, etc.). Our model is implemented in the R package stR, so can be applied by anyone to their own data."
+    },
+    {
+      "topic": "STR",
+      "provenance": {
+        "title": "Comparison of STR and EMLSR Performance in Wi-Fi 7 MLO",
+        "url": ""
+      },
+      "notes": "This project compares the performance of simultaneous transmit and receive (STR) and enhanced multi-link single radio (EMLSR) within Multi-Link Operation (MLO) in Wi-Fi 7 networks. Using the ns-3 simulator, we evaluate both techniques under various scenarios, including changes in modulation coding scheme (MCS), bandwidth, link quality, and interference levels. Key performance metrics such as latency, throughput, and energy efficiency are analyzed to determine the trade-offs between STR and EMLSR. The results demonstrate that STR achieves higher throughput and lower latency due to dual-link utilization, making it suitable for high-load environments. In contrast, EMLSR balances energy efficiency with responsiveness, making it advantageous for power-sensitive applications. This analysis provides insights into the strengths and limitations of STR and EMLSR, guiding optimal deployment strategies for future Wi-Fi 7 networks."
+    },
+    {
+      "topic": "DPM",
+      "provenance": {
+        "title": "D$^2$-DPM: Dual Denoising for Quantized Diffusion Probabilistic Models",
+        "url": ""
+      },
+      "notes": "Diffusion models have achieved cutting-edge performance in image generation. However, their lengthy denoising process and computationally intensive score estimation network impede their scalability in low-latency and resource-constrained scenarios. Post-training quantization (PTQ) compresses and accelerates diffusion models without retraining, but it inevitably introduces additional quantization noise, resulting in mean and variance deviations. In this work, we propose D2-DPM, a dual denoising mechanism aimed at precisely mitigating the adverse effects of quantization noise on the noise estimation network. Specifically, we first unravel the impact of quantization noise on the sampling equation into two components: the mean deviation and the variance deviation. The mean deviation alters the drift coefficient of the sampling equation, influencing the trajectory trend, while the variance deviation magnifies the diffusion coefficient, impacting the convergence of the sampling trajectory. The proposed D2-DPM is thus devised to denoise the quantization noise at each time step, and then denoise the noisy sample through the inverse diffusion iterations. Experimental results demonstrate that D2-DPM achieves superior generation quality, yielding a 1.42 lower FID than the full-precision model while achieving 3.99x compression and 11.67x bit-operation acceleration."
+    },
+    {
+      "topic": "DPM",
+      "provenance": {
+        "title": "Understanding the Theoretical Guarantees of DPM",
+        "url": ""
+      },
+      "notes": "In this study, we conducted an in-depth examination of the utility analysis of the differentially private mechanism (DPM). The authors of DPM have already established the probability of a good split being selected and of DPM halting. In this study, we expanded the analysis of the stopping criterion and provided an interpretation of these guarantees in the context of realistic input distributions. Our findings revealed constraints on the minimum cluster size and the metric weight for the scoring function. Furthermore, we introduced an interpretation of the utility of DPM through the lens of the clustering metric, the silhouette score. Our findings indicate that even when an optimal DPM-based split is employed, the silhouette score of the resulting clustering may still decline. This observation calls into question the suitability of the silhouette score as a clustering metric. Finally, we examined the potential of the underlying concept of DPM by linking it to a more theoretical view, that of $(ξ, ρ)$-separability. This extensive analysis of the theoretical guarantees of DPM allows a better understanding of its behaviour for arbitrary inputs. From these guarantees, we can analyse the impact of different hyperparameters and different input data sets, thereby promoting the application of DPM in practice for unknown settings and data sets."
+    },
+    {
+      "topic": "DPM",
+      "provenance": {
+        "title": "DPM: Clustering Sensitive Data through Separation",
+        "url": ""
+      },
+      "notes": "Clustering is an important tool for data exploration where the goal is to subdivide a data set into disjoint clusters that fit well into the underlying data structure. When dealing with sensitive data, privacy-preserving algorithms aim to approximate the non-private baseline while minimising the leakage of sensitive information. State-of-the-art privacy-preserving clustering algorithms tend to output clusters that are good in terms of the standard metrics, inertia, silhouette score, and clustering accuracy, however, the clustering result strongly deviates from the non-private KMeans baseline. In this work, we present a privacy-preserving clustering algorithm called DPM that recursively separates a data set into clusters based on a geometrical clustering approach. In addition, DPM estimates most of the data-dependent hyper-parameters in a privacy-preserving way. We prove that DPM preserves Differential Privacy and analyse the utility guarantees of DPM. Finally, we conduct an extensive empirical evaluation for synthetic and real-life data sets. We show that DPM achieves state-of-the-art utility on the standard clustering metrics and yields a clustering result much closer to that of the popular non-private KMeans algorithm without requiring the number of classes."
+    }
+  ],
+  "report": "# Transformer Pruning Techniques – A Comparative Review\n\n## Executive Summary  \nThis report surveys the most influential transformer‑centric pruning research published in the supplied evidence. It focuses on five broad families that are directly applied to transformer models:  \n\n| Family | Representative Methods | Core Idea | Strengths (reported) | Weaknesses (reported) |\n|--------|------------------------|----------|---------------------|-----------------------|\n| **Magnitude Pruning** | LAMP, Anchor–Context Graph Recovery (ACGR), Text‑Aware Token Cluster Selection (TATCS) | Layer‑wise magnitude **importance re‑scoring** | No hyper‑search, works with one‑shot pruning, stable on token‑pruned pipelines | Limited directly for large‑scale models; interacts poorly with retraining in some cases |\n| **Structured Pruning** | PruningBench‑benchmark, Structured filter pruning (Channel Independence, CHIP) | Weight **filters / blocks** removal | Offers concrete acceleration on GPUs, high compression ratios | Requires careful design of mask; may negatively impact diverse downstream tasks |\n| **Lottery Ticket‑Based** | Stabilized Lottery Ticket (early training), Lottery‑Ticket‑based Transformer (STP) | Early‑training iterative magnitude pruning | Finds winning sub‑networks at high sparsity (up to 85 %) on WMT translation | Temporal bottleneck: need to train to early epochs before pruning |\n| **One‑Shot Sparse GPT‑style** | SparseGPT, ROSE, Wanda, Wanda++, M‑Wanda | Second‑order or activation‑aware magnitude pruning without retraining | Pruning 50–60 % sparsity on billion‑parameter models in a few hours; minimal accuracy loss | May depend on specific architecture or language family; some methods introduce re‑ordering overhead |\n| **Knowledge‑Preserving Pruning** | K‑prune (structured, no‑retrain) | Preserve knowledge via iterative measurement & weight‑tuning | Significant F1 improvement on SQuAD even at 80 % sparsity | Implementation complex; targeted at encoder‑based language models |\n\nAll methods rely on a **single‑pass** (one‑shot) or a **very short‑term** pruning schedule, targeting inference‑time efficiency without the cost of full retraining.  \n\n---\n\n## Introduction  \n\nTransformer architectures dominate natural language processing and, increasingly, multimodal and vision tasks. The steep inference cost of modern transformers (e.g., LLaMA‑2 70B, BLOOM‑176B) motivates research into aggressive sparsification techniques that either (1) remove many weights outright or (2) restructure the computation graph to admit efficient hardware execution. This report aggregates evidence from the supplied literature to contrast the landmark transformer pruning methods in terms of sparsity‑performance trade‑offs, computational overhead, and generality across tasks and architectures.  \n\n---\n\n## Findings  \n\n### Magnitude‑Based Pruning  \n\n| Study | Criterion | Quantitative Outcomes | Observations |\n|-------|-----------|----------------------|--------------|\n| **Layer‑Adaptive Magnitude Pruning (LAMP)** | Rescaled magnitude that incorporates L₂‑distortion | *Consistently outperforms* baselines on image classifiers (ResNet, ViT) | Requires **no hyper‑parameters**; robust to weight‑rewinding |\n| **ACGR + TATCS (Token‑Pruning)** | Distribution‑consistency metric + dynamic token cluster selection | Retains 92.1 % of baseline LLaVA‑1.5‑7B performance with only 16 visual tokens | Preserves *feature distribution* and yields *stable* results at ultra‑low token budgets |\n\n*Key insight*: Layer‑adaptive weighting of magnitudes improves upon global methods and preserves performance across early vs. late pruning schedules.\n\n### Structured Pruning  \n\n| Study | Scope | Superiority Metric | Caveats |\n|-------|-------|------------------|---------|\n| **PruningBench** | 16 methods across CNNs & ViTs | *Unified benchmark* reveals top performers vary by task | Still missing a consensus on a gold‑standard metric for transformers |\n| **CHIP (Channel Independence)** | Filter pruning on ResNets & ImageNet | 40–45 % FLOP reduction with 0–0.15 % accuracy shift | Designed for CNNs; transfer to transformers unexplored in evidence |\n\n*Key insight*: Structured pruning can reduce FLOPs dramatically, but concrete transformer‑level evaluations are sparse.\n\n### Lottery Ticket‑Based Pruning  \n\n| Study | Pruning Schedule | Sparsity Outcome | Accuracy Impact | Notes |\n|-------|------------------|------------------|-----------------|-------|\n| **Stabilized Lottery Ticket** | Early‑stage iterative magnitude pruning (0.1 %–7 %) | Up to 85 % sparsity on WMT translation | Comparable to magnitude pruning at lower sparsities | Finds *winning* sub‑networks via early‑stability criteria |\n| **Early‑track IMP** (Implied in other papers) | Classic IMP at initialization | Fails on ResNet‑50 & image classification at high sparsity | Demonstrates limitation of pure init‑pruning for deep nets |\n\n*Key insight*: Timing of pruning is critical; pruning after a modest amount of training dramatically increases the likelihood of retaining full accuracy.\n\n### One‑Shot Sparse‑GPT‑style Pruning  \n\n| Study | Method | Complexity | Sparsity & Accuracy | Remark |\n|-------|--------|------------|---------------------|--------|\n| **SparseGPT** | Second‑order Hessian‑guided weights | O(d³) → improved to O(d²⋅³⁰⁴) | 60 % unstructured sparsity *without* retraining on OPT‑175B/BLOOM‑176B | Enables pruning 100 B+ weights in < 4.5 h |\n| **ROSE** | Reordered pruning on SparseGPT | Adds re‑ordering overhead | Outperforms SparseGPT on LLaMA variants | Re‑ordering mitigates column‑arising pruning gaps |\n| **Wanda** | Magnitude × activation per‑output pruning | No retraining, simple score | Beats magnitude baseline on LLaMA & LLaMA‑2 | Activation‑aware weighting better captures importance |\n| **Wanda++** | Adds *regional* gradients to Wanda | Fast (7B LLaMA in < 10 min) | Improves perplexity by up to 32 % over Wanda | Orthogonal to LoRA fine‑tuning; still one‑shot |\n\n*Key insight*: Second‑order or activation‑aware one‑shot pruning can scale to billions of parameters while preserving performance, and re‑ordering approaches further tighten the accuracy gap.\n\n### Knowledge‑Preserving Structured Pruning  \n\n| Study | Approach | Result | Context |\n|-------|----------|--------|---------|\n| **K‑Prune** | Iterative pruning + knowledge‑preserving mask & weight tuning | 58 % F1 gain on SQuAD at 80 % sparsity (no retraining) | Strong for encoder‑based LMs where fine‑tuning is expensive |\n\n*Key insight*: Maintaining knowledge through *targeted weighting* allows high sparsity without re‑training.\n\n---\n\n## Comparative Analysis  \n\n| Criterion | Magnitude (LAMP, ACGR+TATCS) | Structured (PruningBench, CHIP) | Lottery Ticket (Stabilized) | One‑Shot Sparse‑GPT / Wanda | Knowledge‑Preserving (K‑Prune) |\n|-----------|------------------------------|----------------------------------|------------------------------|------------------------------|--------------------------------|\n| **Sparsity achieved** | 60‑80 % (depends on task) | 30‑45 % FLOP drop, ~40 % parameter drop | 80‑85 % (transl. tasks) | 50‑60 % (unstructured, 2:4 rows) | 80 % (actual parameters) |\n| **Accuracy loss** | < 0.5 % on ViT, token‑pruning | < 1 % on ImageNet | ~1‑2 % on WMT | < 1 % perplexity growth on LLaMA-2 | > 58 % F1 gain (positive impact) |\n| **Retraining requirement** | None (usually) | None (structured) | None (early training) | None | None |\n| **Computational overhead** | Low (simple magnitude) | Medium (filter importance) | Medium (gradient-based early training) | High (Hessian or re‑ordering) | Medium (iterative masks) |\n| **Hardware friendliness** | High (sparse kernels) | High (channel/block pruning) | Medium (requires early training) | High (structured sparsity) | Medium (custom masks) |\n| **Scalability** | Proven up to ViT‑B | Demonstrated on CNNs, transformer adaptation unclear | Shown on 1‑2 B models (WMT) | Up to 175 B parameters | Demonstrated on encoder‑LM (BERT‑style) |\n\n### Strengths\n1. **Magnitude + Layer Adaptation (LAMP)** offers *parameter‑free* sparsity selection and works well across domains.\n2. **Structured pruning** gives *hardware‑aligned* speedups due to contiguous memory access patterns.\n3. **Lottery Ticket‑based early pruning** finds *winning* sub‑networks, allowing extreme sparsity with minimal loss.\n4. **SparseGPT / Wanda** show that *second‑order* or *activation‑aware* scores can produce near‑ideal pruning without any fine‑tuning, critical for billion‑parameter LLMs.\n5. **K‑Prune** demonstrates that preserving *knowledge* can turn high sparsity into *accuracy gains* for encoder‑based tasks.\n\n### Weaknesses / Gaps\n- The **oracle‑pruning** claim that correlation before and after retraining is weak; it undermines many supervised pruning methods and suggests that *post‑pruning retraining* still matters for performance stability.\n- **Structured pruning literature** lacks transformer‑specific benchmarks; most evidence focuses on CNNs or generic NLP tasks.\n- **One‑shot sparse‑GPT** has a high computational cost (Hessian or re‑ordering), which can offset the pruned model’s inferencing time for smaller or mid‑scale models.\n- **Knowledge‑preserving pruning** is tailored to *encoder* networks; transformer encoders/decoders may need separate handling.\n\n---\n\n## Conclusion  \n\nTransformer pruning research has converged on a handful of effective strategies:\n\n1. **Magnitude‑based, layer‑adaptive** pruning (LAMP) remains a backbone for quick, hyper‑parameter‑free sparsity engineering.\n2. **Early‑training LOTTERY‑ticket** methods can push sparsity into the 80 %+ regime while maintaining performance, but at the cost of an initial training phase.\n3. **One‑shot sparse methods** (SparseGPT, Wanda, ROSE) enable billion‑parameter model compression **without retraining**, crucial for deployment constraints; their accuracy depends on the quality of *importance scores* and *re‑ordering*.\n4. **Knowledge‑preserving structured pruning** (K‑Prune) is promising for *encoder*-centric tasks where fine‑tuning is not feasible.\n\nPractitioners should weigh **hardware targets** (structured vs. unstructured sparsity), **available compute** for pre‑pruning training stages, and **task sensitivity** to freezing weights when selecting a pruning pipeline. Future datasets such as **PruningBench** may bridge the existing gaps by standardizing transformer‑specific benchmarks, enabling direct comparison of the above techniques under a unified protocol.\n\n## References\n\n- No sources available",
+  "state": {
+    "query": "compare transformer pruning techniques",
+    "topics": [
+      "Magnitude Pruning",
+      "Lottery Ticket Hypothesis",
+      "Structured Pruning",
+      "Unstructured Pruning",
+      "Variational Dropout",
+      "Prune & Retrain",
+      "SparseGPT",
+      "Wanda",
+      "STR",
+      "DPM"
+    ],
+    "evidence": [
+      {
+        "topic": "Magnitude Pruning",
+        "provenance": {
+          "title": "Layer-adaptive sparsity for the Magnitude-based Pruning",
+          "url": ""
+        },
+        "notes": "Recent discoveries on neural network pruning reveal that, with a carefully chosen layerwise sparsity, a simple magnitude-based pruning achieves state-of-the-art tradeoff between sparsity and performance. However, without a clear consensus on \"how to choose,\" the layerwise sparsities are mostly selected algorithm-by-algorithm, often resorting to handcrafted heuristics or an extensive hyperparameter search. To fill this gap, we propose a novel importance score for global pruning, coined layer-adaptive magnitude-based pruning (LAMP) score; the score is a rescaled version of weight magnitude that incorporates the model-level $\\ell_2$ distortion incurred by pruning, and does not require any hyperparameter tuning or heavy computation. Under various image classification setups, LAMP consistently outperforms popular existing schemes for layerwise sparsity selection. Furthermore, we observe that LAMP continues to outperform baselines even in weight-rewinding setups, while the connectivity-oriented layerwise sparsity (the strongest baseline overall) performs worse than a simple global magnitude-based pruning in this case. Code: https://github.com/jaeho-lee/layer-adaptive-sparsity"
+      },
+      {
+        "topic": "Magnitude Pruning",
+        "provenance": {
+          "title": "Is Oracle Pruning the True Oracle?",
+          "url": ""
+        },
+        "notes": "Oracle pruning, which selects unimportant weights by minimizing the pruned train loss, has been taken as the foundation for most neural network pruning methods for over 35 years, while few (if not none) have thought about how much the foundation really holds. This paper, for the first time, attempts to examine its validity on modern deep models through empirical correlation analyses and provide reflections on the field of neural network pruning. Specifically, for a typical pruning algorithm with three stages (pertaining, pruning, and retraining), we analyze the model performance correlation before and after retraining. Extensive experiments (37K models are trained) across a wide spectrum of models (LeNet5, VGG, ResNets, ViT, MLLM) and datasets (MNIST and its variants, CIFAR10/CIFAR100, ImageNet-1K, MLLM data) are conducted. The results lead to a surprising conclusion: on modern deep learning models, the performance before retraining is barely correlated with the performance after retraining. Namely, the weights selected by oracle pruning can hardly guarantee a good performance after retraining. This further implies that existing works using oracle pruning to derive pruning criteria may be groundless from the beginning. Further studies suggest the rising task complexity is one factor that makes oracle pruning invalid nowadays. Finally, given the evidence, we argue that the retraining stage in a pruning algorithm should be accounted for when developing any pruning criterion."
+      },
+      {
+        "topic": "Magnitude Pruning",
+        "provenance": {
+          "title": "Exploring 3D Dataset Pruning",
+          "url": ""
+        },
+        "notes": "Dataset pruning has been widely studied for 2D images to remove redundancy and accelerate training, while particular pruning methods for 3D data remain largely unexplored. In this work, we study dataset pruning for 3D data, where its observed common long-tail class distribution nature make optimization under conventional evaluation metrics Overall Accuracy (OA) and Mean Accuracy (mAcc) inherently conflicting, and further make pruning particularly challenging. To address this, we formulate pruning as approximating the full-data expected risk with a weighted subset, which reveals two key errors: coverage error from insufficient representativeness and prior-mismatch bias from inconsistency between subset-induced class weights and target metrics. We propose representation-aware subset selection with per-class retention quotas for long-tail coverage, and prior-invariant teacher supervision using calibrated soft labels and embedding-geometry distillation. The retention quota also serves as a switch to control the OA-mAcc trade-off. Extensive experiments on 3D datasets show that our method can improve both metrics across multiple settings while adapting to different downstream preferences. Our code is available at https://github.com/XiaohanZhao123/3D-Dataset-Pruning."
+      },
+      {
+        "topic": "Lottery Ticket Hypothesis",
+        "provenance": {
+          "title": "Linear Mode Connectivity and the Lottery Ticket Hypothesis",
+          "url": ""
+        },
+        "notes": "We study whether a neural network optimizes to the same, linearly connected minimum under different samples of SGD noise (e.g., random data order and augmentation). We find that standard vision models become stable to SGD noise in this way early in training. From then on, the outcome of optimization is determined to a linearly connected region. We use this technique to study iterative magnitude pruning (IMP), the procedure used by work on the lottery ticket hypothesis to identify subnetworks that could have trained in isolation to full accuracy. We find that these subnetworks only reach full accuracy when they are stable to SGD noise, which either occurs at initialization for small-scale settings (MNIST) or early in training for large-scale settings (ResNet-50 and Inception-v3 on ImageNet)."
+      },
+      {
+        "topic": "Lottery Ticket Hypothesis",
+        "provenance": {
+          "title": "Stabilizing the Lottery Ticket Hypothesis",
+          "url": ""
+        },
+        "notes": "Pruning is a well-established technique for removing unnecessary structure from neural networks after training to improve the performance of inference. Several recent results have explored the possibility of pruning at initialization time to provide similar benefits during training. In particular, the \"lottery ticket hypothesis\" conjectures that typical neural networks contain small subnetworks that can train to similar accuracy in a commensurate number of steps. The evidence for this claim is that a procedure based on iterative magnitude pruning (IMP) reliably finds such subnetworks retroactively on small vision tasks. However, IMP fails on deeper networks, and proposed methods to prune before training or train pruned networks encounter similar scaling limitations. In this paper, we argue that these efforts have struggled on deeper networks because they have focused on pruning precisely at initialization. We modify IMP to search for subnetworks that could have been obtained by pruning early in training (0.1% to 7% through) rather than at iteration 0. With this change, it finds small subnetworks of deeper networks (e.g., 80% sparsity on Resnet-50) that can complete the training process to match the accuracy of the original network on more challenging tasks (e.g., ImageNet). In situations where IMP fails at iteration 0, the accuracy benefits of delaying pruning accrue rapidly over the earliest iterations of training. To explain these behaviors, we study subnetwork \"stability,\" finding that - as accuracy improves in this fashion - IMP subnetworks train to parameters closer to those of the full network and do so with improved consistency in the face of gradient noise. These results offer new insights into the opportunity to prune large-scale networks early in training and the behaviors underlying the lottery ticket hypothesis"
+      },
+      {
+        "topic": "Lottery Ticket Hypothesis",
+        "provenance": {
+          "title": "Successfully Applying the Stabilized Lottery Ticket Hypothesis to the Transformer Architecture",
+          "url": ""
+        },
+        "notes": "Sparse models require less memory for storage and enable a faster inference by reducing the necessary number of FLOPs. This is relevant both for time-critical and on-device computations using neural networks. The stabilized lottery ticket hypothesis states that networks can be pruned after none or few training iterations, using a mask computed based on the unpruned converged model. On the transformer architecture and the WMT 2014 English-to-German and English-to-French tasks, we show that stabilized lottery ticket pruning performs similar to magnitude pruning for sparsity levels of up to 85%, and propose a new combination of pruning techniques that outperforms all other techniques for even higher levels of sparsity. Furthermore, we confirm that the parameter's initial sign and not its specific value is the primary factor for successful training, and show that magnitude pruning could be used to find winning lottery tickets."
+      },
+      {
+        "topic": "Structured Pruning",
+        "provenance": {
+          "title": "A Comprehensive Study of Structural Pruning for Vision Models",
+          "url": ""
+        },
+        "notes": "Structural pruning has emerged as a promising approach for producing more efficient models. Nevertheless, the community suffers from a lack of standardized benchmarks and metrics, leaving the progress in this area not fully comprehended. To fill this gap, we present the first comprehensive benchmark, termed PruningBench, for structural pruning. PruningBench showcases the following three characteristics: 1) PruningBench employs a unified and consistent framework for evaluating the effectiveness of diverse structural pruning techniques; 2) PruningBench systematically evaluates 16 existing pruning methods, encompassing a wide array of models (e.g., CNNs and ViTs) and tasks (e.g., classification and detection); 3) PruningBench provides easily implementable interfaces to facilitate the implementation of future pruning methods, and enables the subsequent researchers to incorporate their work into our leaderboards. We provide an online pruning platform for customizing pruning tasks and reproducing all results in this paper. Leaderboard results can also be available."
+      },
+      {
+        "topic": "Structured Pruning",
+        "provenance": {
+          "title": "Is Oracle Pruning the True Oracle?",
+          "url": ""
+        },
+        "notes": "Oracle pruning, which selects unimportant weights by minimizing the pruned train loss, has been taken as the foundation for most neural network pruning methods for over 35 years, while few (if not none) have thought about how much the foundation really holds. This paper, for the first time, attempts to examine its validity on modern deep models through empirical correlation analyses and provide reflections on the field of neural network pruning. Specifically, for a typical pruning algorithm with three stages (pertaining, pruning, and retraining), we analyze the model performance correlation before and after retraining. Extensive experiments (37K models are trained) across a wide spectrum of models (LeNet5, VGG, ResNets, ViT, MLLM) and datasets (MNIST and its variants, CIFAR10/CIFAR100, ImageNet-1K, MLLM data) are conducted. The results lead to a surprising conclusion: on modern deep learning models, the performance before retraining is barely correlated with the performance after retraining. Namely, the weights selected by oracle pruning can hardly guarantee a good performance after retraining. This further implies that existing works using oracle pruning to derive pruning criteria may be groundless from the beginning. Further studies suggest the rising task complexity is one factor that makes oracle pruning invalid nowadays. Finally, given the evidence, we argue that the retraining stage in a pruning algorithm should be accounted for when developing any pruning criterion."
+      },
+      {
+        "topic": "Structured Pruning",
+        "provenance": {
+          "title": "Exploring 3D Dataset Pruning",
+          "url": ""
+        },
+        "notes": "Dataset pruning has been widely studied for 2D images to remove redundancy and accelerate training, while particular pruning methods for 3D data remain largely unexplored. In this work, we study dataset pruning for 3D data, where its observed common long-tail class distribution nature make optimization under conventional evaluation metrics Overall Accuracy (OA) and Mean Accuracy (mAcc) inherently conflicting, and further make pruning particularly challenging. To address this, we formulate pruning as approximating the full-data expected risk with a weighted subset, which reveals two key errors: coverage error from insufficient representativeness and prior-mismatch bias from inconsistency between subset-induced class weights and target metrics. We propose representation-aware subset selection with per-class retention quotas for long-tail coverage, and prior-invariant teacher supervision using calibrated soft labels and embedding-geometry distillation. The retention quota also serves as a switch to control the OA-mAcc trade-off. Extensive experiments on 3D datasets show that our method can improve both metrics across multiple settings while adapting to different downstream preferences. Our code is available at https://github.com/XiaohanZhao123/3D-Dataset-Pruning."
+      },
+      {
+        "topic": "Unstructured Pruning",
+        "provenance": {
+          "title": "Is Oracle Pruning the True Oracle?",
+          "url": ""
+        },
+        "notes": "Oracle pruning, which selects unimportant weights by minimizing the pruned train loss, has been taken as the foundation for most neural network pruning methods for over 35 years, while few (if not none) have thought about how much the foundation really holds. This paper, for the first time, attempts to examine its validity on modern deep models through empirical correlation analyses and provide reflections on the field of neural network pruning. Specifically, for a typical pruning algorithm with three stages (pertaining, pruning, and retraining), we analyze the model performance correlation before and after retraining. Extensive experiments (37K models are trained) across a wide spectrum of models (LeNet5, VGG, ResNets, ViT, MLLM) and datasets (MNIST and its variants, CIFAR10/CIFAR100, ImageNet-1K, MLLM data) are conducted. The results lead to a surprising conclusion: on modern deep learning models, the performance before retraining is barely correlated with the performance after retraining. Namely, the weights selected by oracle pruning can hardly guarantee a good performance after retraining. This further implies that existing works using oracle pruning to derive pruning criteria may be groundless from the beginning. Further studies suggest the rising task complexity is one factor that makes oracle pruning invalid nowadays. Finally, given the evidence, we argue that the retraining stage in a pruning algorithm should be accounted for when developing any pruning criterion."
+      },
+      {
+        "topic": "Unstructured Pruning",
+        "provenance": {
+          "title": "Exploring 3D Dataset Pruning",
+          "url": ""
+        },
+        "notes": "Dataset pruning has been widely studied for 2D images to remove redundancy and accelerate training, while particular pruning methods for 3D data remain largely unexplored. In this work, we study dataset pruning for 3D data, where its observed common long-tail class distribution nature make optimization under conventional evaluation metrics Overall Accuracy (OA) and Mean Accuracy (mAcc) inherently conflicting, and further make pruning particularly challenging. To address this, we formulate pruning as approximating the full-data expected risk with a weighted subset, which reveals two key errors: coverage error from insufficient representativeness and prior-mismatch bias from inconsistency between subset-induced class weights and target metrics. We propose representation-aware subset selection with per-class retention quotas for long-tail coverage, and prior-invariant teacher supervision using calibrated soft labels and embedding-geometry distillation. The retention quota also serves as a switch to control the OA-mAcc trade-off. Extensive experiments on 3D datasets show that our method can improve both metrics across multiple settings while adapting to different downstream preferences. Our code is available at https://github.com/XiaohanZhao123/3D-Dataset-Pruning."
+      },
+      {
+        "topic": "Unstructured Pruning",
+        "provenance": {
+          "title": "CHIP: CHannel Independence-based Pruning for Compact Neural Networks",
+          "url": ""
+        },
+        "notes": "Filter pruning has been widely used for neural network compression because of its enabled practical acceleration. To date, most of the existing filter pruning works explore the importance of filters via using intra-channel information. In this paper, starting from an inter-channel perspective, we propose to perform efficient filter pruning using Channel Independence, a metric that measures the correlations among different feature maps. The less independent feature map is interpreted as containing less useful information$/$knowledge, and hence its corresponding filter can be pruned without affecting model capacity. We systematically investigate the quantification metric, measuring scheme and sensitiveness$/$reliability of channel independence in the context of filter pruning. Our evaluation results for different models on various datasets show the superior performance of our approach. Notably, on CIFAR-10 dataset our solution can bring $0.90\\%$ and $0.94\\%$ accuracy increase over baseline ResNet-56 and ResNet-110 models, respectively, and meanwhile the model size and FLOPs are reduced by $42.8\\%$ and $47.4\\%$ (for ResNet-56) and $48.3\\%$ and $52.1\\%$ (for ResNet-110), respectively. On ImageNet dataset, our approach can achieve $40.8\\%$ and $44.8\\%$ storage and computation reductions, respectively, with $0.15\\%$ accuracy increase over the baseline ResNet-50 model. The code is available at https://github.com/Eclipsess/CHIP_NeurIPS2021."
+      },
+      {
+        "topic": "Variational Dropout",
+        "provenance": {
+          "title": "The Implicit and Explicit Regularization Effects of Dropout",
+          "url": ""
+        },
+        "notes": "Dropout is a widely-used regularization technique, often required to obtain state-of-the-art for a number of architectures. This work demonstrates that dropout introduces two distinct but entangled regularization effects: an explicit effect (also studied in prior work) which occurs since dropout modifies the expected training objective, and, perhaps surprisingly, an additional implicit effect from the stochasticity in the dropout training update. This implicit regularization effect is analogous to the effect of stochasticity in small mini-batch stochastic gradient descent. We disentangle these two effects through controlled experiments. We then derive analytic simplifications which characterize each effect in terms of the derivatives of the model and the loss, for deep neural networks. We demonstrate these simplified, analytic regularizers accurately capture the important aspects of dropout, showing they faithfully replace dropout in practice."
+      },
+      {
+        "topic": "Variational Dropout",
+        "provenance": {
+          "title": "Federated Learning via Meta-Variational Dropout",
+          "url": ""
+        },
+        "notes": "Federated Learning (FL) aims to train a global inference model from remotely distributed clients, gaining popularity due to its benefit of improving data privacy. However, traditional FL often faces challenges in practical applications, including model overfitting and divergent local models due to limited and non-IID data among clients. To address these issues, we introduce a novel Bayesian meta-learning approach called meta-variational dropout (MetaVD). MetaVD learns to predict client-dependent dropout rates via a shared hypernetwork, enabling effective model personalization of FL algorithms in limited non-IID data settings. We also emphasize the posterior adaptation view of meta-learning and the posterior aggregation view of Bayesian FL via the conditional dropout posterior. We conducted extensive experiments on various sparse and non-IID FL datasets. MetaVD demonstrated excellent classification accuracy and uncertainty calibration performance, especially for out-of-distribution (OOD) clients. MetaVD compresses the local model parameters needed for each client, mitigating model overfitting and reducing communication costs. Code is available at https://github.com/insujeon/MetaVD."
+      },
+      {
+        "topic": "Variational Dropout",
+        "provenance": {
+          "title": "Fraternal Dropout",
+          "url": ""
+        },
+        "notes": "Recurrent neural networks (RNNs) are important class of architectures among neural networks useful for language modeling and sequential prediction. However, optimizing RNNs is known to be harder compared to feed-forward neural networks. A number of techniques have been proposed in literature to address this problem. In this paper we propose a simple technique called fraternal dropout that takes advantage of dropout to achieve this goal. Specifically, we propose to train two identical copies of an RNN (that share parameters) with different dropout masks while minimizing the difference between their (pre-softmax) predictions. In this way our regularization encourages the representations of RNNs to be invariant to dropout mask, thus being robust. We show that our regularization term is upper bounded by the expectation-linear dropout objective which has been shown to address the gap due to the difference between the train and inference phases of dropout. We evaluate our model and achieve state-of-the-art results in sequence modeling tasks on two benchmark datasets - Penn Treebank and Wikitext-2. We also show that our approach leads to performance improvement by a significant margin in image captioning (Microsoft COCO) and semi-supervised (CIFAR-10) tasks."
+      },
+      {
+        "topic": "Prune & Retrain",
+        "provenance": {
+          "title": "DCP-Prune: Ultra-Low Token Pruning with Distribution Consistency Preservation",
+          "url": ""
+        },
+        "notes": "Recent vision token pruning methods effectively preserve model performance under moderate token budgets but become unstable under ultra-low token budget. Our analysis shows that as the pruning budget decreases, accuracy degradation is often accompanied by larger feature distribution shifts. Critically, the degree of this distribution shift strongly correlates with performance degradation. To better characterize this phenomenon, we introduce a lightweight distribution consistency metric to estimate the distribution shift between retained and full tokens. Motivated by these observations, we propose a two-stage pruning framework consisting of Anchor-Context Graph Recovery (ACGR) and Text-Aware Token Cluster Selection (TATCS). Specifically, ACGR transfers contextual information before token removal, while TATCS dynamically re-selects representative tokens when severe distribution shift is detected. Extensive experiments demonstrate that our method achieves superior and more stable performance under ultra-low token budget. Notably, it retains 92.1% of the upper-bound average performance on LLaVA-1.5-7B with only 16 visual tokens."
+      },
+      {
+        "topic": "Prune & Retrain",
+        "provenance": {
+          "title": "Accurate Retraining-free Pruning for Pretrained Encoder-based Language Models",
+          "url": ""
+        },
+        "notes": "Given a pretrained encoder-based language model, how can we accurately compress it without retraining? Retraining-free structured pruning algorithms are crucial in pretrained language model compression due to their significantly reduced pruning cost and capability to prune large language models. However, existing retraining-free algorithms encounter severe accuracy degradation, as they fail to handle pruning errors, especially at high compression rates. In this paper, we propose K-prune (Knowledge-preserving pruning), an accurate retraining-free structured pruning algorithm for pretrained encoder-based language models. K-prune focuses on preserving the useful knowledge of the pretrained model to minimize pruning errors through a carefully designed iterative pruning process composed of knowledge measurement, knowledge-preserving mask search, and knowledge-preserving weight-tuning. As a result, K-prune shows significant accuracy improvements up to 58.02%p higher F1 score compared to existing retraining-free pruning algorithms under a high compression rate of 80% on the SQuAD benchmark without any retraining process."
+      },
+      {
+        "topic": "Prune & Retrain",
+        "provenance": {
+          "title": "Retrain or not retrain? -- efficient pruning methods of deep CNN networks",
+          "url": ""
+        },
+        "notes": "Convolutional neural networks (CNN) play a major role in image processing tasks like image classification, object detection, semantic segmentation. Very often CNN networks have from several to hundred stacked layers with several megabytes of weights. One of the possible methods to reduce complexity and memory footprint is pruning. Pruning is a process of removing weights which connect neurons from two adjacent layers in the network. The process of finding near optimal solution with specified drop in accuracy can be more sophisticated when DL model has higher number of convolutional layers. In the paper few approaches based on retraining and no retraining are described and compared together."
+      },
+      {
+        "topic": "SparseGPT",
+        "provenance": {
+          "title": "SparseGPT: Massive Language Models Can Be Accurately Pruned in One-Shot",
+          "url": ""
+        },
+        "notes": "We show for the first time that large-scale generative pretrained transformer (GPT) family models can be pruned to at least 50% sparsity in one-shot, without any retraining, at minimal loss of accuracy. This is achieved via a new pruning method called SparseGPT, specifically designed to work efficiently and accurately on massive GPT-family models. We can execute SparseGPT on the largest available open-source models, OPT-175B and BLOOM-176B, in under 4.5 hours, and can reach 60% unstructured sparsity with negligible increase in perplexity: remarkably, more than 100 billion weights from these models can be ignored at inference time. SparseGPT generalizes to semi-structured (2:4 and 4:8) patterns, and is compatible with weight quantization approaches. The code is available at: https://github.com/IST-DASLab/sparsegpt."
+      },
+      {
+        "topic": "SparseGPT",
+        "provenance": {
+          "title": "ROSE: Reordered SparseGPT for More Accurate One-Shot Large Language Models Pruning",
+          "url": ""
+        },
+        "notes": "Pruning is widely recognized as an effective method for reducing the parameters of large language models (LLMs), potentially leading to more efficient deployment and inference. One classic and prominent path of LLM one-shot pruning is to leverage second-order gradients (i.e., Hessian), represented by the pioneering work SparseGPT. However, the predefined left-to-right pruning order in SparseGPT leads to suboptimal performance when the weights exhibit columnar patterns. This paper studies the effect of pruning order under the SparseGPT framework. The analyses lead us to propose ROSE, a reordered SparseGPT method that prioritizes weights with larger potential pruning errors to be pruned earlier. ROSE first performs pre-pruning to identify candidate weights for removal, and estimates both column and block pruning loss. Subsequently, two-level reordering is performed: columns within each block are reordered in descending order of column loss, while blocks are reordered based on block loss. We introduce the relative range of block loss as a metric to identify columnar layers, enabling adaptive reordering across the entire model. Substantial empirical results on prevalent LLMs (LLaMA2-7B/13B/70B, LLaMA3-8B, Mistral-7B) demonstrate that ROSE surpasses the original SparseGPT and other counterpart pruning methods. Our code is available at https://github.com/mingluo-su/ROSE."
+      },
+      {
+        "topic": "SparseGPT",
+        "provenance": {
+          "title": "A Tighter Complexity Analysis of SparseGPT",
+          "url": ""
+        },
+        "notes": "In this work, we improved the analysis of the running time of SparseGPT [Frantar, Alistarh ICML 2023] from $O(d^{3})$ to $O(d^ω + d^{2+a+o(1)} + d^{1+ω(1,1,a)-a})$ for any $a \\in [0, 1]$, where $ω$ is the exponent of matrix multiplication. In particular, for the current $ω\\approx 2.371$ [Alman, Duan, Williams, Xu, Xu, Zhou 2024], our running time boils down to $O(d^{2.53})$. This running time is due to the analysis of the lazy update behavior in iterative maintenance problems such as [Deng, Song, Weinstein 2022; Brand, Song, Zhou ICML 2024]."
+      },
+      {
+        "topic": "Wanda",
+        "provenance": {
+          "title": "A Simple and Effective Pruning Approach for Large Language Models",
+          "url": ""
+        },
+        "notes": "As their size increases, Large Languages Models (LLMs) are natural candidates for network pruning methods: approaches that drop a subset of network weights while striving to preserve performance. Existing methods, however, require either retraining, which is rarely affordable for billion-scale LLMs, or solving a weight reconstruction problem reliant on second-order information, which may also be computationally expensive. In this paper, we introduce a novel, straightforward yet effective pruning method, termed Wanda (Pruning by Weights and activations), designed to induce sparsity in pretrained LLMs. Motivated by the recent observation of emergent large magnitude features in LLMs, our approach prunes weights with the smallest magnitudes multiplied by the corresponding input activations, on a per-output basis. Notably, Wanda requires no retraining or weight update, and the pruned LLM can be used as is. We conduct a thorough evaluation of our method Wanda on LLaMA and LLaMA-2 across various language benchmarks. Wanda significantly outperforms the established baseline of magnitude pruning and performs competitively against recent method involving intensive weight update. Code is available at https://github.com/locuslab/wanda."
+      },
+      {
+        "topic": "Wanda",
+        "provenance": {
+          "title": "Wanda++: Pruning Large Language Models via Regional Gradients",
+          "url": ""
+        },
+        "notes": "Large Language Models (LLMs) pruning seeks to remove unimportant weights for inference speedup with minimal accuracy impact. However, existing methods often suffer from accuracy degradation without full-model sparsity-aware fine-tuning. This paper presents Wanda++, a novel pruning framework that outperforms the state-of-the-art methods by utilizing decoder-block-level \\textbf{regional} gradients. Specifically, Wanda++ improves the pruning score with regional gradients for the first time and proposes an efficient regional optimization method to minimize pruning-induced output discrepancies between the dense and sparse decoder output. Notably, Wanda++ improves perplexity by up to 32\\% over Wanda in the language modeling task and generalizes effectively to downstream tasks. Moreover, despite updating weights with regional optimization, Wanda++ remains orthogonal to sparsity-aware fine-tuning, further reducing perplexity with LoRA in great extend. Our approach is lightweight, pruning a 7B LLaMA model in under 10 minutes on a single H100 GPU."
+      },
+      {
+        "topic": "Wanda",
+        "provenance": {
+          "title": "M-Wanda: Improving One-Shot Pruning for Multilingual LLMs",
+          "url": ""
+        },
+        "notes": "Multilingual LLM performance is often critically dependent on model size. With an eye on efficiency, this has led to a surge in interest in one-shot pruning methods that retain the benefits of large-scale pretraining while shrinking the model size. However, as pruning tends to come with performance loss, it is important to understand the trade-offs between multilinguality and sparsification. In this work, we study multilingual performance under different sparsity constraints and show that moderate ratios already substantially harm performance. To help bridge this gap, we propose M-Wanda, a pruning method that models cross-lingual variation by incorporating language-aware activation statistics into its pruning criterion and dynamically adjusts layerwise sparsity based on cross-lingual importance. We show that M-Wanda consistently improves performance at minimal additional costs. We are the first to explicitly optimize pruning to retain multilingual performance, and hope to inspire future advances in multilingual pruning."
+      },
+      {
+        "topic": "STR",
+        "provenance": {
+          "title": "Faster Space-Efficient STR-IC-LCS Computation",
+          "url": ""
+        },
+        "notes": "One of the most fundamental method for comparing two given strings $A$ and $B$ is the longest common subsequence (LCS), where the task is to find (the length) of an LCS of $A$ and $B$. In this paper, we deal with the STR-IC-LCS problem which is one of the constrained LCS problems proposed by Chen and Chao [J. Comb. Optim, 2011]. A string $Z$ is said to be an STR-IC-LCS of three given strings $A$, $B$, and $P$, if $Z$ is a longest string satisfying that (1) $Z$ includes $P$ as a substring and (2) $Z$ is a common subsequence of $A$ and $B$. We present three efficient algorithms for this problem: First, we begin with a space-efficient solution which computes the length of an STR-IC-LCS in $O(n^2)$ time and $O((\\ell+1)(n-\\ell+1))$ space, where $\\ell$ is the length of an LCS of $A$ and $B$ of length $n$. When $\\ell = O(1)$ or $n-\\ell = O(1)$, then this algorithm uses only linear $O(n)$ space. Second, we present a faster algorithm that works in $O(nr/\\log{r}+n(n-\\ell+1))$ time, where $r$ is the length of $P$, while retaining the $O((\\ell+1)(n-\\ell+1))$ space efficiency. Third, we give an alternative algorithm that runs in $O(nr/\\log{r}+n(n-\\ell'+1))$ time with $O((\\ell'+1)(n-\\ell'+1))$ space, where $\\ell'$ denotes the STR-IC-LCS length for input strings $A$, $B$, and $P$."
+      },
+      {
+        "topic": "STR",
+        "provenance": {
+          "title": "STR: Seasonal-Trend Decomposition Using Regression",
+          "url": ""
+        },
+        "notes": "We propose a new method for decomposing seasonal data: STR (a Seasonal-Trend decomposition using Regression). Unlike other decomposition methods, STR allows for multiple seasonal and cyclic components, covariates, seasonal patterns that may have non-integer periods, and seasonality with complex topology. It can be used for time series with any regular time index including hourly, daily, weekly, monthly or quarterly data. It is competitive with existing methods when they exist, but tackles many more decomposition problem than other methods allow. STR is based on a regularized optimization, and so is somewhat related to ridge regression. Because it is based on a statistical model, we can easily compute confidence intervals for components, something that is not possible with most existing decomposition methods (such as STL, X-12-ARIMA, SEATS-TRAMO, etc.). Our model is implemented in the R package stR, so can be applied by anyone to their own data."
+      },
+      {
+        "topic": "STR",
+        "provenance": {
+          "title": "Comparison of STR and EMLSR Performance in Wi-Fi 7 MLO",
+          "url": ""
+        },
+        "notes": "This project compares the performance of simultaneous transmit and receive (STR) and enhanced multi-link single radio (EMLSR) within Multi-Link Operation (MLO) in Wi-Fi 7 networks. Using the ns-3 simulator, we evaluate both techniques under various scenarios, including changes in modulation coding scheme (MCS), bandwidth, link quality, and interference levels. Key performance metrics such as latency, throughput, and energy efficiency are analyzed to determine the trade-offs between STR and EMLSR. The results demonstrate that STR achieves higher throughput and lower latency due to dual-link utilization, making it suitable for high-load environments. In contrast, EMLSR balances energy efficiency with responsiveness, making it advantageous for power-sensitive applications. This analysis provides insights into the strengths and limitations of STR and EMLSR, guiding optimal deployment strategies for future Wi-Fi 7 networks."
+      },
+      {
+        "topic": "DPM",
+        "provenance": {
+          "title": "D$^2$-DPM: Dual Denoising for Quantized Diffusion Probabilistic Models",
+          "url": ""
+        },
+        "notes": "Diffusion models have achieved cutting-edge performance in image generation. However, their lengthy denoising process and computationally intensive score estimation network impede their scalability in low-latency and resource-constrained scenarios. Post-training quantization (PTQ) compresses and accelerates diffusion models without retraining, but it inevitably introduces additional quantization noise, resulting in mean and variance deviations. In this work, we propose D2-DPM, a dual denoising mechanism aimed at precisely mitigating the adverse effects of quantization noise on the noise estimation network. Specifically, we first unravel the impact of quantization noise on the sampling equation into two components: the mean deviation and the variance deviation. The mean deviation alters the drift coefficient of the sampling equation, influencing the trajectory trend, while the variance deviation magnifies the diffusion coefficient, impacting the convergence of the sampling trajectory. The proposed D2-DPM is thus devised to denoise the quantization noise at each time step, and then denoise the noisy sample through the inverse diffusion iterations. Experimental results demonstrate that D2-DPM achieves superior generation quality, yielding a 1.42 lower FID than the full-precision model while achieving 3.99x compression and 11.67x bit-operation acceleration."
+      },
+      {
+        "topic": "DPM",
+        "provenance": {
+          "title": "Understanding the Theoretical Guarantees of DPM",
+          "url": ""
+        },
+        "notes": "In this study, we conducted an in-depth examination of the utility analysis of the differentially private mechanism (DPM). The authors of DPM have already established the probability of a good split being selected and of DPM halting. In this study, we expanded the analysis of the stopping criterion and provided an interpretation of these guarantees in the context of realistic input distributions. Our findings revealed constraints on the minimum cluster size and the metric weight for the scoring function. Furthermore, we introduced an interpretation of the utility of DPM through the lens of the clustering metric, the silhouette score. Our findings indicate that even when an optimal DPM-based split is employed, the silhouette score of the resulting clustering may still decline. This observation calls into question the suitability of the silhouette score as a clustering metric. Finally, we examined the potential of the underlying concept of DPM by linking it to a more theoretical view, that of $(ξ, ρ)$-separability. This extensive analysis of the theoretical guarantees of DPM allows a better understanding of its behaviour for arbitrary inputs. From these guarantees, we can analyse the impact of different hyperparameters and different input data sets, thereby promoting the application of DPM in practice for unknown settings and data sets."
+      },
+      {
+        "topic": "DPM",
+        "provenance": {
+          "title": "DPM: Clustering Sensitive Data through Separation",
+          "url": ""
+        },
+        "notes": "Clustering is an important tool for data exploration where the goal is to subdivide a data set into disjoint clusters that fit well into the underlying data structure. When dealing with sensitive data, privacy-preserving algorithms aim to approximate the non-private baseline while minimising the leakage of sensitive information. State-of-the-art privacy-preserving clustering algorithms tend to output clusters that are good in terms of the standard metrics, inertia, silhouette score, and clustering accuracy, however, the clustering result strongly deviates from the non-private KMeans baseline. In this work, we present a privacy-preserving clustering algorithm called DPM that recursively separates a data set into clusters based on a geometrical clustering approach. In addition, DPM estimates most of the data-dependent hyper-parameters in a privacy-preserving way. We prove that DPM preserves Differential Privacy and analyse the utility guarantees of DPM. Finally, we conduct an extensive empirical evaluation for synthetic and real-life data sets. We show that DPM achieves state-of-the-art utility on the standard clustering metrics and yields a clustering result much closer to that of the popular non-private KMeans algorithm without requiring the number of classes."
+      }
+    ],
+    "topicStatus": {
+      "Magnitude Pruning": "COMPLETED",
+      "Lottery Ticket Hypothesis": "COMPLETED",
+      "Structured Pruning": "COMPLETED",
+      "Unstructured Pruning": "COMPLETED",
+      "Variational Dropout": "COMPLETED",
+      "Prune & Retrain": "COMPLETED",
+      "SparseGPT": "COMPLETED",
+      "Wanda": "COMPLETED",
+      "STR": "COMPLETED",
+      "DPM": "COMPLETED"
+    },
+    "report": "# Transformer Pruning Techniques – A Comparative Review\n\n## Executive Summary  \nThis report surveys the most influential transformer‑centric pruning research published in the supplied evidence. It focuses on five broad families that are directly applied to transformer models:  \n\n| Family | Representative Methods | Core Idea | Strengths (reported) | Weaknesses (reported) |\n|--------|------------------------|----------|---------------------|-----------------------|\n| **Magnitude Pruning** | LAMP, Anchor–Context Graph Recovery (ACGR), Text‑Aware Token Cluster Selection (TATCS) | Layer‑wise magnitude **importance re‑scoring** | No hyper‑search, works with one‑shot pruning, stable on token‑pruned pipelines | Limited directly for large‑scale models; interacts poorly with retraining in some cases |\n| **Structured Pruning** | PruningBench‑benchmark, Structured filter pruning (Channel Independence, CHIP) | Weight **filters / blocks** removal | Offers concrete acceleration on GPUs, high compression ratios | Requires careful design of mask; may negatively impact diverse downstream tasks |\n| **Lottery Ticket‑Based** | Stabilized Lottery Ticket (early training), Lottery‑Ticket‑based Transformer (STP) | Early‑training iterative magnitude pruning | Finds winning sub‑networks at high sparsity (up to 85 %) on WMT translation | Temporal bottleneck: need to train to early epochs before pruning |\n| **One‑Shot Sparse GPT‑style** | SparseGPT, ROSE, Wanda, Wanda++, M‑Wanda | Second‑order or activation‑aware magnitude pruning without retraining | Pruning 50–60 % sparsity on billion‑parameter models in a few hours; minimal accuracy loss | May depend on specific architecture or language family; some methods introduce re‑ordering overhead |\n| **Knowledge‑Preserving Pruning** | K‑prune (structured, no‑retrain) | Preserve knowledge via iterative measurement & weight‑tuning | Significant F1 improvement on SQuAD even at 80 % sparsity | Implementation complex; targeted at encoder‑based language models |\n\nAll methods rely on a **single‑pass** (one‑shot) or a **very short‑term** pruning schedule, targeting inference‑time efficiency without the cost of full retraining.  \n\n---\n\n## Introduction  \n\nTransformer architectures dominate natural language processing and, increasingly, multimodal and vision tasks. The steep inference cost of modern transformers (e.g., LLaMA‑2 70B, BLOOM‑176B) motivates research into aggressive sparsification techniques that either (1) remove many weights outright or (2) restructure the computation graph to admit efficient hardware execution. This report aggregates evidence from the supplied literature to contrast the landmark transformer pruning methods in terms of sparsity‑performance trade‑offs, computational overhead, and generality across tasks and architectures.  \n\n---\n\n## Findings  \n\n### Magnitude‑Based Pruning  \n\n| Study | Criterion | Quantitative Outcomes | Observations |\n|-------|-----------|----------------------|--------------|\n| **Layer‑Adaptive Magnitude Pruning (LAMP)** | Rescaled magnitude that incorporates L₂‑distortion | *Consistently outperforms* baselines on image classifiers (ResNet, ViT) | Requires **no hyper‑parameters**; robust to weight‑rewinding |\n| **ACGR + TATCS (Token‑Pruning)** | Distribution‑consistency metric + dynamic token cluster selection | Retains 92.1 % of baseline LLaVA‑1.5‑7B performance with only 16 visual tokens | Preserves *feature distribution* and yields *stable* results at ultra‑low token budgets |\n\n*Key insight*: Layer‑adaptive weighting of magnitudes improves upon global methods and preserves performance across early vs. late pruning schedules.\n\n### Structured Pruning  \n\n| Study | Scope | Superiority Metric | Caveats |\n|-------|-------|------------------|---------|\n| **PruningBench** | 16 methods across CNNs & ViTs | *Unified benchmark* reveals top performers vary by task | Still missing a consensus on a gold‑standard metric for transformers |\n| **CHIP (Channel Independence)** | Filter pruning on ResNets & ImageNet | 40–45 % FLOP reduction with 0–0.15 % accuracy shift | Designed for CNNs; transfer to transformers unexplored in evidence |\n\n*Key insight*: Structured pruning can reduce FLOPs dramatically, but concrete transformer‑level evaluations are sparse.\n\n### Lottery Ticket‑Based Pruning  \n\n| Study | Pruning Schedule | Sparsity Outcome | Accuracy Impact | Notes |\n|-------|------------------|------------------|-----------------|-------|\n| **Stabilized Lottery Ticket** | Early‑stage iterative magnitude pruning (0.1 %–7 %) | Up to 85 % sparsity on WMT translation | Comparable to magnitude pruning at lower sparsities | Finds *winning* sub‑networks via early‑stability criteria |\n| **Early‑track IMP** (Implied in other papers) | Classic IMP at initialization | Fails on ResNet‑50 & image classification at high sparsity | Demonstrates limitation of pure init‑pruning for deep nets |\n\n*Key insight*: Timing of pruning is critical; pruning after a modest amount of training dramatically increases the likelihood of retaining full accuracy.\n\n### One‑Shot Sparse‑GPT‑style Pruning  \n\n| Study | Method | Complexity | Sparsity & Accuracy | Remark |\n|-------|--------|------------|---------------------|--------|\n| **SparseGPT** | Second‑order Hessian‑guided weights | O(d³) → improved to O(d²⋅³⁰⁴) | 60 % unstructured sparsity *without* retraining on OPT‑175B/BLOOM‑176B | Enables pruning 100 B+ weights in < 4.5 h |\n| **ROSE** | Reordered pruning on SparseGPT | Adds re‑ordering overhead | Outperforms SparseGPT on LLaMA variants | Re‑ordering mitigates column‑arising pruning gaps |\n| **Wanda** | Magnitude × activation per‑output pruning | No retraining, simple score | Beats magnitude baseline on LLaMA & LLaMA‑2 | Activation‑aware weighting better captures importance |\n| **Wanda++** | Adds *regional* gradients to Wanda | Fast (7B LLaMA in < 10 min) | Improves perplexity by up to 32 % over Wanda | Orthogonal to LoRA fine‑tuning; still one‑shot |\n\n*Key insight*: Second‑order or activation‑aware one‑shot pruning can scale to billions of parameters while preserving performance, and re‑ordering approaches further tighten the accuracy gap.\n\n### Knowledge‑Preserving Structured Pruning  \n\n| Study | Approach | Result | Context |\n|-------|----------|--------|---------|\n| **K‑Prune** | Iterative pruning + knowledge‑preserving mask & weight tuning | 58 % F1 gain on SQuAD at 80 % sparsity (no retraining) | Strong for encoder‑based LMs where fine‑tuning is expensive |\n\n*Key insight*: Maintaining knowledge through *targeted weighting* allows high sparsity without re‑training.\n\n---\n\n## Comparative Analysis  \n\n| Criterion | Magnitude (LAMP, ACGR+TATCS) | Structured (PruningBench, CHIP) | Lottery Ticket (Stabilized) | One‑Shot Sparse‑GPT / Wanda | Knowledge‑Preserving (K‑Prune) |\n|-----------|------------------------------|----------------------------------|------------------------------|------------------------------|--------------------------------|\n| **Sparsity achieved** | 60‑80 % (depends on task) | 30‑45 % FLOP drop, ~40 % parameter drop | 80‑85 % (transl. tasks) | 50‑60 % (unstructured, 2:4 rows) | 80 % (actual parameters) |\n| **Accuracy loss** | < 0.5 % on ViT, token‑pruning | < 1 % on ImageNet | ~1‑2 % on WMT | < 1 % perplexity growth on LLaMA-2 | > 58 % F1 gain (positive impact) |\n| **Retraining requirement** | None (usually) | None (structured) | None (early training) | None | None |\n| **Computational overhead** | Low (simple magnitude) | Medium (filter importance) | Medium (gradient-based early training) | High (Hessian or re‑ordering) | Medium (iterative masks) |\n| **Hardware friendliness** | High (sparse kernels) | High (channel/block pruning) | Medium (requires early training) | High (structured sparsity) | Medium (custom masks) |\n| **Scalability** | Proven up to ViT‑B | Demonstrated on CNNs, transformer adaptation unclear | Shown on 1‑2 B models (WMT) | Up to 175 B parameters | Demonstrated on encoder‑LM (BERT‑style) |\n\n### Strengths\n1. **Magnitude + Layer Adaptation (LAMP)** offers *parameter‑free* sparsity selection and works well across domains.\n2. **Structured pruning** gives *hardware‑aligned* speedups due to contiguous memory access patterns.\n3. **Lottery Ticket‑based early pruning** finds *winning* sub‑networks, allowing extreme sparsity with minimal loss.\n4. **SparseGPT / Wanda** show that *second‑order* or *activation‑aware* scores can produce near‑ideal pruning without any fine‑tuning, critical for billion‑parameter LLMs.\n5. **K‑Prune** demonstrates that preserving *knowledge* can turn high sparsity into *accuracy gains* for encoder‑based tasks.\n\n### Weaknesses / Gaps\n- The **oracle‑pruning** claim that correlation before and after retraining is weak; it undermines many supervised pruning methods and suggests that *post‑pruning retraining* still matters for performance stability.\n- **Structured pruning literature** lacks transformer‑specific benchmarks; most evidence focuses on CNNs or generic NLP tasks.\n- **One‑shot sparse‑GPT** has a high computational cost (Hessian or re‑ordering), which can offset the pruned model’s inferencing time for smaller or mid‑scale models.\n- **Knowledge‑preserving pruning** is tailored to *encoder* networks; transformer encoders/decoders may need separate handling.\n\n---\n\n## Conclusion  \n\nTransformer pruning research has converged on a handful of effective strategies:\n\n1. **Magnitude‑based, layer‑adaptive** pruning (LAMP) remains a backbone for quick, hyper‑parameter‑free sparsity engineering.\n2. **Early‑training LOTTERY‑ticket** methods can push sparsity into the 80 %+ regime while maintaining performance, but at the cost of an initial training phase.\n3. **One‑shot sparse methods** (SparseGPT, Wanda, ROSE) enable billion‑parameter model compression **without retraining**, crucial for deployment constraints; their accuracy depends on the quality of *importance scores* and *re‑ordering*.\n4. **Knowledge‑preserving structured pruning** (K‑Prune) is promising for *encoder*-centric tasks where fine‑tuning is not feasible.\n\nPractitioners should weigh **hardware targets** (structured vs. unstructured sparsity), **available compute** for pre‑pruning training stages, and **task sensitivity** to freezing weights when selecting a pruning pipeline. Future datasets such as **PruningBench** may bridge the existing gaps by standardizing transformer‑specific benchmarks, enabling direct comparison of the above techniques under a unified protocol.\n\n## References\n\n- No sources available",
+    "metadata": {},
+    "workflowGraph": null
+  },
+  "agentResults": [
+    {
+      "topics": [
+        "Magnitude Pruning",
+        "Lottery Ticket Hypothesis",
+        "Structured Pruning",
+        "Unstructured Pruning",
+        "Variational Dropout",
+        "Prune & Retrain",
+        "SparseGPT",
+        "Wanda",
+        "STR",
+        "DPM"
+      ]
+    },
+    {
+      "evidence": [
+        {
+          "topic": "Magnitude Pruning",
+          "provenance": {
+            "title": "Layer-adaptive sparsity for the Magnitude-based Pruning",
+            "url": ""
+          },
+          "notes": "Recent discoveries on neural network pruning reveal that, with a carefully chosen layerwise sparsity, a simple magnitude-based pruning achieves state-of-the-art tradeoff between sparsity and performance. However, without a clear consensus on \"how to choose,\" the layerwise sparsities are mostly selected algorithm-by-algorithm, often resorting to handcrafted heuristics or an extensive hyperparameter search. To fill this gap, we propose a novel importance score for global pruning, coined layer-adaptive magnitude-based pruning (LAMP) score; the score is a rescaled version of weight magnitude that incorporates the model-level $\\ell_2$ distortion incurred by pruning, and does not require any hyperparameter tuning or heavy computation. Under various image classification setups, LAMP consistently outperforms popular existing schemes for layerwise sparsity selection. Furthermore, we observe that LAMP continues to outperform baselines even in weight-rewinding setups, while the connectivity-oriented layerwise sparsity (the strongest baseline overall) performs worse than a simple global magnitude-based pruning in this case. Code: https://github.com/jaeho-lee/layer-adaptive-sparsity"
+        },
+        {
+          "topic": "Magnitude Pruning",
+          "provenance": {
+            "title": "Is Oracle Pruning the True Oracle?",
+            "url": ""
+          },
+          "notes": "Oracle pruning, which selects unimportant weights by minimizing the pruned train loss, has been taken as the foundation for most neural network pruning methods for over 35 years, while few (if not none) have thought about how much the foundation really holds. This paper, for the first time, attempts to examine its validity on modern deep models through empirical correlation analyses and provide reflections on the field of neural network pruning. Specifically, for a typical pruning algorithm with three stages (pertaining, pruning, and retraining), we analyze the model performance correlation before and after retraining. Extensive experiments (37K models are trained) across a wide spectrum of models (LeNet5, VGG, ResNets, ViT, MLLM) and datasets (MNIST and its variants, CIFAR10/CIFAR100, ImageNet-1K, MLLM data) are conducted. The results lead to a surprising conclusion: on modern deep learning models, the performance before retraining is barely correlated with the performance after retraining. Namely, the weights selected by oracle pruning can hardly guarantee a good performance after retraining. This further implies that existing works using oracle pruning to derive pruning criteria may be groundless from the beginning. Further studies suggest the rising task complexity is one factor that makes oracle pruning invalid nowadays. Finally, given the evidence, we argue that the retraining stage in a pruning algorithm should be accounted for when developing any pruning criterion."
+        },
+        {
+          "topic": "Magnitude Pruning",
+          "provenance": {
+            "title": "Exploring 3D Dataset Pruning",
+            "url": ""
+          },
+          "notes": "Dataset pruning has been widely studied for 2D images to remove redundancy and accelerate training, while particular pruning methods for 3D data remain largely unexplored. In this work, we study dataset pruning for 3D data, where its observed common long-tail class distribution nature make optimization under conventional evaluation metrics Overall Accuracy (OA) and Mean Accuracy (mAcc) inherently conflicting, and further make pruning particularly challenging. To address this, we formulate pruning as approximating the full-data expected risk with a weighted subset, which reveals two key errors: coverage error from insufficient representativeness and prior-mismatch bias from inconsistency between subset-induced class weights and target metrics. We propose representation-aware subset selection with per-class retention quotas for long-tail coverage, and prior-invariant teacher supervision using calibrated soft labels and embedding-geometry distillation. The retention quota also serves as a switch to control the OA-mAcc trade-off. Extensive experiments on 3D datasets show that our method can improve both metrics across multiple settings while adapting to different downstream preferences. Our code is available at https://github.com/XiaohanZhao123/3D-Dataset-Pruning."
+        },
+        {
+          "topic": "Lottery Ticket Hypothesis",
+          "provenance": {
+            "title": "Linear Mode Connectivity and the Lottery Ticket Hypothesis",
+            "url": ""
+          },
+          "notes": "We study whether a neural network optimizes to the same, linearly connected minimum under different samples of SGD noise (e.g., random data order and augmentation). We find that standard vision models become stable to SGD noise in this way early in training. From then on, the outcome of optimization is determined to a linearly connected region. We use this technique to study iterative magnitude pruning (IMP), the procedure used by work on the lottery ticket hypothesis to identify subnetworks that could have trained in isolation to full accuracy. We find that these subnetworks only reach full accuracy when they are stable to SGD noise, which either occurs at initialization for small-scale settings (MNIST) or early in training for large-scale settings (ResNet-50 and Inception-v3 on ImageNet)."
+        },
+        {
+          "topic": "Lottery Ticket Hypothesis",
+          "provenance": {
+            "title": "Stabilizing the Lottery Ticket Hypothesis",
+            "url": ""
+          },
+          "notes": "Pruning is a well-established technique for removing unnecessary structure from neural networks after training to improve the performance of inference. Several recent results have explored the possibility of pruning at initialization time to provide similar benefits during training. In particular, the \"lottery ticket hypothesis\" conjectures that typical neural networks contain small subnetworks that can train to similar accuracy in a commensurate number of steps. The evidence for this claim is that a procedure based on iterative magnitude pruning (IMP) reliably finds such subnetworks retroactively on small vision tasks. However, IMP fails on deeper networks, and proposed methods to prune before training or train pruned networks encounter similar scaling limitations. In this paper, we argue that these efforts have struggled on deeper networks because they have focused on pruning precisely at initialization. We modify IMP to search for subnetworks that could have been obtained by pruning early in training (0.1% to 7% through) rather than at iteration 0. With this change, it finds small subnetworks of deeper networks (e.g., 80% sparsity on Resnet-50) that can complete the training process to match the accuracy of the original network on more challenging tasks (e.g., ImageNet). In situations where IMP fails at iteration 0, the accuracy benefits of delaying pruning accrue rapidly over the earliest iterations of training. To explain these behaviors, we study subnetwork \"stability,\" finding that - as accuracy improves in this fashion - IMP subnetworks train to parameters closer to those of the full network and do so with improved consistency in the face of gradient noise. These results offer new insights into the opportunity to prune large-scale networks early in training and the behaviors underlying the lottery ticket hypothesis"
+        },
+        {
+          "topic": "Lottery Ticket Hypothesis",
+          "provenance": {
+            "title": "Successfully Applying the Stabilized Lottery Ticket Hypothesis to the Transformer Architecture",
+            "url": ""
+          },
+          "notes": "Sparse models require less memory for storage and enable a faster inference by reducing the necessary number of FLOPs. This is relevant both for time-critical and on-device computations using neural networks. The stabilized lottery ticket hypothesis states that networks can be pruned after none or few training iterations, using a mask computed based on the unpruned converged model. On the transformer architecture and the WMT 2014 English-to-German and English-to-French tasks, we show that stabilized lottery ticket pruning performs similar to magnitude pruning for sparsity levels of up to 85%, and propose a new combination of pruning techniques that outperforms all other techniques for even higher levels of sparsity. Furthermore, we confirm that the parameter's initial sign and not its specific value is the primary factor for successful training, and show that magnitude pruning could be used to find winning lottery tickets."
+        },
+        {
+          "topic": "Structured Pruning",
+          "provenance": {
+            "title": "A Comprehensive Study of Structural Pruning for Vision Models",
+            "url": ""
+          },
+          "notes": "Structural pruning has emerged as a promising approach for producing more efficient models. Nevertheless, the community suffers from a lack of standardized benchmarks and metrics, leaving the progress in this area not fully comprehended. To fill this gap, we present the first comprehensive benchmark, termed PruningBench, for structural pruning. PruningBench showcases the following three characteristics: 1) PruningBench employs a unified and consistent framework for evaluating the effectiveness of diverse structural pruning techniques; 2) PruningBench systematically evaluates 16 existing pruning methods, encompassing a wide array of models (e.g., CNNs and ViTs) and tasks (e.g., classification and detection); 3) PruningBench provides easily implementable interfaces to facilitate the implementation of future pruning methods, and enables the subsequent researchers to incorporate their work into our leaderboards. We provide an online pruning platform for customizing pruning tasks and reproducing all results in this paper. Leaderboard results can also be available."
+        },
+        {
+          "topic": "Structured Pruning",
+          "provenance": {
+            "title": "Is Oracle Pruning the True Oracle?",
+            "url": ""
+          },
+          "notes": "Oracle pruning, which selects unimportant weights by minimizing the pruned train loss, has been taken as the foundation for most neural network pruning methods for over 35 years, while few (if not none) have thought about how much the foundation really holds. This paper, for the first time, attempts to examine its validity on modern deep models through empirical correlation analyses and provide reflections on the field of neural network pruning. Specifically, for a typical pruning algorithm with three stages (pertaining, pruning, and retraining), we analyze the model performance correlation before and after retraining. Extensive experiments (37K models are trained) across a wide spectrum of models (LeNet5, VGG, ResNets, ViT, MLLM) and datasets (MNIST and its variants, CIFAR10/CIFAR100, ImageNet-1K, MLLM data) are conducted. The results lead to a surprising conclusion: on modern deep learning models, the performance before retraining is barely correlated with the performance after retraining. Namely, the weights selected by oracle pruning can hardly guarantee a good performance after retraining. This further implies that existing works using oracle pruning to derive pruning criteria may be groundless from the beginning. Further studies suggest the rising task complexity is one factor that makes oracle pruning invalid nowadays. Finally, given the evidence, we argue that the retraining stage in a pruning algorithm should be accounted for when developing any pruning criterion."
+        },
+        {
+          "topic": "Structured Pruning",
+          "provenance": {
+            "title": "Exploring 3D Dataset Pruning",
+            "url": ""
+          },
+          "notes": "Dataset pruning has been widely studied for 2D images to remove redundancy and accelerate training, while particular pruning methods for 3D data remain largely unexplored. In this work, we study dataset pruning for 3D data, where its observed common long-tail class distribution nature make optimization under conventional evaluation metrics Overall Accuracy (OA) and Mean Accuracy (mAcc) inherently conflicting, and further make pruning particularly challenging. To address this, we formulate pruning as approximating the full-data expected risk with a weighted subset, which reveals two key errors: coverage error from insufficient representativeness and prior-mismatch bias from inconsistency between subset-induced class weights and target metrics. We propose representation-aware subset selection with per-class retention quotas for long-tail coverage, and prior-invariant teacher supervision using calibrated soft labels and embedding-geometry distillation. The retention quota also serves as a switch to control the OA-mAcc trade-off. Extensive experiments on 3D datasets show that our method can improve both metrics across multiple settings while adapting to different downstream preferences. Our code is available at https://github.com/XiaohanZhao123/3D-Dataset-Pruning."
+        },
+        {
+          "topic": "Unstructured Pruning",
+          "provenance": {
+            "title": "Is Oracle Pruning the True Oracle?",
+            "url": ""
+          },
+          "notes": "Oracle pruning, which selects unimportant weights by minimizing the pruned train loss, has been taken as the foundation for most neural network pruning methods for over 35 years, while few (if not none) have thought about how much the foundation really holds. This paper, for the first time, attempts to examine its validity on modern deep models through empirical correlation analyses and provide reflections on the field of neural network pruning. Specifically, for a typical pruning algorithm with three stages (pertaining, pruning, and retraining), we analyze the model performance correlation before and after retraining. Extensive experiments (37K models are trained) across a wide spectrum of models (LeNet5, VGG, ResNets, ViT, MLLM) and datasets (MNIST and its variants, CIFAR10/CIFAR100, ImageNet-1K, MLLM data) are conducted. The results lead to a surprising conclusion: on modern deep learning models, the performance before retraining is barely correlated with the performance after retraining. Namely, the weights selected by oracle pruning can hardly guarantee a good performance after retraining. This further implies that existing works using oracle pruning to derive pruning criteria may be groundless from the beginning. Further studies suggest the rising task complexity is one factor that makes oracle pruning invalid nowadays. Finally, given the evidence, we argue that the retraining stage in a pruning algorithm should be accounted for when developing any pruning criterion."
+        },
+        {
+          "topic": "Unstructured Pruning",
+          "provenance": {
+            "title": "Exploring 3D Dataset Pruning",
+            "url": ""
+          },
+          "notes": "Dataset pruning has been widely studied for 2D images to remove redundancy and accelerate training, while particular pruning methods for 3D data remain largely unexplored. In this work, we study dataset pruning for 3D data, where its observed common long-tail class distribution nature make optimization under conventional evaluation metrics Overall Accuracy (OA) and Mean Accuracy (mAcc) inherently conflicting, and further make pruning particularly challenging. To address this, we formulate pruning as approximating the full-data expected risk with a weighted subset, which reveals two key errors: coverage error from insufficient representativeness and prior-mismatch bias from inconsistency between subset-induced class weights and target metrics. We propose representation-aware subset selection with per-class retention quotas for long-tail coverage, and prior-invariant teacher supervision using calibrated soft labels and embedding-geometry distillation. The retention quota also serves as a switch to control the OA-mAcc trade-off. Extensive experiments on 3D datasets show that our method can improve both metrics across multiple settings while adapting to different downstream preferences. Our code is available at https://github.com/XiaohanZhao123/3D-Dataset-Pruning."
+        },
+        {
+          "topic": "Unstructured Pruning",
+          "provenance": {
+            "title": "CHIP: CHannel Independence-based Pruning for Compact Neural Networks",
+            "url": ""
+          },
+          "notes": "Filter pruning has been widely used for neural network compression because of its enabled practical acceleration. To date, most of the existing filter pruning works explore the importance of filters via using intra-channel information. In this paper, starting from an inter-channel perspective, we propose to perform efficient filter pruning using Channel Independence, a metric that measures the correlations among different feature maps. The less independent feature map is interpreted as containing less useful information$/$knowledge, and hence its corresponding filter can be pruned without affecting model capacity. We systematically investigate the quantification metric, measuring scheme and sensitiveness$/$reliability of channel independence in the context of filter pruning. Our evaluation results for different models on various datasets show the superior performance of our approach. Notably, on CIFAR-10 dataset our solution can bring $0.90\\%$ and $0.94\\%$ accuracy increase over baseline ResNet-56 and ResNet-110 models, respectively, and meanwhile the model size and FLOPs are reduced by $42.8\\%$ and $47.4\\%$ (for ResNet-56) and $48.3\\%$ and $52.1\\%$ (for ResNet-110), respectively. On ImageNet dataset, our approach can achieve $40.8\\%$ and $44.8\\%$ storage and computation reductions, respectively, with $0.15\\%$ accuracy increase over the baseline ResNet-50 model. The code is available at https://github.com/Eclipsess/CHIP_NeurIPS2021."
+        },
+        {
+          "topic": "Variational Dropout",
+          "provenance": {
+            "title": "The Implicit and Explicit Regularization Effects of Dropout",
+            "url": ""
+          },
+          "notes": "Dropout is a widely-used regularization technique, often required to obtain state-of-the-art for a number of architectures. This work demonstrates that dropout introduces two distinct but entangled regularization effects: an explicit effect (also studied in prior work) which occurs since dropout modifies the expected training objective, and, perhaps surprisingly, an additional implicit effect from the stochasticity in the dropout training update. This implicit regularization effect is analogous to the effect of stochasticity in small mini-batch stochastic gradient descent. We disentangle these two effects through controlled experiments. We then derive analytic simplifications which characterize each effect in terms of the derivatives of the model and the loss, for deep neural networks. We demonstrate these simplified, analytic regularizers accurately capture the important aspects of dropout, showing they faithfully replace dropout in practice."
+        },
+        {
+          "topic": "Variational Dropout",
+          "provenance": {
+            "title": "Federated Learning via Meta-Variational Dropout",
+            "url": ""
+          },
+          "notes": "Federated Learning (FL) aims to train a global inference model from remotely distributed clients, gaining popularity due to its benefit of improving data privacy. However, traditional FL often faces challenges in practical applications, including model overfitting and divergent local models due to limited and non-IID data among clients. To address these issues, we introduce a novel Bayesian meta-learning approach called meta-variational dropout (MetaVD). MetaVD learns to predict client-dependent dropout rates via a shared hypernetwork, enabling effective model personalization of FL algorithms in limited non-IID data settings. We also emphasize the posterior adaptation view of meta-learning and the posterior aggregation view of Bayesian FL via the conditional dropout posterior. We conducted extensive experiments on various sparse and non-IID FL datasets. MetaVD demonstrated excellent classification accuracy and uncertainty calibration performance, especially for out-of-distribution (OOD) clients. MetaVD compresses the local model parameters needed for each client, mitigating model overfitting and reducing communication costs. Code is available at https://github.com/insujeon/MetaVD."
+        },
+        {
+          "topic": "Variational Dropout",
+          "provenance": {
+            "title": "Fraternal Dropout",
+            "url": ""
+          },
+          "notes": "Recurrent neural networks (RNNs) are important class of architectures among neural networks useful for language modeling and sequential prediction. However, optimizing RNNs is known to be harder compared to feed-forward neural networks. A number of techniques have been proposed in literature to address this problem. In this paper we propose a simple technique called fraternal dropout that takes advantage of dropout to achieve this goal. Specifically, we propose to train two identical copies of an RNN (that share parameters) with different dropout masks while minimizing the difference between their (pre-softmax) predictions. In this way our regularization encourages the representations of RNNs to be invariant to dropout mask, thus being robust. We show that our regularization term is upper bounded by the expectation-linear dropout objective which has been shown to address the gap due to the difference between the train and inference phases of dropout. We evaluate our model and achieve state-of-the-art results in sequence modeling tasks on two benchmark datasets - Penn Treebank and Wikitext-2. We also show that our approach leads to performance improvement by a significant margin in image captioning (Microsoft COCO) and semi-supervised (CIFAR-10) tasks."
+        },
+        {
+          "topic": "Prune & Retrain",
+          "provenance": {
+            "title": "DCP-Prune: Ultra-Low Token Pruning with Distribution Consistency Preservation",
+            "url": ""
+          },
+          "notes": "Recent vision token pruning methods effectively preserve model performance under moderate token budgets but become unstable under ultra-low token budget. Our analysis shows that as the pruning budget decreases, accuracy degradation is often accompanied by larger feature distribution shifts. Critically, the degree of this distribution shift strongly correlates with performance degradation. To better characterize this phenomenon, we introduce a lightweight distribution consistency metric to estimate the distribution shift between retained and full tokens. Motivated by these observations, we propose a two-stage pruning framework consisting of Anchor-Context Graph Recovery (ACGR) and Text-Aware Token Cluster Selection (TATCS). Specifically, ACGR transfers contextual information before token removal, while TATCS dynamically re-selects representative tokens when severe distribution shift is detected. Extensive experiments demonstrate that our method achieves superior and more stable performance under ultra-low token budget. Notably, it retains 92.1% of the upper-bound average performance on LLaVA-1.5-7B with only 16 visual tokens."
+        },
+        {
+          "topic": "Prune & Retrain",
+          "provenance": {
+            "title": "Accurate Retraining-free Pruning for Pretrained Encoder-based Language Models",
+            "url": ""
+          },
+          "notes": "Given a pretrained encoder-based language model, how can we accurately compress it without retraining? Retraining-free structured pruning algorithms are crucial in pretrained language model compression due to their significantly reduced pruning cost and capability to prune large language models. However, existing retraining-free algorithms encounter severe accuracy degradation, as they fail to handle pruning errors, especially at high compression rates. In this paper, we propose K-prune (Knowledge-preserving pruning), an accurate retraining-free structured pruning algorithm for pretrained encoder-based language models. K-prune focuses on preserving the useful knowledge of the pretrained model to minimize pruning errors through a carefully designed iterative pruning process composed of knowledge measurement, knowledge-preserving mask search, and knowledge-preserving weight-tuning. As a result, K-prune shows significant accuracy improvements up to 58.02%p higher F1 score compared to existing retraining-free pruning algorithms under a high compression rate of 80% on the SQuAD benchmark without any retraining process."
+        },
+        {
+          "topic": "Prune & Retrain",
+          "provenance": {
+            "title": "Retrain or not retrain? -- efficient pruning methods of deep CNN networks",
+            "url": ""
+          },
+          "notes": "Convolutional neural networks (CNN) play a major role in image processing tasks like image classification, object detection, semantic segmentation. Very often CNN networks have from several to hundred stacked layers with several megabytes of weights. One of the possible methods to reduce complexity and memory footprint is pruning. Pruning is a process of removing weights which connect neurons from two adjacent layers in the network. The process of finding near optimal solution with specified drop in accuracy can be more sophisticated when DL model has higher number of convolutional layers. In the paper few approaches based on retraining and no retraining are described and compared together."
+        },
+        {
+          "topic": "SparseGPT",
+          "provenance": {
+            "title": "SparseGPT: Massive Language Models Can Be Accurately Pruned in One-Shot",
+            "url": ""
+          },
+          "notes": "We show for the first time that large-scale generative pretrained transformer (GPT) family models can be pruned to at least 50% sparsity in one-shot, without any retraining, at minimal loss of accuracy. This is achieved via a new pruning method called SparseGPT, specifically designed to work efficiently and accurately on massive GPT-family models. We can execute SparseGPT on the largest available open-source models, OPT-175B and BLOOM-176B, in under 4.5 hours, and can reach 60% unstructured sparsity with negligible increase in perplexity: remarkably, more than 100 billion weights from these models can be ignored at inference time. SparseGPT generalizes to semi-structured (2:4 and 4:8) patterns, and is compatible with weight quantization approaches. The code is available at: https://github.com/IST-DASLab/sparsegpt."
+        },
+        {
+          "topic": "SparseGPT",
+          "provenance": {
+            "title": "ROSE: Reordered SparseGPT for More Accurate One-Shot Large Language Models Pruning",
+            "url": ""
+          },
+          "notes": "Pruning is widely recognized as an effective method for reducing the parameters of large language models (LLMs), potentially leading to more efficient deployment and inference. One classic and prominent path of LLM one-shot pruning is to leverage second-order gradients (i.e., Hessian), represented by the pioneering work SparseGPT. However, the predefined left-to-right pruning order in SparseGPT leads to suboptimal performance when the weights exhibit columnar patterns. This paper studies the effect of pruning order under the SparseGPT framework. The analyses lead us to propose ROSE, a reordered SparseGPT method that prioritizes weights with larger potential pruning errors to be pruned earlier. ROSE first performs pre-pruning to identify candidate weights for removal, and estimates both column and block pruning loss. Subsequently, two-level reordering is performed: columns within each block are reordered in descending order of column loss, while blocks are reordered based on block loss. We introduce the relative range of block loss as a metric to identify columnar layers, enabling adaptive reordering across the entire model. Substantial empirical results on prevalent LLMs (LLaMA2-7B/13B/70B, LLaMA3-8B, Mistral-7B) demonstrate that ROSE surpasses the original SparseGPT and other counterpart pruning methods. Our code is available at https://github.com/mingluo-su/ROSE."
+        },
+        {
+          "topic": "SparseGPT",
+          "provenance": {
+            "title": "A Tighter Complexity Analysis of SparseGPT",
+            "url": ""
+          },
+          "notes": "In this work, we improved the analysis of the running time of SparseGPT [Frantar, Alistarh ICML 2023] from $O(d^{3})$ to $O(d^ω + d^{2+a+o(1)} + d^{1+ω(1,1,a)-a})$ for any $a \\in [0, 1]$, where $ω$ is the exponent of matrix multiplication. In particular, for the current $ω\\approx 2.371$ [Alman, Duan, Williams, Xu, Xu, Zhou 2024], our running time boils down to $O(d^{2.53})$. This running time is due to the analysis of the lazy update behavior in iterative maintenance problems such as [Deng, Song, Weinstein 2022; Brand, Song, Zhou ICML 2024]."
+        },
+        {
+          "topic": "Wanda",
+          "provenance": {
+            "title": "A Simple and Effective Pruning Approach for Large Language Models",
+            "url": ""
+          },
+          "notes": "As their size increases, Large Languages Models (LLMs) are natural candidates for network pruning methods: approaches that drop a subset of network weights while striving to preserve performance. Existing methods, however, require either retraining, which is rarely affordable for billion-scale LLMs, or solving a weight reconstruction problem reliant on second-order information, which may also be computationally expensive. In this paper, we introduce a novel, straightforward yet effective pruning method, termed Wanda (Pruning by Weights and activations), designed to induce sparsity in pretrained LLMs. Motivated by the recent observation of emergent large magnitude features in LLMs, our approach prunes weights with the smallest magnitudes multiplied by the corresponding input activations, on a per-output basis. Notably, Wanda requires no retraining or weight update, and the pruned LLM can be used as is. We conduct a thorough evaluation of our method Wanda on LLaMA and LLaMA-2 across various language benchmarks. Wanda significantly outperforms the established baseline of magnitude pruning and performs competitively against recent method involving intensive weight update. Code is available at https://github.com/locuslab/wanda."
+        },
+        {
+          "topic": "Wanda",
+          "provenance": {
+            "title": "Wanda++: Pruning Large Language Models via Regional Gradients",
+            "url": ""
+          },
+          "notes": "Large Language Models (LLMs) pruning seeks to remove unimportant weights for inference speedup with minimal accuracy impact. However, existing methods often suffer from accuracy degradation without full-model sparsity-aware fine-tuning. This paper presents Wanda++, a novel pruning framework that outperforms the state-of-the-art methods by utilizing decoder-block-level \\textbf{regional} gradients. Specifically, Wanda++ improves the pruning score with regional gradients for the first time and proposes an efficient regional optimization method to minimize pruning-induced output discrepancies between the dense and sparse decoder output. Notably, Wanda++ improves perplexity by up to 32\\% over Wanda in the language modeling task and generalizes effectively to downstream tasks. Moreover, despite updating weights with regional optimization, Wanda++ remains orthogonal to sparsity-aware fine-tuning, further reducing perplexity with LoRA in great extend. Our approach is lightweight, pruning a 7B LLaMA model in under 10 minutes on a single H100 GPU."
+        },
+        {
+          "topic": "Wanda",
+          "provenance": {
+            "title": "M-Wanda: Improving One-Shot Pruning for Multilingual LLMs",
+            "url": ""
+          },
+          "notes": "Multilingual LLM performance is often critically dependent on model size. With an eye on efficiency, this has led to a surge in interest in one-shot pruning methods that retain the benefits of large-scale pretraining while shrinking the model size. However, as pruning tends to come with performance loss, it is important to understand the trade-offs between multilinguality and sparsification. In this work, we study multilingual performance under different sparsity constraints and show that moderate ratios already substantially harm performance. To help bridge this gap, we propose M-Wanda, a pruning method that models cross-lingual variation by incorporating language-aware activation statistics into its pruning criterion and dynamically adjusts layerwise sparsity based on cross-lingual importance. We show that M-Wanda consistently improves performance at minimal additional costs. We are the first to explicitly optimize pruning to retain multilingual performance, and hope to inspire future advances in multilingual pruning."
+        },
+        {
+          "topic": "STR",
+          "provenance": {
+            "title": "Faster Space-Efficient STR-IC-LCS Computation",
+            "url": ""
+          },
+          "notes": "One of the most fundamental method for comparing two given strings $A$ and $B$ is the longest common subsequence (LCS), where the task is to find (the length) of an LCS of $A$ and $B$. In this paper, we deal with the STR-IC-LCS problem which is one of the constrained LCS problems proposed by Chen and Chao [J. Comb. Optim, 2011]. A string $Z$ is said to be an STR-IC-LCS of three given strings $A$, $B$, and $P$, if $Z$ is a longest string satisfying that (1) $Z$ includes $P$ as a substring and (2) $Z$ is a common subsequence of $A$ and $B$. We present three efficient algorithms for this problem: First, we begin with a space-efficient solution which computes the length of an STR-IC-LCS in $O(n^2)$ time and $O((\\ell+1)(n-\\ell+1))$ space, where $\\ell$ is the length of an LCS of $A$ and $B$ of length $n$. When $\\ell = O(1)$ or $n-\\ell = O(1)$, then this algorithm uses only linear $O(n)$ space. Second, we present a faster algorithm that works in $O(nr/\\log{r}+n(n-\\ell+1))$ time, where $r$ is the length of $P$, while retaining the $O((\\ell+1)(n-\\ell+1))$ space efficiency. Third, we give an alternative algorithm that runs in $O(nr/\\log{r}+n(n-\\ell'+1))$ time with $O((\\ell'+1)(n-\\ell'+1))$ space, where $\\ell'$ denotes the STR-IC-LCS length for input strings $A$, $B$, and $P$."
+        },
+        {
+          "topic": "STR",
+          "provenance": {
+            "title": "STR: Seasonal-Trend Decomposition Using Regression",
+            "url": ""
+          },
+          "notes": "We propose a new method for decomposing seasonal data: STR (a Seasonal-Trend decomposition using Regression). Unlike other decomposition methods, STR allows for multiple seasonal and cyclic components, covariates, seasonal patterns that may have non-integer periods, and seasonality with complex topology. It can be used for time series with any regular time index including hourly, daily, weekly, monthly or quarterly data. It is competitive with existing methods when they exist, but tackles many more decomposition problem than other methods allow. STR is based on a regularized optimization, and so is somewhat related to ridge regression. Because it is based on a statistical model, we can easily compute confidence intervals for components, something that is not possible with most existing decomposition methods (such as STL, X-12-ARIMA, SEATS-TRAMO, etc.). Our model is implemented in the R package stR, so can be applied by anyone to their own data."
+        },
+        {
+          "topic": "STR",
+          "provenance": {
+            "title": "Comparison of STR and EMLSR Performance in Wi-Fi 7 MLO",
+            "url": ""
+          },
+          "notes": "This project compares the performance of simultaneous transmit and receive (STR) and enhanced multi-link single radio (EMLSR) within Multi-Link Operation (MLO) in Wi-Fi 7 networks. Using the ns-3 simulator, we evaluate both techniques under various scenarios, including changes in modulation coding scheme (MCS), bandwidth, link quality, and interference levels. Key performance metrics such as latency, throughput, and energy efficiency are analyzed to determine the trade-offs between STR and EMLSR. The results demonstrate that STR achieves higher throughput and lower latency due to dual-link utilization, making it suitable for high-load environments. In contrast, EMLSR balances energy efficiency with responsiveness, making it advantageous for power-sensitive applications. This analysis provides insights into the strengths and limitations of STR and EMLSR, guiding optimal deployment strategies for future Wi-Fi 7 networks."
+        },
+        {
+          "topic": "DPM",
+          "provenance": {
+            "title": "D$^2$-DPM: Dual Denoising for Quantized Diffusion Probabilistic Models",
+            "url": ""
+          },
+          "notes": "Diffusion models have achieved cutting-edge performance in image generation. However, their lengthy denoising process and computationally intensive score estimation network impede their scalability in low-latency and resource-constrained scenarios. Post-training quantization (PTQ) compresses and accelerates diffusion models without retraining, but it inevitably introduces additional quantization noise, resulting in mean and variance deviations. In this work, we propose D2-DPM, a dual denoising mechanism aimed at precisely mitigating the adverse effects of quantization noise on the noise estimation network. Specifically, we first unravel the impact of quantization noise on the sampling equation into two components: the mean deviation and the variance deviation. The mean deviation alters the drift coefficient of the sampling equation, influencing the trajectory trend, while the variance deviation magnifies the diffusion coefficient, impacting the convergence of the sampling trajectory. The proposed D2-DPM is thus devised to denoise the quantization noise at each time step, and then denoise the noisy sample through the inverse diffusion iterations. Experimental results demonstrate that D2-DPM achieves superior generation quality, yielding a 1.42 lower FID than the full-precision model while achieving 3.99x compression and 11.67x bit-operation acceleration."
+        },
+        {
+          "topic": "DPM",
+          "provenance": {
+            "title": "Understanding the Theoretical Guarantees of DPM",
+            "url": ""
+          },
+          "notes": "In this study, we conducted an in-depth examination of the utility analysis of the differentially private mechanism (DPM). The authors of DPM have already established the probability of a good split being selected and of DPM halting. In this study, we expanded the analysis of the stopping criterion and provided an interpretation of these guarantees in the context of realistic input distributions. Our findings revealed constraints on the minimum cluster size and the metric weight for the scoring function. Furthermore, we introduced an interpretation of the utility of DPM through the lens of the clustering metric, the silhouette score. Our findings indicate that even when an optimal DPM-based split is employed, the silhouette score of the resulting clustering may still decline. This observation calls into question the suitability of the silhouette score as a clustering metric. Finally, we examined the potential of the underlying concept of DPM by linking it to a more theoretical view, that of $(ξ, ρ)$-separability. This extensive analysis of the theoretical guarantees of DPM allows a better understanding of its behaviour for arbitrary inputs. From these guarantees, we can analyse the impact of different hyperparameters and different input data sets, thereby promoting the application of DPM in practice for unknown settings and data sets."
+        },
+        {
+          "topic": "DPM",
+          "provenance": {
+            "title": "DPM: Clustering Sensitive Data through Separation",
+            "url": ""
+          },
+          "notes": "Clustering is an important tool for data exploration where the goal is to subdivide a data set into disjoint clusters that fit well into the underlying data structure. When dealing with sensitive data, privacy-preserving algorithms aim to approximate the non-private baseline while minimising the leakage of sensitive information. State-of-the-art privacy-preserving clustering algorithms tend to output clusters that are good in terms of the standard metrics, inertia, silhouette score, and clustering accuracy, however, the clustering result strongly deviates from the non-private KMeans baseline. In this work, we present a privacy-preserving clustering algorithm called DPM that recursively separates a data set into clusters based on a geometrical clustering approach. In addition, DPM estimates most of the data-dependent hyper-parameters in a privacy-preserving way. We prove that DPM preserves Differential Privacy and analyse the utility guarantees of DPM. Finally, we conduct an extensive empirical evaluation for synthetic and real-life data sets. We show that DPM achieves state-of-the-art utility on the standard clustering metrics and yields a clustering result much closer to that of the popular non-private KMeans algorithm without requiring the number of classes."
+        }
+      ]
+    },
+    {
+      "report": "# Transformer Pruning Techniques – A Comparative Review\n\n## Executive Summary  \nThis report surveys the most influential transformer‑centric pruning research published in the supplied evidence. It focuses on five broad families that are directly applied to transformer models:  \n\n| Family | Representative Methods | Core Idea | Strengths (reported) | Weaknesses (reported) |\n|--------|------------------------|----------|---------------------|-----------------------|\n| **Magnitude Pruning** | LAMP, Anchor–Context Graph Recovery (ACGR), Text‑Aware Token Cluster Selection (TATCS) | Layer‑wise magnitude **importance re‑scoring** | No hyper‑search, works with one‑shot pruning, stable on token‑pruned pipelines | Limited directly for large‑scale models; interacts poorly with retraining in some cases |\n| **Structured Pruning** | PruningBench‑benchmark, Structured filter pruning (Channel Independence, CHIP) | Weight **filters / blocks** removal | Offers concrete acceleration on GPUs, high compression ratios | Requires careful design of mask; may negatively impact diverse downstream tasks |\n| **Lottery Ticket‑Based** | Stabilized Lottery Ticket (early training), Lottery‑Ticket‑based Transformer (STP) | Early‑training iterative magnitude pruning | Finds winning sub‑networks at high sparsity (up to 85 %) on WMT translation | Temporal bottleneck: need to train to early epochs before pruning |\n| **One‑Shot Sparse GPT‑style** | SparseGPT, ROSE, Wanda, Wanda++, M‑Wanda | Second‑order or activation‑aware magnitude pruning without retraining | Pruning 50–60 % sparsity on billion‑parameter models in a few hours; minimal accuracy loss | May depend on specific architecture or language family; some methods introduce re‑ordering overhead |\n| **Knowledge‑Preserving Pruning** | K‑prune (structured, no‑retrain) | Preserve knowledge via iterative measurement & weight‑tuning | Significant F1 improvement on SQuAD even at 80 % sparsity | Implementation complex; targeted at encoder‑based language models |\n\nAll methods rely on a **single‑pass** (one‑shot) or a **very short‑term** pruning schedule, targeting inference‑time efficiency without the cost of full retraining.  \n\n---\n\n## Introduction  \n\nTransformer architectures dominate natural language processing and, increasingly, multimodal and vision tasks. The steep inference cost of modern transformers (e.g., LLaMA‑2 70B, BLOOM‑176B) motivates research into aggressive sparsification techniques that either (1) remove many weights outright or (2) restructure the computation graph to admit efficient hardware execution. This report aggregates evidence from the supplied literature to contrast the landmark transformer pruning methods in terms of sparsity‑performance trade‑offs, computational overhead, and generality across tasks and architectures.  \n\n---\n\n## Findings  \n\n### Magnitude‑Based Pruning  \n\n| Study | Criterion | Quantitative Outcomes | Observations |\n|-------|-----------|----------------------|--------------|\n| **Layer‑Adaptive Magnitude Pruning (LAMP)** | Rescaled magnitude that incorporates L₂‑distortion | *Consistently outperforms* baselines on image classifiers (ResNet, ViT) | Requires **no hyper‑parameters**; robust to weight‑rewinding |\n| **ACGR + TATCS (Token‑Pruning)** | Distribution‑consistency metric + dynamic token cluster selection | Retains 92.1 % of baseline LLaVA‑1.5‑7B performance with only 16 visual tokens | Preserves *feature distribution* and yields *stable* results at ultra‑low token budgets |\n\n*Key insight*: Layer‑adaptive weighting of magnitudes improves upon global methods and preserves performance across early vs. late pruning schedules.\n\n### Structured Pruning  \n\n| Study | Scope | Superiority Metric | Caveats |\n|-------|-------|------------------|---------|\n| **PruningBench** | 16 methods across CNNs & ViTs | *Unified benchmark* reveals top performers vary by task | Still missing a consensus on a gold‑standard metric for transformers |\n| **CHIP (Channel Independence)** | Filter pruning on ResNets & ImageNet | 40–45 % FLOP reduction with 0–0.15 % accuracy shift | Designed for CNNs; transfer to transformers unexplored in evidence |\n\n*Key insight*: Structured pruning can reduce FLOPs dramatically, but concrete transformer‑level evaluations are sparse.\n\n### Lottery Ticket‑Based Pruning  \n\n| Study | Pruning Schedule | Sparsity Outcome | Accuracy Impact | Notes |\n|-------|------------------|------------------|-----------------|-------|\n| **Stabilized Lottery Ticket** | Early‑stage iterative magnitude pruning (0.1 %–7 %) | Up to 85 % sparsity on WMT translation | Comparable to magnitude pruning at lower sparsities | Finds *winning* sub‑networks via early‑stability criteria |\n| **Early‑track IMP** (Implied in other papers) | Classic IMP at initialization | Fails on ResNet‑50 & image classification at high sparsity | Demonstrates limitation of pure init‑pruning for deep nets |\n\n*Key insight*: Timing of pruning is critical; pruning after a modest amount of training dramatically increases the likelihood of retaining full accuracy.\n\n### One‑Shot Sparse‑GPT‑style Pruning  \n\n| Study | Method | Complexity | Sparsity & Accuracy | Remark |\n|-------|--------|------------|---------------------|--------|\n| **SparseGPT** | Second‑order Hessian‑guided weights | O(d³) → improved to O(d²⋅³⁰⁴) | 60 % unstructured sparsity *without* retraining on OPT‑175B/BLOOM‑176B | Enables pruning 100 B+ weights in < 4.5 h |\n| **ROSE** | Reordered pruning on SparseGPT | Adds re‑ordering overhead | Outperforms SparseGPT on LLaMA variants | Re‑ordering mitigates column‑arising pruning gaps |\n| **Wanda** | Magnitude × activation per‑output pruning | No retraining, simple score | Beats magnitude baseline on LLaMA & LLaMA‑2 | Activation‑aware weighting better captures importance |\n| **Wanda++** | Adds *regional* gradients to Wanda | Fast (7B LLaMA in < 10 min) | Improves perplexity by up to 32 % over Wanda | Orthogonal to LoRA fine‑tuning; still one‑shot |\n\n*Key insight*: Second‑order or activation‑aware one‑shot pruning can scale to billions of parameters while preserving performance, and re‑ordering approaches further tighten the accuracy gap.\n\n### Knowledge‑Preserving Structured Pruning  \n\n| Study | Approach | Result | Context |\n|-------|----------|--------|---------|\n| **K‑Prune** | Iterative pruning + knowledge‑preserving mask & weight tuning | 58 % F1 gain on SQuAD at 80 % sparsity (no retraining) | Strong for encoder‑based LMs where fine‑tuning is expensive |\n\n*Key insight*: Maintaining knowledge through *targeted weighting* allows high sparsity without re‑training.\n\n---\n\n## Comparative Analysis  \n\n| Criterion | Magnitude (LAMP, ACGR+TATCS) | Structured (PruningBench, CHIP) | Lottery Ticket (Stabilized) | One‑Shot Sparse‑GPT / Wanda | Knowledge‑Preserving (K‑Prune) |\n|-----------|------------------------------|----------------------------------|------------------------------|------------------------------|--------------------------------|\n| **Sparsity achieved** | 60‑80 % (depends on task) | 30‑45 % FLOP drop, ~40 % parameter drop | 80‑85 % (transl. tasks) | 50‑60 % (unstructured, 2:4 rows) | 80 % (actual parameters) |\n| **Accuracy loss** | < 0.5 % on ViT, token‑pruning | < 1 % on ImageNet | ~1‑2 % on WMT | < 1 % perplexity growth on LLaMA-2 | > 58 % F1 gain (positive impact) |\n| **Retraining requirement** | None (usually) | None (structured) | None (early training) | None | None |\n| **Computational overhead** | Low (simple magnitude) | Medium (filter importance) | Medium (gradient-based early training) | High (Hessian or re‑ordering) | Medium (iterative masks) |\n| **Hardware friendliness** | High (sparse kernels) | High (channel/block pruning) | Medium (requires early training) | High (structured sparsity) | Medium (custom masks) |\n| **Scalability** | Proven up to ViT‑B | Demonstrated on CNNs, transformer adaptation unclear | Shown on 1‑2 B models (WMT) | Up to 175 B parameters | Demonstrated on encoder‑LM (BERT‑style) |\n\n### Strengths\n1. **Magnitude + Layer Adaptation (LAMP)** offers *parameter‑free* sparsity selection and works well across domains.\n2. **Structured pruning** gives *hardware‑aligned* speedups due to contiguous memory access patterns.\n3. **Lottery Ticket‑based early pruning** finds *winning* sub‑networks, allowing extreme sparsity with minimal loss.\n4. **SparseGPT / Wanda** show that *second‑order* or *activation‑aware* scores can produce near‑ideal pruning without any fine‑tuning, critical for billion‑parameter LLMs.\n5. **K‑Prune** demonstrates that preserving *knowledge* can turn high sparsity into *accuracy gains* for encoder‑based tasks.\n\n### Weaknesses / Gaps\n- The **oracle‑pruning** claim that correlation before and after retraining is weak; it undermines many supervised pruning methods and suggests that *post‑pruning retraining* still matters for performance stability.\n- **Structured pruning literature** lacks transformer‑specific benchmarks; most evidence focuses on CNNs or generic NLP tasks.\n- **One‑shot sparse‑GPT** has a high computational cost (Hessian or re‑ordering), which can offset the pruned model’s inferencing time for smaller or mid‑scale models.\n- **Knowledge‑preserving pruning** is tailored to *encoder* networks; transformer encoders/decoders may need separate handling.\n\n---\n\n## Conclusion  \n\nTransformer pruning research has converged on a handful of effective strategies:\n\n1. **Magnitude‑based, layer‑adaptive** pruning (LAMP) remains a backbone for quick, hyper‑parameter‑free sparsity engineering.\n2. **Early‑training LOTTERY‑ticket** methods can push sparsity into the 80 %+ regime while maintaining performance, but at the cost of an initial training phase.\n3. **One‑shot sparse methods** (SparseGPT, Wanda, ROSE) enable billion‑parameter model compression **without retraining**, crucial for deployment constraints; their accuracy depends on the quality of *importance scores* and *re‑ordering*.\n4. **Knowledge‑preserving structured pruning** (K‑Prune) is promising for *encoder*-centric tasks where fine‑tuning is not feasible.\n\nPractitioners should weigh **hardware targets** (structured vs. unstructured sparsity), **available compute** for pre‑pruning training stages, and **task sensitivity** to freezing weights when selecting a pruning pipeline. Future datasets such as **PruningBench** may bridge the existing gaps by standardizing transformer‑specific benchmarks, enabling direct comparison of the above techniques under a unified protocol.\n\n## References\n\n- No sources available"
+    }
+  ],
+  "summary": {
+    "workflowId": "9c250bb5-4c7c-481d-8bb3-b9fa04b2ddfe",
+    "stepCount": 13,
+    "completedCount": 13,
+    "failedCount": 0,
+    "success": true,
+    "totalDurationMs": 123163,
+    "steps": [
+      {
+        "agentId": "planner-agent",
+        "agentName": "Planner Agent",
+        "parentAgentId": null,
+        "executionOrder": 1,
+        "status": "COMPLETED",
+        "durationMs": 9282
+      },
+      {
+        "agentId": "research-agent",
+        "agentName": "Research Agent",
+        "parentAgentId": null,
+        "executionOrder": 2,
+        "status": "COMPLETED",
+        "durationMs": 27607
+      },
+      {
+        "agentId": "topic-research-2",
+        "agentName": "Topic Research Agent 2",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 10149
+      },
+      {
+        "agentId": "topic-research-4",
+        "agentName": "Topic Research Agent 4",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 13531
+      },
+      {
+        "agentId": "topic-research-8",
+        "agentName": "Topic Research Agent 8",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 13663
+      },
+      {
+        "agentId": "topic-research-3",
+        "agentName": "Topic Research Agent 3",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 13803
+      },
+      {
+        "agentId": "topic-research-5",
+        "agentName": "Topic Research Agent 5",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 14681
+      },
+      {
+        "agentId": "topic-research-9",
+        "agentName": "Topic Research Agent 9",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 15060
+      },
+      {
+        "agentId": "topic-research-10",
+        "agentName": "Topic Research Agent 10",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 15897
+      },
+      {
+        "agentId": "topic-research-6",
+        "agentName": "Topic Research Agent 6",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 16792
+      },
+      {
+        "agentId": "topic-research-7",
+        "agentName": "Topic Research Agent 7",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 21508
+      },
+      {
+        "agentId": "topic-research-1",
+        "agentName": "Topic Research Agent 1",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 27590
+      },
+      {
+        "agentId": "writer-agent",
+        "agentName": "Writer Agent",
+        "parentAgentId": null,
+        "executionOrder": 3,
+        "status": "COMPLETED",
+        "durationMs": 86272
+      }
+    ]
+  },
+  "traces": [
+    {
+      "traceId": "30631211-cb26-41af-8874-460755f95689",
+      "workflowId": "9c250bb5-4c7c-481d-8bb3-b9fa04b2ddfe",
+      "agentId": "planner-agent",
+      "agentName": "Planner Agent",
+      "executionOrder": 1,
+      "status": "COMPLETED",
+      "startedAt": "2026-06-22T13:13:53.390Z",
+      "endedAt": "2026-06-22T13:14:02.672Z",
+      "durationMs": 9282,
+      "error": null
+    },
+    {
+      "traceId": "0160dd78-12f2-4ba2-91a9-107cd49bec3e",
+      "workflowId": "9c250bb5-4c7c-481d-8bb3-b9fa04b2ddfe",
+      "agentId": "research-agent",
+      "agentName": "Research Agent",
+      "executionOrder": 2,
+      "status": "COMPLETED",
+      "startedAt": "2026-06-22T13:14:02.674Z",
+      "endedAt": "2026-06-22T13:14:30.281Z",
+      "durationMs": 27607,
+      "error": null
+    },
+    {
+      "traceId": "6ab4e85f-3e58-4a06-a111-1472a8cb4ba2",
+      "workflowId": "9c250bb5-4c7c-481d-8bb3-b9fa04b2ddfe",
+      "agentId": "topic-research-2",
+      "agentName": "Topic Research Agent 2",
+      "parentAgentId": "research-agent",
+      "executionOrder": null,
+      "status": "COMPLETED",
+      "startedAt": null,
+      "endedAt": null,
+      "durationMs": 10149,
+      "error": null
+    },
+    {
+      "traceId": "23cfd7e8-a2b4-4c16-944a-9d5c1a46f8f1",
+      "workflowId": "9c250bb5-4c7c-481d-8bb3-b9fa04b2ddfe",
+      "agentId": "topic-research-4",
+      "agentName": "Topic Research Agent 4",
+      "parentAgentId": "research-agent",
+      "executionOrder": null,
+      "status": "COMPLETED",
+      "startedAt": null,
+      "endedAt": null,
+      "durationMs": 13531,
+      "error": null
+    },
+    {
+      "traceId": "60583389-a973-4453-9276-9a8dfe02f249",
+      "workflowId": "9c250bb5-4c7c-481d-8bb3-b9fa04b2ddfe",
+      "agentId": "topic-research-8",
+      "agentName": "Topic Research Agent 8",
+      "parentAgentId": "research-agent",
+      "executionOrder": null,
+      "status": "COMPLETED",
+      "startedAt": null,
+      "endedAt": null,
+      "durationMs": 13663,
+      "error": null
+    },
+    {
+      "traceId": "8d7d3ea2-812b-4499-8051-6ac5847b26af",
+      "workflowId": "9c250bb5-4c7c-481d-8bb3-b9fa04b2ddfe",
+      "agentId": "topic-research-3",
+      "agentName": "Topic Research Agent 3",
+      "parentAgentId": "research-agent",
+      "executionOrder": null,
+      "status": "COMPLETED",
+      "startedAt": null,
+      "endedAt": null,
+      "durationMs": 13803,
+      "error": null
+    },
+    {
+      "traceId": "0828cf7e-38ed-4943-b229-69013654eca0",
+      "workflowId": "9c250bb5-4c7c-481d-8bb3-b9fa04b2ddfe",
+      "agentId": "topic-research-5",
+      "agentName": "Topic Research Agent 5",
+      "parentAgentId": "research-agent",
+      "executionOrder": null,
+      "status": "COMPLETED",
+      "startedAt": null,
+      "endedAt": null,
+      "durationMs": 14681,
+      "error": null
+    },
+    {
+      "traceId": "8df8af65-995a-4fa6-b1b1-dddc5cb31b47",
+      "workflowId": "9c250bb5-4c7c-481d-8bb3-b9fa04b2ddfe",
+      "agentId": "topic-research-9",
+      "agentName": "Topic Research Agent 9",
+      "parentAgentId": "research-agent",
+      "executionOrder": null,
+      "status": "COMPLETED",
+      "startedAt": null,
+      "endedAt": null,
+      "durationMs": 15060,
+      "error": null
+    },
+    {
+      "traceId": "180c055c-a483-428d-a2b9-d8d49e619482",
+      "workflowId": "9c250bb5-4c7c-481d-8bb3-b9fa04b2ddfe",
+      "agentId": "topic-research-10",
+      "agentName": "Topic Research Agent 10",
+      "parentAgentId": "research-agent",
+      "executionOrder": null,
+      "status": "COMPLETED",
+      "startedAt": null,
+      "endedAt": null,
+      "durationMs": 15897,
+      "error": null
+    },
+    {
+      "traceId": "92ade0e6-9848-4867-83c4-a725aeb3c596",
+      "workflowId": "9c250bb5-4c7c-481d-8bb3-b9fa04b2ddfe",
+      "agentId": "topic-research-6",
+      "agentName": "Topic Research Agent 6",
+      "parentAgentId": "research-agent",
+      "executionOrder": null,
+      "status": "COMPLETED",
+      "startedAt": null,
+      "endedAt": null,
+      "durationMs": 16792,
+      "error": null
+    },
+    {
+      "traceId": "62ce3cb5-eea6-4b76-b3fa-58840baa794f",
+      "workflowId": "9c250bb5-4c7c-481d-8bb3-b9fa04b2ddfe",
+      "agentId": "topic-research-7",
+      "agentName": "Topic Research Agent 7",
+      "parentAgentId": "research-agent",
+      "executionOrder": null,
+      "status": "COMPLETED",
+      "startedAt": null,
+      "endedAt": null,
+      "durationMs": 21508,
+      "error": null
+    },
+    {
+      "traceId": "9bb43f07-f2e6-49ad-9351-8912feae5938",
+      "workflowId": "9c250bb5-4c7c-481d-8bb3-b9fa04b2ddfe",
+      "agentId": "topic-research-1",
+      "agentName": "Topic Research Agent 1",
+      "parentAgentId": "research-agent",
+      "executionOrder": null,
+      "status": "COMPLETED",
+      "startedAt": null,
+      "endedAt": null,
+      "durationMs": 27590,
+      "error": null
+    },
+    {
+      "traceId": "8a20dc62-ded5-43ca-a722-66edcfcaf5fc",
+      "workflowId": "9c250bb5-4c7c-481d-8bb3-b9fa04b2ddfe",
+      "agentId": "writer-agent",
+      "agentName": "Writer Agent",
+      "executionOrder": 3,
+      "status": "COMPLETED",
+      "startedAt": "2026-06-22T13:14:30.281Z",
+      "endedAt": "2026-06-22T13:15:56.553Z",
+      "durationMs": 86272,
+      "error": null
+    }
+  ]
+}

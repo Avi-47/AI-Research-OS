@@ -1,0 +1,44 @@
+{
+  "runId": "c52ad5ac-7261-4f11-bd4e-fda28d7055c9",
+  "timestamp": "2026-06-13T14:53:30.351Z",
+  "query": "Compare transformer pruning techniques",
+  "topics": [
+    "SparseGPT",
+    "Wanda"
+  ],
+  "evidence": [
+    {
+      "topic": "SparseGPT",
+      "provenance": {
+        "title": "SparseGPT paper one",
+        "url": "https://example.com/SparseGPT/1"
+      },
+      "notes": "Evidence from paper one"
+    },
+    {
+      "topic": "SparseGPT",
+      "provenance": {
+        "title": "SparseGPT paper one",
+        "url": "https://example.com/SparseGPT/1"
+      },
+      "notes": "Evidence from paper two"
+    },
+    {
+      "topic": "Wanda",
+      "provenance": {
+        "title": "Wanda paper one",
+        "url": "https://example.com/Wanda/1"
+      },
+      "notes": "Evidence from paper one"
+    },
+    {
+      "topic": "Wanda",
+      "provenance": {
+        "title": "Wanda paper one",
+        "url": "https://example.com/Wanda/1"
+      },
+      "notes": "Evidence from paper two"
+    }
+  ],
+  "report": "# Report\n\n## Executive Summary\nBody.\n\n## Introduction\nIntro.\n\n## Findings\nFindings.\n\n## Comparative Analysis\nCompare.\n\n## Conclusion\nDone.\n\n## References\n\n- [SparseGPT paper one](https://example.com/SparseGPT/1) - SparseGPT\n- [Wanda paper one](https://example.com/Wanda/1) - Wanda"
+}

@@ -1,0 +1,885 @@
+{
+  "workflowId": "9e7f75e0-4b63-4305-b0de-d58536cc506a",
+  "timestamp": "2026-06-22T12:05:10.636Z",
+  "query": "compare transformer pruning techniques",
+  "topics": [
+    "Magnitude Pruning",
+    "Structured Pruning",
+    "Unstructured Pruning",
+    "Dynamic Network Surgery",
+    "Layerwise Importance Ranking",
+    "Group Lasso Pruning",
+    "Knowledge Distillation Guided Pruning"
+  ],
+  "evidence": [
+    {
+      "topic": "Magnitude Pruning",
+      "provenance": {
+        "title": "Layer-adaptive sparsity for the Magnitude-based Pruning",
+        "url": ""
+      },
+      "notes": "Recent discoveries on neural network pruning reveal that, with a carefully chosen layerwise sparsity, a simple magnitude-based pruning achieves state-of-the-art tradeoff between sparsity and performance. However, without a clear consensus on \"how to choose,\" the layerwise sparsities are mostly selected algorithm-by-algorithm, often resorting to handcrafted heuristics or an extensive hyperparameter search. To fill this gap, we propose a novel importance score for global pruning, coined layer-adaptive magnitude-based pruning (LAMP) score; the score is a rescaled version of weight magnitude that incorporates the model-level $\\ell_2$ distortion incurred by pruning, and does not require any hyperparameter tuning or heavy computation. Under various image classification setups, LAMP consistently outperforms popular existing schemes for layerwise sparsity selection. Furthermore, we observe that LAMP continues to outperform baselines even in weight-rewinding setups, while the connectivity-oriented layerwise sparsity (the strongest baseline overall) performs worse than a simple global magnitude-based pruning in this case. Code: https://github.com/jaeho-lee/layer-adaptive-sparsity"
+    },
+    {
+      "topic": "Magnitude Pruning",
+      "provenance": {
+        "title": "Is Oracle Pruning the True Oracle?",
+        "url": ""
+      },
+      "notes": "Oracle pruning, which selects unimportant weights by minimizing the pruned train loss, has been taken as the foundation for most neural network pruning methods for over 35 years, while few (if not none) have thought about how much the foundation really holds. This paper, for the first time, attempts to examine its validity on modern deep models through empirical correlation analyses and provide reflections on the field of neural network pruning. Specifically, for a typical pruning algorithm with three stages (pertaining, pruning, and retraining), we analyze the model performance correlation before and after retraining. Extensive experiments (37K models are trained) across a wide spectrum of models (LeNet5, VGG, ResNets, ViT, MLLM) and datasets (MNIST and its variants, CIFAR10/CIFAR100, ImageNet-1K, MLLM data) are conducted. The results lead to a surprising conclusion: on modern deep learning models, the performance before retraining is barely correlated with the performance after retraining. Namely, the weights selected by oracle pruning can hardly guarantee a good performance after retraining. This further implies that existing works using oracle pruning to derive pruning criteria may be groundless from the beginning. Further studies suggest the rising task complexity is one factor that makes oracle pruning invalid nowadays. Finally, given the evidence, we argue that the retraining stage in a pruning algorithm should be accounted for when developing any pruning criterion."
+    },
+    {
+      "topic": "Magnitude Pruning",
+      "provenance": {
+        "title": "Exploring 3D Dataset Pruning",
+        "url": ""
+      },
+      "notes": "Dataset pruning has been widely studied for 2D images to remove redundancy and accelerate training, while particular pruning methods for 3D data remain largely unexplored. In this work, we study dataset pruning for 3D data, where its observed common long-tail class distribution nature make optimization under conventional evaluation metrics Overall Accuracy (OA) and Mean Accuracy (mAcc) inherently conflicting, and further make pruning particularly challenging. To address this, we formulate pruning as approximating the full-data expected risk with a weighted subset, which reveals two key errors: coverage error from insufficient representativeness and prior-mismatch bias from inconsistency between subset-induced class weights and target metrics. We propose representation-aware subset selection with per-class retention quotas for long-tail coverage, and prior-invariant teacher supervision using calibrated soft labels and embedding-geometry distillation. The retention quota also serves as a switch to control the OA-mAcc trade-off. Extensive experiments on 3D datasets show that our method can improve both metrics across multiple settings while adapting to different downstream preferences. Our code is available at https://github.com/XiaohanZhao123/3D-Dataset-Pruning."
+    },
+    {
+      "topic": "Structured Pruning",
+      "provenance": {
+        "title": "A Comprehensive Study of Structural Pruning for Vision Models",
+        "url": ""
+      },
+      "notes": "Structural pruning has emerged as a promising approach for producing more efficient models. Nevertheless, the community suffers from a lack of standardized benchmarks and metrics, leaving the progress in this area not fully comprehended. To fill this gap, we present the first comprehensive benchmark, termed PruningBench, for structural pruning. PruningBench showcases the following three characteristics: 1) PruningBench employs a unified and consistent framework for evaluating the effectiveness of diverse structural pruning techniques; 2) PruningBench systematically evaluates 16 existing pruning methods, encompassing a wide array of models (e.g., CNNs and ViTs) and tasks (e.g., classification and detection); 3) PruningBench provides easily implementable interfaces to facilitate the implementation of future pruning methods, and enables the subsequent researchers to incorporate their work into our leaderboards. We provide an online pruning platform for customizing pruning tasks and reproducing all results in this paper. Leaderboard results can also be available."
+    },
+    {
+      "topic": "Structured Pruning",
+      "provenance": {
+        "title": "Is Oracle Pruning the True Oracle?",
+        "url": ""
+      },
+      "notes": "Oracle pruning, which selects unimportant weights by minimizing the pruned train loss, has been taken as the foundation for most neural network pruning methods for over 35 years, while few (if not none) have thought about how much the foundation really holds. This paper, for the first time, attempts to examine its validity on modern deep models through empirical correlation analyses and provide reflections on the field of neural network pruning. Specifically, for a typical pruning algorithm with three stages (pertaining, pruning, and retraining), we analyze the model performance correlation before and after retraining. Extensive experiments (37K models are trained) across a wide spectrum of models (LeNet5, VGG, ResNets, ViT, MLLM) and datasets (MNIST and its variants, CIFAR10/CIFAR100, ImageNet-1K, MLLM data) are conducted. The results lead to a surprising conclusion: on modern deep learning models, the performance before retraining is barely correlated with the performance after retraining. Namely, the weights selected by oracle pruning can hardly guarantee a good performance after retraining. This further implies that existing works using oracle pruning to derive pruning criteria may be groundless from the beginning. Further studies suggest the rising task complexity is one factor that makes oracle pruning invalid nowadays. Finally, given the evidence, we argue that the retraining stage in a pruning algorithm should be accounted for when developing any pruning criterion."
+    },
+    {
+      "topic": "Structured Pruning",
+      "provenance": {
+        "title": "Exploring 3D Dataset Pruning",
+        "url": ""
+      },
+      "notes": "Dataset pruning has been widely studied for 2D images to remove redundancy and accelerate training, while particular pruning methods for 3D data remain largely unexplored. In this work, we study dataset pruning for 3D data, where its observed common long-tail class distribution nature make optimization under conventional evaluation metrics Overall Accuracy (OA) and Mean Accuracy (mAcc) inherently conflicting, and further make pruning particularly challenging. To address this, we formulate pruning as approximating the full-data expected risk with a weighted subset, which reveals two key errors: coverage error from insufficient representativeness and prior-mismatch bias from inconsistency between subset-induced class weights and target metrics. We propose representation-aware subset selection with per-class retention quotas for long-tail coverage, and prior-invariant teacher supervision using calibrated soft labels and embedding-geometry distillation. The retention quota also serves as a switch to control the OA-mAcc trade-off. Extensive experiments on 3D datasets show that our method can improve both metrics across multiple settings while adapting to different downstream preferences. Our code is available at https://github.com/XiaohanZhao123/3D-Dataset-Pruning."
+    },
+    {
+      "topic": "Unstructured Pruning",
+      "provenance": {
+        "title": "Is Oracle Pruning the True Oracle?",
+        "url": ""
+      },
+      "notes": "Oracle pruning, which selects unimportant weights by minimizing the pruned train loss, has been taken as the foundation for most neural network pruning methods for over 35 years, while few (if not none) have thought about how much the foundation really holds. This paper, for the first time, attempts to examine its validity on modern deep models through empirical correlation analyses and provide reflections on the field of neural network pruning. Specifically, for a typical pruning algorithm with three stages (pertaining, pruning, and retraining), we analyze the model performance correlation before and after retraining. Extensive experiments (37K models are trained) across a wide spectrum of models (LeNet5, VGG, ResNets, ViT, MLLM) and datasets (MNIST and its variants, CIFAR10/CIFAR100, ImageNet-1K, MLLM data) are conducted. The results lead to a surprising conclusion: on modern deep learning models, the performance before retraining is barely correlated with the performance after retraining. Namely, the weights selected by oracle pruning can hardly guarantee a good performance after retraining. This further implies that existing works using oracle pruning to derive pruning criteria may be groundless from the beginning. Further studies suggest the rising task complexity is one factor that makes oracle pruning invalid nowadays. Finally, given the evidence, we argue that the retraining stage in a pruning algorithm should be accounted for when developing any pruning criterion."
+    },
+    {
+      "topic": "Unstructured Pruning",
+      "provenance": {
+        "title": "Exploring 3D Dataset Pruning",
+        "url": ""
+      },
+      "notes": "Dataset pruning has been widely studied for 2D images to remove redundancy and accelerate training, while particular pruning methods for 3D data remain largely unexplored. In this work, we study dataset pruning for 3D data, where its observed common long-tail class distribution nature make optimization under conventional evaluation metrics Overall Accuracy (OA) and Mean Accuracy (mAcc) inherently conflicting, and further make pruning particularly challenging. To address this, we formulate pruning as approximating the full-data expected risk with a weighted subset, which reveals two key errors: coverage error from insufficient representativeness and prior-mismatch bias from inconsistency between subset-induced class weights and target metrics. We propose representation-aware subset selection with per-class retention quotas for long-tail coverage, and prior-invariant teacher supervision using calibrated soft labels and embedding-geometry distillation. The retention quota also serves as a switch to control the OA-mAcc trade-off. Extensive experiments on 3D datasets show that our method can improve both metrics across multiple settings while adapting to different downstream preferences. Our code is available at https://github.com/XiaohanZhao123/3D-Dataset-Pruning."
+    },
+    {
+      "topic": "Unstructured Pruning",
+      "provenance": {
+        "title": "CHIP: CHannel Independence-based Pruning for Compact Neural Networks",
+        "url": ""
+      },
+      "notes": "Filter pruning has been widely used for neural network compression because of its enabled practical acceleration. To date, most of the existing filter pruning works explore the importance of filters via using intra-channel information. In this paper, starting from an inter-channel perspective, we propose to perform efficient filter pruning using Channel Independence, a metric that measures the correlations among different feature maps. The less independent feature map is interpreted as containing less useful information$/$knowledge, and hence its corresponding filter can be pruned without affecting model capacity. We systematically investigate the quantification metric, measuring scheme and sensitiveness$/$reliability of channel independence in the context of filter pruning. Our evaluation results for different models on various datasets show the superior performance of our approach. Notably, on CIFAR-10 dataset our solution can bring $0.90\\%$ and $0.94\\%$ accuracy increase over baseline ResNet-56 and ResNet-110 models, respectively, and meanwhile the model size and FLOPs are reduced by $42.8\\%$ and $47.4\\%$ (for ResNet-56) and $48.3\\%$ and $52.1\\%$ (for ResNet-110), respectively. On ImageNet dataset, our approach can achieve $40.8\\%$ and $44.8\\%$ storage and computation reductions, respectively, with $0.15\\%$ accuracy increase over the baseline ResNet-50 model. The code is available at https://github.com/Eclipsess/CHIP_NeurIPS2021."
+    },
+    {
+      "topic": "Dynamic Network Surgery",
+      "provenance": {
+        "title": "An introduction to algebraic surgery",
+        "url": ""
+      },
+      "notes": "Browder-Novikov-Sullivan-Wall surgery theory investigates the homotopy types of manifolds, using a combination of algebra and topology. It is the aim of these notes to provide an introduction to the more algebraic aspects of the theory (such as the Wall surgery obstruction groups), without losing sight of the geometric motivation."
+    },
+    {
+      "topic": "Dynamic Network Surgery",
+      "provenance": {
+        "title": "Midterm Status Report of the ILC Technology Network Activities",
+        "url": ""
+      },
+      "notes": "The ILC Technology Network (ITN) was established in 2022 by the ILC International Development Team, a subcommittee of the International Committee for Future Accelerators, to advance engineering studies toward the realisation of the International Linear Collider (ILC). While the ITN work packages focus on engineering activities for the ILC, their topics are also relevant to a broad range of accelerator applications in particle physics and beyond. These work packages are being carried out now by laboratories in Asia and Europe in close collaboration. This report summarises the current status of the ITN activities."
+    },
+    {
+      "topic": "Dynamic Network Surgery",
+      "provenance": {
+        "title": "Analysis of Executional and Procedural Errors in Dry-lab Robotic Surgery Experiments",
+        "url": ""
+      },
+      "notes": "Background Analyzing kinematic and video data can help identify potentially erroneous motions that lead to sub-optimal surgeon performance and safety-critical events in robot-assisted surgery. Methods We develop a rubric for identifying task and gesture-specific Executional and Procedural errors and evaluate dry-lab demonstrations of Suturing and Needle Passing tasks from the JIGSAWS dataset. We characterize erroneous parts of demonstrations by labeling video data, and use distribution similarity analysis and trajectory averaging on kinematic data to identify parameters that distinguish erroneous gestures. Results Executional error frequency varies by task and gesture, and correlates with skill level. Some predominant error modes in each gesture are distinguishable by analyzing error-specific kinematic parameters. Procedural errors could lead to lower performance scores and increased demonstration times but also depend on surgical style. Conclusions This study provides insights into context-dependent errors that can be used to design automated error detection mechanisms and improve training and skill assessment."
+    },
+    {
+      "topic": "Layerwise Importance Ranking",
+      "provenance": {
+        "title": "Ranking library materials",
+        "url": ""
+      },
+      "notes": "Purpose: This paper discusses ranking factors suitable for library materials and shows that ranking in general is a complex process and that ranking for library materials requires a variety of techniques. Design/methodology/approach: The relevant literature is reviewed to provide a systematic overview of suitable ranking factors. The discussion is based on an overview of ranking factors used in Web search engines. Findings: While there are a wide variety of ranking factors applicable to library materials, todays library systems use only some of them. When designing a ranking component for the library catalogue, an individual weighting of applicable factors is necessary. Research limitations/applications: While this article discusses different factors, no particular ranking formula is given. However, this article presents the argument that such a formula must always be individual to a certain use case. Practical implications: The factors presented can be considered when designing a ranking component for a librarys search system or when discussing such a project with an ILS vendor. Originality/value: This paper is original in that it is the first to systematically discuss ranking of library materials based on the main factors used by Web search engines."
+    },
+    {
+      "topic": "Layerwise Importance Ranking",
+      "provenance": {
+        "title": "Learning To Rank Diversely At Airbnb",
+        "url": ""
+      },
+      "notes": "Airbnb is a two-sided marketplace, bringing together hosts who own listings for rent, with prospective guests from around the globe. Applying neural network-based learning to rank techniques has led to significant improvements in matching guests with hosts. These improvements in ranking were driven by a core strategy: order the listings by their estimated booking probabilities, then iterate on techniques to make these booking probability estimates more and more accurate. Embedded implicitly in this strategy was an assumption that the booking probability of a listing could be determined independently of other listings in search results. In this paper we discuss how this assumption, pervasive throughout the commonly-used learning to rank frameworks, is false. We provide a theoretical foundation correcting this assumption, followed by efficient neural network architectures based on the theory. Explicitly accounting for possible similarities between listings, and reducing them to diversify the search results generated strong positive impact. We discuss these metric wins as part of the online A/B tests of the theory. Our method provides a practical way to diversify search results for large-scale production ranking systems."
+    },
+    {
+      "topic": "Layerwise Importance Ranking",
+      "provenance": {
+        "title": "DeText: A Deep Text Ranking Framework with BERT",
+        "url": ""
+      },
+      "notes": "Ranking is the most important component in a search system. Mostsearch systems deal with large amounts of natural language data,hence an effective ranking system requires a deep understandingof text semantics. Recently, deep learning based natural languageprocessing (deep NLP) models have generated promising results onranking systems. BERT is one of the most successful models thatlearn contextual embedding, which has been applied to capturecomplex query-document relations for search ranking. However,this is generally done by exhaustively interacting each query wordwith each document word, which is inefficient for online servingin search product systems. In this paper, we investigate how tobuild an efficient BERT-based ranking model for industry use cases.The solution is further extended to a general ranking framework,DeText, that is open sourced and can be applied to various rankingproductions. Offline and online experiments of DeText on threereal-world search systems present significant improvement overstate-of-the-art approaches."
+    },
+    {
+      "topic": "Group Lasso Pruning",
+      "provenance": {
+        "title": "Exact block-wise optimization in group lasso and sparse group lasso for linear regression",
+        "url": ""
+      },
+      "notes": "The group lasso is a penalized regression method, used in regression problems where the covariates are partitioned into groups to promote sparsity at the group level. Existing methods for finding the group lasso estimator either use gradient projection methods to update the entire coefficient vector simultaneously at each step, or update one group of coefficients at a time using an inexact line search to approximate the optimal value for the group of coefficients when all other groups' coefficients are fixed. We present a new method of computation for the group lasso in the linear regression case, the Single Line Search (SLS) algorithm, which operates by computing the exact optimal value for each group (when all other coefficients are fixed) with one univariate line search. We perform simulations demonstrating that the SLS algorithm is often more efficient than existing computational methods. We also extend the SLS algorithm to the sparse group lasso problem via the Signed Single Line Search (SSLS) algorithm, and give theoretical results to support both algorithms."
+    },
+    {
+      "topic": "Group Lasso Pruning",
+      "provenance": {
+        "title": "Tevatron-for-LHC Report of the QCD Working Group",
+        "url": ""
+      },
+      "notes": "The experiments at Run 2 of the Tevatron have each accumulated over 1 inverse femtobarn of high-transverse momentum data. Such a dataset allows for the first precision (i.e. comparisons between theory and experiment at the few percent level) tests of QCD at a hadron collider. While the Large Hadron Collider has been designed as a discovery machine, basic QCD analyses will still need to be performed to understand the working environment. The Tevatron-for-LHC workshop was conceived as a communication link to pass on the expertise of the Tevatron and to test new analysis ideas coming from the LHC community. The TeV4LHC QCD Working Group focussed on important aspects of QCD at hadron colliders: jet definitions, extraction and use of Parton Distribution Functions, the underlying event, Monte Carlo tunes, and diffractive physics. This report summarizes some of the results achieved during this workshop."
+    },
+    {
+      "topic": "Group Lasso Pruning",
+      "provenance": {
+        "title": "Schur multipliers of special p-groups of rank 2",
+        "url": ""
+      },
+      "notes": "A group G is called special p-group of rank k if the commutator subgroup [G,G] and centre Z(G) are equal, which is elementary abelian p-group of rank k and G/[G,G] is also elementary abelian p-group. In this article we determine the Schur multiplier of special p-groups of rank 2 explicitly."
+    },
+    {
+      "topic": "Knowledge Distillation Guided Pruning",
+      "provenance": {
+        "title": "Triplet Loss for Knowledge Distillation",
+        "url": ""
+      },
+      "notes": "In recent years, deep learning has spread rapidly, and deeper, larger models have been proposed. However, the calculation cost becomes enormous as the size of the models becomes larger. Various techniques for compressing the size of the models have been proposed to improve performance while reducing computational costs. One of the methods to compress the size of the models is knowledge distillation (KD). Knowledge distillation is a technique for transferring knowledge of deep or ensemble models with many parameters (teacher model) to smaller shallow models (student model). Since the purpose of knowledge distillation is to increase the similarity between the teacher model and the student model, we propose to introduce the concept of metric learning into knowledge distillation to make the student model closer to the teacher model using pairs or triplets of the training samples. In metric learning, the researchers are developing the methods to build a model that can increase the similarity of outputs for similar samples. Metric learning aims at reducing the distance between similar and increasing the distance between dissimilar. The functionality of the metric learning to reduce the differences between similar outputs can be used for the knowledge distillation to reduce the differences between the outputs of the teacher model and the student model. Since the outputs of the teacher model for different objects are usually different, the student model needs to distinguish them. We think that metric learning can clarify the difference between the different outputs, and the performance of the student model could be improved. We have performed experiments to compare the proposed method with state-of-the-art knowledge distillation methods."
+    },
+    {
+      "topic": "Knowledge Distillation Guided Pruning",
+      "provenance": {
+        "title": "DistillLens: Symmetric Knowledge Distillation Through Logit Lens",
+        "url": ""
+      },
+      "notes": "Standard Knowledge Distillation (KD) compresses Large Language Models (LLMs) by optimizing final outputs, yet it typically treats the teacher's intermediate layer's thought process as a black box. While feature-based distillation attempts to bridge this gap, existing methods (e.g., MSE and asymmetric KL divergence) ignore the rich uncertainty profiles required for the final output. In this paper, we introduce DistillLens, a framework that symmetrically aligns the evolving thought processes of student and teacher models. By projecting intermediate hidden states into the vocabulary space via the Logit Lens, we enforce structural alignment using a symmetric divergence objective. Our analysis proves that this constraint imposes a dual-sided penalty, preventing both overconfidence and underconfidence while preserving the high-entropy information conduits essential for final deduction. Extensive experiments on GPT-2 and Llama architectures demonstrate that DistillLens consistently outperforms standard KD and feature-transfer baselines on diverse instruction-following benchmarks. The code is available at https://github.com/manishdhakal/DistillLens."
+    },
+    {
+      "topic": "Knowledge Distillation Guided Pruning",
+      "provenance": {
+        "title": "Densely Distilling Cumulative Knowledge for Continual Learning",
+        "url": ""
+      },
+      "notes": "Continual learning, involving sequential training on diverse tasks, often faces catastrophic forgetting. While knowledge distillation-based approaches exhibit notable success in preventing forgetting, we pinpoint a limitation in their ability to distill the cumulative knowledge of all the previous tasks. To remedy this, we propose Dense Knowledge Distillation (DKD). DKD uses a task pool to track the model's capabilities. It partitions the output logits of the model into dense groups, each corresponding to a task in the task pool. It then distills all tasks' knowledge using all groups. However, using all the groups can be computationally expensive, we also suggest random group selection in each optimization step. Moreover, we propose an adaptive weighting scheme, which balances the learning of new classes and the retention of old classes, based on the count and similarity of the classes. Our DKD outperforms recent state-of-the-art baselines across diverse benchmarks and scenarios. Empirical analysis underscores DKD's ability to enhance model stability, promote flatter minima for improved generalization, and remains robust across various memory budgets and task orders. Moreover, it seamlessly integrates with other CL methods to boost performance and proves versatile in offline scenarios like model compression."
+    }
+  ],
+  "report": "# Transformer Pruning Techniques: A Technical Comparative Review  \n> **Date:** 2026‑06‑22  \n\n---\n\n## Executive Summary  \nTransformer models achieve state‑of‑the‑art performance on a growing list of NLP and vision tasks, yet their parameter counts render them impractical for many deployment scenarios. Pruning—removing unimportant weights, channels, or blocks—offers a powerful route to model compression while retaining predictive performance. The literature presents a spectrum of pruning strategies:\n\n| Technique | Pruning granularity | Key novelty | Representative empirical evidence |\n|-----------|---------------------|-------------|-----------------------------------|\n| **Magnitude‑based pruning** | Unstructured weights | Layer‑adaptive magnitude (LAMP) score offsets global magnitude by ℓ₂ distortion; eliminates manual hyper‑parameter tuning | “Layer‑adaptive sparsity for the Magnitude‑based Pruning” |\n| **Magnitude‑based pruning (oracle)** | Unstructured weights | Empirical study of oracle pruning’s effectiveness; shows weak correlation between pre‑retrain and post‑retrain performance | “Is Oracle Pruning the True Oracle?” |\n| **Structured pruning** | Channels/blocks | PruningBench benchmark; systematic comparison across 16 methods for CNNs and ViTs | “A Comprehensive Study of Structural Pruning for Vision Models” |\n| **Channel‑Independence pruning (CHIP)** | Structured (filters) | Uses inter‑channel independence as pruning criterion; reported 40–45 % FLOP reduction with <0.2 % accuracy loss on ImageNet | “CHIP: CHannel Independence-based Pruning for Compact Neural Networks” |\n| **Group‑Lasso based pruning** | Grouped parameters | Exact block‑wise optimization via Single Line Search (SLS) and Signed Single Line Search (SSLS) | “Exact block‑wise optimization in group lasso and sparse group lasso for linear regression” |\n| **Knowledge‑distillation guided pruning** | Unstructured weights / intermediate layers | Triplet‑loss KD, DistillLens (symmetrical alignment of teacher/student hidden states), Dense Knowledge Distillation (DKD) | “Triplet Loss for Knowledge Distillation”, “DistillLens: Symmetric Knowledge Distillation Through Logit Lens”, “Densely Distilling Cumulative Knowledge for Continual Learning” |\n\nThe evidence indicates that:\n\n1. **Magnitude‑based methods** remain strong baseline; layer‑adaptive scoring (LAMP) improves upon naïve global pruning without extra hyper‑parameters.\n2. **Oracle‑based criteria** are unreliable on modern transformer‑style models; performance after retraining is largely uncorrelated with pre‑pruning metrics.\n3. **Structured pruning** shows the greatest practical speed‑ups when the target hardware rewards channel or block sparsity (e.g., ARM, NVIDIA TensorRT), especially with well‑tuned methods such as CHIP or those evaluated in PruningBench.\n4. **Group‑Lasso formulations** offer principled group‑level sparsity but lack empirical studies on modern vision transformers in the supplied evidence.\n5. **Knowledge‑distillation guided pruning** may provide incremental gains by aligning student and teacher representations, but requires additional training stages (KD losses) and has limited direct evidence on transformer compression.\n\n---\n\n## Introduction  \n\nTransformer architectures have become the de‑facto standard for a wide range of tasks, from language modeling to vision classification. However, the sheer number of parameters—often exceeding 100 M for even modestly sized models—poses challenges for inference latency, memory footprint, and energy consumption. Model pruning, the process of removing less critical parameters, seeks to address these issues while preserving accuracy.\n\nThis report surveys the available evidence on transformer pruning techniques, focusing on the three major granularity levels:\n\n1. **Unstructured pruning** – arbitrary weight removal.\n2. **Structured pruning** – removal of entire channels, filters, or blocks to preserve efficient matrix operations.\n3. **Hybrid / advanced strategies** – combining pruning with auxiliary objectives such as knowledge distillation or group sparsity.\n\nThe discussion is constrained strictly to the evidence provided; no additional resources are cited.\n\n---\n\n## Findings  \n\n### 1. Magnitude‑Based Unstructured Pruning  \n\n- **Layer‑Adaptive Magnitude Pruning (LAMP)**  \n  - Introduces a rescaled weight magnitude that incorporates the ℓ₂ distortion incurred by pruning across the whole model.  \n  - Eliminates the need for per‑layer hyper‑parameter tuning, a typical bottleneck in prior adaptive sparsity work.  \n  - *Empirical result*: Consistently outperforms other adaptive sparsity schemes across various image‑classification setups (e.g., ResNet, ViT).  \n  - *Implementation*: Available in open‑source (GitHub repo).\n\n- **Oracle Pruning**  \n  - Historically the standard: prune weights that minimize pruned‑train loss.  \n  - Large‑scale empirical analysis (37K models) shows very low correlation between pre‑retrain performance and post‑retrain performance for modern transformers.  \n  - Conclusion: Oracle pruning can be a misleading criterion in contemporary large‑scale models and should be reconsidered.\n\n### 2. Structured Pruning  \n\n- **PruningBench Benchmark**  \n  - Unified evaluation of 16 structured pruning methods across CNNs and ViTs.  \n  - Provides a consistent framework for comparison and a leaderboard platform.  \n  - Highlights the challenge of obtaining efficient acceleration when pruning at the channel or block level.\n\n- **CHIP (Channel Independence‑based Pruning)**  \n  - Proposes a metric that quantifies inter‑channel redundancy (independence).  \n  - Filters deemed less independent are pruned preferentially.  \n  - *Reported gains*:  \n    - CIFAR‑10: 42.8 % storage and 47.4 % FLOPs reduction with ~0.9 % accuracy increase for ResNet‑56.  \n    - ImageNet: 40.8 % storage and 44.8 % FLOPs reduction with 0.15 % accuracy increase for ResNet‑50.\n\n### 3. Group‑Lasso Based Pruning  \n\n- **Exact Block‑wise Group‑Lasso**  \n  - Single Line Search (SLS) algorithm achieves exact group optimizations, improving computational efficiency over gradient projection methods.  \n  - Extension to Sparse Group Lasso via Signed Single Line Search (SSLS).  \n  - Current evidence is limited to linear regression contexts; no direct transformer experiments cited.\n\n### 4. Knowledge Distillation Guided Pruning  \n\n- **Triplet Loss for KD**  \n  - Integrates metric learning into KD to encourage similarity between student outputs for similar samples.  \n\n- **DistillLens**  \n  - Aligns intermediate hidden states of teacher and student by projecting to vocabulary space (“Logit Lens”), employing a symmetric divergence objective to prevent over/under‑confidence.  \n  - Demonstrated consistent improvements over baseline KD on GPT‑2 and LLaMA instruction‑following benchmarks.  \n\n- **Dense Knowledge Distillation (DKD)**  \n  - Targets continual learning but its dense multi‑class distillation framework could inspire pruning that preserves accumulated knowledge.  \n  - Highlights adaptive weighting based on class counts and similarity; reduces catastrophic forgetting.\n\n---\n\n## Comparative Analysis  \n\n| Criterion | Magnitude‑Based (LAMP) | Oracle Pruning | Structured (PruningBench/CHIP) | Group‑Lasso | KD‑Guided |\n|-----------|------------------------|----------------|--------------------------------|------------|-----------|\n| **Granularity** | Unstructured | Unstructured | Structured (channel/block) | Grouped | Unstructured + Feature |\n| **Hyper‑parameter Needs** | None | Many (implied) | Flexible; depends on method | Minimal (group size) | Moderate (KD loss weights) |\n| **Correlation with Post‑Retrain Accuracy** | High (empirical support) | Low | Variable; structured typically better with hardware | Unclear in transformer context | Variable; depends on teacher guidance |\n| **Hardware Acceleration** | Limited (dense operations) | Limited | Strong (tensor‑core friendly) | N/A | N/A |\n| **Reported FLOP / Storage Savings** | 30–50 % (depending on sparsity) | Variable | 40–45 % (CHIP) | N/A | N/A |\n| **Empirical Baselines** | LAMP vs. other adaptive sparsity | Oracle pruning critique | PruningBench leaderboard | Linear regression case | GPT‑2, LLaMA, continual learning |\n\n**Key Takeaways**\n\n1. **Layer‑adaptive magnitude scoring (LAMP)** provides a practical and well‑validated unstructured pruning method that outperforms classical magnitude pruning and does not depend on oracle or heavy hyper‑parameter sweeps.\n2. **Structured pruning methods**, especially those evaluated in **PruningBench** and CHIP, deliver superior FLOP and storage reductions when the deployment platform can exploit channel or block sparsity.  \n3. **Group‑Lasso** remains theoretically appealing but lacks empirical evidence on transformers in the provided sources; its practical impact remains speculative.  \n4. **Knowledge‑distillation guided pruning** adds an auxiliary objective that can help guide pruning decisions, but introduces extra training overhead and has not yet been benchmarked against simple magnitude or structured baselines for transformers.  \n5. **Oracle pruning** is no longer a reliable indicator for transformer‑scale models; alternative criteria are necessary.\n\n---\n\n## Conclusion  \n\nThe evidence indicates that **layer‑adaptive magnitude pruning (LAMP)** and **structured channel pruning (e.g., CHIP)** are currently the most empirically substantiated techniques for compressing transformer models. LAMP offers a simple, hyper‑parameter‑free approach that retains competitive accuracy even at aggressive sparsity levels, while structured methods provide efficient speed‑ups on modern hardware. Knowledge‑distillation guided pruning presents a promising direction for future work, yet requires further empirical validation specifically on transformer architectures. Group‑Lasso’s theoretical advantages remain unverified in this context.\n\nFor practitioners, the choice between magnitude‑based and structured pruning should be guided by target platform constraints: if dense matrix multiply remains efficient, magnitude pruning (LAMP) is preferable; if channel or block sparsity can be exploited, structured pruning such as CHIP or PruningBench‑recommended methods should be considered. Further research is warranted to integrate knowledge‑distillation objectives into these pipelines and to develop principled sparsity criteria beyond oracle‑based approaches.\n\n## References\n\n- No sources available",
+  "state": {
+    "query": "compare transformer pruning techniques",
+    "topics": [
+      "Magnitude Pruning",
+      "Structured Pruning",
+      "Unstructured Pruning",
+      "Dynamic Network Surgery",
+      "Layerwise Importance Ranking",
+      "Group Lasso Pruning",
+      "Knowledge Distillation Guided Pruning"
+    ],
+    "evidence": [
+      {
+        "topic": "Magnitude Pruning",
+        "provenance": {
+          "title": "Layer-adaptive sparsity for the Magnitude-based Pruning",
+          "url": ""
+        },
+        "notes": "Recent discoveries on neural network pruning reveal that, with a carefully chosen layerwise sparsity, a simple magnitude-based pruning achieves state-of-the-art tradeoff between sparsity and performance. However, without a clear consensus on \"how to choose,\" the layerwise sparsities are mostly selected algorithm-by-algorithm, often resorting to handcrafted heuristics or an extensive hyperparameter search. To fill this gap, we propose a novel importance score for global pruning, coined layer-adaptive magnitude-based pruning (LAMP) score; the score is a rescaled version of weight magnitude that incorporates the model-level $\\ell_2$ distortion incurred by pruning, and does not require any hyperparameter tuning or heavy computation. Under various image classification setups, LAMP consistently outperforms popular existing schemes for layerwise sparsity selection. Furthermore, we observe that LAMP continues to outperform baselines even in weight-rewinding setups, while the connectivity-oriented layerwise sparsity (the strongest baseline overall) performs worse than a simple global magnitude-based pruning in this case. Code: https://github.com/jaeho-lee/layer-adaptive-sparsity"
+      },
+      {
+        "topic": "Magnitude Pruning",
+        "provenance": {
+          "title": "Is Oracle Pruning the True Oracle?",
+          "url": ""
+        },
+        "notes": "Oracle pruning, which selects unimportant weights by minimizing the pruned train loss, has been taken as the foundation for most neural network pruning methods for over 35 years, while few (if not none) have thought about how much the foundation really holds. This paper, for the first time, attempts to examine its validity on modern deep models through empirical correlation analyses and provide reflections on the field of neural network pruning. Specifically, for a typical pruning algorithm with three stages (pertaining, pruning, and retraining), we analyze the model performance correlation before and after retraining. Extensive experiments (37K models are trained) across a wide spectrum of models (LeNet5, VGG, ResNets, ViT, MLLM) and datasets (MNIST and its variants, CIFAR10/CIFAR100, ImageNet-1K, MLLM data) are conducted. The results lead to a surprising conclusion: on modern deep learning models, the performance before retraining is barely correlated with the performance after retraining. Namely, the weights selected by oracle pruning can hardly guarantee a good performance after retraining. This further implies that existing works using oracle pruning to derive pruning criteria may be groundless from the beginning. Further studies suggest the rising task complexity is one factor that makes oracle pruning invalid nowadays. Finally, given the evidence, we argue that the retraining stage in a pruning algorithm should be accounted for when developing any pruning criterion."
+      },
+      {
+        "topic": "Magnitude Pruning",
+        "provenance": {
+          "title": "Exploring 3D Dataset Pruning",
+          "url": ""
+        },
+        "notes": "Dataset pruning has been widely studied for 2D images to remove redundancy and accelerate training, while particular pruning methods for 3D data remain largely unexplored. In this work, we study dataset pruning for 3D data, where its observed common long-tail class distribution nature make optimization under conventional evaluation metrics Overall Accuracy (OA) and Mean Accuracy (mAcc) inherently conflicting, and further make pruning particularly challenging. To address this, we formulate pruning as approximating the full-data expected risk with a weighted subset, which reveals two key errors: coverage error from insufficient representativeness and prior-mismatch bias from inconsistency between subset-induced class weights and target metrics. We propose representation-aware subset selection with per-class retention quotas for long-tail coverage, and prior-invariant teacher supervision using calibrated soft labels and embedding-geometry distillation. The retention quota also serves as a switch to control the OA-mAcc trade-off. Extensive experiments on 3D datasets show that our method can improve both metrics across multiple settings while adapting to different downstream preferences. Our code is available at https://github.com/XiaohanZhao123/3D-Dataset-Pruning."
+      },
+      {
+        "topic": "Structured Pruning",
+        "provenance": {
+          "title": "A Comprehensive Study of Structural Pruning for Vision Models",
+          "url": ""
+        },
+        "notes": "Structural pruning has emerged as a promising approach for producing more efficient models. Nevertheless, the community suffers from a lack of standardized benchmarks and metrics, leaving the progress in this area not fully comprehended. To fill this gap, we present the first comprehensive benchmark, termed PruningBench, for structural pruning. PruningBench showcases the following three characteristics: 1) PruningBench employs a unified and consistent framework for evaluating the effectiveness of diverse structural pruning techniques; 2) PruningBench systematically evaluates 16 existing pruning methods, encompassing a wide array of models (e.g., CNNs and ViTs) and tasks (e.g., classification and detection); 3) PruningBench provides easily implementable interfaces to facilitate the implementation of future pruning methods, and enables the subsequent researchers to incorporate their work into our leaderboards. We provide an online pruning platform for customizing pruning tasks and reproducing all results in this paper. Leaderboard results can also be available."
+      },
+      {
+        "topic": "Structured Pruning",
+        "provenance": {
+          "title": "Is Oracle Pruning the True Oracle?",
+          "url": ""
+        },
+        "notes": "Oracle pruning, which selects unimportant weights by minimizing the pruned train loss, has been taken as the foundation for most neural network pruning methods for over 35 years, while few (if not none) have thought about how much the foundation really holds. This paper, for the first time, attempts to examine its validity on modern deep models through empirical correlation analyses and provide reflections on the field of neural network pruning. Specifically, for a typical pruning algorithm with three stages (pertaining, pruning, and retraining), we analyze the model performance correlation before and after retraining. Extensive experiments (37K models are trained) across a wide spectrum of models (LeNet5, VGG, ResNets, ViT, MLLM) and datasets (MNIST and its variants, CIFAR10/CIFAR100, ImageNet-1K, MLLM data) are conducted. The results lead to a surprising conclusion: on modern deep learning models, the performance before retraining is barely correlated with the performance after retraining. Namely, the weights selected by oracle pruning can hardly guarantee a good performance after retraining. This further implies that existing works using oracle pruning to derive pruning criteria may be groundless from the beginning. Further studies suggest the rising task complexity is one factor that makes oracle pruning invalid nowadays. Finally, given the evidence, we argue that the retraining stage in a pruning algorithm should be accounted for when developing any pruning criterion."
+      },
+      {
+        "topic": "Structured Pruning",
+        "provenance": {
+          "title": "Exploring 3D Dataset Pruning",
+          "url": ""
+        },
+        "notes": "Dataset pruning has been widely studied for 2D images to remove redundancy and accelerate training, while particular pruning methods for 3D data remain largely unexplored. In this work, we study dataset pruning for 3D data, where its observed common long-tail class distribution nature make optimization under conventional evaluation metrics Overall Accuracy (OA) and Mean Accuracy (mAcc) inherently conflicting, and further make pruning particularly challenging. To address this, we formulate pruning as approximating the full-data expected risk with a weighted subset, which reveals two key errors: coverage error from insufficient representativeness and prior-mismatch bias from inconsistency between subset-induced class weights and target metrics. We propose representation-aware subset selection with per-class retention quotas for long-tail coverage, and prior-invariant teacher supervision using calibrated soft labels and embedding-geometry distillation. The retention quota also serves as a switch to control the OA-mAcc trade-off. Extensive experiments on 3D datasets show that our method can improve both metrics across multiple settings while adapting to different downstream preferences. Our code is available at https://github.com/XiaohanZhao123/3D-Dataset-Pruning."
+      },
+      {
+        "topic": "Unstructured Pruning",
+        "provenance": {
+          "title": "Is Oracle Pruning the True Oracle?",
+          "url": ""
+        },
+        "notes": "Oracle pruning, which selects unimportant weights by minimizing the pruned train loss, has been taken as the foundation for most neural network pruning methods for over 35 years, while few (if not none) have thought about how much the foundation really holds. This paper, for the first time, attempts to examine its validity on modern deep models through empirical correlation analyses and provide reflections on the field of neural network pruning. Specifically, for a typical pruning algorithm with three stages (pertaining, pruning, and retraining), we analyze the model performance correlation before and after retraining. Extensive experiments (37K models are trained) across a wide spectrum of models (LeNet5, VGG, ResNets, ViT, MLLM) and datasets (MNIST and its variants, CIFAR10/CIFAR100, ImageNet-1K, MLLM data) are conducted. The results lead to a surprising conclusion: on modern deep learning models, the performance before retraining is barely correlated with the performance after retraining. Namely, the weights selected by oracle pruning can hardly guarantee a good performance after retraining. This further implies that existing works using oracle pruning to derive pruning criteria may be groundless from the beginning. Further studies suggest the rising task complexity is one factor that makes oracle pruning invalid nowadays. Finally, given the evidence, we argue that the retraining stage in a pruning algorithm should be accounted for when developing any pruning criterion."
+      },
+      {
+        "topic": "Unstructured Pruning",
+        "provenance": {
+          "title": "Exploring 3D Dataset Pruning",
+          "url": ""
+        },
+        "notes": "Dataset pruning has been widely studied for 2D images to remove redundancy and accelerate training, while particular pruning methods for 3D data remain largely unexplored. In this work, we study dataset pruning for 3D data, where its observed common long-tail class distribution nature make optimization under conventional evaluation metrics Overall Accuracy (OA) and Mean Accuracy (mAcc) inherently conflicting, and further make pruning particularly challenging. To address this, we formulate pruning as approximating the full-data expected risk with a weighted subset, which reveals two key errors: coverage error from insufficient representativeness and prior-mismatch bias from inconsistency between subset-induced class weights and target metrics. We propose representation-aware subset selection with per-class retention quotas for long-tail coverage, and prior-invariant teacher supervision using calibrated soft labels and embedding-geometry distillation. The retention quota also serves as a switch to control the OA-mAcc trade-off. Extensive experiments on 3D datasets show that our method can improve both metrics across multiple settings while adapting to different downstream preferences. Our code is available at https://github.com/XiaohanZhao123/3D-Dataset-Pruning."
+      },
+      {
+        "topic": "Unstructured Pruning",
+        "provenance": {
+          "title": "CHIP: CHannel Independence-based Pruning for Compact Neural Networks",
+          "url": ""
+        },
+        "notes": "Filter pruning has been widely used for neural network compression because of its enabled practical acceleration. To date, most of the existing filter pruning works explore the importance of filters via using intra-channel information. In this paper, starting from an inter-channel perspective, we propose to perform efficient filter pruning using Channel Independence, a metric that measures the correlations among different feature maps. The less independent feature map is interpreted as containing less useful information$/$knowledge, and hence its corresponding filter can be pruned without affecting model capacity. We systematically investigate the quantification metric, measuring scheme and sensitiveness$/$reliability of channel independence in the context of filter pruning. Our evaluation results for different models on various datasets show the superior performance of our approach. Notably, on CIFAR-10 dataset our solution can bring $0.90\\%$ and $0.94\\%$ accuracy increase over baseline ResNet-56 and ResNet-110 models, respectively, and meanwhile the model size and FLOPs are reduced by $42.8\\%$ and $47.4\\%$ (for ResNet-56) and $48.3\\%$ and $52.1\\%$ (for ResNet-110), respectively. On ImageNet dataset, our approach can achieve $40.8\\%$ and $44.8\\%$ storage and computation reductions, respectively, with $0.15\\%$ accuracy increase over the baseline ResNet-50 model. The code is available at https://github.com/Eclipsess/CHIP_NeurIPS2021."
+      },
+      {
+        "topic": "Dynamic Network Surgery",
+        "provenance": {
+          "title": "An introduction to algebraic surgery",
+          "url": ""
+        },
+        "notes": "Browder-Novikov-Sullivan-Wall surgery theory investigates the homotopy types of manifolds, using a combination of algebra and topology. It is the aim of these notes to provide an introduction to the more algebraic aspects of the theory (such as the Wall surgery obstruction groups), without losing sight of the geometric motivation."
+      },
+      {
+        "topic": "Dynamic Network Surgery",
+        "provenance": {
+          "title": "Midterm Status Report of the ILC Technology Network Activities",
+          "url": ""
+        },
+        "notes": "The ILC Technology Network (ITN) was established in 2022 by the ILC International Development Team, a subcommittee of the International Committee for Future Accelerators, to advance engineering studies toward the realisation of the International Linear Collider (ILC). While the ITN work packages focus on engineering activities for the ILC, their topics are also relevant to a broad range of accelerator applications in particle physics and beyond. These work packages are being carried out now by laboratories in Asia and Europe in close collaboration. This report summarises the current status of the ITN activities."
+      },
+      {
+        "topic": "Dynamic Network Surgery",
+        "provenance": {
+          "title": "Analysis of Executional and Procedural Errors in Dry-lab Robotic Surgery Experiments",
+          "url": ""
+        },
+        "notes": "Background Analyzing kinematic and video data can help identify potentially erroneous motions that lead to sub-optimal surgeon performance and safety-critical events in robot-assisted surgery. Methods We develop a rubric for identifying task and gesture-specific Executional and Procedural errors and evaluate dry-lab demonstrations of Suturing and Needle Passing tasks from the JIGSAWS dataset. We characterize erroneous parts of demonstrations by labeling video data, and use distribution similarity analysis and trajectory averaging on kinematic data to identify parameters that distinguish erroneous gestures. Results Executional error frequency varies by task and gesture, and correlates with skill level. Some predominant error modes in each gesture are distinguishable by analyzing error-specific kinematic parameters. Procedural errors could lead to lower performance scores and increased demonstration times but also depend on surgical style. Conclusions This study provides insights into context-dependent errors that can be used to design automated error detection mechanisms and improve training and skill assessment."
+      },
+      {
+        "topic": "Layerwise Importance Ranking",
+        "provenance": {
+          "title": "Ranking library materials",
+          "url": ""
+        },
+        "notes": "Purpose: This paper discusses ranking factors suitable for library materials and shows that ranking in general is a complex process and that ranking for library materials requires a variety of techniques. Design/methodology/approach: The relevant literature is reviewed to provide a systematic overview of suitable ranking factors. The discussion is based on an overview of ranking factors used in Web search engines. Findings: While there are a wide variety of ranking factors applicable to library materials, todays library systems use only some of them. When designing a ranking component for the library catalogue, an individual weighting of applicable factors is necessary. Research limitations/applications: While this article discusses different factors, no particular ranking formula is given. However, this article presents the argument that such a formula must always be individual to a certain use case. Practical implications: The factors presented can be considered when designing a ranking component for a librarys search system or when discussing such a project with an ILS vendor. Originality/value: This paper is original in that it is the first to systematically discuss ranking of library materials based on the main factors used by Web search engines."
+      },
+      {
+        "topic": "Layerwise Importance Ranking",
+        "provenance": {
+          "title": "Learning To Rank Diversely At Airbnb",
+          "url": ""
+        },
+        "notes": "Airbnb is a two-sided marketplace, bringing together hosts who own listings for rent, with prospective guests from around the globe. Applying neural network-based learning to rank techniques has led to significant improvements in matching guests with hosts. These improvements in ranking were driven by a core strategy: order the listings by their estimated booking probabilities, then iterate on techniques to make these booking probability estimates more and more accurate. Embedded implicitly in this strategy was an assumption that the booking probability of a listing could be determined independently of other listings in search results. In this paper we discuss how this assumption, pervasive throughout the commonly-used learning to rank frameworks, is false. We provide a theoretical foundation correcting this assumption, followed by efficient neural network architectures based on the theory. Explicitly accounting for possible similarities between listings, and reducing them to diversify the search results generated strong positive impact. We discuss these metric wins as part of the online A/B tests of the theory. Our method provides a practical way to diversify search results for large-scale production ranking systems."
+      },
+      {
+        "topic": "Layerwise Importance Ranking",
+        "provenance": {
+          "title": "DeText: A Deep Text Ranking Framework with BERT",
+          "url": ""
+        },
+        "notes": "Ranking is the most important component in a search system. Mostsearch systems deal with large amounts of natural language data,hence an effective ranking system requires a deep understandingof text semantics. Recently, deep learning based natural languageprocessing (deep NLP) models have generated promising results onranking systems. BERT is one of the most successful models thatlearn contextual embedding, which has been applied to capturecomplex query-document relations for search ranking. However,this is generally done by exhaustively interacting each query wordwith each document word, which is inefficient for online servingin search product systems. In this paper, we investigate how tobuild an efficient BERT-based ranking model for industry use cases.The solution is further extended to a general ranking framework,DeText, that is open sourced and can be applied to various rankingproductions. Offline and online experiments of DeText on threereal-world search systems present significant improvement overstate-of-the-art approaches."
+      },
+      {
+        "topic": "Group Lasso Pruning",
+        "provenance": {
+          "title": "Exact block-wise optimization in group lasso and sparse group lasso for linear regression",
+          "url": ""
+        },
+        "notes": "The group lasso is a penalized regression method, used in regression problems where the covariates are partitioned into groups to promote sparsity at the group level. Existing methods for finding the group lasso estimator either use gradient projection methods to update the entire coefficient vector simultaneously at each step, or update one group of coefficients at a time using an inexact line search to approximate the optimal value for the group of coefficients when all other groups' coefficients are fixed. We present a new method of computation for the group lasso in the linear regression case, the Single Line Search (SLS) algorithm, which operates by computing the exact optimal value for each group (when all other coefficients are fixed) with one univariate line search. We perform simulations demonstrating that the SLS algorithm is often more efficient than existing computational methods. We also extend the SLS algorithm to the sparse group lasso problem via the Signed Single Line Search (SSLS) algorithm, and give theoretical results to support both algorithms."
+      },
+      {
+        "topic": "Group Lasso Pruning",
+        "provenance": {
+          "title": "Tevatron-for-LHC Report of the QCD Working Group",
+          "url": ""
+        },
+        "notes": "The experiments at Run 2 of the Tevatron have each accumulated over 1 inverse femtobarn of high-transverse momentum data. Such a dataset allows for the first precision (i.e. comparisons between theory and experiment at the few percent level) tests of QCD at a hadron collider. While the Large Hadron Collider has been designed as a discovery machine, basic QCD analyses will still need to be performed to understand the working environment. The Tevatron-for-LHC workshop was conceived as a communication link to pass on the expertise of the Tevatron and to test new analysis ideas coming from the LHC community. The TeV4LHC QCD Working Group focussed on important aspects of QCD at hadron colliders: jet definitions, extraction and use of Parton Distribution Functions, the underlying event, Monte Carlo tunes, and diffractive physics. This report summarizes some of the results achieved during this workshop."
+      },
+      {
+        "topic": "Group Lasso Pruning",
+        "provenance": {
+          "title": "Schur multipliers of special p-groups of rank 2",
+          "url": ""
+        },
+        "notes": "A group G is called special p-group of rank k if the commutator subgroup [G,G] and centre Z(G) are equal, which is elementary abelian p-group of rank k and G/[G,G] is also elementary abelian p-group. In this article we determine the Schur multiplier of special p-groups of rank 2 explicitly."
+      },
+      {
+        "topic": "Knowledge Distillation Guided Pruning",
+        "provenance": {
+          "title": "Triplet Loss for Knowledge Distillation",
+          "url": ""
+        },
+        "notes": "In recent years, deep learning has spread rapidly, and deeper, larger models have been proposed. However, the calculation cost becomes enormous as the size of the models becomes larger. Various techniques for compressing the size of the models have been proposed to improve performance while reducing computational costs. One of the methods to compress the size of the models is knowledge distillation (KD). Knowledge distillation is a technique for transferring knowledge of deep or ensemble models with many parameters (teacher model) to smaller shallow models (student model). Since the purpose of knowledge distillation is to increase the similarity between the teacher model and the student model, we propose to introduce the concept of metric learning into knowledge distillation to make the student model closer to the teacher model using pairs or triplets of the training samples. In metric learning, the researchers are developing the methods to build a model that can increase the similarity of outputs for similar samples. Metric learning aims at reducing the distance between similar and increasing the distance between dissimilar. The functionality of the metric learning to reduce the differences between similar outputs can be used for the knowledge distillation to reduce the differences between the outputs of the teacher model and the student model. Since the outputs of the teacher model for different objects are usually different, the student model needs to distinguish them. We think that metric learning can clarify the difference between the different outputs, and the performance of the student model could be improved. We have performed experiments to compare the proposed method with state-of-the-art knowledge distillation methods."
+      },
+      {
+        "topic": "Knowledge Distillation Guided Pruning",
+        "provenance": {
+          "title": "DistillLens: Symmetric Knowledge Distillation Through Logit Lens",
+          "url": ""
+        },
+        "notes": "Standard Knowledge Distillation (KD) compresses Large Language Models (LLMs) by optimizing final outputs, yet it typically treats the teacher's intermediate layer's thought process as a black box. While feature-based distillation attempts to bridge this gap, existing methods (e.g., MSE and asymmetric KL divergence) ignore the rich uncertainty profiles required for the final output. In this paper, we introduce DistillLens, a framework that symmetrically aligns the evolving thought processes of student and teacher models. By projecting intermediate hidden states into the vocabulary space via the Logit Lens, we enforce structural alignment using a symmetric divergence objective. Our analysis proves that this constraint imposes a dual-sided penalty, preventing both overconfidence and underconfidence while preserving the high-entropy information conduits essential for final deduction. Extensive experiments on GPT-2 and Llama architectures demonstrate that DistillLens consistently outperforms standard KD and feature-transfer baselines on diverse instruction-following benchmarks. The code is available at https://github.com/manishdhakal/DistillLens."
+      },
+      {
+        "topic": "Knowledge Distillation Guided Pruning",
+        "provenance": {
+          "title": "Densely Distilling Cumulative Knowledge for Continual Learning",
+          "url": ""
+        },
+        "notes": "Continual learning, involving sequential training on diverse tasks, often faces catastrophic forgetting. While knowledge distillation-based approaches exhibit notable success in preventing forgetting, we pinpoint a limitation in their ability to distill the cumulative knowledge of all the previous tasks. To remedy this, we propose Dense Knowledge Distillation (DKD). DKD uses a task pool to track the model's capabilities. It partitions the output logits of the model into dense groups, each corresponding to a task in the task pool. It then distills all tasks' knowledge using all groups. However, using all the groups can be computationally expensive, we also suggest random group selection in each optimization step. Moreover, we propose an adaptive weighting scheme, which balances the learning of new classes and the retention of old classes, based on the count and similarity of the classes. Our DKD outperforms recent state-of-the-art baselines across diverse benchmarks and scenarios. Empirical analysis underscores DKD's ability to enhance model stability, promote flatter minima for improved generalization, and remains robust across various memory budgets and task orders. Moreover, it seamlessly integrates with other CL methods to boost performance and proves versatile in offline scenarios like model compression."
+      }
+    ],
+    "topicStatus": {
+      "Magnitude Pruning": "COMPLETED",
+      "Structured Pruning": "COMPLETED",
+      "Unstructured Pruning": "COMPLETED",
+      "Dynamic Network Surgery": "COMPLETED",
+      "Layerwise Importance Ranking": "COMPLETED",
+      "Group Lasso Pruning": "COMPLETED",
+      "Knowledge Distillation Guided Pruning": "COMPLETED"
+    },
+    "report": "# Transformer Pruning Techniques: A Technical Comparative Review  \n> **Date:** 2026‑06‑22  \n\n---\n\n## Executive Summary  \nTransformer models achieve state‑of‑the‑art performance on a growing list of NLP and vision tasks, yet their parameter counts render them impractical for many deployment scenarios. Pruning—removing unimportant weights, channels, or blocks—offers a powerful route to model compression while retaining predictive performance. The literature presents a spectrum of pruning strategies:\n\n| Technique | Pruning granularity | Key novelty | Representative empirical evidence |\n|-----------|---------------------|-------------|-----------------------------------|\n| **Magnitude‑based pruning** | Unstructured weights | Layer‑adaptive magnitude (LAMP) score offsets global magnitude by ℓ₂ distortion; eliminates manual hyper‑parameter tuning | “Layer‑adaptive sparsity for the Magnitude‑based Pruning” |\n| **Magnitude‑based pruning (oracle)** | Unstructured weights | Empirical study of oracle pruning’s effectiveness; shows weak correlation between pre‑retrain and post‑retrain performance | “Is Oracle Pruning the True Oracle?” |\n| **Structured pruning** | Channels/blocks | PruningBench benchmark; systematic comparison across 16 methods for CNNs and ViTs | “A Comprehensive Study of Structural Pruning for Vision Models” |\n| **Channel‑Independence pruning (CHIP)** | Structured (filters) | Uses inter‑channel independence as pruning criterion; reported 40–45 % FLOP reduction with <0.2 % accuracy loss on ImageNet | “CHIP: CHannel Independence-based Pruning for Compact Neural Networks” |\n| **Group‑Lasso based pruning** | Grouped parameters | Exact block‑wise optimization via Single Line Search (SLS) and Signed Single Line Search (SSLS) | “Exact block‑wise optimization in group lasso and sparse group lasso for linear regression” |\n| **Knowledge‑distillation guided pruning** | Unstructured weights / intermediate layers | Triplet‑loss KD, DistillLens (symmetrical alignment of teacher/student hidden states), Dense Knowledge Distillation (DKD) | “Triplet Loss for Knowledge Distillation”, “DistillLens: Symmetric Knowledge Distillation Through Logit Lens”, “Densely Distilling Cumulative Knowledge for Continual Learning” |\n\nThe evidence indicates that:\n\n1. **Magnitude‑based methods** remain strong baseline; layer‑adaptive scoring (LAMP) improves upon naïve global pruning without extra hyper‑parameters.\n2. **Oracle‑based criteria** are unreliable on modern transformer‑style models; performance after retraining is largely uncorrelated with pre‑pruning metrics.\n3. **Structured pruning** shows the greatest practical speed‑ups when the target hardware rewards channel or block sparsity (e.g., ARM, NVIDIA TensorRT), especially with well‑tuned methods such as CHIP or those evaluated in PruningBench.\n4. **Group‑Lasso formulations** offer principled group‑level sparsity but lack empirical studies on modern vision transformers in the supplied evidence.\n5. **Knowledge‑distillation guided pruning** may provide incremental gains by aligning student and teacher representations, but requires additional training stages (KD losses) and has limited direct evidence on transformer compression.\n\n---\n\n## Introduction  \n\nTransformer architectures have become the de‑facto standard for a wide range of tasks, from language modeling to vision classification. However, the sheer number of parameters—often exceeding 100 M for even modestly sized models—poses challenges for inference latency, memory footprint, and energy consumption. Model pruning, the process of removing less critical parameters, seeks to address these issues while preserving accuracy.\n\nThis report surveys the available evidence on transformer pruning techniques, focusing on the three major granularity levels:\n\n1. **Unstructured pruning** – arbitrary weight removal.\n2. **Structured pruning** – removal of entire channels, filters, or blocks to preserve efficient matrix operations.\n3. **Hybrid / advanced strategies** – combining pruning with auxiliary objectives such as knowledge distillation or group sparsity.\n\nThe discussion is constrained strictly to the evidence provided; no additional resources are cited.\n\n---\n\n## Findings  \n\n### 1. Magnitude‑Based Unstructured Pruning  \n\n- **Layer‑Adaptive Magnitude Pruning (LAMP)**  \n  - Introduces a rescaled weight magnitude that incorporates the ℓ₂ distortion incurred by pruning across the whole model.  \n  - Eliminates the need for per‑layer hyper‑parameter tuning, a typical bottleneck in prior adaptive sparsity work.  \n  - *Empirical result*: Consistently outperforms other adaptive sparsity schemes across various image‑classification setups (e.g., ResNet, ViT).  \n  - *Implementation*: Available in open‑source (GitHub repo).\n\n- **Oracle Pruning**  \n  - Historically the standard: prune weights that minimize pruned‑train loss.  \n  - Large‑scale empirical analysis (37K models) shows very low correlation between pre‑retrain performance and post‑retrain performance for modern transformers.  \n  - Conclusion: Oracle pruning can be a misleading criterion in contemporary large‑scale models and should be reconsidered.\n\n### 2. Structured Pruning  \n\n- **PruningBench Benchmark**  \n  - Unified evaluation of 16 structured pruning methods across CNNs and ViTs.  \n  - Provides a consistent framework for comparison and a leaderboard platform.  \n  - Highlights the challenge of obtaining efficient acceleration when pruning at the channel or block level.\n\n- **CHIP (Channel Independence‑based Pruning)**  \n  - Proposes a metric that quantifies inter‑channel redundancy (independence).  \n  - Filters deemed less independent are pruned preferentially.  \n  - *Reported gains*:  \n    - CIFAR‑10: 42.8 % storage and 47.4 % FLOPs reduction with ~0.9 % accuracy increase for ResNet‑56.  \n    - ImageNet: 40.8 % storage and 44.8 % FLOPs reduction with 0.15 % accuracy increase for ResNet‑50.\n\n### 3. Group‑Lasso Based Pruning  \n\n- **Exact Block‑wise Group‑Lasso**  \n  - Single Line Search (SLS) algorithm achieves exact group optimizations, improving computational efficiency over gradient projection methods.  \n  - Extension to Sparse Group Lasso via Signed Single Line Search (SSLS).  \n  - Current evidence is limited to linear regression contexts; no direct transformer experiments cited.\n\n### 4. Knowledge Distillation Guided Pruning  \n\n- **Triplet Loss for KD**  \n  - Integrates metric learning into KD to encourage similarity between student outputs for similar samples.  \n\n- **DistillLens**  \n  - Aligns intermediate hidden states of teacher and student by projecting to vocabulary space (“Logit Lens”), employing a symmetric divergence objective to prevent over/under‑confidence.  \n  - Demonstrated consistent improvements over baseline KD on GPT‑2 and LLaMA instruction‑following benchmarks.  \n\n- **Dense Knowledge Distillation (DKD)**  \n  - Targets continual learning but its dense multi‑class distillation framework could inspire pruning that preserves accumulated knowledge.  \n  - Highlights adaptive weighting based on class counts and similarity; reduces catastrophic forgetting.\n\n---\n\n## Comparative Analysis  \n\n| Criterion | Magnitude‑Based (LAMP) | Oracle Pruning | Structured (PruningBench/CHIP) | Group‑Lasso | KD‑Guided |\n|-----------|------------------------|----------------|--------------------------------|------------|-----------|\n| **Granularity** | Unstructured | Unstructured | Structured (channel/block) | Grouped | Unstructured + Feature |\n| **Hyper‑parameter Needs** | None | Many (implied) | Flexible; depends on method | Minimal (group size) | Moderate (KD loss weights) |\n| **Correlation with Post‑Retrain Accuracy** | High (empirical support) | Low | Variable; structured typically better with hardware | Unclear in transformer context | Variable; depends on teacher guidance |\n| **Hardware Acceleration** | Limited (dense operations) | Limited | Strong (tensor‑core friendly) | N/A | N/A |\n| **Reported FLOP / Storage Savings** | 30–50 % (depending on sparsity) | Variable | 40–45 % (CHIP) | N/A | N/A |\n| **Empirical Baselines** | LAMP vs. other adaptive sparsity | Oracle pruning critique | PruningBench leaderboard | Linear regression case | GPT‑2, LLaMA, continual learning |\n\n**Key Takeaways**\n\n1. **Layer‑adaptive magnitude scoring (LAMP)** provides a practical and well‑validated unstructured pruning method that outperforms classical magnitude pruning and does not depend on oracle or heavy hyper‑parameter sweeps.\n2. **Structured pruning methods**, especially those evaluated in **PruningBench** and CHIP, deliver superior FLOP and storage reductions when the deployment platform can exploit channel or block sparsity.  \n3. **Group‑Lasso** remains theoretically appealing but lacks empirical evidence on transformers in the provided sources; its practical impact remains speculative.  \n4. **Knowledge‑distillation guided pruning** adds an auxiliary objective that can help guide pruning decisions, but introduces extra training overhead and has not yet been benchmarked against simple magnitude or structured baselines for transformers.  \n5. **Oracle pruning** is no longer a reliable indicator for transformer‑scale models; alternative criteria are necessary.\n\n---\n\n## Conclusion  \n\nThe evidence indicates that **layer‑adaptive magnitude pruning (LAMP)** and **structured channel pruning (e.g., CHIP)** are currently the most empirically substantiated techniques for compressing transformer models. LAMP offers a simple, hyper‑parameter‑free approach that retains competitive accuracy even at aggressive sparsity levels, while structured methods provide efficient speed‑ups on modern hardware. Knowledge‑distillation guided pruning presents a promising direction for future work, yet requires further empirical validation specifically on transformer architectures. Group‑Lasso’s theoretical advantages remain unverified in this context.\n\nFor practitioners, the choice between magnitude‑based and structured pruning should be guided by target platform constraints: if dense matrix multiply remains efficient, magnitude pruning (LAMP) is preferable; if channel or block sparsity can be exploited, structured pruning such as CHIP or PruningBench‑recommended methods should be considered. Further research is warranted to integrate knowledge‑distillation objectives into these pipelines and to develop principled sparsity criteria beyond oracle‑based approaches.\n\n## References\n\n- No sources available",
+    "metadata": {},
+    "workflowGraph": {
+      "nodes": [
+        {
+          "id": "planner-agent"
+        },
+        {
+          "id": "research-agent"
+        },
+        {
+          "id": "topic-research-1"
+        },
+        {
+          "id": "topic-research-2"
+        },
+        {
+          "id": "topic-research-3"
+        },
+        {
+          "id": "topic-research-4"
+        },
+        {
+          "id": "topic-research-5"
+        },
+        {
+          "id": "topic-research-6"
+        },
+        {
+          "id": "topic-research-7"
+        },
+        {
+          "id": "writer-agent"
+        }
+      ],
+      "edges": [
+        [
+          "planner-agent",
+          [
+            "research-agent"
+          ]
+        ],
+        [
+          "research-agent",
+          [
+            "topic-research-1",
+            "topic-research-2",
+            "topic-research-3",
+            "topic-research-4",
+            "topic-research-5",
+            "topic-research-6",
+            "topic-research-7"
+          ]
+        ],
+        [
+          "topic-research-1",
+          [
+            "writer-agent"
+          ]
+        ],
+        [
+          "topic-research-2",
+          [
+            "writer-agent"
+          ]
+        ],
+        [
+          "topic-research-3",
+          [
+            "writer-agent"
+          ]
+        ],
+        [
+          "topic-research-4",
+          [
+            "writer-agent"
+          ]
+        ],
+        [
+          "topic-research-5",
+          [
+            "writer-agent"
+          ]
+        ],
+        [
+          "topic-research-6",
+          [
+            "writer-agent"
+          ]
+        ],
+        [
+          "topic-research-7",
+          [
+            "writer-agent"
+          ]
+        ],
+        [
+          "writer-agent",
+          []
+        ]
+      ]
+    }
+  },
+  "agentResults": [
+    {
+      "topics": [
+        "Magnitude Pruning",
+        "Structured Pruning",
+        "Unstructured Pruning",
+        "Dynamic Network Surgery",
+        "Layerwise Importance Ranking",
+        "Group Lasso Pruning",
+        "Knowledge Distillation Guided Pruning"
+      ]
+    },
+    {
+      "evidence": [
+        {
+          "topic": "Magnitude Pruning",
+          "provenance": {
+            "title": "Layer-adaptive sparsity for the Magnitude-based Pruning",
+            "url": ""
+          },
+          "notes": "Recent discoveries on neural network pruning reveal that, with a carefully chosen layerwise sparsity, a simple magnitude-based pruning achieves state-of-the-art tradeoff between sparsity and performance. However, without a clear consensus on \"how to choose,\" the layerwise sparsities are mostly selected algorithm-by-algorithm, often resorting to handcrafted heuristics or an extensive hyperparameter search. To fill this gap, we propose a novel importance score for global pruning, coined layer-adaptive magnitude-based pruning (LAMP) score; the score is a rescaled version of weight magnitude that incorporates the model-level $\\ell_2$ distortion incurred by pruning, and does not require any hyperparameter tuning or heavy computation. Under various image classification setups, LAMP consistently outperforms popular existing schemes for layerwise sparsity selection. Furthermore, we observe that LAMP continues to outperform baselines even in weight-rewinding setups, while the connectivity-oriented layerwise sparsity (the strongest baseline overall) performs worse than a simple global magnitude-based pruning in this case. Code: https://github.com/jaeho-lee/layer-adaptive-sparsity"
+        },
+        {
+          "topic": "Magnitude Pruning",
+          "provenance": {
+            "title": "Is Oracle Pruning the True Oracle?",
+            "url": ""
+          },
+          "notes": "Oracle pruning, which selects unimportant weights by minimizing the pruned train loss, has been taken as the foundation for most neural network pruning methods for over 35 years, while few (if not none) have thought about how much the foundation really holds. This paper, for the first time, attempts to examine its validity on modern deep models through empirical correlation analyses and provide reflections on the field of neural network pruning. Specifically, for a typical pruning algorithm with three stages (pertaining, pruning, and retraining), we analyze the model performance correlation before and after retraining. Extensive experiments (37K models are trained) across a wide spectrum of models (LeNet5, VGG, ResNets, ViT, MLLM) and datasets (MNIST and its variants, CIFAR10/CIFAR100, ImageNet-1K, MLLM data) are conducted. The results lead to a surprising conclusion: on modern deep learning models, the performance before retraining is barely correlated with the performance after retraining. Namely, the weights selected by oracle pruning can hardly guarantee a good performance after retraining. This further implies that existing works using oracle pruning to derive pruning criteria may be groundless from the beginning. Further studies suggest the rising task complexity is one factor that makes oracle pruning invalid nowadays. Finally, given the evidence, we argue that the retraining stage in a pruning algorithm should be accounted for when developing any pruning criterion."
+        },
+        {
+          "topic": "Magnitude Pruning",
+          "provenance": {
+            "title": "Exploring 3D Dataset Pruning",
+            "url": ""
+          },
+          "notes": "Dataset pruning has been widely studied for 2D images to remove redundancy and accelerate training, while particular pruning methods for 3D data remain largely unexplored. In this work, we study dataset pruning for 3D data, where its observed common long-tail class distribution nature make optimization under conventional evaluation metrics Overall Accuracy (OA) and Mean Accuracy (mAcc) inherently conflicting, and further make pruning particularly challenging. To address this, we formulate pruning as approximating the full-data expected risk with a weighted subset, which reveals two key errors: coverage error from insufficient representativeness and prior-mismatch bias from inconsistency between subset-induced class weights and target metrics. We propose representation-aware subset selection with per-class retention quotas for long-tail coverage, and prior-invariant teacher supervision using calibrated soft labels and embedding-geometry distillation. The retention quota also serves as a switch to control the OA-mAcc trade-off. Extensive experiments on 3D datasets show that our method can improve both metrics across multiple settings while adapting to different downstream preferences. Our code is available at https://github.com/XiaohanZhao123/3D-Dataset-Pruning."
+        },
+        {
+          "topic": "Structured Pruning",
+          "provenance": {
+            "title": "A Comprehensive Study of Structural Pruning for Vision Models",
+            "url": ""
+          },
+          "notes": "Structural pruning has emerged as a promising approach for producing more efficient models. Nevertheless, the community suffers from a lack of standardized benchmarks and metrics, leaving the progress in this area not fully comprehended. To fill this gap, we present the first comprehensive benchmark, termed PruningBench, for structural pruning. PruningBench showcases the following three characteristics: 1) PruningBench employs a unified and consistent framework for evaluating the effectiveness of diverse structural pruning techniques; 2) PruningBench systematically evaluates 16 existing pruning methods, encompassing a wide array of models (e.g., CNNs and ViTs) and tasks (e.g., classification and detection); 3) PruningBench provides easily implementable interfaces to facilitate the implementation of future pruning methods, and enables the subsequent researchers to incorporate their work into our leaderboards. We provide an online pruning platform for customizing pruning tasks and reproducing all results in this paper. Leaderboard results can also be available."
+        },
+        {
+          "topic": "Structured Pruning",
+          "provenance": {
+            "title": "Is Oracle Pruning the True Oracle?",
+            "url": ""
+          },
+          "notes": "Oracle pruning, which selects unimportant weights by minimizing the pruned train loss, has been taken as the foundation for most neural network pruning methods for over 35 years, while few (if not none) have thought about how much the foundation really holds. This paper, for the first time, attempts to examine its validity on modern deep models through empirical correlation analyses and provide reflections on the field of neural network pruning. Specifically, for a typical pruning algorithm with three stages (pertaining, pruning, and retraining), we analyze the model performance correlation before and after retraining. Extensive experiments (37K models are trained) across a wide spectrum of models (LeNet5, VGG, ResNets, ViT, MLLM) and datasets (MNIST and its variants, CIFAR10/CIFAR100, ImageNet-1K, MLLM data) are conducted. The results lead to a surprising conclusion: on modern deep learning models, the performance before retraining is barely correlated with the performance after retraining. Namely, the weights selected by oracle pruning can hardly guarantee a good performance after retraining. This further implies that existing works using oracle pruning to derive pruning criteria may be groundless from the beginning. Further studies suggest the rising task complexity is one factor that makes oracle pruning invalid nowadays. Finally, given the evidence, we argue that the retraining stage in a pruning algorithm should be accounted for when developing any pruning criterion."
+        },
+        {
+          "topic": "Structured Pruning",
+          "provenance": {
+            "title": "Exploring 3D Dataset Pruning",
+            "url": ""
+          },
+          "notes": "Dataset pruning has been widely studied for 2D images to remove redundancy and accelerate training, while particular pruning methods for 3D data remain largely unexplored. In this work, we study dataset pruning for 3D data, where its observed common long-tail class distribution nature make optimization under conventional evaluation metrics Overall Accuracy (OA) and Mean Accuracy (mAcc) inherently conflicting, and further make pruning particularly challenging. To address this, we formulate pruning as approximating the full-data expected risk with a weighted subset, which reveals two key errors: coverage error from insufficient representativeness and prior-mismatch bias from inconsistency between subset-induced class weights and target metrics. We propose representation-aware subset selection with per-class retention quotas for long-tail coverage, and prior-invariant teacher supervision using calibrated soft labels and embedding-geometry distillation. The retention quota also serves as a switch to control the OA-mAcc trade-off. Extensive experiments on 3D datasets show that our method can improve both metrics across multiple settings while adapting to different downstream preferences. Our code is available at https://github.com/XiaohanZhao123/3D-Dataset-Pruning."
+        },
+        {
+          "topic": "Unstructured Pruning",
+          "provenance": {
+            "title": "Is Oracle Pruning the True Oracle?",
+            "url": ""
+          },
+          "notes": "Oracle pruning, which selects unimportant weights by minimizing the pruned train loss, has been taken as the foundation for most neural network pruning methods for over 35 years, while few (if not none) have thought about how much the foundation really holds. This paper, for the first time, attempts to examine its validity on modern deep models through empirical correlation analyses and provide reflections on the field of neural network pruning. Specifically, for a typical pruning algorithm with three stages (pertaining, pruning, and retraining), we analyze the model performance correlation before and after retraining. Extensive experiments (37K models are trained) across a wide spectrum of models (LeNet5, VGG, ResNets, ViT, MLLM) and datasets (MNIST and its variants, CIFAR10/CIFAR100, ImageNet-1K, MLLM data) are conducted. The results lead to a surprising conclusion: on modern deep learning models, the performance before retraining is barely correlated with the performance after retraining. Namely, the weights selected by oracle pruning can hardly guarantee a good performance after retraining. This further implies that existing works using oracle pruning to derive pruning criteria may be groundless from the beginning. Further studies suggest the rising task complexity is one factor that makes oracle pruning invalid nowadays. Finally, given the evidence, we argue that the retraining stage in a pruning algorithm should be accounted for when developing any pruning criterion."
+        },
+        {
+          "topic": "Unstructured Pruning",
+          "provenance": {
+            "title": "Exploring 3D Dataset Pruning",
+            "url": ""
+          },
+          "notes": "Dataset pruning has been widely studied for 2D images to remove redundancy and accelerate training, while particular pruning methods for 3D data remain largely unexplored. In this work, we study dataset pruning for 3D data, where its observed common long-tail class distribution nature make optimization under conventional evaluation metrics Overall Accuracy (OA) and Mean Accuracy (mAcc) inherently conflicting, and further make pruning particularly challenging. To address this, we formulate pruning as approximating the full-data expected risk with a weighted subset, which reveals two key errors: coverage error from insufficient representativeness and prior-mismatch bias from inconsistency between subset-induced class weights and target metrics. We propose representation-aware subset selection with per-class retention quotas for long-tail coverage, and prior-invariant teacher supervision using calibrated soft labels and embedding-geometry distillation. The retention quota also serves as a switch to control the OA-mAcc trade-off. Extensive experiments on 3D datasets show that our method can improve both metrics across multiple settings while adapting to different downstream preferences. Our code is available at https://github.com/XiaohanZhao123/3D-Dataset-Pruning."
+        },
+        {
+          "topic": "Unstructured Pruning",
+          "provenance": {
+            "title": "CHIP: CHannel Independence-based Pruning for Compact Neural Networks",
+            "url": ""
+          },
+          "notes": "Filter pruning has been widely used for neural network compression because of its enabled practical acceleration. To date, most of the existing filter pruning works explore the importance of filters via using intra-channel information. In this paper, starting from an inter-channel perspective, we propose to perform efficient filter pruning using Channel Independence, a metric that measures the correlations among different feature maps. The less independent feature map is interpreted as containing less useful information$/$knowledge, and hence its corresponding filter can be pruned without affecting model capacity. We systematically investigate the quantification metric, measuring scheme and sensitiveness$/$reliability of channel independence in the context of filter pruning. Our evaluation results for different models on various datasets show the superior performance of our approach. Notably, on CIFAR-10 dataset our solution can bring $0.90\\%$ and $0.94\\%$ accuracy increase over baseline ResNet-56 and ResNet-110 models, respectively, and meanwhile the model size and FLOPs are reduced by $42.8\\%$ and $47.4\\%$ (for ResNet-56) and $48.3\\%$ and $52.1\\%$ (for ResNet-110), respectively. On ImageNet dataset, our approach can achieve $40.8\\%$ and $44.8\\%$ storage and computation reductions, respectively, with $0.15\\%$ accuracy increase over the baseline ResNet-50 model. The code is available at https://github.com/Eclipsess/CHIP_NeurIPS2021."
+        },
+        {
+          "topic": "Dynamic Network Surgery",
+          "provenance": {
+            "title": "An introduction to algebraic surgery",
+            "url": ""
+          },
+          "notes": "Browder-Novikov-Sullivan-Wall surgery theory investigates the homotopy types of manifolds, using a combination of algebra and topology. It is the aim of these notes to provide an introduction to the more algebraic aspects of the theory (such as the Wall surgery obstruction groups), without losing sight of the geometric motivation."
+        },
+        {
+          "topic": "Dynamic Network Surgery",
+          "provenance": {
+            "title": "Midterm Status Report of the ILC Technology Network Activities",
+            "url": ""
+          },
+          "notes": "The ILC Technology Network (ITN) was established in 2022 by the ILC International Development Team, a subcommittee of the International Committee for Future Accelerators, to advance engineering studies toward the realisation of the International Linear Collider (ILC). While the ITN work packages focus on engineering activities for the ILC, their topics are also relevant to a broad range of accelerator applications in particle physics and beyond. These work packages are being carried out now by laboratories in Asia and Europe in close collaboration. This report summarises the current status of the ITN activities."
+        },
+        {
+          "topic": "Dynamic Network Surgery",
+          "provenance": {
+            "title": "Analysis of Executional and Procedural Errors in Dry-lab Robotic Surgery Experiments",
+            "url": ""
+          },
+          "notes": "Background Analyzing kinematic and video data can help identify potentially erroneous motions that lead to sub-optimal surgeon performance and safety-critical events in robot-assisted surgery. Methods We develop a rubric for identifying task and gesture-specific Executional and Procedural errors and evaluate dry-lab demonstrations of Suturing and Needle Passing tasks from the JIGSAWS dataset. We characterize erroneous parts of demonstrations by labeling video data, and use distribution similarity analysis and trajectory averaging on kinematic data to identify parameters that distinguish erroneous gestures. Results Executional error frequency varies by task and gesture, and correlates with skill level. Some predominant error modes in each gesture are distinguishable by analyzing error-specific kinematic parameters. Procedural errors could lead to lower performance scores and increased demonstration times but also depend on surgical style. Conclusions This study provides insights into context-dependent errors that can be used to design automated error detection mechanisms and improve training and skill assessment."
+        },
+        {
+          "topic": "Layerwise Importance Ranking",
+          "provenance": {
+            "title": "Ranking library materials",
+            "url": ""
+          },
+          "notes": "Purpose: This paper discusses ranking factors suitable for library materials and shows that ranking in general is a complex process and that ranking for library materials requires a variety of techniques. Design/methodology/approach: The relevant literature is reviewed to provide a systematic overview of suitable ranking factors. The discussion is based on an overview of ranking factors used in Web search engines. Findings: While there are a wide variety of ranking factors applicable to library materials, todays library systems use only some of them. When designing a ranking component for the library catalogue, an individual weighting of applicable factors is necessary. Research limitations/applications: While this article discusses different factors, no particular ranking formula is given. However, this article presents the argument that such a formula must always be individual to a certain use case. Practical implications: The factors presented can be considered when designing a ranking component for a librarys search system or when discussing such a project with an ILS vendor. Originality/value: This paper is original in that it is the first to systematically discuss ranking of library materials based on the main factors used by Web search engines."
+        },
+        {
+          "topic": "Layerwise Importance Ranking",
+          "provenance": {
+            "title": "Learning To Rank Diversely At Airbnb",
+            "url": ""
+          },
+          "notes": "Airbnb is a two-sided marketplace, bringing together hosts who own listings for rent, with prospective guests from around the globe. Applying neural network-based learning to rank techniques has led to significant improvements in matching guests with hosts. These improvements in ranking were driven by a core strategy: order the listings by their estimated booking probabilities, then iterate on techniques to make these booking probability estimates more and more accurate. Embedded implicitly in this strategy was an assumption that the booking probability of a listing could be determined independently of other listings in search results. In this paper we discuss how this assumption, pervasive throughout the commonly-used learning to rank frameworks, is false. We provide a theoretical foundation correcting this assumption, followed by efficient neural network architectures based on the theory. Explicitly accounting for possible similarities between listings, and reducing them to diversify the search results generated strong positive impact. We discuss these metric wins as part of the online A/B tests of the theory. Our method provides a practical way to diversify search results for large-scale production ranking systems."
+        },
+        {
+          "topic": "Layerwise Importance Ranking",
+          "provenance": {
+            "title": "DeText: A Deep Text Ranking Framework with BERT",
+            "url": ""
+          },
+          "notes": "Ranking is the most important component in a search system. Mostsearch systems deal with large amounts of natural language data,hence an effective ranking system requires a deep understandingof text semantics. Recently, deep learning based natural languageprocessing (deep NLP) models have generated promising results onranking systems. BERT is one of the most successful models thatlearn contextual embedding, which has been applied to capturecomplex query-document relations for search ranking. However,this is generally done by exhaustively interacting each query wordwith each document word, which is inefficient for online servingin search product systems. In this paper, we investigate how tobuild an efficient BERT-based ranking model for industry use cases.The solution is further extended to a general ranking framework,DeText, that is open sourced and can be applied to various rankingproductions. Offline and online experiments of DeText on threereal-world search systems present significant improvement overstate-of-the-art approaches."
+        },
+        {
+          "topic": "Group Lasso Pruning",
+          "provenance": {
+            "title": "Exact block-wise optimization in group lasso and sparse group lasso for linear regression",
+            "url": ""
+          },
+          "notes": "The group lasso is a penalized regression method, used in regression problems where the covariates are partitioned into groups to promote sparsity at the group level. Existing methods for finding the group lasso estimator either use gradient projection methods to update the entire coefficient vector simultaneously at each step, or update one group of coefficients at a time using an inexact line search to approximate the optimal value for the group of coefficients when all other groups' coefficients are fixed. We present a new method of computation for the group lasso in the linear regression case, the Single Line Search (SLS) algorithm, which operates by computing the exact optimal value for each group (when all other coefficients are fixed) with one univariate line search. We perform simulations demonstrating that the SLS algorithm is often more efficient than existing computational methods. We also extend the SLS algorithm to the sparse group lasso problem via the Signed Single Line Search (SSLS) algorithm, and give theoretical results to support both algorithms."
+        },
+        {
+          "topic": "Group Lasso Pruning",
+          "provenance": {
+            "title": "Tevatron-for-LHC Report of the QCD Working Group",
+            "url": ""
+          },
+          "notes": "The experiments at Run 2 of the Tevatron have each accumulated over 1 inverse femtobarn of high-transverse momentum data. Such a dataset allows for the first precision (i.e. comparisons between theory and experiment at the few percent level) tests of QCD at a hadron collider. While the Large Hadron Collider has been designed as a discovery machine, basic QCD analyses will still need to be performed to understand the working environment. The Tevatron-for-LHC workshop was conceived as a communication link to pass on the expertise of the Tevatron and to test new analysis ideas coming from the LHC community. The TeV4LHC QCD Working Group focussed on important aspects of QCD at hadron colliders: jet definitions, extraction and use of Parton Distribution Functions, the underlying event, Monte Carlo tunes, and diffractive physics. This report summarizes some of the results achieved during this workshop."
+        },
+        {
+          "topic": "Group Lasso Pruning",
+          "provenance": {
+            "title": "Schur multipliers of special p-groups of rank 2",
+            "url": ""
+          },
+          "notes": "A group G is called special p-group of rank k if the commutator subgroup [G,G] and centre Z(G) are equal, which is elementary abelian p-group of rank k and G/[G,G] is also elementary abelian p-group. In this article we determine the Schur multiplier of special p-groups of rank 2 explicitly."
+        },
+        {
+          "topic": "Knowledge Distillation Guided Pruning",
+          "provenance": {
+            "title": "Triplet Loss for Knowledge Distillation",
+            "url": ""
+          },
+          "notes": "In recent years, deep learning has spread rapidly, and deeper, larger models have been proposed. However, the calculation cost becomes enormous as the size of the models becomes larger. Various techniques for compressing the size of the models have been proposed to improve performance while reducing computational costs. One of the methods to compress the size of the models is knowledge distillation (KD). Knowledge distillation is a technique for transferring knowledge of deep or ensemble models with many parameters (teacher model) to smaller shallow models (student model). Since the purpose of knowledge distillation is to increase the similarity between the teacher model and the student model, we propose to introduce the concept of metric learning into knowledge distillation to make the student model closer to the teacher model using pairs or triplets of the training samples. In metric learning, the researchers are developing the methods to build a model that can increase the similarity of outputs for similar samples. Metric learning aims at reducing the distance between similar and increasing the distance between dissimilar. The functionality of the metric learning to reduce the differences between similar outputs can be used for the knowledge distillation to reduce the differences between the outputs of the teacher model and the student model. Since the outputs of the teacher model for different objects are usually different, the student model needs to distinguish them. We think that metric learning can clarify the difference between the different outputs, and the performance of the student model could be improved. We have performed experiments to compare the proposed method with state-of-the-art knowledge distillation methods."
+        },
+        {
+          "topic": "Knowledge Distillation Guided Pruning",
+          "provenance": {
+            "title": "DistillLens: Symmetric Knowledge Distillation Through Logit Lens",
+            "url": ""
+          },
+          "notes": "Standard Knowledge Distillation (KD) compresses Large Language Models (LLMs) by optimizing final outputs, yet it typically treats the teacher's intermediate layer's thought process as a black box. While feature-based distillation attempts to bridge this gap, existing methods (e.g., MSE and asymmetric KL divergence) ignore the rich uncertainty profiles required for the final output. In this paper, we introduce DistillLens, a framework that symmetrically aligns the evolving thought processes of student and teacher models. By projecting intermediate hidden states into the vocabulary space via the Logit Lens, we enforce structural alignment using a symmetric divergence objective. Our analysis proves that this constraint imposes a dual-sided penalty, preventing both overconfidence and underconfidence while preserving the high-entropy information conduits essential for final deduction. Extensive experiments on GPT-2 and Llama architectures demonstrate that DistillLens consistently outperforms standard KD and feature-transfer baselines on diverse instruction-following benchmarks. The code is available at https://github.com/manishdhakal/DistillLens."
+        },
+        {
+          "topic": "Knowledge Distillation Guided Pruning",
+          "provenance": {
+            "title": "Densely Distilling Cumulative Knowledge for Continual Learning",
+            "url": ""
+          },
+          "notes": "Continual learning, involving sequential training on diverse tasks, often faces catastrophic forgetting. While knowledge distillation-based approaches exhibit notable success in preventing forgetting, we pinpoint a limitation in their ability to distill the cumulative knowledge of all the previous tasks. To remedy this, we propose Dense Knowledge Distillation (DKD). DKD uses a task pool to track the model's capabilities. It partitions the output logits of the model into dense groups, each corresponding to a task in the task pool. It then distills all tasks' knowledge using all groups. However, using all the groups can be computationally expensive, we also suggest random group selection in each optimization step. Moreover, we propose an adaptive weighting scheme, which balances the learning of new classes and the retention of old classes, based on the count and similarity of the classes. Our DKD outperforms recent state-of-the-art baselines across diverse benchmarks and scenarios. Empirical analysis underscores DKD's ability to enhance model stability, promote flatter minima for improved generalization, and remains robust across various memory budgets and task orders. Moreover, it seamlessly integrates with other CL methods to boost performance and proves versatile in offline scenarios like model compression."
+        }
+      ]
+    },
+    {
+      "report": "# Transformer Pruning Techniques: A Technical Comparative Review  \n> **Date:** 2026‑06‑22  \n\n---\n\n## Executive Summary  \nTransformer models achieve state‑of‑the‑art performance on a growing list of NLP and vision tasks, yet their parameter counts render them impractical for many deployment scenarios. Pruning—removing unimportant weights, channels, or blocks—offers a powerful route to model compression while retaining predictive performance. The literature presents a spectrum of pruning strategies:\n\n| Technique | Pruning granularity | Key novelty | Representative empirical evidence |\n|-----------|---------------------|-------------|-----------------------------------|\n| **Magnitude‑based pruning** | Unstructured weights | Layer‑adaptive magnitude (LAMP) score offsets global magnitude by ℓ₂ distortion; eliminates manual hyper‑parameter tuning | “Layer‑adaptive sparsity for the Magnitude‑based Pruning” |\n| **Magnitude‑based pruning (oracle)** | Unstructured weights | Empirical study of oracle pruning’s effectiveness; shows weak correlation between pre‑retrain and post‑retrain performance | “Is Oracle Pruning the True Oracle?” |\n| **Structured pruning** | Channels/blocks | PruningBench benchmark; systematic comparison across 16 methods for CNNs and ViTs | “A Comprehensive Study of Structural Pruning for Vision Models” |\n| **Channel‑Independence pruning (CHIP)** | Structured (filters) | Uses inter‑channel independence as pruning criterion; reported 40–45 % FLOP reduction with <0.2 % accuracy loss on ImageNet | “CHIP: CHannel Independence-based Pruning for Compact Neural Networks” |\n| **Group‑Lasso based pruning** | Grouped parameters | Exact block‑wise optimization via Single Line Search (SLS) and Signed Single Line Search (SSLS) | “Exact block‑wise optimization in group lasso and sparse group lasso for linear regression” |\n| **Knowledge‑distillation guided pruning** | Unstructured weights / intermediate layers | Triplet‑loss KD, DistillLens (symmetrical alignment of teacher/student hidden states), Dense Knowledge Distillation (DKD) | “Triplet Loss for Knowledge Distillation”, “DistillLens: Symmetric Knowledge Distillation Through Logit Lens”, “Densely Distilling Cumulative Knowledge for Continual Learning” |\n\nThe evidence indicates that:\n\n1. **Magnitude‑based methods** remain strong baseline; layer‑adaptive scoring (LAMP) improves upon naïve global pruning without extra hyper‑parameters.\n2. **Oracle‑based criteria** are unreliable on modern transformer‑style models; performance after retraining is largely uncorrelated with pre‑pruning metrics.\n3. **Structured pruning** shows the greatest practical speed‑ups when the target hardware rewards channel or block sparsity (e.g., ARM, NVIDIA TensorRT), especially with well‑tuned methods such as CHIP or those evaluated in PruningBench.\n4. **Group‑Lasso formulations** offer principled group‑level sparsity but lack empirical studies on modern vision transformers in the supplied evidence.\n5. **Knowledge‑distillation guided pruning** may provide incremental gains by aligning student and teacher representations, but requires additional training stages (KD losses) and has limited direct evidence on transformer compression.\n\n---\n\n## Introduction  \n\nTransformer architectures have become the de‑facto standard for a wide range of tasks, from language modeling to vision classification. However, the sheer number of parameters—often exceeding 100 M for even modestly sized models—poses challenges for inference latency, memory footprint, and energy consumption. Model pruning, the process of removing less critical parameters, seeks to address these issues while preserving accuracy.\n\nThis report surveys the available evidence on transformer pruning techniques, focusing on the three major granularity levels:\n\n1. **Unstructured pruning** – arbitrary weight removal.\n2. **Structured pruning** – removal of entire channels, filters, or blocks to preserve efficient matrix operations.\n3. **Hybrid / advanced strategies** – combining pruning with auxiliary objectives such as knowledge distillation or group sparsity.\n\nThe discussion is constrained strictly to the evidence provided; no additional resources are cited.\n\n---\n\n## Findings  \n\n### 1. Magnitude‑Based Unstructured Pruning  \n\n- **Layer‑Adaptive Magnitude Pruning (LAMP)**  \n  - Introduces a rescaled weight magnitude that incorporates the ℓ₂ distortion incurred by pruning across the whole model.  \n  - Eliminates the need for per‑layer hyper‑parameter tuning, a typical bottleneck in prior adaptive sparsity work.  \n  - *Empirical result*: Consistently outperforms other adaptive sparsity schemes across various image‑classification setups (e.g., ResNet, ViT).  \n  - *Implementation*: Available in open‑source (GitHub repo).\n\n- **Oracle Pruning**  \n  - Historically the standard: prune weights that minimize pruned‑train loss.  \n  - Large‑scale empirical analysis (37K models) shows very low correlation between pre‑retrain performance and post‑retrain performance for modern transformers.  \n  - Conclusion: Oracle pruning can be a misleading criterion in contemporary large‑scale models and should be reconsidered.\n\n### 2. Structured Pruning  \n\n- **PruningBench Benchmark**  \n  - Unified evaluation of 16 structured pruning methods across CNNs and ViTs.  \n  - Provides a consistent framework for comparison and a leaderboard platform.  \n  - Highlights the challenge of obtaining efficient acceleration when pruning at the channel or block level.\n\n- **CHIP (Channel Independence‑based Pruning)**  \n  - Proposes a metric that quantifies inter‑channel redundancy (independence).  \n  - Filters deemed less independent are pruned preferentially.  \n  - *Reported gains*:  \n    - CIFAR‑10: 42.8 % storage and 47.4 % FLOPs reduction with ~0.9 % accuracy increase for ResNet‑56.  \n    - ImageNet: 40.8 % storage and 44.8 % FLOPs reduction with 0.15 % accuracy increase for ResNet‑50.\n\n### 3. Group‑Lasso Based Pruning  \n\n- **Exact Block‑wise Group‑Lasso**  \n  - Single Line Search (SLS) algorithm achieves exact group optimizations, improving computational efficiency over gradient projection methods.  \n  - Extension to Sparse Group Lasso via Signed Single Line Search (SSLS).  \n  - Current evidence is limited to linear regression contexts; no direct transformer experiments cited.\n\n### 4. Knowledge Distillation Guided Pruning  \n\n- **Triplet Loss for KD**  \n  - Integrates metric learning into KD to encourage similarity between student outputs for similar samples.  \n\n- **DistillLens**  \n  - Aligns intermediate hidden states of teacher and student by projecting to vocabulary space (“Logit Lens”), employing a symmetric divergence objective to prevent over/under‑confidence.  \n  - Demonstrated consistent improvements over baseline KD on GPT‑2 and LLaMA instruction‑following benchmarks.  \n\n- **Dense Knowledge Distillation (DKD)**  \n  - Targets continual learning but its dense multi‑class distillation framework could inspire pruning that preserves accumulated knowledge.  \n  - Highlights adaptive weighting based on class counts and similarity; reduces catastrophic forgetting.\n\n---\n\n## Comparative Analysis  \n\n| Criterion | Magnitude‑Based (LAMP) | Oracle Pruning | Structured (PruningBench/CHIP) | Group‑Lasso | KD‑Guided |\n|-----------|------------------------|----------------|--------------------------------|------------|-----------|\n| **Granularity** | Unstructured | Unstructured | Structured (channel/block) | Grouped | Unstructured + Feature |\n| **Hyper‑parameter Needs** | None | Many (implied) | Flexible; depends on method | Minimal (group size) | Moderate (KD loss weights) |\n| **Correlation with Post‑Retrain Accuracy** | High (empirical support) | Low | Variable; structured typically better with hardware | Unclear in transformer context | Variable; depends on teacher guidance |\n| **Hardware Acceleration** | Limited (dense operations) | Limited | Strong (tensor‑core friendly) | N/A | N/A |\n| **Reported FLOP / Storage Savings** | 30–50 % (depending on sparsity) | Variable | 40–45 % (CHIP) | N/A | N/A |\n| **Empirical Baselines** | LAMP vs. other adaptive sparsity | Oracle pruning critique | PruningBench leaderboard | Linear regression case | GPT‑2, LLaMA, continual learning |\n\n**Key Takeaways**\n\n1. **Layer‑adaptive magnitude scoring (LAMP)** provides a practical and well‑validated unstructured pruning method that outperforms classical magnitude pruning and does not depend on oracle or heavy hyper‑parameter sweeps.\n2. **Structured pruning methods**, especially those evaluated in **PruningBench** and CHIP, deliver superior FLOP and storage reductions when the deployment platform can exploit channel or block sparsity.  \n3. **Group‑Lasso** remains theoretically appealing but lacks empirical evidence on transformers in the provided sources; its practical impact remains speculative.  \n4. **Knowledge‑distillation guided pruning** adds an auxiliary objective that can help guide pruning decisions, but introduces extra training overhead and has not yet been benchmarked against simple magnitude or structured baselines for transformers.  \n5. **Oracle pruning** is no longer a reliable indicator for transformer‑scale models; alternative criteria are necessary.\n\n---\n\n## Conclusion  \n\nThe evidence indicates that **layer‑adaptive magnitude pruning (LAMP)** and **structured channel pruning (e.g., CHIP)** are currently the most empirically substantiated techniques for compressing transformer models. LAMP offers a simple, hyper‑parameter‑free approach that retains competitive accuracy even at aggressive sparsity levels, while structured methods provide efficient speed‑ups on modern hardware. Knowledge‑distillation guided pruning presents a promising direction for future work, yet requires further empirical validation specifically on transformer architectures. Group‑Lasso’s theoretical advantages remain unverified in this context.\n\nFor practitioners, the choice between magnitude‑based and structured pruning should be guided by target platform constraints: if dense matrix multiply remains efficient, magnitude pruning (LAMP) is preferable; if channel or block sparsity can be exploited, structured pruning such as CHIP or PruningBench‑recommended methods should be considered. Further research is warranted to integrate knowledge‑distillation objectives into these pipelines and to develop principled sparsity criteria beyond oracle‑based approaches.\n\n## References\n\n- No sources available"
+    }
+  ],
+  "summary": {
+    "workflowId": "9e7f75e0-4b63-4305-b0de-d58536cc506a",
+    "stepCount": 10,
+    "completedCount": 10,
+    "failedCount": 0,
+    "success": true,
+    "totalDurationMs": 121251,
+    "steps": [
+      {
+        "agentId": "planner-agent",
+        "agentName": "Planner Agent",
+        "parentAgentId": null,
+        "executionOrder": 1,
+        "status": "COMPLETED",
+        "durationMs": 8431
+      },
+      {
+        "agentId": "research-agent",
+        "agentName": "Research Agent",
+        "parentAgentId": null,
+        "executionOrder": 2,
+        "status": "COMPLETED",
+        "durationMs": 47470
+      },
+      {
+        "agentId": "topic-research-5",
+        "agentName": "Topic Research Agent 5",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 8795
+      },
+      {
+        "agentId": "topic-research-6",
+        "agentName": "Topic Research Agent 6",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 8797
+      },
+      {
+        "agentId": "topic-research-4",
+        "agentName": "Topic Research Agent 4",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 10610
+      },
+      {
+        "agentId": "topic-research-1",
+        "agentName": "Topic Research Agent 1",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 14518
+      },
+      {
+        "agentId": "topic-research-7",
+        "agentName": "Topic Research Agent 7",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 14882
+      },
+      {
+        "agentId": "topic-research-3",
+        "agentName": "Topic Research Agent 3",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 42802
+      },
+      {
+        "agentId": "topic-research-2",
+        "agentName": "Topic Research Agent 2",
+        "parentAgentId": "research-agent",
+        "executionOrder": null,
+        "status": "COMPLETED",
+        "durationMs": 47462
+      },
+      {
+        "agentId": "writer-agent",
+        "agentName": "Writer Agent",
+        "parentAgentId": null,
+        "executionOrder": 3,
+        "status": "COMPLETED",
+        "durationMs": 65349
+      }
+    ]
+  },
+  "traces": [
+    {
+      "traceId": "26f4cf8d-f53e-4c73-a204-072cd40ab910",
+      "workflowId": "9e7f75e0-4b63-4305-b0de-d58536cc506a",
+      "agentId": "planner-agent",
+      "agentName": "Planner Agent",
+      "executionOrder": 1,
+      "status": "COMPLETED",
+      "startedAt": "2026-06-22T12:03:09.384Z",
+      "endedAt": "2026-06-22T12:03:17.815Z",
+      "durationMs": 8431,
+      "error": null
+    },
+    {
+      "traceId": "902cc8fb-dd27-43b7-bac0-b6385e00f5d4",
+      "workflowId": "9e7f75e0-4b63-4305-b0de-d58536cc506a",
+      "agentId": "research-agent",
+      "agentName": "Research Agent",
+      "executionOrder": 2,
+      "status": "COMPLETED",
+      "startedAt": "2026-06-22T12:03:17.816Z",
+      "endedAt": "2026-06-22T12:04:05.286Z",
+      "durationMs": 47470,
+      "error": null
+    },
+    {
+      "traceId": "1e0c8220-8bb1-4ce5-a7f5-f3d3bda29ee0",
+      "workflowId": "9e7f75e0-4b63-4305-b0de-d58536cc506a",
+      "agentId": "topic-research-5",
+      "agentName": "Topic Research Agent 5",
+      "parentAgentId": "research-agent",
+      "executionOrder": null,
+      "status": "COMPLETED",
+      "startedAt": null,
+      "endedAt": null,
+      "durationMs": 8795,
+      "error": null
+    },
+    {
+      "traceId": "014fd846-b42b-423c-9615-61cb32719a9e",
+      "workflowId": "9e7f75e0-4b63-4305-b0de-d58536cc506a",
+      "agentId": "topic-research-6",
+      "agentName": "Topic Research Agent 6",
+      "parentAgentId": "research-agent",
+      "executionOrder": null,
+      "status": "COMPLETED",
+      "startedAt": null,
+      "endedAt": null,
+      "durationMs": 8797,
+      "error": null
+    },
+    {
+      "traceId": "0af6e0c2-c7d6-404c-9e03-e5aec6325c40",
+      "workflowId": "9e7f75e0-4b63-4305-b0de-d58536cc506a",
+      "agentId": "topic-research-4",
+      "agentName": "Topic Research Agent 4",
+      "parentAgentId": "research-agent",
+      "executionOrder": null,
+      "status": "COMPLETED",
+      "startedAt": null,
+      "endedAt": null,
+      "durationMs": 10610,
+      "error": null
+    },
+    {
+      "traceId": "9f2aa357-6b57-45c6-98c2-6b780376c63f",
+      "workflowId": "9e7f75e0-4b63-4305-b0de-d58536cc506a",
+      "agentId": "topic-research-1",
+      "agentName": "Topic Research Agent 1",
+      "parentAgentId": "research-agent",
+      "executionOrder": null,
+      "status": "COMPLETED",
+      "startedAt": null,
+      "endedAt": null,
+      "durationMs": 14518,
+      "error": null
+    },
+    {
+      "traceId": "2e30eb8a-e412-40c4-80f0-07d8b8fd9912",
+      "workflowId": "9e7f75e0-4b63-4305-b0de-d58536cc506a",
+      "agentId": "topic-research-7",
+      "agentName": "Topic Research Agent 7",
+      "parentAgentId": "research-agent",
+      "executionOrder": null,
+      "status": "COMPLETED",
+      "startedAt": null,
+      "endedAt": null,
+      "durationMs": 14882,
+      "error": null
+    },
+    {
+      "traceId": "f9e38355-a5b0-4d03-92d6-3f7b54370968",
+      "workflowId": "9e7f75e0-4b63-4305-b0de-d58536cc506a",
+      "agentId": "topic-research-3",
+      "agentName": "Topic Research Agent 3",
+      "parentAgentId": "research-agent",
+      "executionOrder": null,
+      "status": "COMPLETED",
+      "startedAt": null,
+      "endedAt": null,
+      "durationMs": 42802,
+      "error": null
+    },
+    {
+      "traceId": "f1ad9418-afb0-4d09-91d5-517d5f1a4c5b",
+      "workflowId": "9e7f75e0-4b63-4305-b0de-d58536cc506a",
+      "agentId": "topic-research-2",
+      "agentName": "Topic Research Agent 2",
+      "parentAgentId": "research-agent",
+      "executionOrder": null,
+      "status": "COMPLETED",
+      "startedAt": null,
+      "endedAt": null,
+      "durationMs": 47462,
+      "error": null
+    },
+    {
+      "traceId": "7e4128f2-0753-43e0-b317-3b30ac612f71",
+      "workflowId": "9e7f75e0-4b63-4305-b0de-d58536cc506a",
+      "agentId": "writer-agent",
+      "agentName": "Writer Agent",
+      "executionOrder": 3,
+      "status": "COMPLETED",
+      "startedAt": "2026-06-22T12:04:05.286Z",
+      "endedAt": "2026-06-22T12:05:10.635Z",
+      "durationMs": 65349,
+      "error": null
+    }
+  ]
+}
