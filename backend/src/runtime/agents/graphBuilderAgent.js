@@ -6,7 +6,7 @@ class GraphBuilderAgent extends BaseAgent {
     async execute(input) {
         const graph =
             await this.dependencies.graphBuilder.build(
-                input.evidence
+                input.payload.evidence
             );
         await this.dependencies.graphRepository.save(
             graph

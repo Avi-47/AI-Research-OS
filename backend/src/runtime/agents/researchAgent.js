@@ -161,15 +161,19 @@ class ResearchAgent extends BaseAgent {
 						provenance: item.provenance,
 						notes: item.notes
 					});
-					await this.runtimeKernel.publish(
-						createEvent({
-							eventType: "evidence.stored",
-							payload: {
-								evidence
-							}
-						})
-					);
 				}
+				await this.runtimeKernel.publish(
+					createEvent({
+						workflowId: context.workflowId,
+						eventType: "evidence.stored",
+						producer: workers[index].id,
+						payload: {
+							workflowId: context.workflowId,
+							topic,
+							evidence: result.value.evidence
+						}
+					})
+				);
 				graph?.addEdge(
 					workers[index].id,
 					"writer-agent"
