@@ -9,6 +9,24 @@ node_modules/
 # =========================
 .env
 **/.env
+.env.*
+**/.env.*
+backend/.env
+backend/.env.*
+
+# =========================
+# Secrets / credentials
+# =========================
+*.key
+*.pem
+*.p12
+*.pfx
+*.crt
+*.cer
+*.secret
+*.secrets
+*.token
+*.vault
 
 # =========================
 # Build output
@@ -30,6 +48,21 @@ pnpm-debug.log*
 outputs/
 workflow-runs/
 coverage/
+data/runs/
+*.sqlite
+*.db
+
+# =========================
+# Model / artifact files
+# =========================
+*.pt
+*.pth
+*.onnx
+*.ckpt
+*.safetensors
+*.bin
+*.tar
+*.zip
 
 # =========================
 # OS
