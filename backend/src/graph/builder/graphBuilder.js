@@ -133,7 +133,16 @@ async function build(evidence) {
     const graph = await callJsonOpenRouter(
         prompt,
         {
-            stage: "Graph Builder"
+            stage: "Graph Builder",
+            validateParsedResponse(parsedGraph) {
+                if (!Array.isArray(parsedGraph.entities) || parsedGraph.entities.length === 0) {
+                    throw new Error("Graph response did not contain entities");
+                }
+
+                if (!Array.isArray(parsedGraph.relationships) || parsedGraph.relationships.length === 0) {
+                    throw new Error("Graph response did not contain relationships");
+                }
+            }
         }
     );
 

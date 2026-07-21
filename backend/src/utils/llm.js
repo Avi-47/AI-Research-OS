@@ -1,10 +1,10 @@
 const axios = require("axios");
 
 const MODELS = [
-  "google/gemma-4-31b-it:free",
-  "openai/gpt-oss-20b:free",
-  "qwen/qwen3-coder:free",
-  "meta-llama/llama-3.3-70b-instruct:free"
+	"google/gemma-4-26b-a4b-it:free",
+	"google/gemma-4-31b-it:free",
+  	"openai/gpt-oss-20b:free",
+	"nvidia/nemotron-3-super-120b-a12b:free"
 ];
 
 function getStageLabel(stage) {
@@ -48,6 +48,22 @@ function extractJsonBlock(content) {
 	}
 
 	return cleanedContent.slice(startIndex, endIndex + 1);
+}
+
+function isUsefulJsonValue(value) {
+	if (value === null || value === undefined) {
+		return false;
+	}
+
+	if (Array.isArray(value)) {
+		return value.length > 0;
+	}
+
+	if (typeof value === "object") {
+		return Object.keys(value).length > 0;
+	}
+
+	return false;
 }
 
 async function callOpenRouterModel(model, prompt, options = {}) {
@@ -116,7 +132,10 @@ ${prompt}
 			const content = await callOpenRouterModel(model, jsonPrompt, {
 				...options,
 				temperature: 0,
-				maxTokens: 4000
+				maxTokens: options.maxTokens ?? 1500,
+				response_format: {
+					type: "json_object"
+				}
 			});
 			console.log("\n========== RAW LLM RESPONSE ==========");
 			console.log(content);
@@ -124,10 +143,19 @@ ${prompt}
 			let jsonText = extractJsonBlock(content);
 			jsonText = jsonText.replace(/,\s*([}\]])/g, "$1");
 			try {
-				return JSON.parse(jsonText);
+				const parsed = JSON.parse(jsonText);
+				if (!isUsefulJsonValue(parsed)) {
+					lastError = new Error("Empty JSON response");
+					console.log(`Empty JSON response from model: ${model}`);
+					continue;
+				}
+				if (typeof options.validateParsedResponse === "function") {
+					options.validateParsedResponse(parsed);
+				}
+				return parsed;
 			} catch (err) {
 				lastError = err;
-				console.log(`JSON Parse Failed for model: ${model}`);
+				console.log(`JSON Parse/Validation Failed for model: ${model}`);
 				console.log(jsonText);
 				continue;
 			}
@@ -145,6 +173,7 @@ module.exports = {
 	callOpenRouter,
 	callJsonOpenRouter,
 	callOpenRouterModel,
+	isUsefulJsonValue,
 	extractJsonBlock,
 	stripCodeFences
 };
