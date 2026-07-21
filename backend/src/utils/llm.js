@@ -50,41 +50,47 @@ function extractJsonBlock(content) {
 	return cleanedContent.slice(startIndex, endIndex + 1);
 }
 
-async function callOpenRouter(prompt, options = {}) {
+async function callOpenRouterModel(model, prompt, options = {}) {
 	const stage = getStageLabel(options.stage);
+	console.log(`${stage} Model Attempt: ${model}`);
+	const response = await axios.post(
+		"https://openrouter.ai/api/v1/chat/completions",
+		{
+			model,
+			messages: [
+				{
+					role: "user",
+					content: prompt
+				}
+			],
+			temperature: options.temperature ?? 0.7,
+			max_tokens: options.maxTokens ?? 4000
+		},
+		{
+			headers: {
+				Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`
+			}
+		}
+	);
+
+	console.log(`${stage} Model Used: ${model}`);
+	const choice = response.data?.choices?.[0];
+	if (!choice?.message?.content) {
+		throw new Error("Empty model response");
+	}
+
+	return choice.message.content;
+}
+
+async function callOpenRouter(prompt, options = {}) {
 	let lastError = null;
 
 	for (const model of MODELS) {
 		try {
-			console.log(`${stage} Model Attempt: ${model}`);
-			const response = await axios.post(
-				"https://openrouter.ai/api/v1/chat/completions",
-				{
-					model,
-					messages: [
-						{
-							role: "user",
-							content: prompt
-						}
-					],
-					temperature: options.temperature ?? 0.7,
-					max_tokens: options.maxTokens ?? 4000
-				},
-				{
-					headers: {
-						Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`
-					}
-				}
-			);
-
-			console.log(`${stage} Model Used: ${model}`);
-			const choice = response.data?.choices?.[0];
-			if (!choice?.message?.content) {
-				throw new Error("Empty model response");
-			}
-			return choice.message.content;
+			return await callOpenRouterModel(model, prompt, options);
 		} catch (err) {
 			lastError = err;
+			const stage = getStageLabel(options.stage);
 			console.log(`${stage} Model Failed: ${model}`);
 			console.log(err.response?.data || err.message);
 		}
@@ -103,33 +109,42 @@ Do not output explanations.
 Do not output code fences.
 ${prompt}
 `;
-    const content = await callOpenRouter(
-        jsonPrompt,
-        {
-            ...options,
-            temperature: 0,
-            maxTokens: 4000
-        }
-    );
-    console.log("\n========== RAW LLM RESPONSE ==========");
-    console.log(content);
-    console.log("======================================\n");
-    let jsonText = extractJsonBlock(content);
-    // Remove trailing commas
-    jsonText = jsonText.replace(/,\s*([}\]])/g, "$1");
-    try {
-        return JSON.parse(jsonText);
-    }
-    catch (err) {
-        console.log("JSON Parse Failed.");
-        console.log(jsonText);
-        throw err;
-    }
+	let lastError = null;
+
+	for (const model of MODELS) {
+		try {
+			const content = await callOpenRouterModel(model, jsonPrompt, {
+				...options,
+				temperature: 0,
+				maxTokens: 4000
+			});
+			console.log("\n========== RAW LLM RESPONSE ==========");
+			console.log(content);
+			console.log("======================================\n");
+			let jsonText = extractJsonBlock(content);
+			jsonText = jsonText.replace(/,\s*([}\]])/g, "$1");
+			try {
+				return JSON.parse(jsonText);
+			} catch (err) {
+				lastError = err;
+				console.log(`JSON Parse Failed for model: ${model}`);
+				console.log(jsonText);
+				continue;
+			}
+		} catch (err) {
+			lastError = err;
+			console.log(`JSON Request Failed for model: ${model}`);
+			console.log(err.response?.data || err.message);
+		}
+	}
+
+	throw lastError || new Error("No model returned valid JSON");
 }
 
 module.exports = {
 	callOpenRouter,
 	callJsonOpenRouter,
+	callOpenRouterModel,
 	extractJsonBlock,
 	stripCodeFences
 };

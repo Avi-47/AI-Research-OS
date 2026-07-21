@@ -1,4 +1,4 @@
-
+console.log(">>> graphBuilder.js loaded <<<");
 const { callJsonOpenRouter } = require("../../utils/llm");
 
 const {
@@ -118,18 +118,28 @@ async function build(evidence) {
         return createGraphDocument();
     }
 
+    console.log("BUILD() CALLED");
+    console.log("Evidence Count:", evidence.length);
+    const compressed = compressEvidence(evidence).slice(0, 5);
+
+    console.log("========== COMPRESSED EVIDENCE ==========");
+    console.dir(compressed, { depth: null });
+    console.log("========================================");
+
+    const prompt = graphExtractionPrompt(compressed);
+    console.log("Prompt Length:", prompt.length);
+
+
     const graph = await callJsonOpenRouter(
-        graphExtractionPrompt(
-            compressEvidence(evidence).slice(0, 5)
-        ),
+        prompt,
         {
             stage: "Graph Builder"
         }
     );
 
-    // console.log("========== RAW GRAPH ==========");
-    // console.dir(graph, { depth: null });
-    // console.log("===============================");
+    console.log("========== RAW GRAPH ==========");
+    console.dir(graph, { depth: null });
+    console.log("===============================");
 
     graph.entities = dedupeEntities(graph.entities || []).entities;
     graph.relationships = normalizeRelationships(graph.relationships || []);

@@ -1,3 +1,4 @@
+require("dotenv").config();
 const fs = require("fs");
 const path = require("path");
 
@@ -29,21 +30,28 @@ async function main() {
         )
     );
 
-    const graph = await build(evidence);
+    console.log("Is Array:", Array.isArray(evidence));
+    console.log("Type:", typeof evidence);
+    console.dir(evidence, { depth: 2 });
+
+    const graph = await build(evidence.evidence);
 
     const repository = new GraphRepository();
 
+    console.log("========== GRAPH ==========");
+    console.log(JSON.stringify(graph, null, 2));
+    console.log("===========================");
     await repository.save(graph);
 
     console.log("Graph saved successfully.");
 
-    const neighbors = await repository.getNeighbors(
+    const graphNeighbors = await repository.getNeighbors(
         "magnitude-pruning"
     );
 
-    console.log(neighbors.length);
+    console.log(graphNeighbors.neighbors.length);
 
-    console.dir(neighbors, {
+    console.dir(graphNeighbors, {
         depth: null
     });
 
