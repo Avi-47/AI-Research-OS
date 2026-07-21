@@ -46,7 +46,9 @@ function dedupeEntities(entities = []) {
         // Remember how old ids map to new ids
         if (originalId) {
             idMap.set(originalId, generatedId);
+			idMap.set(normalizeId(originalId), generatedId);
         }
+		idMap.set(generatedId, generatedId);
         normalizedEntities.push({
             id: generatedId,
             name: String(entity.name).trim(),
@@ -87,17 +89,69 @@ function compressEvidence(evidence = []) {
         }));
 }
 
+function validateGraphCandidate(graph) {
+    if (!graph || typeof graph !== "object" || Array.isArray(graph)) {
+        throw new Error("Graph response must be an object");
+    }
+
+    if (!Array.isArray(graph.entities) || graph.entities.length === 0) {
+        throw new Error("Graph response did not contain entities");
+    }
+
+    if (!Array.isArray(graph.relationships) || graph.relationships.length === 0) {
+        throw new Error("Graph response did not contain relationships");
+    }
+
+    for (const entity of graph.entities) {
+        if (!entity || typeof entity !== "object") {
+            throw new Error(`Invalid entity: ${JSON.stringify(entity)}`);
+        }
+
+        if (!String(entity.name || "").trim()) {
+            throw new Error(`Invalid entity name: ${JSON.stringify(entity)}`);
+        }
+
+        if (!String(entity.type || "").trim()) {
+            throw new Error(`Invalid entity type: ${JSON.stringify(entity)}`);
+        }
+    }
+
+    for (const relationship of graph.relationships) {
+        if (!relationship || typeof relationship !== "object") {
+            throw new Error(`Invalid relationship: ${JSON.stringify(relationship)}`);
+        }
+
+        if (!String(relationship.source || "").trim()) {
+            throw new Error(`Invalid relationship source: ${JSON.stringify(relationship)}`);
+        }
+
+        if (!String(relationship.target || "").trim()) {
+            throw new Error(`Invalid relationship target: ${JSON.stringify(relationship)}`);
+        }
+
+        if (!String(relationship.type || "").trim()) {
+            throw new Error(`Invalid relationship type: ${JSON.stringify(relationship)}`);
+        }
+    }
+}
+
 /**
  * Normalize relationships.
  */
-function normalizeRelationships( relationships = [], idMap = new Map()) {
+function normalizeRelationships(relationships = [], idMap = new Map()) {
     const seen = new Set();
     const normalized = [];
     for (const relationship of relationships) {
-        const source = normalizeId(relationship.source);
-        const target = normalizeId(relationship.target);
+        const sourceName = String(relationship.source || "").trim();
+        const targetName = String(relationship.target || "").trim();
+        const source = idMap.get(sourceName) || idMap.get(normalizeId(sourceName)) || normalizeId(sourceName);
+        const target = idMap.get(targetName) || idMap.get(normalizeId(targetName)) || normalizeId(targetName);
 
         const type = String(relationship.type || "").trim().toUpperCase();
+        if (!source || !target || !type || source === target) {
+            continue;
+        }
+
         const signature = `${source}|${target}|${type}`;
         if (seen.has(signature)) {
             continue;
@@ -134,15 +188,7 @@ async function build(evidence) {
         prompt,
         {
             stage: "Graph Builder",
-            validateParsedResponse(parsedGraph) {
-                if (!Array.isArray(parsedGraph.entities) || parsedGraph.entities.length === 0) {
-                    throw new Error("Graph response did not contain entities");
-                }
-
-                if (!Array.isArray(parsedGraph.relationships) || parsedGraph.relationships.length === 0) {
-                    throw new Error("Graph response did not contain relationships");
-                }
-            }
+            validateParsedResponse: validateGraphCandidate
         }
     );
 
@@ -150,8 +196,9 @@ async function build(evidence) {
     console.dir(graph, { depth: null });
     console.log("===============================");
 
-    graph.entities = dedupeEntities(graph.entities || []).entities;
-    graph.relationships = normalizeRelationships(graph.relationships || []);
+    const { entities, idMap } = dedupeEntities(graph.entities || []);
+    graph.entities = entities;
+    graph.relationships = normalizeRelationships(graph.relationships || [], idMap);
     validateGraph(graph);
 
     return createGraphDocument({

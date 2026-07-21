@@ -1,9 +1,9 @@
 const axios = require("axios");
 
 const MODELS = [
-	"google/gemma-4-26b-a4b-it:free",
+	"openai/gpt-oss-20b:free",
 	"google/gemma-4-31b-it:free",
-  	"openai/gpt-oss-20b:free",
+	"google/gemma-4-26b-a4b-it:free",
 	"nvidia/nemotron-3-super-120b-a12b:free"
 ];
 
@@ -117,12 +117,19 @@ async function callOpenRouter(prompt, options = {}) {
 
 async function callJsonOpenRouter(prompt, options = {}) {
 
-    const jsonPrompt = `
+	const jsonPrompt = `
 You are a JSON generation engine.
+
+IMPORTANT:
 Return ONLY valid JSON.
-Do not output markdown.
-Do not output explanations.
-Do not output code fences.
+Do NOT explain.
+Do NOT think aloud.
+Do NOT use markdown.
+Do NOT wrap the response in code fences.
+Your first character must be {.
+Your last character must be }.
+Any other output is invalid.
+
 ${prompt}
 `;
 	let lastError = null;

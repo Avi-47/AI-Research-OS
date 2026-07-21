@@ -2,6 +2,16 @@ function graphExtractionPrompt(evidence) {
     return `
 You are an expert knowledge graph extraction system.
 
+IMPORTANT:
+Return ONLY valid JSON.
+Do NOT explain.
+Do NOT think aloud.
+Do NOT use markdown.
+Do NOT wrap the response in code fences.
+Your first character must be {.
+Your last character must be }.
+Any other output is invalid.
+
 Your task is to convert research evidence into a structured knowledge graph.
 
 Research Evidence:
