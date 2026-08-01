@@ -32,10 +32,12 @@ async function generateTopics(query) {
 		topics = keywordPlanner(query);
 	}
 
+	if (!Array.isArray(topics) && Array.isArray(topics?.items)) {
+		topics = topics.items;
+	}
 	if (!Array.isArray(topics)) {
 		throw new Error("Planner must return a JSON array of topics");
 	}
-
 	return normalizeTopics(topics);
 }
 

@@ -21,15 +21,34 @@ class WriterAgent extends BaseAgent {
 		return createWriterInput({
 			query: state.query,
 			evidence: state.evidence,
+			retrievedContext: state.retrievedContext,
 			state: state.snapshot()
 		});
 	}
 
 	async execute(input, context = {}) {
-		
-		const report = await this.writerService.generateReport(input.query,input.evidence);
-		
-		context.state.update({report});
+
+		console.log("\n========= WRITER INPUT =========");
+		console.log(
+			"Semantic chunks:",
+			input.retrievedContext.semantic_context.length
+		);
+		console.log(
+			"Graph facts:",
+			input.retrievedContext.graph_context.length
+		);
+		console.log(
+			"Metadata:",
+			input.retrievedContext.metadata
+		);
+		console.log("================================\n");
+
+		const report = await this.writerService.generateReport(
+			input.query,
+			input.retrievedContext
+		);
+
+		context.state.update({ report });
 		if (
 			this.workflowOutputRepository &&
 			context.workflowId

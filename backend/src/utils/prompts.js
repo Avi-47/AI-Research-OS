@@ -60,27 +60,43 @@ Example:
 `;
 }
 
-function reportPrompt(query, evidence) {
+function reportPrompt(query, retrievedContext) {
+
+	const semanticContext = retrievedContext.semantic_context || [];
+
+	const graphContext = retrievedContext.graph_context || [];
+
 	return `
 You are a senior research analyst.
 
-Write a research report using only the supplied evidence.
+Write a research report using ONLY the supplied context.
 
 Research Question:
 ${query}
 
-Evidence:
-${JSON.stringify(evidence, null, 2)}
+Semantic Context
+----------------
+${JSON.stringify(semanticContext, null, 2)}
+
+Graph Context
+-------------
+${JSON.stringify(graphContext, null, 2)}
 
 Requirements:
 
 1. Use markdown formatting.
 2. Include a concise executive summary.
-3. Include the sections: Introduction, Findings, Comparative Analysis, and Conclusion.
-4. Do not introduce claims that are not supported by the evidence.
-5. Do not fabricate citations or sources.
-6. Do not add a references section; it will be appended separately from evidence.provenance values only.
-7. Be detailed and technical.
+3. Include the sections:
+   - Introduction
+   - Findings
+   - Comparative Analysis
+   - Conclusion
+4. Use BOTH semantic context and graph context when they are relevant.
+5. Treat graph facts as structured relationships between concepts.
+6. Do not introduce claims that are not supported by the supplied context.
+7. Do not fabricate citations or sources.
+8. Do not add a references section; it will be appended separately.
+9. Be detailed and technical.
 `;
 }
 

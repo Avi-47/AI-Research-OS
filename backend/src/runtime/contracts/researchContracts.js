@@ -41,11 +41,14 @@ const ResearchInputSchema = freezeObject({
 const ResearchOutputSchema = freezeObject({
 	title: "ResearchOutput",
 	type: "object",
-	required: ["evidence"],
+	required: ["evidence", "retrievedContext"],
 	properties: {
 		evidence: {
 			type: "array",
 			items: { type: "object" }
+		},
+		retrievedContext: {
+			type: "object"
 		}
 	}
 });
@@ -60,7 +63,10 @@ const WriterInputSchema = freezeObject({
 			type: "array",
 			items: { type: "object" }
 		},
-		state: { type: "object" }
+		state: { type: "object" },
+		retrievedContext: {
+			type: "object"
+		}
 	}
 });
 
@@ -106,16 +112,30 @@ function createResearchInput({ query, topics, state }) {
 	});
 }
 
-function createResearchOutput({ evidence }) {
+function createResearchOutput({
+	evidence,
+	retrievedContext
+}) {
 	return freezeObject({
-		evidence: Array.isArray(evidence) ? [...evidence] : []
+		evidence: Array.isArray(evidence) ? [...evidence] : [],
+		retrievedContext: retrievedContext || {
+			semantic_context: [],
+			graph_context: [],
+			metadata: {}
+		}
 	});
 }
 
-function createWriterInput({ query, evidence, state }) {
+function createWriterInput({ query, evidence,retrievedContext, state }) {
 	return freezeObject({
 		query: String(query || "").trim(),
 		evidence: Array.isArray(evidence) ? [...evidence] : [],
+		retrievedContext:
+			retrievedContext || {
+				semantic_context: [],
+				graph_context: [],
+				metadata: {}
+			},
 		state
 	});
 }

@@ -49,14 +49,17 @@ function buildReferencesSection(evidence) {
     ].join("\n");
 }
 
-async function generateReport(query, evidence) {
+async function generateReport(query, retrievedContext) {
     if (!query || !String(query).trim()) {
         throw new Error("Query is required");
     }
+    const evidence = retrievedContext.semantic_context || [];
+    const graphFacts = retrievedContext.graph_context || [];
     const compactEvidence = compressEvidence(evidence);
     const prompt = reportPrompt(
         query,
-        compactEvidence
+        compactEvidence,
+        graphFacts
     );
     let reportBody;
     try {

@@ -1,51 +1,40 @@
 const grouper = require("./documentGrouper.service");
 const contextProcessor = require("./contextProcessor.service");
-const vectorStore =     require("./vectorStore.service");
-const keywordSearch =     require("./keywordSearch.service");
-const reranker =     require("./reranker.service");
-const {JinaEmbedder} = require("../embeddings/jinaEmbedder");
-const embedder = new JinaEmbedder();
-
+const keywordSearch = require("./keywordSearch.service");
+const reranker = require("./reranker.service");
+const hybridRetriever = require("../retrievers/HybridRetriever");
 class RetrievalService {
     async retrieve(
         query,
         evidence = []
     ) {
-        const embedding = await embedder.embed(query);
-        const vectorResults =
-            await vectorStore.search(
-                embedding,
-                20
-            );
-        const memoryResults =
-            vectorResults.map(r => ({
-                score: r.score,
-                topic:
-                    r.payload.topic,
-                notes:
-                    r.payload.text,
-                provenance: {
-                    title:
-                        r.payload.title,
-                    url:
-                        r.payload.url
-                },
-                source: "memory"
-            }));
+        const hybrid = await hybridRetriever.retrieve(query);
         const keywordResults =
             keywordSearch.search(
                 query,
                 evidence
             );
-        const merged = [
-            ...memoryResults,
+        const mergedSemantic = [
+            ...hybrid.semantic_context,
             ...keywordResults
-
         ];
-        const grouped = grouper.group(merged);
-        const ranked = reranker.rerank(grouped);
-        return contextProcessor.compress(ranked);
+        const grouped =
+            grouper.group(
+                mergedSemantic
+            );
+        const ranked =
+            reranker.rerank(
+                grouped
+            );
+        const compressed =
+            contextProcessor.compress(
+                ranked
+            );
+        return {
+            semantic_context: compressed,
+            graph_context: hybrid.graph_context,
+            metadata: hybrid.metadata
+        };
     }
 }
-
 module.exports = new RetrievalService();

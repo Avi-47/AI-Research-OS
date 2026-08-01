@@ -49,7 +49,6 @@ class GraphRepository {
             await session.close();
         }
     }
-
     async getNeighbors(entityId) {
         const session = driver.session();
         try {
@@ -72,17 +71,14 @@ class GraphRepository {
                     neighbors: []
                 };
             }
-
             const entity = result.records[0].get("a")?.properties || null;
             const neighbors = result.records
                 .map((record) => {
                     const relationship = record.get("r");
                     const target = record.get("b");
-
                     if (!relationship || !target) {
                         return null;
                     }
-
                     return {
                         relationship: {
                             type: relationship.type,
@@ -90,9 +86,7 @@ class GraphRepository {
                         },
                         target: target.properties
                     };
-                })
-                .filter(Boolean);
-
+                }).filter(Boolean);
             return {
                 entity,
                 neighbors
@@ -103,7 +97,6 @@ class GraphRepository {
         }
     }
 }
-
 module.exports = {
     GraphRepository
 };

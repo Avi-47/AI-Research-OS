@@ -36,10 +36,14 @@ class ResearchAgent extends BaseAgent {
 
 	async execute(input, context = {}) {
 		const graph = context.graph;
-		const memory = await retrievalService.retrieve(
-			input.query,
-			context.state.evidence
-		);
+		const retrievedContext =
+			await retrievalService.retrieve(
+				input.query,
+				context.state.evidence
+			);
+
+		const memory = retrievedContext.semantic_context;
+		const graphContext = retrievedContext.graph_context;
 
 		const topicsToResearch = input.topics.filter(topic => {
 			const normalizedTopic = topic.toLowerCase();
@@ -67,7 +71,8 @@ class ResearchAgent extends BaseAgent {
 		);
 
 		console.log("\n========= MEMORY =========");
-		console.log(`Retrieved ${memory.length} memory chunks`);
+		console.log(`Retrieved ${memory.length} semantic chunks`);
+		console.log(`Retrieved ${graphContext.length} graph facts`);
 		console.log("==========================\n");
 		const topicStatus = {};
 		for (const topic of input.topics) {
@@ -184,6 +189,7 @@ class ResearchAgent extends BaseAgent {
 		}
 		context.state.update({
 			evidence,
+			retrievedContext,
 			topicStatus
 		});
 		await semanticMemoryService.indexEvidence(evidence);
@@ -198,7 +204,7 @@ class ResearchAgent extends BaseAgent {
 				}
 			})
 		);
-		return createResearchOutput({evidence});
+		return createResearchOutput({evidence,retrievedContext});
 	}
 
 }
