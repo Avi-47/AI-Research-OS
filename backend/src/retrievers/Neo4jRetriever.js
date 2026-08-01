@@ -9,16 +9,10 @@ class Neo4jRetriever extends BaseRetriever {
             .replace(/[^a-z0-9]+/g, "-")
             .replace(/^-|-$/g, "");
     }
-    extractEntities(query) {
-        return query
-            .split(/[^A-Za-z0-9]+/)
-            .filter(Boolean)
-            .filter(word => word.length > 2);
-    }
     async retrieve(query) {
         const session = driver.session();
         try {
-            const entities = [...new Set(this.extractEntities(query))];
+            const entities = [...new Set(extractEntities(query))];
             const graph_context = [];
             const seen = new Set();
             for (const entity of entities) {
@@ -26,8 +20,8 @@ class Neo4jRetriever extends BaseRetriever {
                 const result = await session.run(
                 `
                 MATCH (a:Entity)
-                WHERE toLower(a.name)
-                    CONTAINS toLower($query)
+                WHERE a.id = $entityId
+                    OR toLower(a.name) = toLower($entityName)
                 OPTIONAL MATCH (a)-[r]->(b)
                 RETURN
                 a.name AS source,
@@ -35,7 +29,8 @@ class Neo4jRetriever extends BaseRetriever {
                 b.name AS target
                 `,
                 {
-                    query
+                    entityId: id,
+                    entityName: entity
                 }
                 );
                 for (const record of result.records) {

@@ -58,8 +58,10 @@ async function generateReport(query, retrievedContext) {
     const compactEvidence = compressEvidence(evidence);
     const prompt = reportPrompt(
         query,
-        compactEvidence,
-        graphFacts
+        {
+            semantic_context: compactEvidence,
+            graph_context: graphFacts
+        }
     );
     let reportBody;
     try {
@@ -74,7 +76,10 @@ async function generateReport(query, retrievedContext) {
         console.log("Writer fallback.");
         reportBody = generateFallbackReport(
             query,
-            evidence
+            {
+                semantic_context: compactEvidence,
+                graph_context: graphFacts
+            }
         );
     }
     const referencesSection = buildReferencesSection(evidence);

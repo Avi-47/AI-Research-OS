@@ -1,8 +1,11 @@
-function generateFallbackReport(query, evidence = []) {
+function generateFallbackReport(query, retrievedContext = {}) {
+
+    const semanticContext = retrievedContext.semantic_context || [];
+    const graphContext = retrievedContext.graph_context || [];
 
     const grouped = {};
 
-    for (const item of evidence) {
+    for (const item of semanticContext) {
 
         if (!grouped[item.topic]) {
             grouped[item.topic] = [];
@@ -27,6 +30,16 @@ function generateFallbackReport(query, evidence = []) {
 
         });
 
+    }
+
+    if (graphContext.length > 0) {
+        report += `## Graph Context\n\n`;
+
+        graphContext.forEach((fact) => {
+            report += `- ${fact.source} ${fact.relation} ${fact.target}\n`;
+        });
+
+        report += `\n`;
     }
 
     report += `## Conclusion\n\n`;
