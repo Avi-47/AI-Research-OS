@@ -35,9 +35,16 @@ class RuntimeKernel {
             );
 
         for (const handler of handlers) {
-            await this.retryManager.execute(() =>
-                handler(event)
-            );
+            try {
+                await this.retryManager.execute(() =>
+                    handler(event)
+                );
+            } catch (error) {
+                console.error(
+                    `[Kernel] Handler failed for ${event.eventType}; skipping`,
+                    error
+                );
+            }
         }
     }
 

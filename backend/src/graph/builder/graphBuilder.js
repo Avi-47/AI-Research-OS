@@ -98,7 +98,7 @@ function validateGraphCandidate(graph) {
         throw new Error("Graph response did not contain entities");
     }
 
-    if (!Array.isArray(graph.relationships) || graph.relationships.length === 0) {
+    if (!Array.isArray(graph.relationships)) {
         throw new Error("Graph response did not contain relationships");
     }
 
