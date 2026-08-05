@@ -16,6 +16,7 @@ const { WorkflowEngine } = require("./workflow/workflowEngine");
 const { PlannerAgent } = require("./agents/plannerAgent");
 const { ResearchAgent } = require("./agents/researchAgent");
 const { WriterAgent } = require("./agents/writerAgent");
+const { EvaluationAgent } = require("./agents/evaluationAgent");
 const { createResearchRuntime, getResearchRuntime } = require("./researchRuntime");
 const { researchWorkflowDefinition } = require("./workflow/researchWorkflow.definition");
 const { WorkflowRunRepository, FileWorkflowRunRepository } = require("./storage/workflowRunRepository");
@@ -42,6 +43,7 @@ module.exports = {
 	getResearchRuntime,
 	researchWorkflowDefinition,
 	RuntimeKernel,
+	EvaluationAgent,
 	MessageBus,
 	InMemoryMessageBus,
 	SubscriptionRegistry,

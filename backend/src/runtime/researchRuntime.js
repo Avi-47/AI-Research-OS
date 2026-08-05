@@ -1,3 +1,7 @@
+const { researchWorkflowDefinition } = require("./workflow/researchWorkflow.definition");
+const EvaluationRuntime = require("../evaluation/EvaluationRuntime");
+const { EvaluationRepository } = require("../evaluation/EvaluationRepository");
+const { EvaluationAgent } = require("./agents/evaluationAgent");
 const {GraphRepository} = require("../graph/repository/graphRepository");
 const graphBuilder = require("../graph/builder/graphBuilder");
 const {GraphBuilderAgent} = require("./agents/graphBuilderAgent");
@@ -59,6 +63,10 @@ function createResearchRuntime(overrides = {}) {
 		logger
 	});
 
+	const evaluationRepository = overrides.evaluationRepository || new EvaluationRepository({
+        logger
+    });
+
 	const evidenceRepository = overrides.evidenceRepository || new EvidenceRepository({
 		logger
 	});
@@ -115,10 +123,24 @@ function createResearchRuntime(overrides = {}) {
 		workflowOutputRepository
 	});
 
+	const evaluationAgent = new EvaluationAgent({
+        id: "evaluation-agent",
+        name: "Evaluation Agent",
+        role: "EVALUATION",
+        goal: "Evaluate generated report quality",
+        runStore,
+        tracer,
+        logger,
+        runtimeKernel,
+        evaluationRuntime
+    });
+
 	registry.register(plannerAgent);
 	registry.register(researchAgent);
 	registry.register(writerAgent);
 	registry.register(graphBuilderAgent);
+	registry.register(evaluationAgent);
+
 
 	// subscriptionRegistry.register(
 	// 	"evidence.stored",
@@ -126,14 +148,12 @@ function createResearchRuntime(overrides = {}) {
 	// 		await graphBuilderAgent.run(event);
 	// 	}
 	// );
-
 	subscriptionRegistry.register(
 		"planner.completed",
 		async () => {
 			logger.log("[Runtime] Planner finished");
 		}
 	);
-
 	subscriptionRegistry.register(
 		"research.completed",
 		async (event) => {
@@ -145,11 +165,16 @@ function createResearchRuntime(overrides = {}) {
 			});
 		}
 	);
-
 	subscriptionRegistry.register(
 		"writer.completed",
 		async () => {
 			logger.log("[Runtime] Writer finished");
+		}
+	);
+	subscriptionRegistry.register(
+		"evaluation.completed",
+		async () => {
+			logger.log("[Runtime] Evaluation finished");
 		}
 	);
 	
@@ -168,11 +193,17 @@ function createResearchRuntime(overrides = {}) {
 		researchStateRepository
     });
 
-	const workflowDefinition = overrides.workflowDefinition || {
-		workflowId: "research-workflow",
-		name: "Research Workflow",
-		steps: ["planner-agent", "research-agent", "writer-agent"]
-	};
+	// const workflowDefinition = overrides.workflowDefinition || {
+	// 	workflowId: "research-workflow",
+	// 	name: "Research Workflow",
+	// 	steps: ["planner-agent", "research-agent", "writer-agent", "evaluation-agent"]
+	// };
+
+	const workflowDefinition = overrides.workflowDefinition || researchWorkflowDefinition;
+
+	const evaluationRuntime = new EvaluationRuntime({
+        evaluationRepository
+    });
 
 
 	async function execute(query, context = {}) {
@@ -190,9 +221,7 @@ function createResearchRuntime(overrides = {}) {
 
 		return {
 			...execution,
-
 			schedulerMetrics,
-
 			query: execution.state.query,
 			topics: execution.state.topics,
 			evidence: execution.state.evidence,
@@ -226,11 +255,9 @@ function getResearchRuntime(overrides = {}) {
 	if (overrides && Object.keys(overrides).length > 0) {
 		return createResearchRuntime(overrides);
 	}
-
 	if (!defaultRuntime) {
 		defaultRuntime = createResearchRuntime();
 	}
-
 	return defaultRuntime;
 }
 

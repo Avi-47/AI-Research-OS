@@ -6,6 +6,7 @@ class ResearchState {
 		report = "",
 		topicStatus = {},
 		workflowGraph = null,
+		evaluation = null,
 		metadata = {},
 		retrievedContext={
 			semantic_context:[],
@@ -19,6 +20,7 @@ class ResearchState {
 		this.topicStatus = { ...topicStatus };
 		this.workflowGraph = workflowGraph;
 		this.report = String(report || "");
+		this.evaluation = evaluation;
 		this.metadata = { ...metadata };
 		this.retrievedContext = retrievedContext;
 	}
@@ -27,7 +29,9 @@ class ResearchState {
 		if (Object.prototype.hasOwnProperty.call(patch, "query")) {
 			this.query = String(patch.query || "").trim();
 		}
-
+		if (Object.prototype.hasOwnProperty.call(patch,"evaluation")) {
+			this.evaluation = patch.evaluation;
+		}
 		if (Object.prototype.hasOwnProperty.call(patch, "topics")) {
 			this.topics = Array.isArray(patch.topics) ? [...patch.topics] : [];
 		}
@@ -63,14 +67,13 @@ class ResearchState {
 			report: this.report,
 			metadata: { ...this.metadata },
 			workflowGraph: this.workflowGraph,
+			evaluation: this.evaluation,
 			retrievedContext: this.retrievedContext
 		};
 	}
-
 	clone() {
 		return new ResearchState(this.snapshot());
 	}
-
 	toJSON() {
 		return this.snapshot();
 	}
