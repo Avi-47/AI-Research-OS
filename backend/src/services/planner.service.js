@@ -29,6 +29,8 @@ async function generateTopics(query) {
 				responseType: "json"
 			})
 		);
+		console.log("Planner Response:");
+		console.dir(response.content, { depth: null });
 		topics = response.content;
 	}
 	catch(err){

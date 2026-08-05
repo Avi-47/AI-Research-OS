@@ -120,12 +120,12 @@ function createResearchRuntime(overrides = {}) {
 	registry.register(writerAgent);
 	registry.register(graphBuilderAgent);
 
-	subscriptionRegistry.register(
-		"evidence.stored",
-		async (event) => {
-			await graphBuilderAgent.run(event);
-		}
-	);
+	// subscriptionRegistry.register(
+	// 	"evidence.stored",
+	// 	async (event) => {
+	// 		await graphBuilderAgent.run(event);
+	// 	}
+	// );
 
 	subscriptionRegistry.register(
 		"planner.completed",
@@ -136,8 +136,13 @@ function createResearchRuntime(overrides = {}) {
 
 	subscriptionRegistry.register(
 		"research.completed",
-		async () => {
+		async (event) => {
 			logger.log("[Runtime] Research finished");
+			await graphBuilderAgent.run({
+				payload: {
+					evidence: event.payload.evidence
+				}
+			});
 		}
 	);
 

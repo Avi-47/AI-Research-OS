@@ -34,18 +34,16 @@ class RuntimeKernel {
                 event.eventType
             );
 
-        for (const handler of handlers) {
-            try {
-                await this.retryManager.execute(() =>
-                    handler(event)
-                );
-            } catch (error) {
-                console.error(
-                    `[Kernel] Handler failed for ${event.eventType}; skipping`,
-                    error
-                );
+        const results = await Promise.allSettled(
+            handlers.map(handler =>
+                this.retryManager.execute(() => handler(event))
+            )
+        );
+        results.forEach(result => {
+            if (result.status === "rejected") {
+                console.error(result.reason);
             }
-        }
+        });
     }
 
     async invoke(agent, state, context = {}) {

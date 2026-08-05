@@ -64,12 +64,6 @@ class ResearchAgent extends BaseAgent {
 			} topics already covered by memory`
 		);
 
-		console.log(
-			`Skipped ${
-				input.topics.length - topicsToResearch.length
-			} topics already covered by memory`
-		);
-
 		console.log("\n========= MEMORY =========");
 		console.log(`Retrieved ${memory.length} semantic chunks`);
 		console.log(`Retrieved ${graphContext.length} graph facts`);
@@ -106,7 +100,7 @@ class ResearchAgent extends BaseAgent {
 				topicStatus[topicsToResearch[index]] = "RUNNING";
 				return () =>
 					worker.run(
-						{ topic: input.topics[index] },
+						{ topic: topicsToResearch[index] },
 						{
 							workflowId: context.workflowId,
 							parentAgentId: this.id,
@@ -130,7 +124,7 @@ class ResearchAgent extends BaseAgent {
 		graph?.addNode("writer-agent");
 		for (let index = 0; index < workerResults.length; index++) {
 			const result = workerResults[index];
-			const topic = input.topics[index];
+			const topic = topicsToResearch[index];
 			const trace = this.tracer
 				.getWorkflowTraces(context.workflowId)
 				.find(t => t.agentId === workers[index].id);
@@ -158,27 +152,38 @@ class ResearchAgent extends BaseAgent {
 				evidence.push(
 					...result.value.evidence
 				);
-				for (const item of result.value.evidence) {
-					await this.evidenceRepository.save({
-						workflowId: context.workflowId,
-						agentId: workers[index].id,
-						topic: item.topic,
-						provenance: item.provenance,
-						notes: item.notes
-					});
-				}
-				await this.runtimeKernel.publish(
-					createEvent({
-						workflowId: context.workflowId,
-						eventType: "evidence.stored",
-						producer: workers[index].id,
-						payload: {
+				await Promise.all(
+					result.value.evidence.map(item =>
+						this.evidenceRepository.save({
 							workflowId: context.workflowId,
-							topic,
-							evidence: result.value.evidence
-						}
-					})
+							agentId: workers[index].id,
+							topic: item.topic,
+							provenance: item.provenance,
+							notes: item.notes
+						})
+					)
 				);
+				// for (const item of result.value.evidence) {
+				// 	await this.evidenceRepository.save({
+				// 		workflowId: context.workflowId,
+				// 		agentId: workers[index].id,
+				// 		topic: item.topic,
+				// 		provenance: item.provenance,
+				// 		notes: item.notes
+				// 	});
+				// }
+				// await this.runtimeKernel.publish(
+				// 	createEvent({
+				// 		workflowId: context.workflowId,
+				// 		eventType: "evidence.stored",
+				// 		producer: workers[index].id,
+				// 		payload: {
+				// 			workflowId: context.workflowId,
+				// 			topic,
+				// 			evidence: result.value.evidence
+				// 		}
+				// 	})
+				// );
 				graph?.addEdge(
 					workers[index].id,
 					"writer-agent"
@@ -200,6 +205,7 @@ class ResearchAgent extends BaseAgent {
 				eventType: "research.completed",
 				producer: this.id,
 				payload: {
+					evidence,
 					evidenceCount: evidence.length
 				}
 			})
