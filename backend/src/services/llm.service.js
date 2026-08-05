@@ -1,6 +1,6 @@
 const {generateFallbackReport} = require("./fallbackWriter.service");
 // const { callOpenRouter } = require("../utils/llm");
-const aiGateway = require("../ai");
+// const aiGateway = require("../ai");
 // const AIRequest = require("../ai/contracts/AIRequest");
 const {aiGateway,AIRequest} = require("../ai");
 const { reportPrompt } = require("../utils/prompts");
@@ -76,7 +76,8 @@ async function generateReport(query, retrievedContext) {
             })
         );
         reportBody = response.content;
-    } catch (err) {
+    }
+    catch(err){
         console.log("Writer fallback.");
         reportBody = generateFallbackReport(
             query,
@@ -87,7 +88,6 @@ async function generateReport(query, retrievedContext) {
         );
     }
 
-    reportBody = response.content;
     const referencesSection = buildReferencesSection(evidence);
     return `${reportBody.trim()}\n\n${referencesSection}`;
 }

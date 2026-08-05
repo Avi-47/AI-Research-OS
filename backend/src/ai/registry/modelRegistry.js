@@ -24,7 +24,8 @@ module.exports = {
             model: "google/gemma-4-31b-it:free"
         },
         fallback: [
-            "openai/gpt-oss-20b:free"
+            "openai/gpt-oss-20b:free",
+            "google/gemma-4-26b-a4b-it:free"
         ]
     },
     graph_builder: {

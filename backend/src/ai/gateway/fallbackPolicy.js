@@ -1,10 +1,10 @@
-const modelRegistry = require("../registry/modelRegistry");
+// const modelRegistry = require("../registry/modelRegistry");
 class FallbackPolicy {
     constructor(modelRegistry) {
         this.modelRegistry = modelRegistry;
     }
     getModels(role) {
-        const config = modelRegistry[role];
+        const config = this.modelRegistry[role];
         if (!config)
             throw new Error(
                 `Unknown AI role: ${role}`
