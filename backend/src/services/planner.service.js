@@ -1,4 +1,7 @@
-const { callJsonOpenRouter } = require("../utils/llm");
+// const { callJsonOpenRouter } = require("../utils/llm");
+const aiGateway = require("../ai");
+// const AIRequest = require("../ai/contracts/AIRequest");
+const {aiGateway,AIRequest} = require("../ai");
 const { plannerPrompt } = require("../utils/prompts");
 const { keywordPlanner } = require("./fallbackPlanner.service");
 
@@ -19,12 +22,14 @@ async function generateTopics(query) {
 
 	try {
 
-		topics = await callJsonOpenRouter(
-			plannerPrompt(query),
-			{
-				stage: "Planner"
-			}
+		const response = await aiGateway.generate(
+			new AIRequest({
+				role: "planner",
+				prompt: plannerPrompt(query),
+				responseType: "json"
+			})
 		);
+		topics = response.content;
 	}
 	catch(err){
 		console.log("Planner LLM failed.");

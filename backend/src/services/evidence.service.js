@@ -1,5 +1,6 @@
 const searchService = require("./search.service");
-const { callJsonOpenRouter } = require("../utils/llm");
+// const { callJsonOpenRouter } = require("../utils/llm");
+const { aiGateway, AIRequest } = require("../ai");
 const { evidencePrompt } = require("../utils/prompts");
 
 function flattenSearchResults(searchResponse, topic) {
@@ -128,13 +129,18 @@ async function collectEvidenceForTopic(topic) {
 	}
 
 	try {
-		const evidenceItems = await callJsonOpenRouter(evidencePrompt(topic, documents), {
-			stage: "Research"
-		});
+		const response = await aiGateway.generate(
+			new AIRequest({
+				role: "research",
+				prompt: evidencePrompt(topic, documents),
+				responseType: "json"
+			})
+		);
+		const evidenceItems = response.content;
 		return normalizeEvidenceItems(evidenceItems, topic, documents);
 	} catch (err) {
 		console.log(`Evidence synthesis failed for topic: ${topic}`);
-		console.log(err.response?.data || err.message);
+		console.log(err.message);
 		return documents.slice(0, 3).map((document) => normalizeDocument(document, topic));
 	}
 }

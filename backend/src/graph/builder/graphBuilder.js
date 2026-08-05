@@ -1,17 +1,8 @@
 console.log(">>> graphBuilder.js loaded <<<");
-const { callJsonOpenRouter } = require("../../utils/llm");
-
-const {
-    graphExtractionPrompt
-} = require("../prompts/graphExtractionPrompt");
-
-const {
-    validateGraph
-} = require("../validation/graphValidator");
-
-const {
-    createGraphDocument
-} = require("../models/graphDocument");
+const { aiGateway, AIRequest } = require("../../ai");
+const {graphExtractionPrompt} = require("../prompts/graphExtractionPrompt");
+const {validateGraph} = require("../validation/graphValidator");
+const {createGraphDocument} = require("../models/graphDocument");
 
 /**
  * Creates stable IDs for entities.
@@ -184,13 +175,15 @@ async function build(evidence) {
     console.log("Prompt Length:", prompt.length);
 
 
-    const graph = await callJsonOpenRouter(
-        prompt,
-        {
-            stage: "Graph Builder",
-            validateParsedResponse: validateGraphCandidate
-        }
+    const response = await aiGateway.generate(
+        new AIRequest({
+            role: "graph_builder",
+            prompt,
+            responseType: "json"
+        })
     );
+    const graph = response.content;
+    validateGraphCandidate(graph);
 
     console.log("========== RAW GRAPH ==========");
     console.dir(graph, { depth: null });
@@ -211,6 +204,4 @@ async function build(evidence) {
     });
 }
 
-module.exports = {
-    build
-};
+module.exports = {build};

@@ -1,5 +1,8 @@
 const {generateFallbackReport} = require("./fallbackWriter.service");
-const { callOpenRouter } = require("../utils/llm");
+// const { callOpenRouter } = require("../utils/llm");
+const aiGateway = require("../ai");
+// const AIRequest = require("../ai/contracts/AIRequest");
+const {aiGateway,AIRequest} = require("../ai");
 const { reportPrompt } = require("../utils/prompts");
 
 function compressEvidence(evidence = []) {
@@ -65,14 +68,15 @@ async function generateReport(query, retrievedContext) {
     );
     let reportBody;
     try {
-        reportBody = await callOpenRouter(
-            prompt,
-            {
-                stage: "Writer"
-            }
+        const response = await aiGateway.generate(
+            new AIRequest({
+                role: "writer",
+                prompt,
+                responseType: "text"
+            })
         );
-    }
-    catch(err){
+        reportBody = response.content;
+    } catch (err) {
         console.log("Writer fallback.");
         reportBody = generateFallbackReport(
             query,
@@ -82,6 +86,8 @@ async function generateReport(query, retrievedContext) {
             }
         );
     }
+
+    reportBody = response.content;
     const referencesSection = buildReferencesSection(evidence);
     return `${reportBody.trim()}\n\n${referencesSection}`;
 }
