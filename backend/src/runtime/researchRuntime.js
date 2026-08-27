@@ -172,12 +172,30 @@ function createResearchRuntime(overrides = {}) {
 	subscriptionRegistry.register(
 		"research.completed",
 		async (event) => {
-			logger.log("[Runtime] Research finished");
-			await graphBuilderAgent.run({
-				payload: {
-					evidence: event.payload.evidence
-				}
-			});
+			logger.log(
+				"[Runtime] Research finished"
+			);
+			try {
+				await graphBuilderAgent.run(
+					{
+						payload: {
+							evidence: event.payload.evidence
+						}
+					},
+					{
+						workflowId: event.workflowId,
+						runtimeKernel
+					}
+				);
+				logger.log(
+					"[Runtime] Knowledge graph built successfully"
+				);
+			} catch (error) {
+				logger.error(
+					"[Runtime] Graph building failed, continuing workflow:",
+					error.message
+				);
+			}
 		}
 	);
 	subscriptionRegistry.register(

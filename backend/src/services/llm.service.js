@@ -76,6 +76,14 @@ async function generateReport(query, retrievedContext) {
             })
         );
         reportBody = response.content;
+        if (
+            typeof reportBody !== "string" ||
+            !reportBody.trim()
+        ) {
+            throw new Error(
+                "Writer returned invalid report content"
+            );
+        }
     }
     catch(err){
         console.log("Writer fallback.");

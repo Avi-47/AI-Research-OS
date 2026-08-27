@@ -1,50 +1,46 @@
 module.exports = {
     planner: {
-        primary: {
-            provider: "openrouter",
-            model: "openai/gpt-oss-20b:free"
-        },
-        fallback: [
-            "google/gemma-4-31b-it:free",
-            "google/gemma-4-26b-a4b-it:free"
+        candidates: [
+            {
+                provider: "openrouter",
+                model: "openrouter/free"
+            }
         ]
     },
+
     research: {
-        primary: {
-            provider: "openrouter",
-            model: "openai/gpt-oss-20b:free"
-        },
-        fallback: [
-            "google/gemma-4-31b-it:free"
+        candidates: [
+            {
+                provider: "openrouter",
+                model: "openrouter/free"
+            }
         ]
     },
+
     writer: {
-        primary: {
-            provider: "openrouter",
-            model: "google/gemma-4-31b-it:free"
-        },
-        fallback: [
-            "openai/gpt-oss-20b:free",
-            "google/gemma-4-26b-a4b-it:free"
+        candidates: [
+            {
+                provider: "openrouter",
+                model: "openrouter/free"
+            }
         ]
     },
-    // NEW
+
     evaluation: {
-        primary: {
-            provider: "openrouter",
-            model: "google/gemma-4-31b-it:free"
-        },
-        fallback: [
-            "openai/gpt-oss-20b:free"
+        candidates: [
+            {
+                provider: "openrouter",
+                model: "openrouter/free"
+            }
         ]
     },
+
     graph_builder: {
-        primary: {
-            provider: "openrouter",
-            model: "openai/gpt-oss-20b:free"
-        },
-        fallback: [
-            "google/gemma-4-31b-it:free"
+        candidates: [
+            {
+                provider: "openrouter",
+                model: "openrouter/free"
+            }
         ]
     }
 };

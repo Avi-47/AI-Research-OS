@@ -1,21 +1,28 @@
-// const modelRegistry = require("../registry/modelRegistry");
 class FallbackPolicy {
     constructor(modelRegistry) {
         this.modelRegistry = modelRegistry;
     }
     getModels(role) {
         const config = this.modelRegistry[role];
-        if (!config)
+        if (!config) {
             throw new Error(
                 `Unknown AI role: ${role}`
             );
-        return [
-            config.primary,
-            ...config.fallback.map(model => ({
-                provider: config.primary.provider,
-                model
-            }))
-        ];
+        }
+        if (
+            !Array.isArray(
+                config.candidates
+            )
+        ) {
+            throw new Error(
+                `No candidates configured for role: ${role}`
+            );
+        }
+        console.log(
+            `[FallbackPolicy] Role "${role}" candidates:`,
+            config.candidates
+        );
+        return config.candidates;
     }
 }
 module.exports = FallbackPolicy;
