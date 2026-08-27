@@ -188,12 +188,14 @@ class WorkflowEngine {
 		const summary = this.tracer.getWorkflowSummary(workflowId);
 
 		const evaluation = state.evaluation;
+
 		const workflowPassed =
 			!failedError &&
 			(
 				!evaluation ||
 				evaluation.passed === true
 			);
+
 		return {
 			workflowId,
 			state: state.snapshot(),
@@ -201,10 +203,10 @@ class WorkflowEngine {
 			graph: graph.toJSON(),
 			agentResults,
 			summary,
-			// success: !failedError,
 			success: workflowPassed,
-			failedAgent: workflowPassed ? null : failedAgent || "evaluation-agent",
-			failedAgent,
+			failedAgent: workflowPassed
+				? null
+				: (failedAgent || "evaluation-agent"),
 			error: failedError ? failedError.toJSON() : null
 		};
 	}

@@ -1,6 +1,9 @@
 const { researchWorkflowDefinition } = require("./workflow/researchWorkflow.definition");
-const EvaluationRuntime = require("../evaluation/EvaluationRuntime");
+const { EvaluationRuntime } = require("../evaluation/EvaluationRuntime");
 const { EvaluationRepository } = require("../evaluation/EvaluationRepository");
+const RuleEvaluator = require("../evaluation/RuleEvaluator");
+const { LLMEvaluator } = require("../evaluation/LLMEvaluator");
+const aiGateway = require("../ai/gateway/aiGateway");
 const { EvaluationAgent } = require("./agents/evaluationAgent");
 const {GraphRepository} = require("../graph/repository/graphRepository");
 const graphBuilder = require("../graph/builder/graphBuilder");
@@ -64,13 +67,25 @@ function createResearchRuntime(overrides = {}) {
 	});
 
 	const evaluationRepository = overrides.evaluationRepository || new EvaluationRepository({
-        logger
-    });
+			logger
+		});
+
+	const ruleEvaluator = overrides.ruleEvaluator || new RuleEvaluator();
+
+	const llmEvaluator = overrides.llmEvaluator || new LLMEvaluator({
+			aiGateway
+		});
+
+	const evaluationRuntime = overrides.evaluationRuntime || new EvaluationRuntime({
+			ruleEvaluator,
+			llmEvaluator,
+			evaluationRepository
+		});
 
 	const evidenceRepository = overrides.evidenceRepository || new EvidenceRepository({
 		logger
 	});
-
+	
 	const researchStateRepository = overrides.researchStateRepository || new ResearchStateRepository();
 
 	const plannerAgent = new PlannerAgent({
@@ -201,9 +216,6 @@ function createResearchRuntime(overrides = {}) {
 
 	const workflowDefinition = overrides.workflowDefinition || researchWorkflowDefinition;
 
-	const evaluationRuntime = new EvaluationRuntime({
-        evaluationRepository
-    });
 
 
 	async function execute(query, context = {}) {
@@ -232,6 +244,10 @@ function createResearchRuntime(overrides = {}) {
 	return {
 		logger,
 		workflowOutputRepository,
+		evaluationRepository,
+		ruleEvaluator,
+		llmEvaluator,
+		evaluationRuntime,
 		runStore,
 		tracer,
 		registry,

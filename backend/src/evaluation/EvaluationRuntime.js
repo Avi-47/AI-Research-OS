@@ -5,69 +5,89 @@ const {
 } = require("./EvaluationResult");
 class EvaluationRuntime {
     constructor({
-        ruleEvaluator = new RuleEvaluator(),
-        llmEvaluator = new LLMEvaluator(),
-        evaluationRepository
+        ruleEvaluator,
+        llmEvaluator,
+        evaluationRepository,
+        logger = console
     }) {
         this.ruleEvaluator = ruleEvaluator;
         this.llmEvaluator = llmEvaluator;
         this.evaluationRepository = evaluationRepository;
+        this.logger = logger;
     }
+
     async evaluate({
         workflowId,
         report,
+        evidence,
         retrievedContext
     }) {
-        // --------------------------
-        // Step 1: Deterministic rules
-        // --------------------------
+
         const ruleResult =
-            this.ruleEvaluator.evaluate(
+            await this.ruleEvaluator.evaluate({
                 report,
+                evidence,
                 retrievedContext
-            );
-        // --------------------------
-        // Rule failure -> stop
-        // --------------------------
-        if (!ruleResult.passed) {
-            const result = createEvaluationResult({
-                    workflowId,
-                    passed: false,
-                    failedRules: ruleResult.failedRules,
-                    completeness: 0,
-                    correctness: 0,
-                    structure: 0,
-                    evidenceUsage: 0,
-                    hallucinationRisk: 100,
-                    comments: "Rule validation failed."
-                });
-            if (this.evaluationRepository) {
-                await this.evaluationRepository.save(result);
-            }
-            return result;
-        }
-        // --------------------------
-        // Step 2: LLM evaluation
-        // --------------------------
-        const llmScores = await this.llmEvaluator.evaluate(report);
-        // --------------------------
-        // Build final result
-        // --------------------------
-        const result = createEvaluationResult({
-                workflowId,
-                passed: true,
-                failedRules: [],
-                completeness: llmScores.completeness,
-                correctness: llmScores.correctness,
-                structure: llmScores.structure,
-                evidenceUsage: llmScores.evidenceUsage,
-                hallucinationRisk: llmScores.hallucinationRisk,
-                comments: llmScores.comments
             });
-        if (this.evaluationRepository) {
-            await this.evaluationRepository.save(result);
+
+        let llmResult = null;
+
+        try {
+            llmResult =
+                await this.llmEvaluator.evaluate({
+                    report,
+                    evidence,
+                    retrievedContext
+                });
+        } catch (error) {
+            this.logger.warn(
+                "[Evaluation] LLM evaluation failed. Using rule evaluation only."
+            );
         }
-        return result;
+
+        const ruleScore =
+            Number(ruleResult.score || 0);
+
+        const llmScore =
+            llmResult
+                ? Number(llmResult.score || 0)
+                : null;
+
+        const overallScore =
+            llmScore !== null
+                ? (ruleScore + llmScore) / 2
+                : ruleScore;
+
+        const passed =
+            overallScore >= 0.6;
+
+        const result = {
+            workflowId,
+            overallScore,
+            ruleScore,
+            llmScore,
+            passed,
+            ruleEvaluation: ruleResult,
+            llmEvaluation: llmResult
+        };
+
+        const savedEvaluation =
+            await this.evaluationRepository.save({
+                workflowId,
+                overallScore,
+                ruleScore,
+                llmScore,
+                passed,
+                result
+            });
+
+        return {
+            ...result,
+            evaluationId: savedEvaluation.id
+        };
     }
 }
-module.exports = EvaluationRuntime;
+
+module.exports = {
+    EvaluationRuntime
+};

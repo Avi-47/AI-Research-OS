@@ -1,85 +1,98 @@
 class RuleEvaluator {
-    evaluate(report, retrievedContext = {}) {
+    evaluate({
+        report = "",
+        evidence = [],
+        retrievedContext = {}
+    } = {}) {
         const failedRules = [];
-        if (!this.hasReport(report)) {
-            failedRules.push("REPORT_MISSING");
+        const details = {};
+
+        // Rule 1: Report should not be empty
+        const hasReport =
+            typeof report === "string" &&
+            report.trim().length > 0;
+
+        details.hasReport = hasReport;
+
+        if (!hasReport) {
+            failedRules.push("REPORT_EMPTY");
         }
-        if (!this.hasMinimumLength(report)) {
-            failedRules.push("MINIMUM_LENGTH");
+
+        // Rule 2: Evidence should exist
+        const hasEvidence =
+            Array.isArray(evidence) &&
+            evidence.length > 0;
+
+        details.hasEvidence = hasEvidence;
+        details.evidenceCount =
+            Array.isArray(evidence)
+                ? evidence.length
+                : 0;
+
+        if (!hasEvidence) {
+            failedRules.push("NO_EVIDENCE");
         }
-        if (!this.hasExecutiveSummary(report)) {
-            failedRules.push("EXECUTIVE_SUMMARY");
+
+        // Rule 3: Report should have some meaningful length
+        const minimumReportLength = 100;
+
+        const hasMinimumLength =
+            typeof report === "string" &&
+            report.trim().length >= minimumReportLength;
+
+        details.reportLength =
+            typeof report === "string"
+                ? report.trim().length
+                : 0;
+
+        details.hasMinimumLength =
+            hasMinimumLength;
+
+        if (!hasMinimumLength) {
+            failedRules.push("REPORT_TOO_SHORT");
         }
-        if (!this.hasConclusion(report)) {
-            failedRules.push("CONCLUSION");
+
+        // Rule 4: Retrieved context check
+        const semanticContext =
+            retrievedContext?.semantic_context || [];
+
+        const graphContext =
+            retrievedContext?.graph_context || [];
+
+        const hasContext =
+            semanticContext.length > 0 ||
+            graphContext.length > 0;
+
+        details.semanticContextCount =
+            semanticContext.length;
+
+        details.graphContextCount =
+            graphContext.length;
+
+        details.hasContext = hasContext;
+
+        if (!hasContext) {
+            failedRules.push("NO_RETRIEVED_CONTEXT");
         }
-        if (!this.hasReferences(report)) {
-            failedRules.push("REFERENCES");
-        }
-        if (!this.hasSemanticEvidence(retrievedContext)) {
-            failedRules.push("SEMANTIC_EVIDENCE");
-        }
-        if (!this.hasGraphEvidence(retrievedContext)) {
-            failedRules.push("GRAPH_EVIDENCE");
-        }
-        if (!this.hasNoDuplicateHeadings(report)) {
-            failedRules.push("DUPLICATE_HEADINGS");
-        }
-        if (!this.hasNoEmptyHeadings(report)) {
-            failedRules.push("EMPTY_HEADINGS");
-        }
+
+        const totalRules = 4;
+        const passedRules =
+            totalRules - failedRules.length;
+
+        const score =
+            Math.round(
+                (passedRules / totalRules) * 100
+            );
+
         return {
-            passed: failedRules.length === 0,
-            failedRules
+            evaluator: "RULE",
+            score,
+            passed:
+                failedRules.length === 0,
+            failedRules,
+            details
         };
     }
-    hasReport(report) {
-        return typeof report === "string" && report.trim().length > 0;
-    }
-    hasMinimumLength(report) {
-        if (!report) return false;
-        return report.trim().length >= 1000;
-    }
-    hasExecutiveSummary(report) {
-        if (!report) return false;
-        return /executive summary/i.test(report);
-    }
-    hasConclusion(report) {
-        if (!report) return false;
-        return /conclusion/i.test(report);
-    }
-    hasReferences(report) {
-        if (!report) return false;
-        return /references/i.test(report);
-    }
-    hasSemanticEvidence(context) {
-        return (
-            Array.isArray(context.semantic_context) &&
-            context.semantic_context.length > 0
-        );
-    }
-    hasGraphEvidence(context) {
-        return (
-            Array.isArray(context.graph_context) &&
-            context.graph_context.length > 0
-        );
-    }
-    hasNoDuplicateHeadings(report) {
-        if (!report) return false;
-        const headings = report
-            .split("\n")
-            .filter(line => line.trim().startsWith("#"))
-            .map(line => line.trim().toLowerCase());
-        return new Set(headings).size === headings.length;
-    }
-    hasNoEmptyHeadings(report) {
-        if (!report) return false;
-        const headings = report
-            .split("\n")
-            .filter(line => line.trim().startsWith("#"));
-        return headings.every(
-            heading => heading.replace(/^#+/, "").trim().length > 0
-        );
-    }
 }
+
 module.exports = RuleEvaluator;

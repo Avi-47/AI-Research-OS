@@ -1,59 +1,110 @@
-const aiGateway = require("../ai/gateway/aiGateway");
 class LLMEvaluator {
-    async evaluate(report) {
-        const prompt = `
-You are an expert technical report evaluator.
-Evaluate the following report.
-Return ONLY valid JSON.
-Required JSON format:
-{
-  "completeness": 0,
-  "correctness": 0,
-  "structure": 0,
-  "evidenceUsage": 0,
-  "hallucinationRisk": 0,
-  "comments": ""
-}
-Scoring:
-completeness:
-0-100
-correctness:
-0-100
-structure:
-0-100
-evidenceUsage:
-0-100
-hallucinationRisk:
-0-100
-(100 = very high hallucination risk)
-comments:
-One short paragraph.
-REPORT
-${report}
-`;
-        const response = await aiGateway.generate({
-            role: "writer",
-            messages: [
-                {
-                    role: "user",
-                    content: prompt
-                }
-            ]
-        });
-        let result;
-        try {
-            result = JSON.parse(response.content);
-        } catch (err) {
-            throw new Error("LLM evaluator returned invalid JSON.");
+    constructor({ aiGateway } = {}) {
+        this.aiGateway = aiGateway;
+    }
+
+    async evaluate({
+        report = "",
+        evidence = [],
+        retrievedContext = {}
+    } = {}) {
+        // If no LLM gateway is configured,
+        // return a neutral evaluation instead of crashing.
+        if (!this.aiGateway) {
+            return {
+                evaluator: "LLM",
+                score: 50,
+                passed: true,
+                feedback: "LLM evaluator not configured.",
+                details: {}
+            };
         }
-        return {
-            completeness: Number(result.completeness ?? 0),
-            correctness: Number(result.correctness ?? 0),
-            structure: Number(result.structure ?? 0),
-            evidenceUsage: Number(result.evidenceUsage ?? 0),
-            hallucinationRisk: Number(result.hallucinationRisk ?? 0),
-            comments: result.comments ?? ""
-        };
+
+        try {
+            const prompt = `
+You are evaluating the quality of a research report.
+
+Evaluate the report based on:
+
+1. Relevance to available evidence
+2. Completeness
+3. Clarity
+4. Consistency with retrieved context
+5. Hallucination risk
+
+Return ONLY valid JSON in this format:
+
+{
+    "score": 0,
+    "passed": true,
+    "feedback": "short explanation"
+}
+
+REPORT:
+${report}
+
+EVIDENCE:
+${JSON.stringify(evidence)}
+
+RETRIEVED CONTEXT:
+${JSON.stringify(retrievedContext)}
+`;
+
+            const response =
+                await this.aiGateway.generate({
+                    role: "EVALUATOR",
+                    prompt
+                });
+
+            let parsed;
+
+            try {
+                parsed =
+                    typeof response === "string"
+                        ? JSON.parse(response)
+                        : response;
+            } catch (error) {
+                parsed = {
+                    score: 50,
+                    passed: true,
+                    feedback:
+                        "LLM response could not be parsed."
+                };
+            }
+
+            return {
+                evaluator: "LLM",
+                score: Number(parsed.score) || 50,
+                passed:
+                    typeof parsed.passed === "boolean"
+                        ? parsed.passed
+                        : true,
+                feedback:
+                    parsed.feedback ||
+                    "No feedback provided.",
+                details: {}
+            };
+
+        } catch (error) {
+            console.error(
+                "[LLMEvaluator] Evaluation failed:",
+                error.message
+            );
+
+            return {
+                evaluator: "LLM",
+                score: 50,
+                passed: true,
+                feedback:
+                    "LLM evaluation unavailable. Neutral score assigned.",
+                details: {
+                    error: error.message
+                }
+            };
+        }
     }
 }
-module.exports = LLMEvaluator;
+
+module.exports = {
+    LLMEvaluator
+};

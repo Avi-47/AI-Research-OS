@@ -1,47 +1,76 @@
 const crypto = require("crypto");
-const pool = require("../db/postgres");
+
 class EvaluationRepository {
     constructor({ logger = console } = {}) {
         this.logger = logger;
+        this.evaluations = [];
     }
-    async save(result) {
-        const query = `
-            INSERT INTO evaluations(
-                id,
-                workflow_id,
-                passed,
-                failed_rules,
-                completeness,
-                correctness,
-                structure,
-                evidence_usage,
-                hallucination_risk,
-                comments,
-                evaluated_at
-            )
-            VALUES(
-                $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11
-            )
-        `;
-        await pool.query(query, [
-            crypto.randomUUID(),
-            result.workflowId,
-            result.passed,
-            JSON.stringify(result.failedRules),
-            result.completeness,
-            result.correctness,
-            result.structure,
-            result.evidenceUsage,
-            result.hallucinationRisk,
-            result.comments,
-            result.evaluatedAt
-        ]);
+
+    async save({
+        workflowId,
+        overallScore,
+        ruleScore,
+        llmScore,
+        passed,
+        result
+    }) {
+        const evaluation = {
+            id: crypto.randomUUID(),
+
+            workflowId,
+
+            overallScore,
+            ruleScore,
+            llmScore,
+
+            passed,
+
+            result,
+
+            createdAt:
+                new Date().toISOString()
+        };
+
+        this.evaluations.push(
+            evaluation
+        );
 
         this.logger.log(
-            `Evaluation saved for workflow ${result.workflowId}`
+            `[EvaluationRepository] Evaluation saved in memory: ${workflowId}`
+        );
+
+        return evaluation;
+    }
+
+    async findByWorkflowId(workflowId) {
+        return this.evaluations.filter(
+            evaluation =>
+                evaluation.workflowId === workflowId
         );
     }
+
+    async findLatestByWorkflowId(workflowId) {
+        const evaluations =
+            await this.findByWorkflowId(
+                workflowId
+            );
+
+        if (evaluations.length === 0) {
+            return null;
+        }
+
+        return evaluations[
+            evaluations.length - 1
+        ];
+    }
+
+    async getAll() {
+        return [
+            ...this.evaluations
+        ];
+    }
 }
+
 module.exports = {
     EvaluationRepository
 };

@@ -23,4 +23,6 @@ const researchWorkflowDefinition = Object.freeze({
         "evaluation-agent"
     ])
 });
-module.exports = {researchWorkflowDefinition};
+module.exports = {
+    researchWorkflowDefinition
+};
