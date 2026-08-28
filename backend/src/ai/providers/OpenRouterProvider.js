@@ -77,9 +77,7 @@ class OpenRouterProvider
                 type: "json_object"
             };
         }
-
-        const response =
-            await axios.post(
+        const response = await axios.post(
                 "https://openrouter.ai/api/v1/chat/completions",
                 body,
                 {
@@ -90,31 +88,25 @@ class OpenRouterProvider
                     timeout: 60000
                 }
             );
-
-        const content =
-            response.data
-                ?.choices?.[0]
-                ?.message?.content;
-
-        if (
-            content === undefined ||
-            content === null ||
-            !String(content).trim()
-        ) {
-            console.error(
-                "[OpenRouter] Empty response:"
-            );
-            console.dir(
-                response.data,
-                { depth: null }
-            );
+        const message = response.data?.choices?.[0]?.message;
+        let content = message?.content;
+        if (content === undefined ||content === null || !String(content).trim()) {
+            const reasoning = message?.reasoning || message?.reasoning_content;
+            if (reasoning !== undefined && reasoning !== null && String(reasoning).trim()){
+                console.warn(
+                    "[OpenRouter] Using reasoning as fallback content"
+                );
+                content = reasoning;
+            }
+        }
+        if (content === undefined || content === null || !String(content).trim()) {
+            console.error("[OpenRouter] Empty response:");
+            console.dir(response.data,{ depth: null });
             throw new Error("Empty model response");
         }
         let finalContent = content;
         if (request.responseType === "json") {
-            finalContent = this.parseJsonResponse(
-                    content
-                );
+            finalContent = this.parseJsonResponse(content);
         }
         return new AIResponse({
             content: finalContent,

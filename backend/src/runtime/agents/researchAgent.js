@@ -211,45 +211,76 @@ class ResearchAgent extends BaseAgent {
         if (!evidence) {
             return false;
         }
-
-        const notes = String(evidence.notes || "").trim();
-
+        const notes = String(evidence.notes || "").toLowerCase().trim();
         if (notes.length < 20) {
             return false;
         }
-
-        const evidenceTopic = String(evidence.topic || "")
-            .toLowerCase()
-            .trim();
-
-        const normalizedAllowedTopics = allowedTopics.map((topic) =>
-            String(topic).toLowerCase().trim()
-        );
-
+        const evidenceTopic =
+            String(evidence.topic || "")
+                .toLowerCase()
+                .trim();
+        const normalizedAllowedTopics =
+            allowedTopics.map((topic) =>
+                String(topic)
+                    .toLowerCase()
+                    .trim()
+            );
         /*
-         * If the evidence has a topic, prefer evidence that
-         * belongs to one of the requested research topics.
-         */
+        * First validate the declared topic.
+        */
         if (
             normalizedAllowedTopics.length > 0 &&
             evidenceTopic
         ) {
-            const matchesTopic = normalizedAllowedTopics.some(
-                (topic) =>
-                    evidenceTopic === topic ||
-                    evidenceTopic.includes(topic) ||
-                    topic.includes(evidenceTopic)
-            );
-
+            const matchesTopic =
+                normalizedAllowedTopics.some(
+                    (topic) =>
+                        evidenceTopic === topic ||
+                        evidenceTopic.includes(topic) ||
+                        topic.includes(evidenceTopic)
+                );
             if (!matchesTopic) {
                 this.logger?.warn?.(
-                    `[Research] Dropping potentially irrelevant evidence: ${evidence.topic}`
+                    `[Research] Dropping irrelevant topic: ${evidence.topic}`
                 );
-
                 return false;
             }
         }
-
+        /*
+        * Validate whether the actual evidence content
+        * is related to the requested topic.
+        */
+        if (normalizedAllowedTopics.length > 0) {
+            const isContentRelevant =
+                normalizedAllowedTopics.some(
+                    (topic) => {
+                        const keywords = topic
+                            .split(/[\s-]+/)
+                            .filter(
+                                (word) =>
+                                    word.length > 3
+                            );
+                        if (keywords.length === 0) {
+                            return true;
+                        }
+                        const matchedKeywords =
+                            keywords.filter(
+                                (keyword) =>
+                                    notes.includes(keyword)
+                            );
+                        const matchRatio =
+                            matchedKeywords.length /
+                            keywords.length;
+                        return matchRatio >= 0.5;
+                    }
+                );
+            if (!isContentRelevant) {
+                this.logger?.warn?.(
+                    `[Research] Dropping evidence with unrelated content: ${evidence.topic}`
+                );
+                return false;
+            }
+        }
         return true;
     }
 
@@ -550,7 +581,7 @@ class ResearchAgent extends BaseAgent {
                     .map((item) =>
                         this.normalizeEvidence(
                             item,
-                            "research"
+                            "NEW_RESEARCH"
                         )
                     )
                     .filter(Boolean)
@@ -644,36 +675,60 @@ class ResearchAgent extends BaseAgent {
          * STEP 9: Determine overall research status.
          * ============================================================
          */
-
         const statuses = Object.values(topicStatus);
-
-        const failedCount = statuses.filter(
-            (status) => status === "FAILED"
-        ).length;
-
-        const completedCount = statuses.filter(
-            (status) => status === "COMPLETED"
-        ).length;
-
+        const failedCount = statuses.filter((status) => status === "FAILED").length;
+        const completedCount = statuses.filter((status) => status === "COMPLETED").length;
         let researchStatus;
-
-        if (
-            completedCount === 0 &&
-            evidence.length === 0
-        ) {
+        if (completedCount === 0 && evidence.length === 0) {
             researchStatus = "FAILED";
-        } else if (
-            failedCount > 0 ||
-            statuses.includes("PARTIAL")
-        ) {
+        } else if (failedCount > 0 || statuses.includes("PARTIAL")) {
             researchStatus = "PARTIAL_SUCCESS";
         } else {
             researchStatus = "SUCCESS";
         }
-
+        const partialTopics = Object.entries(topicStatus)
+            .filter(([, status]) => status === "PARTIAL")
+            .map(([topic]) => topic);
         this.logger?.log?.(
-            `[Research] Final status: ${researchStatus}`
+            "\n========== RESEARCH SUMMARY =========="
         );
+        this.logger?.log?.(
+            `[Research] Topics requested: ${input.topics.length}`
+        );
+        this.logger?.log?.(
+            `[Research] Covered by memory: ${coveredTopics.length}`
+        );
+        this.logger?.log?.(
+            `[Research] Successfully researched: ${completedCount}`
+        );
+        this.logger?.log?.(
+            `[Research] Partial topics: ${partialTopics.length}`
+        );
+        this.logger?.log?.(
+            `[Research] Failed topics: ${failedCount}`
+        );
+        this.logger?.log?.(
+            `[Research] Memory evidence: ${memoryEvidence.length}`
+        );
+        this.logger?.log?.(
+            `[Research] New research evidence: ${researchedEvidence.length}`
+        );
+        this.logger?.log?.(
+            `[Research] Total evidence: ${evidence.length}`
+        );
+        if (failedTopics.length > 0) {
+            this.logger?.warn?.(
+                `[Research] Failed topics: ${failedTopics.join(", ")}`
+            );
+        }
+        if (partialTopics.length > 0) {
+            this.logger?.warn?.(
+                `[Research] Partial topics: ${partialTopics.join(", ")}`
+            );
+        }
+        this.logger?.log?.(`[Research] Final status: ${researchStatus}`);
+        this.logger?.log?.("======================================");
+        this.logger?.log?.(`[Research] Final status: ${researchStatus}`);
 
         /*
          * ============================================================

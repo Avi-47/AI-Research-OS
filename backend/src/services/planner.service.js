@@ -3,87 +3,143 @@ const {
     AIRequest
 } = require("../ai");
 
-const {plannerPrompt} = require("../utils/prompts");
-const {keywordPlanner} = require("./fallbackPlanner.service");
+const {
+    plannerPrompt
+} = require("../utils/prompts");
+
+const {
+    keywordPlanner
+} = require("./fallbackPlanner.service");
+
 
 function normalizeTopics(topics) {
-    return [...new Set(
-        topics
-            .map(topic =>
-                String(topic || "").trim()
-            )
-            .filter(Boolean)
-    )].slice(0, 5);
+
+    if (!Array.isArray(topics)) {
+        return [];
+    }
+
+    const normalized = topics
+        .map(topic => {
+
+            if (typeof topic === "string") {
+                return topic.trim();
+            }
+
+            if (
+                topic &&
+                typeof topic === "object"
+            ) {
+                return String(
+                    topic.topic ||
+                    topic.name ||
+                    topic.title ||
+                    ""
+                ).trim();
+            }
+
+            return "";
+
+        })
+        .filter(Boolean);
+
+    return [...new Set(normalized)]
+        .slice(0, 5);
 }
+
 
 function parsePlannerResponse(content) {
     if (Array.isArray(content)) {
         return content;
     }
-    if (content && Array.isArray(content.items)) {
+    if (content && typeof content === "object" && Array.isArray(content.items)) {
         return content.items;
+    }
+    if (content && typeof content === "object" && Array.isArray(content.topics)) {
+        return content.topics;
+    }
+    if (content && typeof content === "object" && !Array.isArray(content)) {
+        const keys = Object.keys(content)
+            .map(topic => topic.trim())
+            .filter(Boolean);
+        if (keys.length > 0) {
+            console.warn(
+                "[Planner] Using object keys as topics."
+            );
+            return keys;
+        }
     }
     if (typeof content === "string") {
         try {
-            const parsed =
-                JSON.parse(content);
-            if (Array.isArray(parsed)) {
-                return parsed;
-            }
-            if (parsed && Array.isArray(parsed.items)) {
-                return parsed.items;
-            }
+            return parsePlannerResponse(
+                JSON.parse(content)
+            );
         } catch (error) {
             console.warn(
-                "Could not parse planner JSON:",
+                "[Planner] Could not parse planner JSON:",
                 error.message
             );
         }
     }
     return null;
 }
+
 async function generateTopics(query) {
     if (!query || !String(query).trim()) {
         throw new Error(
             "Query is required"
         );
+
     }
     let topics;
     try {
-        const response = await aiGateway.generate(
+        const response =
+            await aiGateway.generate(
                 new AIRequest({
                     role: "planner",
                     prompt: plannerPrompt(query),
-                    responseType:
-                        "json"
+                    responseType: "json"
                 })
             );
-        console.log("Planner Gateway Response:");
-        console.dir(response, { depth: null });
-        topics = parsePlannerResponse(
+        console.log(
+            "Planner Gateway Response:"
+        );
+        console.dir(
+            response,
+            { depth: null }
+        );
+        const parsedTopics =
+            parsePlannerResponse(
                 response.content
             );
-        if (!topics) {
+        topics = normalizeTopics(
+                parsedTopics
+            );
+        if (topics.length === 0) {
             throw new Error(
-                "Planner returned invalid topic structure"
+                "Planner returned no valid topics"
             );
         }
+        console.log(
+            "[Planner] Generated topics:",
+            topics
+        );
     } catch (err) {
         console.error(
             "Planner LLM failed:",
             err.message
         );
         console.log("Using keyword fallback.");
-        topics = keywordPlanner(query);
+        topics = normalizeTopics(
+                keywordPlanner(query)
+            );
+
     }
-    if (!Array.isArray(topics)) {
-        console.error(
-            "Invalid planner output:",
-            topics
+    if (topics.length === 0) {
+        throw new Error(
+            "Planner could not generate any topics"
         );
-        throw new Error("Planner must return a JSON array of topics");
     }
-    return normalizeTopics(topics);
+    return topics;
 }
 module.exports = {
     generateTopics

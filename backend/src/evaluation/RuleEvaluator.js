@@ -2,15 +2,25 @@ class RuleEvaluator {
     evaluate({
         report = "",
         evidence = [],
-        retrievedContext = {}
+        retrievedContext = {},
+        topics = []
     } = {}) {
         const failedRules = [];
         const details = {};
 
-        // Rule 1: Report should not be empty
+        const normalizedReport =
+            typeof report === "string"
+                ? report.trim()
+                : "";
+
+        /*
+        ========================================
+        RULE 1: REPORT EXISTS
+        ========================================
+        */
+
         const hasReport =
-            typeof report === "string" &&
-            report.trim().length > 0;
+            normalizedReport.length > 0;
 
         details.hasReport = hasReport;
 
@@ -18,46 +28,78 @@ class RuleEvaluator {
             failedRules.push("REPORT_EMPTY");
         }
 
-        // Rule 2: Evidence should exist
-        const hasEvidence =
-            Array.isArray(evidence) &&
-            evidence.length > 0;
+        /*
+        ========================================
+        RULE 2: MINIMUM LENGTH
+        ========================================
+        */
 
-        details.hasEvidence = hasEvidence;
-        details.evidenceCount =
-            Array.isArray(evidence)
-                ? evidence.length
-                : 0;
-
-        if (!hasEvidence) {
-            failedRules.push("NO_EVIDENCE");
-        }
-
-        // Rule 3: Report should have some meaningful length
-        const minimumReportLength = 100;
+        const minimumReportLength = 300;
 
         const hasMinimumLength =
-            typeof report === "string" &&
-            report.trim().length >= minimumReportLength;
+            normalizedReport.length >=
+            minimumReportLength;
 
         details.reportLength =
-            typeof report === "string"
-                ? report.trim().length
-                : 0;
+            normalizedReport.length;
+
+        details.minimumReportLength =
+            minimumReportLength;
 
         details.hasMinimumLength =
             hasMinimumLength;
 
         if (!hasMinimumLength) {
-            failedRules.push("REPORT_TOO_SHORT");
+            failedRules.push(
+                "REPORT_TOO_SHORT"
+            );
         }
 
-        // Rule 4: Retrieved context check
+        /*
+        ========================================
+        RULE 3: EVIDENCE EXISTS
+        ========================================
+        */
+
+        const evidenceCount =
+            Array.isArray(evidence)
+                ? evidence.length
+                : 0;
+
+        const hasEvidence =
+            evidenceCount > 0;
+
+        details.evidenceCount =
+            evidenceCount;
+
+        details.hasEvidence =
+            hasEvidence;
+
+        if (!hasEvidence) {
+            failedRules.push(
+                "NO_EVIDENCE"
+            );
+        }
+
+        /*
+        ========================================
+        RULE 4: RETRIEVED CONTEXT EXISTS
+        ========================================
+        */
+
         const semanticContext =
-            retrievedContext?.semantic_context || [];
+            Array.isArray(
+                retrievedContext?.semantic_context
+            )
+                ? retrievedContext.semantic_context
+                : [];
 
         const graphContext =
-            retrievedContext?.graph_context || [];
+            Array.isArray(
+                retrievedContext?.graph_context
+            )
+                ? retrievedContext.graph_context
+                : [];
 
         const hasContext =
             semanticContext.length > 0 ||
@@ -69,26 +111,129 @@ class RuleEvaluator {
         details.graphContextCount =
             graphContext.length;
 
-        details.hasContext = hasContext;
+        details.hasContext =
+            hasContext;
 
         if (!hasContext) {
-            failedRules.push("NO_RETRIEVED_CONTEXT");
+            failedRules.push(
+                "NO_RETRIEVED_CONTEXT"
+            );
         }
 
-        const totalRules = 4;
-        const passedRules =
-            totalRules - failedRules.length;
+        /*
+        ========================================
+        RULE 5: REQUIRED SECTIONS
+        ========================================
+        */
 
-        const score =
-            Math.round(
-                (passedRules / totalRules) * 100
+        const requiredSections = [
+            "executive summary",
+            "introduction",
+            "findings",
+            "conclusion"
+        ];
+
+        const reportLower =
+            normalizedReport.toLowerCase();
+
+        const sectionResults =
+            requiredSections.map(section => ({
+                section,
+                present:
+                    reportLower.includes(section)
+            }));
+
+        const missingSections =
+            sectionResults
+                .filter(item => !item.present)
+                .map(item => item.section);
+
+        details.sections =
+            sectionResults;
+
+        details.missingSections =
+            missingSections;
+
+        if (missingSections.length > 0) {
+            failedRules.push(
+                "MISSING_REQUIRED_SECTIONS"
             );
+        }
 
+        /*
+        ========================================
+        RULE 6: TOPIC COVERAGE
+        ========================================
+        */
+
+        const normalizedTopics =
+            Array.isArray(topics)
+                ? topics
+                    .map(topic => {
+                        if (
+                            typeof topic ===
+                            "string"
+                        ) {
+                            return topic;
+                        }
+
+                        return (
+                            topic?.name ||
+                            topic?.topic ||
+                            topic?.title ||
+                            null
+                        );
+                    })
+                    .filter(Boolean)
+                : [];
+
+        const topicResults =
+            normalizedTopics.map(topic => ({
+                topic,
+                covered:
+                    reportLower.includes(
+                        topic.toLowerCase()
+                    )
+            }));
+        const coveredTopics = topicResults.filter(item => item.covered).length;
+        const topicCoverage = normalizedTopics.length > 0 ? Math.round((coveredTopics / normalizedTopics.length) * 100): 100;
+        details.topicResults = topicResults;
+        details.topicCoverage = topicCoverage;
+        if (normalizedTopics.length > 0 && topicCoverage < 70) {
+            failedRules.push("INSUFFICIENT_TOPIC_COVERAGE");
+        }
+        /*
+        ========================================
+        STRUCTURE SCORE
+        ========================================
+        */
+        const structureChecks = [
+            hasReport,
+            hasMinimumLength,
+            missingSections.length === 0
+        ];
+        const structure = Math.round((structureChecks.filter(Boolean).length / structureChecks.length) * 100);
+        /*
+        ========================================
+        OVERALL RULE SCORE
+        ========================================
+        */
+        const ruleChecks = [
+            hasReport,
+            hasMinimumLength,
+            hasEvidence,
+            hasContext,
+            missingSections.length === 0,
+            topicCoverage >= 70
+        ];
+
+        const score = Math.round((ruleChecks.filter(Boolean).length / ruleChecks.length) * 100);
         return {
             evaluator: "RULE",
             score,
-            passed:
-                failedRules.length === 0,
+            structure,
+            topicCoverage,
+            passed: failedRules.length === 0,
             failedRules,
             details
         };

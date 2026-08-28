@@ -1,9 +1,5 @@
-const { BaseAgent } =
-    require("../baseAgent");
-
-const {
-    createEvent
-} = require("../ipc/Event");
+const { BaseAgent } = require("../baseAgent");
+const { createEvent } = require("../ipc/Event");
 
 class EvaluationAgent extends BaseAgent {
     constructor({
@@ -13,46 +9,44 @@ class EvaluationAgent extends BaseAgent {
     }) {
         super(baseConfig);
 
-        this.evaluationRuntime =
-            evaluationRuntime;
+        if (!evaluationRuntime) {
+            throw new Error(
+                "EvaluationAgent requires evaluationRuntime"
+            );
+        }
 
-        this.runtimeKernel =
-            runtimeKernel;
+        this.evaluationRuntime = evaluationRuntime;
+        this.runtimeKernel = runtimeKernel;
     }
 
     buildInput(state) {
         return {
-            report: state.report,
-
-            evidence:
-                state.evidence,
-
+            report: state.report || "",
+            evidence: state.evidence || [],
             retrievedContext:
-                state.retrievedContext
+                state.retrievedContext || {}
         };
     }
 
     async execute(input, context = {}) {
-
         const result =
             await this.evaluationRuntime.evaluate({
-                workflowId:
-                    context.workflowId,
+                workflowId: context.workflowId,
 
-                report:
-                    input.report,
+                report: input.report,
 
-                evidence:
-                    input.evidence,
+                evidence: input.evidence,
 
                 retrievedContext:
                     input.retrievedContext
             });
 
+        /*
+         * IMPORTANT:
+         * WorkflowEngine later reads state.evaluation
+         */
         context.state.update({
-            metadata: {
-                evaluation: result
-            }
+            evaluation: result
         });
 
         if (
@@ -61,14 +55,12 @@ class EvaluationAgent extends BaseAgent {
         ) {
             await this.runtimeKernel.publish(
                 createEvent({
-                    workflowId:
-                        context.workflowId,
+                    workflowId: context.workflowId,
 
                     eventType:
                         "evaluation.completed",
 
-                    producer:
-                        this.id,
+                    producer: this.id,
 
                     payload: {
                         evaluation: result
@@ -78,8 +70,7 @@ class EvaluationAgent extends BaseAgent {
         }
 
         return {
-            evaluation:
-                result
+            evaluation: result
         };
     }
 }

@@ -14,7 +14,46 @@ function normalizeId(value) {
         .replace(/[^a-z0-9]+/g, "-")
         .replace(/^-|-$/g, "");
 }
-
+function normalizeRelationshipType(type) {
+    if (!type) {
+        return null;
+    }
+    const normalized = String(type)
+        .trim()
+        .toUpperCase()
+        .replace(/[()]/g, "")
+        .replace(/[\s-]+/g, "_");
+    const aliases = {
+        USE: "USES",
+        USES: "USES",
+        USED_FOR: "USES",
+        USED_BY: "USES",
+        USE_OF: "USES",
+        BASED_ON: "BASED_ON",
+        DEPENDS_ON: "BASED_ON",
+        IMPROVE: "IMPROVES",
+        IMPROVES: "IMPROVES",
+        COMPARE: "COMPARES_WITH",
+        COMPARES: "COMPARES_WITH",
+        COMPARED_WITH: "COMPARES_WITH",
+        COMPARES_WITH: "COMPARES_WITH",
+        OUTPERFORM: "OUTPERFORMS",
+        OUTPERFORMS: "OUTPERFORMS",
+        INTRODUCE: "INTRODUCES",
+        INTRODUCES: "INTRODUCES",
+        EVALUATE_ON: "EVALUATED_ON",
+        EVALUATED_ON: "EVALUATED_ON",
+        PROPOSE: "PROPOSES",
+        PROPOSES: "PROPOSES"
+    };
+    const result = aliases[normalized];
+    if (!result) {
+        console.warn(
+            `[GraphBuilder] Unknown relationship type dropped: ${type}`
+        );
+    }
+    return result || null;
+}
 /**
  * Remove duplicate entities.
  */
@@ -135,14 +174,15 @@ function normalizeRelationships(relationships = [], idMap = new Map()) {
     for (const relationship of relationships) {
         const sourceName = String(relationship.source || "").trim();
         const targetName = String(relationship.target || "").trim();
-        const source = idMap.get(sourceName) || idMap.get(normalizeId(sourceName)) || normalizeId(sourceName);
-        const target = idMap.get(targetName) || idMap.get(normalizeId(targetName)) || normalizeId(targetName);
-
-        const type = String(relationship.type || "").trim().toUpperCase();
+        const source = idMap.get(sourceName) || idMap.get(normalizeId(sourceName));
+        const target = idMap.get(targetName) || idMap.get(normalizeId(targetName));
+        const type = normalizeRelationshipType(relationship.type);
+        // Drop relationships whose entities
+        // do not actually exist.
         if (!source || !target || !type || source === target) {
+            console.warn("[GraphBuilder] Dropping invalid relationship:", relationship);
             continue;
         }
-
         const signature = `${source}|${target}|${type}`;
         if (seen.has(signature)) {
             continue;
@@ -159,44 +199,73 @@ function normalizeRelationships(relationships = [], idMap = new Map()) {
 
 async function build(evidence) {
 
-    if (!Array.isArray(evidence) || evidence.length === 0) {
+    if (
+        !Array.isArray(evidence) ||
+        evidence.length === 0
+    ) {
         return createGraphDocument();
     }
 
     console.log("BUILD() CALLED");
-    console.log("Evidence Count:", evidence.length);
-    const compressed = compressEvidence(evidence).slice(0, 5);
+    console.log(
+        "Evidence Count:",
+        evidence.length
+    );
 
-    console.log("========== COMPRESSED EVIDENCE ==========");
-    console.dir(compressed, { depth: null });
-    console.log("========================================");
+    const compressed =
+        compressEvidence(evidence)
+            .slice(0, 5);
+
+    console.log(
+        "========== COMPRESSED EVIDENCE =========="
+    );
+
+    console.dir(
+        compressed,
+        { depth: null }
+    );
+
+    console.log(
+        "========================================"
+    );
 
     const prompt = graphExtractionPrompt(compressed);
-    console.log("Prompt Length:", prompt.length);
-
-
-    const response = await aiGateway.generate(
-        new AIRequest({
-            role: "graph_builder",
-            prompt,
-            responseType: "json"
-        })
-    );
+    console.log("Prompt Length:",prompt.length);
+    const response =
+        await aiGateway.generate(
+            new AIRequest({
+                role: "graph_builder",
+                prompt,
+                responseType: "json"
+            })
+        );
     const graph = response.content;
     validateGraphCandidate(graph);
-
     console.log("========== RAW GRAPH ==========");
-    console.dir(graph, { depth: null });
+    console.dir(
+        graph,
+        { depth: null }
+    );
     console.log("===============================");
-
-    const { entities, idMap } = dedupeEntities(graph.entities || []);
-    graph.entities = entities;
-    graph.relationships = normalizeRelationships(graph.relationships || [], idMap);
-    validateGraph(graph);
-
+    const {entities,idMap} = dedupeEntities(graph.entities || []);
+    const relationships = normalizeRelationships(
+            graph.relationships || [],
+            idMap
+        );
+    const normalizedGraph = {
+        entities,
+        relationships
+    };
+    console.log("========== NORMALIZED GRAPH ==========");
+    console.dir(
+        normalizedGraph,
+        { depth: null }
+    );
+    console.log("======================================");
+    validateGraph(normalizedGraph);
     return createGraphDocument({
-        entities: graph.entities,
-        relationships: graph.relationships,
+        entities: normalizedGraph.entities,
+        relationships: normalizedGraph.relationships,
         metadata: {
             generatedAt: new Date().toISOString(),
             evidenceCount: evidence.length
