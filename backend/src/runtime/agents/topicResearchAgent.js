@@ -7,14 +7,12 @@ class TopicResearchAgent extends BaseAgent {
 	}
 
 	async execute(input) {
-		const evidence =
-			await this.dependencies.researchService
-				.collectEvidenceForTopic(input.topic);
+		const result = await this.dependencies.researchService
+				.collectEvidenceForTopic(
+					input.topic
+				);
 
-		return {
-			topic: input.topic,
-			evidence
-		};
+		return result;
 	}
 }
 

@@ -301,16 +301,10 @@ class ResearchAgent extends BaseAgent {
         for (const item of evidence) {
             const key = [
                 item.topic,
-                item.provenance,
+                item.provenance?.title,
+                item.provenance?.url,
                 item.notes,
-            ]
-                .map((value) =>
-                    String(value || "")
-                        .trim()
-                        .toLowerCase()
-                )
-                .join("|");
-
+            ].map((value) => String(value || "").trim().toLowerCase()).join("|");
             if (savedEvidenceKeys.has(key)) {
                 this.logger?.log?.(
                     `[Research] Skipping duplicate evidence storage: ${item.topic}`
@@ -485,25 +479,32 @@ class ResearchAgent extends BaseAgent {
          * ============================================================
          */
 
-        let evidence = memory
-            .map((item) =>
-                this.normalizeEvidence(item, "memory")
-            )
-            .filter(Boolean)
-            .filter((item) =>
-                this.isUsefulEvidence(
-                    item,
-                    input.query,
-                    input.topics
+        const memoryEvidence = deduplicateEvidence(memory
+                .map((item) =>
+                    this.normalizeEvidence(item, "MEMORY")
                 )
-            );
-
-        evidence = deduplicateEvidence(evidence);
-
+                .filter(Boolean)
+                .filter((item) =>
+                    this.isUsefulEvidence(
+                        item,
+                        input.query,
+                        input.topics
+                    )
+                )
+        );
+        const researchedEvidence = [];
+        let evidence = [
+            ...memoryEvidence,
+        ];
+        this.logger?.log?.(
+            `[Research] Valid memory evidence: ${memoryEvidence.length}`
+        );
+        this.logger?.log?.(
+            `[Research] New research evidence initialized: 0`
+        );
         this.logger?.log?.(
             `[Research] Valid memory evidence: ${evidence.length}`
         );
-
         graph?.addNode("writer-agent");
 
         /*
@@ -571,12 +572,11 @@ class ResearchAgent extends BaseAgent {
              */
 
             if (result.status === "fulfilled") {
-                const rawEvidence = Array.isArray(
-                    result.value?.evidence
-                )
-                    ? result.value.evidence
-                    : [];
-
+                const rawEvidence = Array.isArray(result.value?.evidence) ? result.value.evidence : [];
+                const researchResult = result.value;
+                const executionStatus =  researchResult.status || "COMPLETED";
+                const synthesis = researchResult.synthesis || "UNKNOWN";
+                const researchError = researchResult.error ||null;
                 const topicEvidence = rawEvidence
                     .map((item) =>
                         this.normalizeEvidence(
@@ -595,16 +595,23 @@ class ResearchAgent extends BaseAgent {
 
                 if (topicEvidence.length === 0) {
                     topicStatus[topic] = "PARTIAL";
-
                     this.logger?.warn?.(
                         `[Research] No useful evidence generated for topic: ${topic}`
                     );
-
                     continue;
                 }
-
-                topicStatus[topic] = "COMPLETED";
-
+                topicStatus[topic] = executionStatus;
+                this.logger?.log?.(`[Research] Topic: ${topic}`);
+                this.logger?.log?.(`[Research] Status: ${executionStatus}`);
+                this.logger?.log?.(`[Research] Evidence source: ${researchResult.source}`);
+                this.logger?.log?.(`[Research] Evidence synthesis: ${synthesis}`);
+                this.logger?.log?.(`[Research] Evidence items: ${topicEvidence.length}`);
+                if (researchError) {
+                    this.logger?.warn?.(
+                        `[Research] Fallback reason: ${researchError}`
+                    );
+                }
+                researchedEvidence.push(...topicEvidence);
                 evidence.push(...topicEvidence);
 
                 /*
@@ -676,46 +683,103 @@ class ResearchAgent extends BaseAgent {
          * ============================================================
          */
         const statuses = Object.values(topicStatus);
-        const failedCount = statuses.filter((status) => status === "FAILED").length;
-        const completedCount = statuses.filter((status) => status === "COMPLETED").length;
+        const failedCount = statuses.filter(
+            (status) =>
+                status === "FAILED" ||
+                status === "NO_RESULTS"
+        ).length;
+        const completedCount = statuses.filter(
+            (status) =>
+                status === "COMPLETED"
+        ).length;
+        const fallbackCount = statuses.filter(
+            (status) =>
+                status === "COMPLETED_WITH_FALLBACK"
+        ).length;
+
+        const memoryCoveredCount = statuses.filter(
+            (status) =>
+                status === "COVERED_BY_MEMORY"
+        ).length;
+
         let researchStatus;
-        if (completedCount === 0 && evidence.length === 0) {
+
+        if (evidence.length === 0) {
             researchStatus = "FAILED";
-        } else if (failedCount > 0 || statuses.includes("PARTIAL")) {
+        } else if (
+            failedCount > 0 ||
+            statuses.includes("PARTIAL") ||
+            fallbackCount > 0
+        ) {
             researchStatus = "PARTIAL_SUCCESS";
         } else {
             researchStatus = "SUCCESS";
         }
+
         const partialTopics = Object.entries(topicStatus)
-            .filter(([, status]) => status === "PARTIAL")
+            .filter(
+                ([, status]) =>
+                    status === "PARTIAL"
+            )
+            .map(([topic]) => topic);
+
+        const failedTopics = Object.entries(topicStatus)
+            .filter(
+                ([, status]) =>
+                    status === "FAILED"
+            )
+            .map(([topic]) => topic);
+
+        const fallbackTopics = Object.entries(topicStatus)
+            .filter(
+                ([, status]) =>
+                    status === "COMPLETED_WITH_FALLBACK"
+            )
             .map(([topic]) => topic);
         this.logger?.log?.(
             "\n========== RESEARCH SUMMARY =========="
         );
+
         this.logger?.log?.(
             `[Research] Topics requested: ${input.topics.length}`
         );
+
         this.logger?.log?.(
-            `[Research] Covered by memory: ${coveredTopics.length}`
+            `[Research] Covered by memory: ${memoryCoveredCount}`
         );
+
         this.logger?.log?.(
             `[Research] Successfully researched: ${completedCount}`
         );
+
+        this.logger?.log?.(
+            `[Research] Completed with fallback: ${fallbackCount}`
+        );
+
         this.logger?.log?.(
             `[Research] Partial topics: ${partialTopics.length}`
         );
+
         this.logger?.log?.(
             `[Research] Failed topics: ${failedCount}`
         );
+
         this.logger?.log?.(
             `[Research] Memory evidence: ${memoryEvidence.length}`
         );
+
         this.logger?.log?.(
             `[Research] New research evidence: ${researchedEvidence.length}`
         );
+
         this.logger?.log?.(
             `[Research] Total evidence: ${evidence.length}`
         );
+        if (fallbackTopics.length > 0) {
+            this.logger?.warn?.(
+                `[Research] Fallback topics: ${fallbackTopics.join(", ")}`
+            );
+        }
         if (failedTopics.length > 0) {
             this.logger?.warn?.(
                 `[Research] Failed topics: ${failedTopics.join(", ")}`
@@ -726,32 +790,38 @@ class ResearchAgent extends BaseAgent {
                 `[Research] Partial topics: ${partialTopics.join(", ")}`
             );
         }
-        this.logger?.log?.(`[Research] Final status: ${researchStatus}`);
-        this.logger?.log?.("======================================");
-        this.logger?.log?.(`[Research] Final status: ${researchStatus}`);
 
+        this.logger?.log?.(
+            `[Research] Final status: ${researchStatus}`
+        );
+
+        this.logger?.log?.(
+            "======================================"
+        );
         /*
          * ============================================================
          * STEP 10: Update workflow state.
          * ============================================================
          */
 
-        const failedTopics = Object.entries(topicStatus)
-            .filter(([, status]) => status === "FAILED")
-            .map(([topic]) => topic);
-
         context.state.update({
             evidence,
             retrievedContext,
             topicStatus,
-
+            
             metadata: {
                 researchStatus,
                 failedTopics,
                 coveredTopics,
+                fallbackTopics,
             },
         });
-
+        
+        if (failedTopics.length > 0) {
+            this.logger?.warn?.(
+                `[Research] Failed topics: ${failedTopics.join(", ")}`
+            );
+        }
         /*
          * ============================================================
          * STEP 11: Index evidence into semantic memory.

@@ -121,38 +121,81 @@ function normalizeEvidenceItems(items, topic, documents) {
 }
 
 async function collectEvidenceForTopic(topic) {
-	const searchResponse = await searchService.search(topic);
-	const documents = dedupeDocuments(flattenSearchResults(searchResponse, topic));
+    const searchResponse = await searchService.search(topic);
+    const documents = dedupeDocuments(flattenSearchResults(searchResponse,topic));
 
 	if (documents.length === 0) {
-		return [];
-	}
+        return {
+            topic,
+            evidence: [],
+            status: "NO_RESULTS",
+            source: "NONE",
+            synthesis: "NOT_ATTEMPTED",
+            error: null
+        };
+    }
 
 	try {
-		const response = await aiGateway.generate(
-			new AIRequest({
-				role: "research",
-				prompt: evidencePrompt(topic, documents),
-				responseType: "json"
-			})
-		);
-		const evidenceItems = response.content;
-		return normalizeEvidenceItems(evidenceItems, topic, documents);
-	} catch (err) {
-		console.log(`Evidence synthesis failed for topic: ${topic}`);
-		console.log(err.message);
-		return documents.slice(0, 3).map((document) => normalizeDocument(document, topic));
-	}
+        const response =
+            await aiGateway.generate(
+                new AIRequest({
+                    role: "research",
+                    prompt: evidencePrompt(
+                        topic,
+                        documents
+                    ),
+                    responseType: "json"
+                })
+            );
+        const evidence =
+            normalizeEvidenceItems(
+                response.content,
+                topic,
+                documents
+            );
+        return {
+            topic,
+            evidence,
+            status: evidence.length > 0
+                ? "COMPLETED"
+                : "PARTIAL",
+            source: "NEW_RESEARCH",
+            synthesis: "LLM",
+            error: null
+        };
+    } catch (err) {
+        const fallbackEvidence = documents
+                .slice(0, 3)
+                .map((document) =>
+                    normalizeDocument(
+                        document,
+                        topic
+                    )
+                );
+        console.warn(`[Evidence] LLM synthesis failed for topic: ${topic}`);
+        console.warn(`[Evidence] Falling back to raw search evidence`);
+        console.warn(`[Evidence] Reason: ${err.message}`);
+        return {
+            topic,
+            evidence: fallbackEvidence,
+            status: fallbackEvidence.length > 0
+                ? "COMPLETED_WITH_FALLBACK"
+                : "FAILED",
+            source: "NEW_RESEARCH",
+            synthesis: "SEARCH_FALLBACK",
+            error: err.message
+        };
+    }
 }
 
 async function collectEvidence(topics) {
-	const results = await Promise.allSettled(
-		topics.map((topic) => collectEvidenceForTopic(topic))
-	);
-
-	return results
-		.filter((result) => result.status === "fulfilled")
-		.flatMap((result) => result.value);
+    const results = await Promise.allSettled(
+        topics.map((topic) =>
+            collectEvidenceForTopic(topic)
+        )
+    );
+    return results.filter((result) => result.status === "fulfilled")
+        .flatMap((result) => result.value.evidence || []);
 }
 
 module.exports = {
