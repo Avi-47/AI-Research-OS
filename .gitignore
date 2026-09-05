@@ -81,3 +81,6 @@ Thumbs.db
 # =========================
 __pycache__/
 *.pyc
+
+
+FRONTEND_INTEGRATION_MAP.md

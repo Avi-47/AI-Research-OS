@@ -126,7 +126,13 @@ exports.generateResearch = async (req, res) => {
             query,
             topics,
             evidence,
-            report
+            report,
+            state: execution.state,
+            evaluation: execution.evaluation,
+            agentResults: execution.agentResults,
+            summary: execution.summary,
+            traces: execution.traces,
+            workflowGraph: execution.workflowGraph || null
         });
     } catch (err) {
         console.log("CONTROLLER ERROR");

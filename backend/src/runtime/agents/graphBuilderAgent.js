@@ -12,6 +12,7 @@ class GraphBuilderAgent extends BaseAgent {
             graph
         );
         return {
+            graph,
             entities: graph.entities.length,
             relationships: graph.relationships.length
         };

@@ -36,6 +36,7 @@ function createResearchRuntime(overrides = {}) {
 	const runStore = overrides.runStore || new InMemoryAgentRunStore();
 	const tracer = overrides.tracer || new ExecutionTracer();
 	const registry = overrides.registry || new AgentRegistry();
+	const workflowGraphs = new Map();
 	const scheduler = new AgentScheduler({ logger });
 	const eventLogRepository = new EventLogRepository();
 	const graphRepository = new GraphRepository();
@@ -176,7 +177,7 @@ function createResearchRuntime(overrides = {}) {
 				"[Runtime] Research finished"
 			);
 			try {
-				await graphBuilderAgent.run(
+				const graphResult = await graphBuilderAgent.run(
 					{
 						payload: {
 							evidence: event.payload.evidence
@@ -187,6 +188,7 @@ function createResearchRuntime(overrides = {}) {
 						runtimeKernel
 					}
 				);
+				workflowGraphs.set(event.workflowId, graphResult?.graph || null);
 				logger.log(
 					"[Runtime] Knowledge graph built successfully"
 				);
@@ -255,7 +257,8 @@ function createResearchRuntime(overrides = {}) {
 			query: execution.state.query,
 			topics: execution.state.topics,
 			evidence: execution.state.evidence,
-			report: execution.state.report
+				report: execution.state.report,
+				workflowGraph: workflowGraphs.get(execution.workflowId) || null
 		};
 	}
 
