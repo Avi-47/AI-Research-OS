@@ -4,11 +4,145 @@ export default function EvidenceExplorer({ evidence = [] }) {
   const [query, setQuery] = useState('');
   const [topic, setTopic] = useState('all');
   const [expanded, setExpanded] = useState(null);
-  const topics = [...new Set(evidence.map((item) => item.topic).filter(Boolean))];
-  const filtered = useMemo(() => evidence.filter((item) => { const haystack = `${item.topic || ''} ${item.provenance?.title || ''} ${item.notes || ''}`.toLowerCase(); return (topic === 'all' || item.topic === topic) && haystack.includes(query.toLowerCase()); }), [evidence, query, topic]);
 
-  if (!evidence.length) return <Empty title="No evidence returned" detail="This research run did not provide evidence items." />;
-  return <div className="space-y-6"><div className="flex flex-col gap-3 border-b border-white/10 pb-5 lg:flex-row"><label className="relative flex-1"><span className="sr-only">Search evidence</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search titles, topics, or notes" className="w-full border border-white/10 bg-[#0a1019] px-4 py-3 text-sm text-white placeholder:text-slate-600 focus:border-cyan-200/50 focus:outline-none" /></label><label><span className="sr-only">Filter by topic</span><select value={topic} onChange={(event) => setTopic(event.target.value)} className="h-full min-w-48 border border-white/10 bg-[#0a1019] px-4 py-3 text-sm text-slate-300 focus:border-cyan-200/50 focus:outline-none"><option value="all">All topics ({evidence.length})</option>{topics.map((item) => <option key={item} value={item}>{item}</option>)}</select></label></div><div className="space-y-2">{filtered.map((item, index) => { const key = `${item.topic}-${index}`; const isOpen = expanded === key; return <article key={key} className="border border-white/10 bg-[#0b111b] transition hover:border-white/20"><button type="button" onClick={() => setExpanded(isOpen ? null : key)} aria-expanded={isOpen} className="flex w-full items-start gap-4 p-5 text-left"><span className="mt-1 font-mono text-[10px] text-cyan-200">{String(index + 1).padStart(2, '0')}</span><span className="min-w-0 flex-1"><span className="block text-xs text-slate-600">{item.topic || 'Uncategorized'}</span><span className="mt-1 block text-sm font-medium text-white">{item.provenance?.title || item.title || 'Untitled source'}</span><span className="mt-2 block line-clamp-2 text-sm leading-6 text-slate-500">{item.notes || 'No summary was returned.'}</span></span><span className="font-mono text-lg text-slate-600">{isOpen ? '−' : '+'}</span></button>{isOpen && <div className="border-t border-white/10 px-5 pb-5 pl-14"><p className="whitespace-pre-wrap pt-4 text-sm leading-7 text-slate-400">{item.notes || 'No summary was returned.'}</p>{item.provenance?.url ? <a className="mt-4 inline-flex border-b border-cyan-200/40 pb-1 text-xs text-cyan-100" href={item.provenance.url} target="_blank" rel="noreferrer">View source ↗</a> : <p className="mt-4 font-mono text-[10px] uppercase tracking-widest text-slate-600">Source URL unavailable</p>}</div>}</article>; })}</div>{!filtered.length && <Empty title="No matching evidence" detail="Try a different search term or topic." />}</div>;
+  const topics = [...new Set(evidence.map((item) => item.topic).filter(Boolean))];
+
+  const filtered = useMemo(
+    () =>
+      evidence.filter((item) => {
+        const haystack = `${item.topic || ''} ${item.provenance?.title || ''} ${
+          item.notes || ''
+        }`.toLowerCase();
+
+        return (
+          (topic === 'all' || item.topic === topic) &&
+          haystack.includes(query.toLowerCase())
+        );
+      }),
+    [evidence, query, topic]
+  );
+
+  if (!evidence.length)
+    return (
+      <Empty
+        title="No evidence returned"
+        detail="This research run did not provide evidence items."
+      />
+    );
+
+  return (
+    <div className="space-y-6">
+      <div className="flex flex-col gap-3 border-b border-white/10 pb-5 lg:flex-row">
+        <label className="relative flex-1">
+          <span className="sr-only">Search evidence</span>
+          <input
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder="Search titles, topics, or notes"
+            className="w-full border border-white/10 bg-[#0a1019] px-4 py-3 text-[15px] text-white placeholder:text-slate-600 focus:border-cyan-200/50 focus:outline-none"
+          />
+        </label>
+
+        <label>
+          <span className="sr-only">Filter by topic</span>
+          <select
+            value={topic}
+            onChange={(event) => setTopic(event.target.value)}
+            className="h-full min-w-48 border border-white/10 bg-[#0a1019] px-4 py-3 text-[15px] text-slate-300 focus:border-cyan-200/50 focus:outline-none"
+          >
+            <option value="all">All topics ({evidence.length})</option>
+            {topics.map((item) => (
+              <option key={item} value={item}>
+                {item}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
+
+      <div className="space-y-2">
+        {filtered.map((item, index) => {
+          const key = `${item.topic}-${index}`;
+          const isOpen = expanded === key;
+
+          return (
+            <article
+              key={key}
+              className="border border-white/10 bg-[#0b111b] transition hover:border-white/20"
+            >
+              <button
+                type="button"
+                onClick={() => setExpanded(isOpen ? null : key)}
+                aria-expanded={isOpen}
+                className="flex w-full items-start gap-4 p-5 text-left"
+              >
+                <span className="mt-1 font-mono text-[11px] text-cyan-200">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+
+                <span className="min-w-0 flex-1">
+                  <span className="block text-sm text-slate-400">
+                    {item.topic || 'Uncategorized'}
+                  </span>
+
+                  <span className="mt-1 block text-[16px] font-medium text-slate-100">
+                    {item.provenance?.title || item.title || 'Untitled source'}
+                  </span>
+
+                  <span className="mt-3 block line-clamp-2 text-[15px] leading-4.5 text-pink-400">
+                    {item.notes || 'No summary was returned.'}
+                  </span>
+                </span>
+
+                <span className="font-mono text-lg text-slate-600">
+                  {isOpen ? '−' : '+'}
+                </span>
+              </button>
+
+              {isOpen && (
+                <div className="border-t border-white/10 px-5 pb-5 pl-14">
+                  <p className="whitespace-pre-wrap pt-4 text-[15px] leading-7 text-emerald-200/85">
+                    {item.notes || 'No summary was returned.'}
+                  </p>
+
+                  {item.provenance?.url ? (
+                    <a
+                      className="mt-4 inline-flex border-b border-cyan-200/40 pb-1 text-sm text-cyan-100"
+                      href={item.provenance.url}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      View source ↗
+                    </a>
+                  ) : (
+                    <p className="mt-4 font-mono text-[11px] uppercase tracking-widest text-slate-600">
+                      Source URL unavailable
+                    </p>
+                  )}
+                </div>
+              )}
+            </article>
+          );
+        })}
+      </div>
+
+      {!filtered.length && (
+        <Empty
+          title="No matching evidence"
+          detail="Try a different search term or topic."
+        />
+      )}
+    </div>
+  );
 }
 
-function Empty({ title, detail }) { return <div className="grid min-h-56 place-items-center border border-dashed border-white/10 p-8 text-center"><div><p className="text-sm text-slate-300">{title}</p><p className="mt-2 text-xs text-slate-600">{detail}</p></div></div>; }
+function Empty({ title, detail }) {
+  return (
+    <div className="grid min-h-56 place-items-center border border-dashed border-white/10 p-8 text-center">
+      <div>
+        <p className="text-[15px] text-slate-300">{title}</p>
+        <p className="mt-2 text-sm text-slate-500">{detail}</p>
+      </div>
+    </div>
+  );
+}

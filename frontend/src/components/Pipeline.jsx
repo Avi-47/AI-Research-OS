@@ -127,7 +127,7 @@ export default function Pipeline({ research, compact = false }) {
                   index <
                     stageDefinitions.length -
                       1 && (
-                    <span className="absolute -right-5 top-1/2 z-20 hidden -translate-y-1/2 font-bold text-cyan-200/70 md:block">
+                    <span className="absolute -right-5 top-1/2 z-20 hidden -translate-y-1/2 font-extrabold text-cyan-200/70 md:block">
                     ⟶
                     </span>
                   )}
