@@ -1,9 +1,12 @@
 const crypto = require("crypto");
+
 const {
     client,
     COLLECTION
 } = require("../db/qdrant");
+
 class VectorStoreService {
+
     async insert({
         text,
         embedding,
@@ -26,19 +29,25 @@ class VectorStoreService {
             }
         );
     }
+
     async search(
         embedding,
         limit = 30
     ) {
-        const results = await client.search(
+
+        const response = await client.query(
             COLLECTION,
             {
-                vector: embedding,
+                query: embedding,
                 limit,
                 with_payload: true
             }
         );
-        return results;
+
+        // Qdrant's current JS client returns the
+        // query response as an object containing points.
+        return response.points || response.result || [];
     }
 }
+
 module.exports = new VectorStoreService();

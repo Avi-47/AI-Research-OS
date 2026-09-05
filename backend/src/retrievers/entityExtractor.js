@@ -1,5 +1,6 @@
 function extractEntities(query) {
     const text = String(query || "").trim();
+
     if (!text) {
         return [];
     }
@@ -24,54 +25,33 @@ function extractEntities(query) {
         "versus",
         "between",
         "difference",
-        "with"
+        "with",
+        "for",
+        "of",
+        "to",
+        "in",
+        "on",
+        "using",
+        "use",
+        "techniques",
+        "method",
+        "methods"
     ]);
 
-    const tokens = text.match(/[A-Za-z0-9-]+/g) || [];
-    const candidates = [];
+    const tokens =
+        text.match(/[A-Za-z0-9-]+/g) || [];
 
-    const isEntityToken = (token) => /[A-Z]/.test(token) && token !== token.toLowerCase();
-
-    let current = [];
-
-    const flush = () => {
-        if (current.length === 0) {
-            return;
-        }
-
-        let phrase = [...current];
-        while (phrase.length > 0 && stopWords.has(phrase[0].toLowerCase())) {
-            phrase.shift();
-        }
-
-        if (phrase.length === 1) {
-            const [single] = phrase;
-            if (!stopWords.has(single.toLowerCase())) {
-                candidates.push(single);
-            }
-        } else if (phrase.length > 1) {
-            candidates.push(phrase.join(" "));
-        }
-
-        current = [];
-    };
-
-    for (const token of tokens) {
-        if (isEntityToken(token)) {
-            current.push(token);
-        } else {
-            flush();
-        }
-    }
-
-    flush();
-
-    return [...new Set(
-        candidates
-            .map((entity) => entity.trim())
-            .filter(Boolean)
-            .filter((entity) => !stopWords.has(entity.toLowerCase()))
-    )];
+    return [
+        ...new Set(
+            tokens
+                .map(token => token.trim())
+                .filter(Boolean)
+                .filter(token =>
+                    !stopWords.has(token.toLowerCase())
+                )
+                .filter(token => token.length > 2)
+        )
+    ];
 }
 
 module.exports = {

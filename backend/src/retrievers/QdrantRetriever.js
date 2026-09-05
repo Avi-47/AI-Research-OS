@@ -9,6 +9,14 @@ class QdrantRetriever extends BaseRetriever {
             embedding,
             20
         );
+        console.log(
+            "QDRANT RAW RESULTS:",
+            results.map(r => ({
+                score: r.score,
+                topic: r.payload?.topic,
+                title: r.payload?.title
+            }))
+        );
         const semantic_context = results.map(r => ({
             score: r.score,
             topic: r.payload.topic,
@@ -19,6 +27,7 @@ class QdrantRetriever extends BaseRetriever {
             },
             source: "memory"
         }));
+
         return {
             semantic_context
         };
