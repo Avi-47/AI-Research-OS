@@ -17,6 +17,7 @@
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "neo4j-driver": "^6.2.0",
+    "pg": "^8.23.0",
     "react-markdown": "^10.1.0"
   },
   "devDependencies": {
