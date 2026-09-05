@@ -7,7 +7,7 @@ const researchRoute = require("./routes/research.route");
 const app = express();
 const PORT = process.env.PORT || 5000;
 const graphRoute = require("./routes/graph.routes");
-console.log("POSTGRES_URL =", process.env.POSTGRES_URL);
+console.log("PostgreSQL configured:", !!process.env.POSTGRES_URL);
 app.use(cors());
 app.use(express.json());
 app.use("/api/search", searchRoute);
